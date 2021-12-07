@@ -2,6 +2,8 @@ import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 
+import { imageLoader } from 'utils/contentful';
+
 const options = {
   renderMark: {
     [MARKS.BOLD]: text => <strong className="font-bold text-teal">{text}</strong>,
@@ -17,7 +19,7 @@ const options = {
     [BLOCKS.UL_LIST]: (node, children) => <ul className="list-disc ml-8">{children}</ul>,
     [BLOCKS.OL_LIST]: (node, children) => <ol className="list-decimal ml-8">{children}</ol>,
     [INLINES.HYPERLINK]: ({ data }, children) => (
-      <a href={data.uri} className="text-coral underline">
+      <a href={data.uri} className="font-bold text-coral underline">
         {children}
       </a>
     ),
@@ -25,8 +27,15 @@ const options = {
       const { url, width, height } = node.data.target;
 
       return (
-        <div className="relative w-xl rounded p-4">
-          <Image src={url} width={width} height={height} className="rounded" />
+        <div className="relative md:p-4">
+          <Image
+            src={url}
+            loader={imageLoader}
+            sizes="900px" // tailwind max-w-4xl
+            width={width}
+            height={height}
+            layout="responsive"
+            className="md:rounded" />
         </div>
       );
     }

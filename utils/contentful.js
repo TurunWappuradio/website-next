@@ -22,4 +22,8 @@ async function fetchContent(query) {
   }
 }
 
-export { fetchContent };
+function imageLoader({ src, width, quality }) {
+  return `${src}?q=${quality || 100}&w=${width}&fm=webp`;
+}
+
+export { fetchContent, imageLoader };

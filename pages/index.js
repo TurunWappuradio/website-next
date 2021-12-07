@@ -12,7 +12,7 @@ export default function Home({ content }) {
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-auto max-w-2xl text-white">
+      <div className="mx-auto max-w-4xl text-white">
         <RichText content={content} />
       </div>
     </div>
