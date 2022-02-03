@@ -1,18 +1,16 @@
 module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false,
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#fff',
       blue: {
+        dark: '#001326',
         DEFAULT: '#001C36',
         light: '#002447',
       },
-      coral: {
-        DEFAULT: '#FF6B6B',
-      },
+      coral: '#F65F52',
       teal: '#5bbfbf',
     },
     fontFamily: {
@@ -22,7 +20,12 @@ module.exports = {
       normal: 500,
       bold: 600,
     },
-    extend: {}
+    extend: {
+      height: {
+        '128': '32rem',
+        '192': '48rem',
+      }
+    }
   },
   variants: {
     extend: {},

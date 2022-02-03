@@ -3,16 +3,18 @@ import Image from 'next/image';
 
 import RichText from 'components/richtext';
 import { fetchContent } from 'utils/contentful';
+import Hero from 'components/hero';
 
-export default function Home({ content }) {
+export default function Home({ content, heroImage }) {
   return (
-    <div className="flex flex-col item-center justify-center min-h-screen w-screen">
+    <div className="min-h-screen w-screen">
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-auto max-w-4xl text-white">
+      <Hero image={heroImage} />
+      <div className="mx-auto pt-12 max-w-4xl text-white">
         <RichText content={content} />
       </div>
     </div>
@@ -41,6 +43,9 @@ export async function getStaticProps() {
   const contentQuery = `
   {
     index(id: "${indexId}") {
+      heroImage {
+        url
+      }
       content {
         json
         links {
@@ -60,9 +65,12 @@ export async function getStaticProps() {
 
   const contentResult = await fetchContent(contentQuery);
 
+  const { heroImage, content } = contentResult.index;
+
   return {
     props: {
-      content: contentResult.index.content,
+      heroImage,
+      content
     }
   };
 }

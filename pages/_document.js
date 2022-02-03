@@ -7,11 +7,11 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap"
             rel="stylesheet"
           />
         </Head>
-        <body className="bg-gradient-to-b from-blue to-blue-light">
+        <body className="bg-blue">
           <Main />
           <NextScript />
         </body>
