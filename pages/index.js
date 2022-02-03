@@ -7,7 +7,7 @@ import Hero from 'components/hero';
 
 export default function Home({ content, heroImage }) {
   return (
-    <div className="min-h-screen w-screen">
+    <div className="min-h-screen w-full">
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />

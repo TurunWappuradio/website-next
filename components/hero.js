@@ -7,7 +7,7 @@ function Hero({ image }) {
   const { url } = image;
 
   return (
-    <div className="relative flex flex-col w-screen h-128 xl:h-192">
+    <div className="relative flex flex-col w-full h-128 xl:h-192">
       {/* Hero image */}
       <Image
         src={url}
