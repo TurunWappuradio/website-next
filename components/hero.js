@@ -2,8 +2,9 @@ import Image from 'next/image';
 
 import { imageLoader } from 'utils/contentful';
 import Button from './button';
+import Link from 'next/Link';
 
-function Hero({ image }) {
+function Hero({ image, title, subtext, buttonText, buttonLink }) {
   const { url } = image;
 
   return (
@@ -25,7 +26,7 @@ function Hero({ image }) {
           ))}
         </ul>
       </header>
-
+      
       {/* Hero content */}
       <div className="z-10 flex flex-wrap items-center justify-center h-full">
         <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
@@ -33,14 +34,16 @@ function Hero({ image }) {
         </div>
         <div className="p-8 text-center">
           <h1 className="text-3xl font-bold text-coral md:text-5xl">
-            Turun Wappuradio
+          {title}
           </h1>
           <p className="p-4 text-xl text-white md:text-3xl">
-            Ohjelmahaku aukeaa 13.1.
+            {subtext}
           </p>
-          <Button className="text-md md:text-xl">
-            Hae ohjelmantekijäksi
-          </Button>
+          {buttonText && buttonLink ? (
+            <Link href={buttonLink}>
+            <a className="bg-teal px-8 py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded text-md md:text-xl" >{buttonText}</a>
+            </Link>
+          ) : null }
         </div>
       </div>
     </div>
