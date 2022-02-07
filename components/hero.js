@@ -1,13 +1,13 @@
 import Image from 'next/image';
 
 import { imageLoader } from 'utils/contentful';
-import Button from './button';
+import {Button, LinkButton} from './button';
 
-function Hero({ image }) {
+function Hero({ image, title, subtext, buttonText, buttonLink }) {
   const { url } = image;
 
   return (
-    <div className="relative flex flex-col w-screen h-128 xl:h-192">
+    <div className="relative flex flex-col w-full h-128 xl:h-192">
       {/* Hero image */}
       <Image
         src={url}
@@ -25,7 +25,7 @@ function Hero({ image }) {
           ))}
         </ul>
       </header>
-
+      
       {/* Hero content */}
       <div className="z-10 flex flex-wrap items-center justify-center h-full">
         <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
@@ -33,14 +33,18 @@ function Hero({ image }) {
         </div>
         <div className="p-8 text-center">
           <h1 className="text-3xl font-bold text-coral md:text-5xl">
-            Turun Wappuradio
+          {title}
           </h1>
           <p className="p-4 text-xl text-white md:text-3xl">
-            Ohjelmahaku aukeaa 13.1.
+            {subtext}
           </p>
-          <Button className="text-md md:text-xl">
-            Hae ohjelmantekijäksi
-          </Button>
+
+          {buttonText && buttonLink ? (
+          <LinkButton className="text-md md:text-xl" href={buttonLink}>
+            {buttonText}
+          </LinkButton>
+          ) : null}
+
         </div>
       </div>
     </div>

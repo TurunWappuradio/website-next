@@ -5,15 +5,15 @@ import RichText from 'components/richtext';
 import { fetchContent } from 'utils/contentful';
 import Hero from 'components/hero';
 
-export default function Home({ content, heroImage }) {
+export default function Home({ content, heroImage, heroTitle, heroSubtext, heroButtonText, heroButtonLink }) {
   return (
-    <div className="min-h-screen w-screen">
+    <div className="min-h-screen w-full">
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero image={heroImage} />
+      <Hero image={heroImage} title={heroTitle} subtext={heroSubtext} buttonLink={heroButtonLink} buttonText={heroButtonText} />
       <div className="mx-auto pt-12 max-w-4xl text-white">
         <RichText content={content} />
       </div>
@@ -46,6 +46,10 @@ export async function getStaticProps() {
       heroImage {
         url
       }
+      heroTitle
+      heroSubtext
+      heroButtonText
+      heroButtonLink
       content {
         json
         links {
@@ -65,12 +69,16 @@ export async function getStaticProps() {
 
   const contentResult = await fetchContent(contentQuery);
 
-  const { heroImage, content } = contentResult.index;
+  const { heroImage, content, heroTitle, heroSubtext, heroButtonText, heroButtonLink } = contentResult.index;
 
   return {
     props: {
       heroImage,
-      content
+      content,
+      heroTitle,
+      heroSubtext,
+      heroButtonText,
+      heroButtonLink
     }
   };
 }
