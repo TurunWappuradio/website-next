@@ -1,8 +1,7 @@
 import Image from 'next/image';
 
 import { imageLoader } from 'utils/contentful';
-import Button from './button';
-import Link from 'next/Link';
+import {Button, LinkButton} from './button';
 
 function Hero({ image, title, subtext, buttonText, buttonLink }) {
   const { url } = image;
@@ -39,11 +38,13 @@ function Hero({ image, title, subtext, buttonText, buttonLink }) {
           <p className="p-4 text-xl text-white md:text-3xl">
             {subtext}
           </p>
+
           {buttonText && buttonLink ? (
-            <Link href={buttonLink}>
-            <a className="bg-teal px-8 py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded text-md md:text-xl" >{buttonText}</a>
-            </Link>
-          ) : null }
+          <LinkButton className="text-md md:text-xl" href={buttonLink}>
+            {buttonText}
+          </LinkButton>
+          ) : null}
+
         </div>
       </div>
     </div>
