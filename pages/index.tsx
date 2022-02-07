@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import Image from 'next/image';
 
-import RichText from 'components/richtext';
+import { renderRichtext } from 'utils/richtext';
 import { fetchContent } from 'utils/contentful';
 import Hero from 'components/hero';
 
@@ -12,7 +11,7 @@ export default function Home({
   heroSubtext,
   heroButtonText,
   heroButtonLink,
-}) {
+}: any) {
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -28,7 +27,7 @@ export default function Home({
         buttonText={heroButtonText}
       />
       <div className="mx-auto pt-12 max-w-4xl text-white">
-        <RichText content={content} />
+        {renderRichtext(content)}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
-async function fetchContent(query) {
+async function fetchContent(query: string) {
   try {
     const res = await fetch(
       `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`,
@@ -22,7 +22,7 @@ async function fetchContent(query) {
   }
 }
 
-function imageLoader({ src, width, quality }) {
+function imageLoader({ src, width, quality }: { src: string; width: number; quality: number }) {
   return `${src}?q=${quality || 100}&w=${width}&fm=webp`;
 }
 

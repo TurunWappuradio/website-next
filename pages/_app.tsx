@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   return <Component {...pageProps} />;
 }
 

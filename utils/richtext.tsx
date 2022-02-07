@@ -1,10 +1,10 @@
 import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 
 import { imageLoader } from 'utils/contentful';
 
-const options = {
+const options: Options = {
   renderMark: {
     [MARKS.BOLD]: (text) => <strong className="font-bold text-teal">{text}</strong>,
   },
@@ -55,13 +55,13 @@ const options = {
   },
 };
 
-function RichText({ content }) {
+function renderRichtext(content: any): React.ReactNode {
   const { json, links } = content;
 
   // This bullshit could be avoided if we used Contentful SDK, which doesn't support GraphQL.
-  const contentWithLinks = json.content.map((node) => {
+  const contentWithLinks = json.content.map((node: any) => {
     if (node.nodeType == 'embedded-asset-block') {
-      const asset = links.assets.block.find((asset) => asset.sys.id == node.data.target.sys.id);
+      const asset = links.assets.block.find((asset: any) => asset.sys.id == node.data.target.sys.id);
       node.data.target = asset;
     }
     return node;
@@ -75,4 +75,4 @@ function RichText({ content }) {
   return documentToReactComponents(jsonWithLinks, options);
 }
 
-export default RichText;
+export { renderRichtext };

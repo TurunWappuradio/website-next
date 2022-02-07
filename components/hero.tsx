@@ -3,7 +3,17 @@ import Image from 'next/image';
 import { imageLoader } from 'utils/contentful';
 import { LinkButton } from './button';
 
-function Hero({ image, title, subtext, buttonText, buttonLink }) {
+interface Props {
+  image: {
+    url: string;
+  },
+  title: string;
+  subtext: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+function Hero({ image, title, subtext, buttonText, buttonLink }: Props) {
   const { url } = image;
 
   return (
@@ -48,7 +58,7 @@ function Hero({ image, title, subtext, buttonText, buttonLink }) {
   );
 }
 
-function NavLink({ text }) {
+function NavLink({ text }: { text: string }) {
   return <li className="p-4 text-xl text-white">{text}</li>;
 }
 
