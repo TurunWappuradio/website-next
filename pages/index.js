@@ -5,7 +5,14 @@ import RichText from 'components/richtext';
 import { fetchContent } from 'utils/contentful';
 import Hero from 'components/hero';
 
-export default function Home({ content, heroImage, heroTitle, heroSubtext, heroButtonText, heroButtonLink }) {
+export default function Home({
+  content,
+  heroImage,
+  heroTitle,
+  heroSubtext,
+  heroButtonText,
+  heroButtonLink,
+}) {
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -13,7 +20,13 @@ export default function Home({ content, heroImage, heroTitle, heroSubtext, heroB
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero image={heroImage} title={heroTitle} subtext={heroSubtext} buttonLink={heroButtonLink} buttonText={heroButtonText} />
+      <Hero
+        image={heroImage}
+        title={heroTitle}
+        subtext={heroSubtext}
+        buttonLink={heroButtonLink}
+        buttonText={heroButtonText}
+      />
       <div className="mx-auto pt-12 max-w-4xl text-white">
         <RichText content={content} />
       </div>
@@ -69,7 +82,8 @@ export async function getStaticProps() {
 
   const contentResult = await fetchContent(contentQuery);
 
-  const { heroImage, content, heroTitle, heroSubtext, heroButtonText, heroButtonLink } = contentResult.index;
+  const { heroImage, content, heroTitle, heroSubtext, heroButtonText, heroButtonLink } =
+    contentResult.index;
 
   return {
     props: {
@@ -78,7 +92,7 @@ export async function getStaticProps() {
       heroTitle,
       heroSubtext,
       heroButtonText,
-      heroButtonLink
-    }
+      heroButtonLink,
+    },
   };
 }

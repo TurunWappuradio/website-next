@@ -1,6 +1,7 @@
 import Link from 'next/Link';
 
-const buttonStyle = "bg-teal px-8 py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded";
+const buttonStyle =
+  'bg-teal px-8 py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded';
 
 function Button({ children, className, ...props }) {
   return (
@@ -10,7 +11,7 @@ function Button({ children, className, ...props }) {
   );
 }
 
-function LinkButton({ children,className, href, ...props}) {
+function LinkButton({ children, className, href, ...props }) {
   return (
     <Link href={href}>
       <a className={`${buttonStyle} ${className}`} {...props}>
@@ -18,7 +19,6 @@ function LinkButton({ children,className, href, ...props}) {
       </a>
     </Link>
   );
-
 }
 
-export {Button, LinkButton};
+export { Button, LinkButton };

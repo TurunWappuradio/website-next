@@ -9,10 +9,10 @@ async function fetchContent(query) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'authorization': `Bearer ${CONTENTFUL_ACCESS_TOKEN}`,
+          authorization: `Bearer ${CONTENTFUL_ACCESS_TOKEN}`,
         },
         body: JSON.stringify({ query }),
-      },
+      }
     );
     const { data } = await res.json();
     return data;
