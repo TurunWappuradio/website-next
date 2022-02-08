@@ -1,5 +1,5 @@
 import Link from 'next/Link';
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 const buttonStyle =
   'bg-teal px-8 py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded';
@@ -9,7 +9,7 @@ interface ButtonProps {
   className?: string;
 }
 
-function Button({ children, className, ...props }: ButtonProps) {
+const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button className={`${buttonStyle} ${className || ''}`} {...props}>
       {children}
@@ -23,7 +23,7 @@ interface LinkButtonProps {
   href: string;
 }
 
-function LinkButton({ children, className, href, ...props }: LinkButtonProps) {
+const LinkButton: FC<LinkButtonProps> = ({ children, className, href, ...props }) => {
   return (
     <Link href={href}>
       <a className={`${buttonStyle} ${className || ''}`} {...props}>

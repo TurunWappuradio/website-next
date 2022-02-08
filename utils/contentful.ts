@@ -5,7 +5,7 @@ const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-async function fetchContent<T>(query: DocumentNode): Promise<T> {
+const fetchContent = async <T>(query: DocumentNode): Promise<T> => {
   try {
     const _apolloClient = apolloClient ?? createApolloClient();
     const { data } = await _apolloClient.query({ query });
@@ -17,7 +17,7 @@ async function fetchContent<T>(query: DocumentNode): Promise<T> {
   }
 }
 
-function createApolloClient() {
+const createApolloClient = () => {
   return new ApolloClient({
     uri: 'https://graphql.contentful.com/content/v1/spaces/' + CONTENTFUL_SPACE_ID,
     headers: {
@@ -27,7 +27,7 @@ function createApolloClient() {
   });
 }
 
-function imageLoader({ src, width, quality }: { src: string; width: number; quality: number }) {
+const imageLoader = ({ src, width, quality }: { src: string; width: number; quality: number }) => {
   return `${src}?q=${quality || 100}&w=${width}&fm=webp`;
 }
 

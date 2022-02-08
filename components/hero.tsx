@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { FC } from 'react';
 
 import { imageLoader } from 'utils/contentful';
 import { LinkButton } from './button';
@@ -13,7 +14,7 @@ interface HeroProps {
   buttonLink: string;
 }
 
-function Hero({ image, title, subtext, buttonText, buttonLink }: HeroProps) {
+const Hero: FC<HeroProps> = ({ image, title, subtext, buttonText, buttonLink }) => {
   const { url } = image;
 
   return (
@@ -58,7 +59,7 @@ function Hero({ image, title, subtext, buttonText, buttonLink }: HeroProps) {
   );
 }
 
-function NavLink({ text }: { text: string }) {
+const NavLink: FC<{ text: string }> = ({ text }) => {
   return <li className="p-4 text-xl text-white">{text}</li>;
 }
 

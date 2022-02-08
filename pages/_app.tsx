@@ -1,6 +1,8 @@
+import { FC } from 'react';
+import { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
 
-function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
 }
 

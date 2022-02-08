@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { imageLoader } from 'utils/contentful';
 
-function renderOptions(links: any): Options {
+const renderOptions = (links: any): Options => {
   // create an asset map
   const assetMap = new Map();
 
@@ -66,7 +66,7 @@ function renderOptions(links: any): Options {
   };
 }
 
-function renderRichtext(content: any): React.ReactNode {
+const renderRichtext = (content: any): React.ReactNode => {
   const { json, links } = content;
 
   return documentToReactComponents(json, renderOptions(links));
