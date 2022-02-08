@@ -33,6 +33,7 @@ yarn-error.log*
 # vercel
 .vercel
 .env.local
+.env
 *.graphql.d.ts
 *.graphqls.d.ts
 /.cache

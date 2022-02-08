@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint --fix",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
-    "codegen": "graphql-let"
+    "codegen": "graphql-let --require dotenv/config"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
