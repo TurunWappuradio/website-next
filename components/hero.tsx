@@ -5,7 +5,7 @@ import { LinkButton } from './button';
 
 interface HeroProps {
   image: {
-    url: string;
+    url?: string;
   };
   title: string;
   subtext: string;
@@ -20,7 +20,7 @@ function Hero({ image, title, subtext, buttonText, buttonLink }: HeroProps) {
     <div className="relative flex flex-col w-full h-128 xl:h-192">
       {/* Hero image */}
       <Image
-        src={url}
+        src={url} // TODO: fallback for missing urls.
         loader={imageLoader}
         layout="fill"
         objectFit="cover"

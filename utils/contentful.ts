@@ -5,7 +5,7 @@ const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-async function fetchContent(query: DocumentNode) {
+async function fetchContent<T>(query: DocumentNode): Promise<T> {
   try {
     const _apolloClient = apolloClient ?? createApolloClient();
     const { data } = await _apolloClient.query({ query });
