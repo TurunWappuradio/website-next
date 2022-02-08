@@ -15,7 +15,7 @@ const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
       {children}
     </button>
   );
-}
+};
 
 interface LinkButtonProps {
   children: ReactNode;
@@ -31,6 +31,6 @@ const LinkButton: FC<LinkButtonProps> = ({ children, className, href, ...props }
       </a>
     </Link>
   );
-}
+};
 
 export { Button, LinkButton };

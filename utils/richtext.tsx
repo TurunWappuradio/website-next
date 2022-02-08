@@ -64,12 +64,12 @@ const renderOptions = (links: any): Options => {
       },
     },
   };
-}
+};
 
 const renderRichtext = (content: any): React.ReactNode => {
   const { json, links } = content;
 
   return documentToReactComponents(json, renderOptions(links));
-}
+};
 
 export { renderRichtext };

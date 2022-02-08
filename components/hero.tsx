@@ -57,10 +57,10 @@ const Hero: FC<HeroProps> = ({ image, title, subtext, buttonText, buttonLink }) 
       </div>
     </div>
   );
-}
+};
 
 const NavLink: FC<{ text: string }> = ({ text }) => {
   return <li className="p-4 text-xl text-white">{text}</li>;
-}
+};
 
 export default Hero;

@@ -15,7 +15,7 @@ const fetchContent = async <T>(query: DocumentNode): Promise<T> => {
     console.error(`There was a problem retrieving entries with the query ${query}`);
     console.error(error);
   }
-}
+};
 
 const createApolloClient = () => {
   return new ApolloClient({
@@ -25,10 +25,10 @@ const createApolloClient = () => {
     },
     cache: new InMemoryCache(),
   });
-}
+};
 
 const imageLoader = ({ src, width, quality }: { src: string; width: number; quality: number }) => {
   return `${src}?q=${quality || 100}&w=${width}&fm=webp`;
-}
+};
 
 export { fetchContent, imageLoader };
