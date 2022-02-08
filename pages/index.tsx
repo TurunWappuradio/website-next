@@ -1,10 +1,11 @@
 import Head from 'next/head';
+import { gql } from '@apollo/client';
 
 import { renderRichtext } from 'utils/richtext';
 import { fetchContent } from 'utils/contentful';
 import Hero from 'components/hero';
 
-export default function Home({
+export default function Index({
   content,
   heroImage,
   heroTitle,
@@ -26,63 +27,49 @@ export default function Home({
         buttonLink={heroButtonLink}
         buttonText={heroButtonText}
       />
-      <div className="mx-auto pt-12 max-w-4xl text-white">
-        {renderRichtext(content)}
-      </div>
+      <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
     </div>
   );
 }
 
 export async function getStaticProps() {
-  // find the ID of our index object.
-  const idQuery = `
-  {
-    indexCollection {
-      items {
-        sys {
-          id
-        }
-      }
-    }
-  }
-  `;
-  const idResult = await fetchContent(idQuery);
-
-  // there can be only one index object, so we'll just grab the first one.
-  const indexId = idResult.indexCollection.items[0].sys.id;
-
-  // find the content of our index object.
-  const contentQuery = `
-  {
-    index(id: "${indexId}") {
-      heroImage {
-        url
-      }
-      heroTitle
-      heroSubtext
-      heroButtonText
-      heroButtonLink
-      content {
-        json
-        links {
-          assets {
-            block {
-              sys { id }
-              url
-              width
-              height
+  const indexQuery = gql`
+    query IndexQuery {
+      indexCollection(limit: 1) {
+        items {
+          heroImage {
+            url
+          }
+          heroTitle
+          heroSubtext
+          heroButtonText
+          heroButtonLink
+          content {
+            json
+            links {
+              assets {
+                block {
+                  sys {
+                    id
+                  }
+                  url
+                  width
+                  height
+                  description
+                  contentType
+                }
+              }
             }
           }
         }
       }
     }
-  }
   `;
 
-  const contentResult = await fetchContent(contentQuery);
+  const data = await fetchContent(indexQuery);
 
   const { heroImage, content, heroTitle, heroSubtext, heroButtonText, heroButtonLink } =
-    contentResult.index;
+    data.indexCollection.items[0];
 
   return {
     props: {

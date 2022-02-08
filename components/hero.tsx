@@ -3,17 +3,17 @@ import Image from 'next/image';
 import { imageLoader } from 'utils/contentful';
 import { LinkButton } from './button';
 
-interface Props {
+interface HeroProps {
   image: {
     url: string;
-  },
+  };
   title: string;
   subtext: string;
   buttonText: string;
   buttonLink: string;
 }
 
-function Hero({ image, title, subtext, buttonText, buttonLink }: Props) {
+function Hero({ image, title, subtext, buttonText, buttonLink }: HeroProps) {
   const { url } = image;
 
   return (

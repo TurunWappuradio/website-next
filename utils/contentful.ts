@@ -1,25 +1,30 @@
+import { ApolloClient, DocumentNode, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
-async function fetchContent(query: string) {
+let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+
+async function fetchContent(query: DocumentNode) {
   try {
-    const res = await fetch(
-      `https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${CONTENTFUL_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({ query }),
-      }
-    );
-    const { data } = await res.json();
+    const _apolloClient = apolloClient ?? createApolloClient();
+    const { data } = await _apolloClient.query({ query });
+
     return data;
   } catch (error) {
     console.error(`There was a problem retrieving entries with the query ${query}`);
     console.error(error);
   }
+}
+
+function createApolloClient() {
+  return new ApolloClient({
+    uri: 'https://graphql.contentful.com/content/v1/spaces/' + CONTENTFUL_SPACE_ID,
+    headers: {
+      Authorization: 'Bearer ' + CONTENTFUL_ACCESS_TOKEN,
+    },
+    cache: new InMemoryCache(),
+  });
 }
 
 function imageLoader({ src, width, quality }: { src: string; width: number; quality: number }) {
