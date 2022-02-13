@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 
-import { imageLoader } from 'utils/contentful';
+import { imageLoader } from 'contentful/imageLoader';
 import { LinkButton } from './button';
 
 interface HeroProps {

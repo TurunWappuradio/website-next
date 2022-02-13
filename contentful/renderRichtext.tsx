@@ -2,7 +2,7 @@ import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 
-import { imageLoader } from 'utils/contentful';
+import { imageLoader } from './imageLoader';
 
 const renderOptions = (links: any): Options => {
   // create an asset map

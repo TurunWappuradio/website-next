@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { GetStaticProps, NextPage } from 'next';
 
-import { renderRichtext } from 'utils/richtext';
-import { fetchContent } from 'utils/contentful';
+import { fetchContent } from 'contentful/client';
+import { renderRichtext } from 'contentful/renderRichtext';
 import Hero from 'components/hero';
-import { IndexDocument, IndexQuery } from './index.graphql';
+import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
 
 interface IndexProps {
   content: any;
