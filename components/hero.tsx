@@ -3,6 +3,8 @@ import { FC } from 'react';
 
 import { imageLoader } from 'contentful/imageLoader';
 import { LinkButton } from './button';
+import Link from 'next/Link';
+import { NavigationItem } from 'contentful/client';
 
 interface HeroProps {
   image: {
@@ -12,9 +14,17 @@ interface HeroProps {
   subtext: string;
   buttonText: string;
   buttonLink: string;
+  navigationItems: NavigationItem[];
 }
 
-const Hero: FC<HeroProps> = ({ image, title, subtext, buttonText, buttonLink }) => {
+const Hero: FC<HeroProps> = ({
+  image,
+  title,
+  subtext,
+  buttonText,
+  buttonLink,
+  navigationItems,
+}) => {
   const { url } = image;
 
   return (
@@ -31,11 +41,12 @@ const Hero: FC<HeroProps> = ({ image, title, subtext, buttonText, buttonLink }) 
       {/* Navigation */}
       <header className="z-10 w-screen h-16 max-w-4xl mx-auto">
         <ul className="hidden w-full md:flex justify-end">
-          {['Radio', 'Lisätietoja', 'Liity mukaan', 'Yhteistyö', 'Musiikki', 'Arkisto'].map(
-            (text) => (
-              <NavLink text={text} key={text} />
-            )
-          )}
+          {/*{['Radio', 'Lisätietoja', 'Liity mukaan', 'Yhteistyö', 'Musiikki', 'Arkisto'].map(*/}
+          {navigationItems.map((navItem) => (
+            <Link key={navItem.slug} href={'/' + navItem.slug}>
+              <a className="p-4 text-xl text-white">{navItem.name}</a>
+            </Link>
+          ))}
         </ul>
       </header>
 
@@ -57,10 +68,6 @@ const Hero: FC<HeroProps> = ({ image, title, subtext, buttonText, buttonLink }) 
       </div>
     </div>
   );
-};
-
-const NavLink: FC<{ text: string }> = ({ text }) => {
-  return <li className="p-4 text-xl text-white">{text}</li>;
 };
 
 export default Hero;

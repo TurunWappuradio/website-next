@@ -25,6 +25,7 @@ const Index: NextPage<IndexProps> = ({
   heroSubtext,
   heroButtonText,
   heroButtonLink,
+  navigationItems,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -39,7 +40,7 @@ const Index: NextPage<IndexProps> = ({
         subtext={heroSubtext}
         buttonLink={heroButtonLink}
         buttonText={heroButtonText}
-        //navigationPages={navigationPages}
+        navigationItems={navigationItems}
       />
       <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
     </div>
@@ -53,7 +54,6 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     data.indexCollection.items[0];
 
   const navigationItems = await fetchNavigationItems();
-  console.log(navigationItems);
   return {
     props: {
       heroImage,
