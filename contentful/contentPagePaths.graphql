@@ -1,0 +1,7 @@
+query contentPagePaths {
+  contentPageCollection {
+    items {
+      slug
+    }
+  }
+}
