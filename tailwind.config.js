@@ -14,7 +14,7 @@ module.exports = {
       teal: '#5bbfbf',
     },
     fontFamily: {
-      sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif']
+      sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
     },
     fontWeight: {
       normal: 500,
@@ -22,13 +22,13 @@ module.exports = {
     },
     extend: {
       height: {
-        '128': '32rem',
-        '192': '48rem',
-      }
-    }
+        128: '32rem',
+        192: '48rem',
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};

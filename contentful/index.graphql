@@ -1,0 +1,30 @@
+query Index {
+  indexCollection(limit: 1) {
+    items {
+      heroImage {
+        url
+      }
+      heroTitle
+      heroSubtext
+      heroButtonText
+      heroButtonLink
+      content {
+        json
+        links {
+          assets {
+            block {
+              sys {
+                id
+              }
+              url
+              width
+              height
+              description
+              contentType
+            }
+          }
+        }
+      }
+    }
+  }
+}
