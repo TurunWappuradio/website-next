@@ -1,9 +1,9 @@
 import Image from 'next/image';
+import Link from 'next/Link';
 import { FC } from 'react';
 
 import { imageLoader } from 'contentful/imageLoader';
 import { LinkButton } from './button';
-import Link from 'next/Link';
 import { NavigationItem } from 'contentful/client';
 
 interface HeroProps {
