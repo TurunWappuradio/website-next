@@ -1,0 +1,12 @@
+query NavigationItems {
+  navigationCollection(limit: 1) {
+    items {
+      pagesCollection {
+        items {
+          name
+          slug
+        }
+      }
+    }
+  }
+}
