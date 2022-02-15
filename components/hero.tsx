@@ -41,7 +41,6 @@ const Hero: FC<HeroProps> = ({
       {/* Navigation */}
       <header className="z-10 w-screen h-16 max-w-4xl mx-auto">
         <ul className="hidden w-full md:flex justify-end">
-          {/*{['Radio', 'Lisätietoja', 'Liity mukaan', 'Yhteistyö', 'Musiikki', 'Arkisto'].map(*/}
           {navigationItems.map((navItem) => (
             <Link key={navItem.slug} href={'/' + navItem.slug}>
               <a className="p-4 text-xl text-white">{navItem.name}</a>
