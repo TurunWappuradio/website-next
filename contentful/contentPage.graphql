@@ -2,6 +2,14 @@ query contentPage($slug: String) {
   contentPageCollection(where: { slug: $slug }, limit: 1) {
     items {
       slug
+      description
+      heroImage {
+        url
+      }
+      name
+      heroSubtext
+      heroButtonText
+      heroButtonLink
       content {
         json
         links {

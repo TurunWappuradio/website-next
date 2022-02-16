@@ -53,6 +53,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     data.indexCollection.items[0];
 
   const navigationItems = await fetchNavigationItems();
+
   return {
     props: {
       heroImage,
