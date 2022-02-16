@@ -1,9 +1,19 @@
 import { ApolloClient, DocumentNode, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { NavigationItemsDocument, NavigationItemsQuery } from './navigation.graphql';
 
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+
+export interface NavigationItem {
+  name?: string;
+  slug?: string;
+}
+const fetchNavigationItems = async (): Promise<NavigationItem[]> => {
+  const navigationItems = await fetchContent<NavigationItemsQuery>(NavigationItemsDocument);
+  return navigationItems.navigationCollection.items[0].pagesCollection.items;
+};
 
 const fetchContent = async <T>(query: DocumentNode): Promise<T> => {
   try {
@@ -27,4 +37,4 @@ const createApolloClient = () => {
   });
 };
 
-export { fetchContent };
+export { fetchContent, fetchNavigationItems };

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { GetStaticProps, NextPage } from 'next';
 
-import { fetchContent } from 'contentful/client';
+import { fetchContent, fetchNavigationItems, NavigationItem } from 'contentful/client';
 import { renderRichtext } from 'contentful/renderRichtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
@@ -15,6 +15,7 @@ interface IndexProps {
   heroSubtext: string;
   heroButtonText: string;
   heroButtonLink: string;
+  navigationItems: NavigationItem[];
 }
 
 const Index: NextPage<IndexProps> = ({
@@ -24,6 +25,7 @@ const Index: NextPage<IndexProps> = ({
   heroSubtext,
   heroButtonText,
   heroButtonLink,
+  navigationItems,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -38,6 +40,7 @@ const Index: NextPage<IndexProps> = ({
         subtext={heroSubtext}
         buttonLink={heroButtonLink}
         buttonText={heroButtonText}
+        navigationItems={navigationItems}
       />
       <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
     </div>
@@ -50,6 +53,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const { heroImage, content, heroTitle, heroSubtext, heroButtonText, heroButtonLink } =
     data.indexCollection.items[0];
 
+  const navigationItems = await fetchNavigationItems();
   return {
     props: {
       heroImage,
@@ -58,6 +62,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroSubtext,
       heroButtonText,
       heroButtonLink,
+      navigationItems,
     },
   };
 };
