@@ -19,7 +19,6 @@ const ContentPage: NextPage<ContentPageProps> = ({ content }) => {
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
     </div>
