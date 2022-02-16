@@ -17,10 +17,16 @@ module.exports = {
       sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
     },
     fontWeight: {
-      normal: 500,
+      normal: 400,
       bold: 600,
     },
     extend: {
+      width: {
+        128: '32rem',
+        144: '36rem',
+        160: '40rem',
+        192: '48rem',
+      },
       height: {
         128: '32rem',
         144: '36rem',

@@ -1,16 +1,19 @@
+import { FC } from 'react';
 import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 
-import { imageLoader } from './imageLoader';
+import { imageLoader } from '../contentful/imageLoader';
 
-const renderOptions = (links: any): Options => {
+const renderOptions = (links?: any): Options => {
   // create an asset map
   const assetMap = new Map();
 
-  // loop through the linked assets and add them to a map
-  for (const asset of links.assets.block) {
-    assetMap.set(asset.sys.id, asset);
+  if (links) {
+    // loop through the linked assets and add them to a map
+    for (const asset of links.assets.block) {
+      assetMap.set(asset.sys.id, asset);
+    }
   }
 
   return {
@@ -20,7 +23,7 @@ const renderOptions = (links: any): Options => {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => <p className="m-3">{children}</p>,
       [BLOCKS.HEADING_1]: (node, children) => (
-        <h1 className="text-4xl m-3 font-bold text-coral">{children}</h1>
+        <p className="text-4xl mx-3 my-6 font-bold text-coral">{children}</p>
       ),
       [BLOCKS.HEADING_2]: (node, children) => (
         <h2 className="text-3xl m-3 font-bold text-coral">{children}</h2>
@@ -66,10 +69,14 @@ const renderOptions = (links: any): Options => {
   };
 };
 
-const renderRichtext = (content: any): React.ReactNode => {
+interface RichTextProps {
+  content: any;
+}
+
+const RichText: FC<RichTextProps> = ({ content }: RichTextProps) => {
   const { json, links } = content;
 
-  return documentToReactComponents(json, renderOptions(links));
+  return <>{documentToReactComponents(json, renderOptions(links))}</>;
 };
 
-export { renderRichtext };
+export default RichText;

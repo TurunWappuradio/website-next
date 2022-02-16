@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 
 import { fetchContent, fetchNavigationItems, NavigationItem } from 'contentful/client';
-import { renderRichtext } from 'contentful/renderRichtext';
+import RichText from 'components/richtext';
 import {
   ContentPagePathsDocument,
   ContentPagePathsQuery,
@@ -47,7 +47,9 @@ const ContentPage: NextPage<ContentPageProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
+      <article className="mx-auto pt-12 max-w-4xl text-white">
+        <RichText content={content} />
+      </article>
     </div>
   );
 };

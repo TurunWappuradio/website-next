@@ -2,12 +2,12 @@ import Head from 'next/head';
 import { GetStaticProps, NextPage } from 'next';
 
 import { fetchContent, fetchNavigationItems, NavigationItem } from 'contentful/client';
-import { renderRichtext } from 'contentful/renderRichtext';
+import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
+import Image from 'next/image';
 
 interface IndexProps {
-  content: any;
   heroImage: {
     url?: string;
   };
@@ -16,16 +16,31 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
+  firstDecorativeImage: {
+    url?: string;
+    width?: number;
+    height?: number;
+  };
+  secondDecorativeImage: {
+    url?: string;
+  };
+  firstContent: any;
+  secondContent: any;
+  thirdContent: any;
 }
 
 const Index: NextPage<IndexProps> = ({
-  content,
   heroImage,
   heroTitle,
   heroSubtext,
   heroButtonText,
   heroButtonLink,
   navigationItems,
+  firstDecorativeImage,
+  secondDecorativeImage,
+  firstContent,
+  secondContent,
+  thirdContent,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -41,7 +56,19 @@ const Index: NextPage<IndexProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
+      <main className="flex justify-center items-center flex-wrap-reverse">
+        <div className="relative h-48 md:h-96 w-128 m-10 max-w-full">
+          <Image
+            src={firstDecorativeImage.url}
+            layout="fill"
+            objectFit="cover"
+            className="rounded"
+          />
+        </div>
+        <section className="text-white text-lg w-128 m-6 max-w-full">
+          <RichText content={firstContent} />
+        </section>
+      </main>
     </div>
   );
 };
@@ -49,20 +76,34 @@ const Index: NextPage<IndexProps> = ({
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const data = await fetchContent<IndexQuery>(IndexDocument);
 
-  const { heroImage, content, heroTitle, heroSubtext, heroButtonText, heroButtonLink } =
-    data.indexCollection.items[0];
+  const {
+    heroImage,
+    heroTitle,
+    heroSubtext,
+    heroButtonText,
+    heroButtonLink,
+    firstDecorativeImage,
+    secondDecorativeImage,
+    firstContent,
+    secondContent,
+    thirdContent,
+  } = data.indexCollection.items[0];
 
   const navigationItems = await fetchNavigationItems();
 
   return {
     props: {
       heroImage,
-      content,
       heroTitle,
       heroSubtext,
       heroButtonText,
       heroButtonLink,
       navigationItems,
+      firstDecorativeImage,
+      secondDecorativeImage,
+      firstContent,
+      secondContent,
+      thirdContent,
     },
   };
 };
