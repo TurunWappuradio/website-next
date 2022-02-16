@@ -37,3 +37,4 @@ yarn-error.log*
 *.graphql.d.ts
 *.graphqls.d.ts
 /.cache
+.vscode
