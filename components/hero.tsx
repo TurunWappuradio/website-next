@@ -30,23 +30,24 @@ const Hero: FC<HeroProps> = ({
   const loader = image?.url ? imageLoader : undefined;
 
   return (
-    <div className="relative flex flex-col w-full h-128 xl:h-192">
+    <div className="relative flex flex-col w-full h-160">
       {/* Hero image */}
       <Image
         src={url}
         loader={loader}
+        priority={true}
         layout="fill"
         objectFit="cover"
-        className="z-0 opacity-[10%]"
+        className="z-0 opacity-[10%] grayscale"
       />
 
       {/* Navigation */}
       <header className="z-10 w-screen h-16 max-w-4xl mx-auto">
+        {/* Desktop navigation bar. */}
         <ul className="hidden w-full md:flex justify-end">
-          {navigationItems.map((navItem) => (
-            <Link key={navItem.slug} href={'/' + navItem.slug}>
-              <a className="p-4 text-xl text-white">{navItem.name}</a>
-            </Link>
+          <NavLink href="/" name="Radio" />
+          {navigationItems.map(({ name, slug }) => (
+            <NavLink key={slug} href={`/${slug}`} name={name} />
           ))}
         </ul>
       </header>
@@ -54,14 +55,14 @@ const Hero: FC<HeroProps> = ({
       {/* Hero content */}
       <div className="z-10 flex flex-wrap items-center justify-center h-full">
         <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
-          <Image src="/leima.svg" layout="fill" />
+          <Image src="/leima.svg" layout="fill" priority={true} />
         </div>
-        <div className="p-8 text-center">
-          <h1 className="text-3xl font-bold text-coral md:text-5xl">{title}</h1>
-          <p className="p-4 text-xl text-white md:text-3xl">{subtext}</p>
+        <div className="p-8 flex flex-col">
+          <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">{title}</h1>
+          <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
 
           {buttonText && buttonLink ? (
-            <LinkButton className="text-md md:text-xl" href={buttonLink}>
+            <LinkButton className="text-md md:text-xl my-3 ml-auto" href={buttonLink}>
               {buttonText}
             </LinkButton>
           ) : null}
@@ -70,5 +71,13 @@ const Hero: FC<HeroProps> = ({
     </div>
   );
 };
+
+const NavLink = ({ href, name }: { href: string; name: string }) => (
+  <li className="p-4">
+    <Link href={href}>
+      <a className="text-xl text-white hover:text-coral transition">{name}</a>
+    </Link>
+  </li>
+);
 
 export default Hero;
