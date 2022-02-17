@@ -5,6 +5,7 @@ import { fetchContent, fetchNavigationItems, NavigationItem } from 'contentful/c
 import { renderRichtext } from 'contentful/renderRichtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
+import Footer from 'components/footer';
 
 interface IndexProps {
   content: any;
@@ -42,7 +43,8 @@ const Index: NextPage<IndexProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
+      <div className="pb-8 mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
+      <Footer navigationItems={navigationItems} />
     </div>
   );
 };
