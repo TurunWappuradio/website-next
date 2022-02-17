@@ -32,7 +32,6 @@ const Index: NextPage<IndexProps> = ({
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero
         image={heroImage}
@@ -54,6 +53,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     data.indexCollection.items[0];
 
   const navigationItems = await fetchNavigationItems();
+
   return {
     props: {
       heroImage,

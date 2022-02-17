@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { imageLoader } from 'contentful/imageLoader';
 import { LinkButton } from './button';
 import { NavigationItem } from 'contentful/client';
+import heroImage from '../public/hero.jpeg';
 
 interface HeroProps {
   image: {
@@ -25,17 +26,18 @@ const Hero: FC<HeroProps> = ({
   buttonLink,
   navigationItems,
 }) => {
-  const { url } = image;
+  const url = image?.url || heroImage;
+  const loader = image?.url ? imageLoader : undefined;
 
   return (
     <div className="relative flex flex-col w-full h-128 xl:h-192">
       {/* Hero image */}
       <Image
-        src={url} // TODO: fallback for missing urls.
-        loader={imageLoader}
+        src={url}
+        loader={loader}
         layout="fill"
         objectFit="cover"
-        className="z-0 opacity-30"
+        className="z-0 opacity-[10%]"
       />
 
       {/* Navigation */}

@@ -15,10 +15,10 @@ const fetchNavigationItems = async (): Promise<NavigationItem[]> => {
   return navigationItems.navigationCollection.items[0].pagesCollection.items;
 };
 
-const fetchContent = async <T>(query: DocumentNode): Promise<T> => {
+const fetchContent = async <T>(query: DocumentNode, variables?: any): Promise<T> => {
   try {
     const _apolloClient = apolloClient ?? createApolloClient();
-    const { data } = await _apolloClient.query({ query });
+    const { data } = await _apolloClient.query({ query, variables });
 
     return data;
   } catch (error) {
