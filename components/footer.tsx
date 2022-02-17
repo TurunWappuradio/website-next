@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/Link';
 import { FC } from 'react';
+import { AiOutlineInstagram } from 'react-icons/ai';
 
 import { NavigationItem } from 'contentful/client';
 
@@ -45,11 +46,14 @@ const Footer: FC<FooterProps> = ({ navigationItems }) => {
       </div>
       <div className="p-4 px-12 text-sm text-white">
         <ul>
-          <li>Tähän tulis ne somelinkit</li>
+          <li>
+            <AiOutlineInstagram /> Tähän tulis ne somelinkit
+          </li>
         </ul>
       </div>
-      <div className="relative h-40 w-40 lg:h-52 lg:w-52 xl:h-60 xl:w-60">
+      <div className="relative h-32 w-32 lg:h-40 lg:w-40 xl:h-44 xl:w-44">
         <Image src="/leima.svg" layout="fill" priority={true} />
+        <div className="p-5 py-12 text-sm text-white opacity-50">Ja tähän loput</div>
       </div>
     </div>
   );
