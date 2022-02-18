@@ -13,7 +13,7 @@ const Footer: FC<FooterProps> = ({ navigationItems }) => {
   return (
     <div className="z-15 p-6 flex flex-wrap items-center justify-center bg-blue-dark">
       <div className="p-4 px-12 text-l text-white">
-        <ul>
+        <ul className="space-y-2 ">
           <li key="/">
             <Link href={'/'}>
               <a>Etusivu</a>
@@ -29,7 +29,7 @@ const Footer: FC<FooterProps> = ({ navigationItems }) => {
           {/* Other buttons, placeholders */}
           <li>
             <Link href={'/lisatietoja'}>
-              <a>Lisätietoja</a>
+              <a className='hover:underline'>Lisätietoja</a>
             </Link>
           </li>
           <li>
@@ -46,19 +46,23 @@ const Footer: FC<FooterProps> = ({ navigationItems }) => {
       </div>
       <div className="p-4 px-12 text-sm text-white">
         <ul>
-          <li>
-            <AiOutlineInstagram /> Tähän tulis ne somelinkit
+          <li className="text-center">
+            <a href="https://instagram.com" target="_blank" className="flex items-center text-center">
+            <AiOutlineInstagram className="h-6 w-6 p-1"/>
+            Instagram
+            </a>
           </li>
         </ul>
       </div>
       <div className="relative h-32 w-32 lg:h-40 lg:w-40 xl:h-44 xl:w-44">
         <Image src="/leima.svg" layout="fill" priority={true} />
         <div className="p-5 py-12 text-sm text-white opacity-50">Ja tähän loput</div>
-          <li>Tähän tulis ne somelinkit</li>
       </div>
-      <div className="relative h-40 w-40 lg:h-52 lg:w-52 xl:h-60 xl:w-60">
-        <Image src="/leima.svg" layout="fill" priority={true} />
-      </div>
+      <style jsx>{`
+      li:hover {
+        text-decoration:underline
+      }
+      `}</style>
     </div>
   );
 };
