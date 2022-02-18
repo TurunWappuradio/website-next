@@ -54,9 +54,11 @@ const Footer: FC<FooterProps> = ({ navigationItems }) => {
           </li>
         </ul>
       </div>
-      <div className="relative h-32 w-32 lg:h-40 lg:w-40 xl:h-44 xl:w-44">
+      <div>
+      <div className="relative flex h-28 w-28 lg:h-32 lg:w-32 xl:h-36 xl:w-36">
         <Image src="/leima.svg" layout="fill" priority={true} />
-        <div className="p-5 py-12 text-sm text-white opacity-50">Ja tähän loput</div>
+      </div>
+        <div className="relative p-3 text-center text-sm text-white opacity-50">Ja tähän loput</div>
       </div>
       <style jsx>{`
       li:hover {
