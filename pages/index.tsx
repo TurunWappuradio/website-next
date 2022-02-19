@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import { GetStaticProps, NextPage } from 'next';
 
-import { fetchContent, fetchNavigationItems, NavigationItem } from 'contentful/client';
+import {
+  fetchContent,
+  fetchNavigationItems,
+  NavigationItem,
+} from 'contentful/client';
 import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/index.graphql';

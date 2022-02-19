@@ -58,11 +58,16 @@ const Hero: FC<HeroProps> = ({
           <Image src="/leima.svg" layout="fill" priority={true} />
         </div>
         <div className="flex flex-col p-8">
-          <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">{title}</h1>
+          <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">
+            {title}
+          </h1>
           <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
 
           {buttonText && buttonLink ? (
-            <LinkButton className="text-md my-3 ml-auto md:text-xl" href={buttonLink}>
+            <LinkButton
+              className="text-md my-3 ml-auto md:text-xl"
+              href={buttonLink}
+            >
               {buttonText}
             </LinkButton>
           ) : null}

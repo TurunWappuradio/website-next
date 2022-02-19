@@ -24,7 +24,12 @@ interface LinkButtonProps {
   target?: string;
 }
 
-const LinkButton: FC<LinkButtonProps> = ({ children, className, href, ...props }) => {
+const LinkButton: FC<LinkButtonProps> = ({
+  children,
+  className,
+  href,
+  ...props
+}) => {
   return (
     <Link href={href}>
       <a className={`${buttonStyle} ${className || ''}`} {...props}>

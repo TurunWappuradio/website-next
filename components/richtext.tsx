@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types';
-import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import {
+  documentToReactComponents,
+  Options,
+} from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 
 import { imageLoader } from '../contentful/imageLoader';
@@ -46,14 +49,23 @@ const renderOptions = (links?: any): Options => {
       [BLOCKS.HEADING_6]: (node, children) => (
         <h6 className="m-3 text-lg font-bold text-coral">{children}</h6>
       ),
-      [BLOCKS.UL_LIST]: (node, children) => <ul className="ml-8 list-disc">{children}</ul>,
-      [BLOCKS.OL_LIST]: (node, children) => <ol className="ml-8 list-decimal">{children}</ol>,
+      [BLOCKS.UL_LIST]: (node, children) => (
+        <ul className="ml-8 list-disc">{children}</ul>
+      ),
+      [BLOCKS.OL_LIST]: (node, children) => (
+        <ol className="ml-8 list-decimal">{children}</ol>
+      ),
       [INLINES.HYPERLINK]: ({ data }, children) => {
         /* This is a hack.
          * If children are underlined, render the link as button.
          * TODO: find a better way to make a button with Contentful.
          */
-        if (React.Children.map(children, (child: any) => child?.type === 'u').every(Boolean)) {
+        if (
+          React.Children.map(
+            children,
+            (child: any) => child?.type === 'u'
+          ).every(Boolean)
+        ) {
           return (
             <span className="flex w-full justify-end">
               <LinkButton href={data.uri}>
@@ -103,7 +115,9 @@ const RichText: FC<RichTextProps> = ({ content }: RichTextProps) => {
   const { json, links } = content;
 
   return (
-    <div className="flex flex-col">{documentToReactComponents(json, renderOptions(links))}</div>
+    <div className="flex flex-col">
+      {documentToReactComponents(json, renderOptions(links))}
+    </div>
   );
 };
 
