@@ -84,6 +84,21 @@ const Index: NextPage<IndexProps> = ({
         </section>
         <Calendar />
       </div>
+
+      {/* Third section */}
+      <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
+          <RichText content={thirdContent} />
+        </section>
+        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
+          <Image
+            src={secondDecorativeImage.url}
+            layout="fill"
+            objectFit="cover"
+            className="rounded"
+          />
+        </div>
+      </div>
     </div>
   );
 };
