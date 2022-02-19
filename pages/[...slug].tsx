@@ -47,7 +47,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <article className="mx-auto pt-12 max-w-4xl text-white">
+      <article className="mx-auto max-w-4xl pt-12 text-white">
         <RichText content={content} />
       </article>
     </div>

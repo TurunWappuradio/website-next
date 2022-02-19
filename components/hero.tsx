@@ -30,7 +30,7 @@ const Hero: FC<HeroProps> = ({
   const loader = image?.url ? imageLoader : undefined;
 
   return (
-    <div className="relative flex flex-col w-full h-160">
+    <div className="relative flex h-160 w-full flex-col">
       {/* Hero image */}
       <Image
         src={url}
@@ -42,9 +42,9 @@ const Hero: FC<HeroProps> = ({
       />
 
       {/* Navigation */}
-      <header className="z-10 w-screen h-16 max-w-4xl mx-auto">
+      <header className="z-10 mx-auto h-16 w-screen max-w-4xl">
         {/* Desktop navigation bar. */}
-        <ul className="hidden w-full md:flex justify-end">
+        <ul className="hidden w-full justify-end md:flex">
           <NavLink href="/" name="Radio" />
           {navigationItems.map(({ name, slug }) => (
             <NavLink key={slug} href={`/${slug}`} name={name} />
@@ -53,16 +53,16 @@ const Hero: FC<HeroProps> = ({
       </header>
 
       {/* Hero content */}
-      <div className="z-10 flex flex-wrap items-center justify-center h-full">
+      <div className="z-10 flex h-full flex-wrap items-center justify-center">
         <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
           <Image src="/leima.svg" layout="fill" priority={true} />
         </div>
-        <div className="p-8 flex flex-col">
+        <div className="flex flex-col p-8">
           <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">{title}</h1>
           <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
 
           {buttonText && buttonLink ? (
-            <LinkButton className="text-md md:text-xl my-3 ml-auto" href={buttonLink}>
+            <LinkButton className="text-md my-3 ml-auto md:text-xl" href={buttonLink}>
               {buttonText}
             </LinkButton>
           ) : null}
@@ -75,7 +75,7 @@ const Hero: FC<HeroProps> = ({
 const NavLink = ({ href, name }: { href: string; name: string }) => (
   <li className="p-4">
     <Link href={href}>
-      <a className="text-xl text-white hover:text-coral transition">{name}</a>
+      <a className="text-xl text-white transition hover:text-coral">{name}</a>
     </Link>
   </li>
 );

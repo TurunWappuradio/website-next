@@ -21,6 +21,7 @@ interface LinkButtonProps {
   children: ReactNode;
   className?: string;
   href: string;
+  target?: string;
 }
 
 const LinkButton: FC<LinkButtonProps> = ({ children, className, href, ...props }) => {

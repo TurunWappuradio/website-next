@@ -6,6 +6,7 @@ import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
 import Image from 'next/image';
+import Calendar from 'components/calendar';
 
 interface IndexProps {
   heroImage: {
@@ -58,8 +59,8 @@ const Index: NextPage<IndexProps> = ({
       />
 
       {/* First section */}
-      <main className="flex justify-center p-4 md:p-8 items-center flex-wrap-reverse">
-        <div className="relative h-48 md:h-96 w-128 m-10 max-w-full">
+      <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
             layout="fill"
@@ -67,16 +68,17 @@ const Index: NextPage<IndexProps> = ({
             className="rounded"
           />
         </div>
-        <section className="text-white text-lg w-128 max-w-full">
+        <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
           <RichText content={firstContent} />
         </section>
       </main>
 
       {/* Second section */}
-      <div className="w-full min-h-32 p-4 md:p-8 bg-blue-dark flex justify-center items-center flex-wrap">
-        <section className="text-white text-base w-128 max-w-full">
+      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
+        <Calendar />
       </div>
     </div>
   );
