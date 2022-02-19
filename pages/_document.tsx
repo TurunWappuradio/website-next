@@ -12,7 +12,7 @@ class MyDocument extends Document {
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <body className="bg-blue">
+        <body className="bg-gradient-to-b from-blue to-blue-light">
           <Main />
           <NextScript />
         </body>

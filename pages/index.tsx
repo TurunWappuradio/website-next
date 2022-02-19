@@ -56,7 +56,9 @@ const Index: NextPage<IndexProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <main className="flex justify-center items-center flex-wrap-reverse">
+
+      {/* First section */}
+      <main className="flex justify-center p-4 md:p-8 items-center flex-wrap-reverse">
         <div className="relative h-48 md:h-96 w-128 m-10 max-w-full">
           <Image
             src={firstDecorativeImage.url}
@@ -65,10 +67,17 @@ const Index: NextPage<IndexProps> = ({
             className="rounded"
           />
         </div>
-        <section className="text-white text-lg w-128 m-6 max-w-full">
+        <section className="text-white text-lg w-128 max-w-full">
           <RichText content={firstContent} />
         </section>
       </main>
+
+      {/* Second section */}
+      <div className="w-full min-h-32 p-4 md:p-8 bg-blue-dark flex justify-center items-center flex-wrap">
+        <section className="text-white text-base w-128 max-w-full">
+          <RichText content={secondContent} />
+        </section>
+      </div>
     </div>
   );
 };
