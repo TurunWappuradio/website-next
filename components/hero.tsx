@@ -30,7 +30,7 @@ const Hero: FC<HeroProps> = ({
   const loader = image?.url ? imageLoader : undefined;
 
   return (
-    <div className="relative flex flex-col w-full h-160">
+    <div className="relative flex flex-col w-full h-128 xl:h-160">
       {/* Hero image */}
       <Image
         src={url}
