@@ -7,12 +7,12 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
             rel="stylesheet"
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <body className="bg-blue">
+        <body className="bg-gradient-to-b from-blue to-blue-light">
           <Main />
           <NextScript />
         </body>

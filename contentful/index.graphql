@@ -8,22 +8,22 @@ query Index {
       heroSubtext
       heroButtonText
       heroButtonLink
-      content {
+      firstDecorativeImage {
+        url
+        width
+        height
+      }
+      secondDecorativeImage {
+        url
+      }
+      firstContent {
         json
-        links {
-          assets {
-            block {
-              sys {
-                id
-              }
-              url
-              width
-              height
-              description
-              contentType
-            }
-          }
-        }
+      }
+      secondContent {
+        json
+      }
+      thirdContent {
+        json
       }
     }
   }
