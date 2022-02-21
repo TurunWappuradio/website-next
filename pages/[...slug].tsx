@@ -1,13 +1,20 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 
-import { fetchContent, fetchNavigationItems, NavigationItem } from 'contentful/client';
-import { renderRichtext } from 'contentful/renderRichtext';
+import {
+  fetchContent,
+  fetchNavigationItems,
+  NavigationItem,
+} from 'contentful/client';
+import RichText from 'components/richtext';
 import {
   ContentPagePathsDocument,
   ContentPagePathsQuery,
 } from 'contentful/contentPagePaths.graphql';
-import { ContentPageDocument, ContentPageQuery } from 'contentful/contentPage.graphql';
+import {
+  ContentPageDocument,
+  ContentPageQuery,
+} from 'contentful/contentPage.graphql';
 import Hero from 'components/hero';
 
 interface ContentPageProps {
@@ -47,13 +54,17 @@ const ContentPage: NextPage<ContentPageProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <div className="mx-auto pt-12 max-w-4xl text-white">{renderRichtext(content)}</div>
+      <article className="mx-auto max-w-4xl pt-12 text-white">
+        <RichText content={content} />
+      </article>
     </div>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pathsResult = await fetchContent<ContentPagePathsQuery>(ContentPagePathsDocument);
+  const pathsResult = await fetchContent<ContentPagePathsQuery>(
+    ContentPagePathsDocument
+  );
   const paths = pathsResult.contentPageCollection.items.map((item) => ({
     params: { slug: item.slug.split('/') },
   }));
@@ -64,14 +75,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<ContentPageProps> = async (context) => {
+export const getStaticProps: GetStaticProps<ContentPageProps> = async (
+  context
+) => {
   const { slug } = context.params;
 
   const slugJoined = typeof slug === 'string' ? slug : slug.join('/');
 
-  const data = await fetchContent<ContentPageQuery>(ContentPageDocument, { slug: slugJoined });
-  const { name, description, heroImage, heroSubtext, heroButtonLink, heroButtonText, content } =
-    data.contentPageCollection.items[0];
+  const data = await fetchContent<ContentPageQuery>(ContentPageDocument, {
+    slug: slugJoined,
+  });
+  const {
+    name,
+    description,
+    heroImage,
+    heroSubtext,
+    heroButtonLink,
+    heroButtonText,
+    content,
+  } = data.contentPageCollection.items[0];
 
   const navigationItems = await fetchNavigationItems();
 
