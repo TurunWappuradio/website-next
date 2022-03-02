@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import { imageLoader } from 'contentful/imageLoader';
 import { LinkButton } from './button';
 import { NavigationItem } from 'contentful/client';
 import heroImage from '../public/hero.jpeg';
+import Hamburger from './hamburger/hamburger';
 
 interface HeroProps {
   image: {
@@ -26,8 +27,14 @@ const Hero: FC<HeroProps> = ({
   buttonLink,
   navigationItems,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const url = image?.url || heroImage;
   const loader = image?.url ? imageLoader : undefined;
+
+  const handleHamburgerClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="relative flex flex-col w-full h-128 xl:h-160">
@@ -44,19 +51,27 @@ const Hero: FC<HeroProps> = ({
 
       {/* Navigation */}
       <header className="z-10 w-screen h-16 max-w-4xl mx-auto">
-        {/* Desktop navigation bar. */}
+        {/* Desktop navigation bar */}
         <ul className="justify-end hidden w-full md:flex">
           <NavLink href="/" name="Radio" />
           {navigationItems.map(({ name, slug }) => (
             <NavLink key={slug} href={`/${slug}`} name={name} />
           ))}
         </ul>
+
+        {/* Mobile hamburger menu */}
+        <Hamburger className="ml-auto md:hidden" isOpen={isOpen} onClick={handleHamburgerClick} />
       </header>
 
       {/* Hero content */}
       <div className="z-10 flex flex-wrap items-center justify-center h-full">
         <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
-          <Image src="/leima.svg" layout="fill" priority={true} alt="Logo of Turun Wappuradio ry" />
+          <Image
+            src="/leima.svg"
+            layout="fill"
+            priority={true}
+            alt="Logo of Turun Wappuradio ry"
+          />
         </div>
         <div className="flex flex-col p-8">
           <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">
