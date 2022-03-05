@@ -7,6 +7,7 @@ import { LinkButton } from './button';
 import { NavigationItem } from 'contentful/client';
 import heroImage from '../public/hero.jpeg';
 import Hamburger from './hamburger/hamburger';
+import Menu from './menu';
 
 interface HeroProps {
   image: {
@@ -36,60 +37,74 @@ const Hero: FC<HeroProps> = ({
     setIsOpen(!isOpen);
   };
 
+  const handleMenuClose = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="relative flex flex-col w-full h-128 xl:h-160">
-      {/* Hero image */}
-      <Image
-        src={url}
-        loader={loader}
-        priority={true}
-        layout="fill"
-        objectFit="cover"
-        className="z-0 opacity-[10%] grayscale"
-        alt=""
-      />
+    <>
+      <div className="relative flex h-128 w-full flex-col xl:h-160">
+        {/* Hero image */}
+        <Image
+          src={url}
+          loader={loader}
+          priority={true}
+          layout="fill"
+          objectFit="cover"
+          className="z-0 opacity-[10%] grayscale"
+          alt=""
+        />
 
-      {/* Navigation */}
-      <header className="z-10 w-screen h-16 max-w-4xl mx-auto">
-        {/* Desktop navigation bar */}
-        <ul className="justify-end hidden w-full md:flex">
-          <NavLink href="/" name="Radio" />
-          {navigationItems.map(({ name, slug }) => (
-            <NavLink key={slug} href={`/${slug}`} name={name} />
-          ))}
-        </ul>
+        {/* Navigation */}
+        <header className="z-10 mx-auto h-16 w-screen max-w-4xl">
+          {/* Desktop navigation bar */}
+          <ul className="hidden w-full justify-end md:flex">
+            <NavLink href="/" name="Radio" />
+            {navigationItems.map(({ name, slug }) => (
+              <NavLink key={slug} href={`/${slug}`} name={name} />
+            ))}
+          </ul>
+        </header>
 
-        {/* Mobile hamburger menu */}
-        <Hamburger className="ml-auto md:hidden" isOpen={isOpen} onClick={handleHamburgerClick} />
-      </header>
+        {/* Hero content */}
+        <div className="z-10 flex h-full flex-col items-center justify-center md:flex-row">
+          <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
+            <Image
+              src="/leima.svg"
+              layout="fill"
+              priority={true}
+              alt="Logo of Turun Wappuradio ry"
+            />
+          </div>
+          <div className="flex flex-col p-8">
+            <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">
+              {title}
+            </h1>
+            <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
 
-      {/* Hero content */}
-      <div className="z-10 flex flex-wrap items-center justify-center h-full">
-        <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
-          <Image
-            src="/leima.svg"
-            layout="fill"
-            priority={true}
-            alt="Logo of Turun Wappuradio ry"
-          />
-        </div>
-        <div className="flex flex-col p-8">
-          <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">
-            {title}
-          </h1>
-          <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
-
-          {buttonText && buttonLink ? (
-            <LinkButton
-              className="my-3 ml-auto text-md md:text-xl"
-              href={buttonLink}
-            >
-              {buttonText}
-            </LinkButton>
-          ) : null}
+            {buttonText && buttonLink ? (
+              <LinkButton
+                className="text-md my-3 ml-auto md:text-xl"
+                href={buttonLink}
+              >
+                {buttonText}
+              </LinkButton>
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
+      {/* Mobile hamburger menu */}
+      <Hamburger
+        className="fixed top-0 right-0 z-30 md:hidden"
+        isOpen={isOpen}
+        onClick={handleHamburgerClick}
+      />
+      <Menu
+        navigationItems={navigationItems}
+        isOpen={isOpen}
+        closeMenu={handleMenuClose}
+      />
+    </>
   );
 };
 
