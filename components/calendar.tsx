@@ -38,19 +38,20 @@ const Calendar: FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col max-w-full m-4 w-128 md:m-8">
-      <h2 className="text-xl font-bold text-center text-white">
+    <div className="m-4 flex w-128 max-w-full flex-col md:m-8">
+      <h2 className="text-center text-xl font-bold text-white">
         Tulevat tapahtumat
       </h2>
       {events.map((event, idx) => (
         <Event key={idx} event={event} />
       ))}
       <a
-        className="ml-auto font-bold underline transition text-teal hover:text-coral"
+        className="ml-auto font-bold text-teal underline transition hover:text-coral"
         href={
           process.env.NEXT_PUBLIC_NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL || ''
         }
-        target="_blank" rel="noreferrer"
+        target="_blank"
+        rel="noreferrer"
       >
         Tilaa kalenteri
       </a>
@@ -77,8 +78,8 @@ const Event: FC<{ event: Event }> = ({ event }) => {
       : formatWithoutTime(start, end);
 
   return (
-    <div className="flex flex-row p-2 my-2 text-white bg-blue-darkest">
-      <div className="flex flex-col items-center justify-center p-2 w-28">
+    <div className="my-2 flex flex-row bg-blue-darkest p-2 text-white">
+      <div className="flex w-28 flex-col items-center justify-center p-2">
         <div className="text-3xl font-bold">{dateFormatted}</div>
         <div className="text-lg font-bold">{weekday}</div>
       </div>
