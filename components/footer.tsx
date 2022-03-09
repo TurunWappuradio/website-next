@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/Link';
-import { FC } from 'react';
 import {
   AiOutlineInstagram,
   AiFillFacebook,
@@ -17,86 +16,105 @@ interface FooterProps {
 
 const Footer = ({ navigationItems }: FooterProps) => {
   return (
-    <div className="z-15 flex max-w-full justify-center items-center bg-blue-darkest py-6">
-      <div className="text-l w-128 text-white hidden md:block">
-        <ul className="space-y-2">
-          <li key="/">
-            <Link href={'/'}>
-              <a className="hover:underline">Etusivu</a>
-            </Link>
-          </li>
-          {navigationItems.map((navItem) => (
-            <li key={navItem.slug}>
-              <Link href={'/' + navItem.slug}>
-                <a className="hover:underline">{navItem.name}</a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex w-128 justify-end text-sm text-white m-10">
-        <ul className="space-y-2">
-          <SomeLink
-            LogoComponent={AiOutlineInstagram}
-            href="https://instagram.com/turunwappuradio"
-          />
-          <SomeLink
-            LogoComponent={
-              AiFillFacebook
-            }
-            href="https://facebook.com/turunwappuradio/"
-          />
-          <SomeLink
-            LogoComponent={
-              FaDiscord
-            }
-            href="https://discord.gg/CpnVGckP9Z"
-          />
-          <SomeLink
-            LogoComponent={
-              FaTelegramPlane
-            }
-            href="https://t.me/turunwappuradio"
-          />
-          <SomeLink
-            LogoComponent={
-              AiOutlineMail
-            }
-            href="mailto:toimitus@turunwappuradio.com"
-          />
-          <SomeLink
-            LogoComponent={
-              AiFillGithub
-            }
-            href="https://github.com/TurunWappuradio"
-          />
-        </ul>
-      <div className="mx-6 flex max-w-full flex-col items-center">
-        <div className="relative mx-auto h-28 w-28 lg:h-32 lg:w-32 xl:h-36 xl:w-36">
-          <Image src="/leima.svg" layout="fill" priority={true} />
+    <div className="flex flex-row flex-wrap justify-center max-w-full text-white z-15 bg-blue-darkest py-14 md:flex-row">
+      <div className="flex justify-center max-w-full mx-8 my-4 w-128 md:justify-between">
+        <div className="hidden md:block">
+          <SiteMap navigationItems={navigationItems} />
         </div>
-        <Link href="/tietosuojaseloste">
-          <a className="text-sm text-white opacity-25">
-            © Turun Wappuradio ry
-            <br />
-            Tietosuojaseloste
-          </a>
-        </Link>
+        <div className="flex flex-col items-center">
+          <div className="relative h-36 w-36">
+            <Image src="/leima.svg" layout="fill" />
+          </div>
+          <Link href="/tietosuojaseloste">
+            <a className="text-sm text-white opacity-25">
+              © Turun Wappuradio ry
+              <br />
+              Tietosuojaseloste
+            </a>
+          </Link>
+        </div>
       </div>
+
+      <div className="max-w-full mx-8 my-4 w-128">
+        <Socials />
       </div>
     </div>
   );
 };
 
-const SomeLink: FC<{ href: string; LogoComponent: any }> = ({ href, LogoComponent }) => {
+const SiteMap = ({ navigationItems }: FooterProps) => (
+  <ul>
+    <NavLink slug="/" name="Radio" />
+    {navigationItems.map((navItem) => (
+      <NavLink {...navItem} />
+    ))}
+  </ul>
+);
+
+interface NavLinkProps {
+  slug?: string;
+  name?: string;
+}
+
+const NavLink = ({ slug, name }: NavLinkProps) => (
+  <li key={slug} className="my-3">
+    <Link href={'/' + slug}>
+      <a className="font-bold hover:underline">{name}</a>
+    </Link>
+  </li>
+);
+
+const Socials = () => (
+  <ul className="flex flex-row items-center justify-around mx-auto w-80 md:block md:w-full">
+    <SomeLink
+      text="@turunwappuradio"
+      LogoComponent={AiOutlineInstagram}
+      href="https://instagram.com/turunwappuradio"
+    />
+    <SomeLink
+      text="@turunwappuradio"
+      LogoComponent={AiFillFacebook}
+      href="https://facebook.com/turunwappuradio/"
+    />
+    <SomeLink
+      text="Discord-serveri"
+      LogoComponent={FaDiscord}
+      href="https://discord.gg/CpnVGckP9Z"
+    />
+    <SomeLink
+      text="t.me/turunwappuradio"
+      LogoComponent={FaTelegramPlane}
+      href="https://t.me/turunwappuradio"
+    />
+    <SomeLink
+      text="toimitus[ät]turunwappuradio.com"
+      LogoComponent={AiOutlineMail}
+      href="mailto:toimitus@turunwappuradio.com"
+    />
+    <SomeLink
+      text="TurunWappuradio"
+      LogoComponent={AiFillGithub}
+      href="https://github.com/TurunWappuradio"
+    />
+  </ul>
+);
+
+interface SomeLinkProps {
+  text: string;
+  href: string;
+  LogoComponent: any;
+}
+
+const SomeLink = ({ text, href, LogoComponent }: SomeLinkProps) => {
   return (
-    <li className="text-center">
+    <li className="my-3">
       <a
         href={href}
         target="_blank"
-        className="flex items-center transition hover:scale-150"
+        className="flex items-center transition hover:underline"
       >
-        <LogoComponent className="h-8 w-8 p-1 transition hover:fill-coral" />
+        <LogoComponent className="w-6 h-6" />
+        <span className="hidden ml-3 md:block">{text}</span>
       </a>
     </li>
   );
