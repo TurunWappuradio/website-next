@@ -7,7 +7,7 @@ import {
 import {
   NavigationItemsDocument,
   NavigationItemsQuery,
-} from './navigation.graphql';
+} from './graphql/navigation.graphql';
 
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;

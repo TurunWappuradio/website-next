@@ -10,11 +10,11 @@ import RichText from 'components/richtext';
 import {
   ContentPagePathsDocument,
   ContentPagePathsQuery,
-} from 'contentful/contentPagePaths.graphql';
+} from 'contentful/graphql/contentPagePaths.graphql';
 import {
   ContentPageDocument,
   ContentPageQuery,
-} from 'contentful/contentPage.graphql';
+} from 'contentful/graphql/contentPage.graphql';
 import Hero from 'components/hero';
 
 interface ContentPageProps {
@@ -41,7 +41,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
   content,
 }) => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="w-full min-h-screen">
       <Head>
         <title>{name}</title>
         <meta name="description" content={description} />
@@ -54,7 +54,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <article className="mx-auto max-w-4xl pt-12 text-white">
+      <article className="max-w-4xl pt-12 mx-auto text-white">
         <RichText content={content} />
       </article>
     </div>
