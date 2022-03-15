@@ -9,6 +9,7 @@ import {
 import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
+import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
 
@@ -101,6 +102,7 @@ const Index: NextPage<IndexProps> = ({
           />
         </div>
       </div>
+      <Footer navigationItems={navigationItems} />
     </div>
   );
 };
