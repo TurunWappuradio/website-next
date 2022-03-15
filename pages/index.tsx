@@ -8,7 +8,7 @@ import {
 } from 'contentful/client';
 import RichText from 'components/richtext';
 import Hero from 'components/hero';
-import { IndexDocument, IndexQuery } from 'contentful/index.graphql';
+import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
@@ -49,7 +49,7 @@ const Index: NextPage<IndexProps> = ({
   thirdContent,
 }) => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="w-full min-h-screen">
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
@@ -65,7 +65,7 @@ const Index: NextPage<IndexProps> = ({
 
       {/* First section */}
       <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
-        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
+        <div className="relative h-48 max-w-full m-10 w-128 md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
             layout="fill"
@@ -74,14 +74,14 @@ const Index: NextPage<IndexProps> = ({
             alt=""
           />
         </div>
-        <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
+        <section className="max-w-full m-4 text-lg text-white w-128 md:m-8">
           <RichText content={firstContent} />
         </section>
       </main>
 
       {/* Second section */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
-        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
+      <div className="flex flex-wrap items-center justify-center w-full py-4 min-h-32 bg-blue-dark md:py-8">
+        <section className="max-w-full m-4 text-base text-white w-128 md:m-8">
           <RichText content={secondContent} />
         </section>
         <Calendar />
@@ -89,10 +89,10 @@ const Index: NextPage<IndexProps> = ({
 
       {/* Third section */}
       <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
-        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
+        <section className="max-w-full m-4 text-base text-white w-128 md:m-8">
           <RichText content={thirdContent} />
         </section>
-        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
+        <div className="relative h-48 max-w-full m-10 w-128 md:m-8 md:h-96">
           <Image
             src={secondDecorativeImage.url}
             layout="fill"
