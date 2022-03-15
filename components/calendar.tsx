@@ -42,8 +42,8 @@ const Calendar: FC = () => {
       <h2 className="text-center text-xl font-bold text-white">
         Tulevat tapahtumat
       </h2>
-      {events.map((event) => (
-        <Event event={event} />
+      {events.map((event, idx) => (
+        <Event key={idx} event={event} />
       ))}
       <a
         className="ml-auto font-bold text-teal underline transition hover:text-coral"
@@ -51,6 +51,7 @@ const Calendar: FC = () => {
           process.env.NEXT_PUBLIC_NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL || ''
         }
         target="_blank"
+        rel="noreferrer"
       >
         Tilaa kalenteri
       </a>

@@ -71,6 +71,7 @@ const Index: NextPage<IndexProps> = ({
             layout="fill"
             objectFit="cover"
             className="rounded"
+            alt=""
           />
         </div>
         <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
@@ -97,6 +98,7 @@ const Index: NextPage<IndexProps> = ({
             layout="fill"
             objectFit="cover"
             className="rounded"
+            alt=""
           />
         </div>
       </div>
