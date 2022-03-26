@@ -10,11 +10,12 @@ import {
   ShowlistPageDocument,
   ShowlistPageQuery,
 } from 'contentful/graphql/showlistPage.graphql';
-import { format, Locale } from 'date-fns';
+import { format } from 'date-fns';
 import Head from 'next/head';
 import Hero from 'components/hero';
 import fi from 'date-fns/locale/fi';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ShowCard } from 'components/showcard';
 
 interface DateButton {
   value: string;
@@ -27,7 +28,7 @@ const DateButton: React.FC<DateButton> = ({ value, isSelected, onClick }) => {
   const text = str.charAt(0).toUpperCase() + str.slice(1);
   return (
     <button
-      className={`rounded-sm p-2 text-left text-white ${
+      className={`w-full rounded-sm p-2 text-left text-white ${
         isSelected ? 'bg-coral' : 'bg-blue-dark hover:text-coral'
       }`}
       onClick={() => onClick(value)}
@@ -86,7 +87,6 @@ export const ShowListPage: React.FC<ShowListPageProps> = ({
   const [selectedDate, setSelectedDate] = useState<string>(
     Object.keys(byDate)[0]
   );
-
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -99,11 +99,32 @@ export const ShowListPage: React.FC<ShowListPageProps> = ({
         navigationItems={navigationItems}
         subtext={heroSubtext}
       />
-      <div className="mx-auto max-w-4xl px-4 pt-12">
-        <h1 className="text-5xl font-bold text-coral">Ohjelmistossa</h1>
-        <div className="flex pt-8">
-          <div>asd</div>
-          <div className="ml-auto flex max-w-xs flex-col space-y-2">
+      <div className="mx-auto flex max-w-4xl flex-col px-4 pt-12 pb-12">
+        <h1 className="w-auto text-3xl font-bold text-coral md:text-5xl">
+          Ohjelmistossa
+        </h1>
+        <div className="flex flex-col pt-8 md:flex-row">
+          <select
+            className="mb-4 flex h-8 rounded-sm border border-white bg-blue-dark px-2 text-white md:hidden"
+            onChange={(event) => setSelectedDate(event.target.value)}
+            value={selectedDate}
+          >
+            {Object.keys(byDate).map((date, i) => {
+              const str = format(new Date(date), 'EEEE d.M', { locale: fi });
+              const text = str.charAt(0).toUpperCase() + str.slice(1);
+              return (
+                <option key={date + i} value={date}>
+                  {text}
+                </option>
+              );
+            })}
+          </select>
+          <div className="mx-auto w-full space-y-4">
+            {byDate[selectedDate].map((show, i) => (
+              <ShowCard show={show} key={show.date + i} index={i} />
+            ))}
+          </div>
+          <div className="ml-4 hidden w-52 shrink-0 flex-col space-y-2 md:flex">
             {Object.keys(byDate).map((date) => (
               <DateButton
                 key={date}
