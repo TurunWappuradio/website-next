@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import Image from 'next/image';
 import { imageLoader } from 'contentful/imageLoader';
+import heroImage from '../public/hero.jpeg';
 import { useState } from 'react';
 
 interface ShowCard {
@@ -14,7 +15,7 @@ export const ShowCard: React.FC<ShowCard> = ({ show, index }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const { picture } = show;
-  const url = picture?.url || '';
+  const url = picture?.url || heroImage;
   const loader = picture?.url ? imageLoader : undefined;
 
   return (
