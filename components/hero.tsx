@@ -47,7 +47,7 @@ const Hero: FC<HeroProps> = ({
         {/* Hero image */}
         <Image
           src={url}
-          loader={loader}
+          loader={imageLoader}
           priority={true}
           layout="fill"
           objectFit="cover"
@@ -74,6 +74,7 @@ const Hero: FC<HeroProps> = ({
               layout="fill"
               priority={true}
               alt="Logo of Turun Wappuradio ry"
+              loader={imageLoader}
             />
           </div>
           <div className="flex flex-col p-8">

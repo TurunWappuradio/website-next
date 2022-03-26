@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run codegen && next dev",
-    "build": "npm run codegen && next build",
+    "build": "npm run codegen && next build && next export",
     "start": "next start",
     "lint": "next lint --fix",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,graphql,css}\"",
