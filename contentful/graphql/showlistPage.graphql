@@ -3,6 +3,10 @@ query showlistPage($showlistId: String) {
     items {
       name
       id
+      heroSubtext
+      heroImage {
+        url
+      }
       showsCollection {
         items {
           name
