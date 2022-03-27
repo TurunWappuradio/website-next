@@ -20,14 +20,14 @@ export const ShowCard: React.FC<ShowCard> = ({ show, index }) => {
 
   return (
     <div className={`mx-auto flex w-full ${isExpanded ? 'h-auto' : 'h-52'}`}>
-      {!!!show.color && (
-        <p className="-mx-8 mb-auto mt-11 h-6 shrink-0 rotate-90 text-center font-bold text-white">
-          {format(new Date(show.start), 'p', { locale: fi })} -{' '}
-          {format(new Date(show.end), 'p', { locale: fi })}
-        </p>
-      )}
+      <p className="-mx-8 mb-auto mt-11 h-6 shrink-0 rotate-90 text-center font-bold text-white">
+        {format(new Date(show.start), 'p', { locale: fi })} -{' '}
+        {format(new Date(show.end), 'p', { locale: fi })}
+      </p>
       <button
-        className="relative flex h-full w-full flex-col rounded-xl bg-gradient-to-b from-transparent to-blue-darkest"
+        className={`relative flex h-full w-full flex-col rounded-xl bg-gradient-to-b from-transparent to-blue-darkest ${
+          isExpanded && 'min-h-[350px]'
+        }`}
         onClick={() => setIsExpanded((isExpanded) => !isExpanded)}
       >
         <Image
@@ -40,31 +40,22 @@ export const ShowCard: React.FC<ShowCard> = ({ show, index }) => {
           alt={picture?.title || ''}
         />
         <div
-          className={`mt-auto mb-2 w-full px-2 text-left text-white ${
-            isExpanded ? 'hidden' : 'block'
+          className={`mt-auto mb-2 w-full pl-2 pr-16 text-left text-white ${
+            isExpanded ? 'unreveal hidden' : 'reveal block'
           }`}
         >
-          {show?.color ? (
-            <div className="flex space-x-2 px-2 text-xl font-bold">
-              <p className="text-white">
-                {format(new Date(show.start), 'p', { locale: fi })}
-              </p>
-              <p className="text-coral">{show.name}</p>
-            </div>
-          ) : (
-            <p
-              className={`text-bold font-bol rounded-sm px-2 text-lg ${
-                index % 2 === 0 ? 'bg-coral' : 'bg-teal'
-              }`}
-            >
-              {show.name}
-            </p>
-          )}
+          <p
+            className={`rounded-sm px-2 text-2xl font-bold ${
+              index % 2 === 0 ? 'bg-coral' : 'bg-teal'
+            }`}
+          >
+            {show.name}
+          </p>
           <p className="px-2">{show.hosts}</p>
         </div>
         <div
           className={`z-10 ml-auto h-full w-3/5 flex-col rounded-r-xl bg-blue-dark p-4 text-left md:w-2/5 ${
-            isExpanded ? 'flex' : 'hidden'
+            isExpanded ? 'reveal flex min-h-[350px]' : 'unreveal hidden'
           }`}
         >
           <h2 className="text-base font-bold text-teal sm:text-lg">
@@ -78,6 +69,35 @@ export const ShowCard: React.FC<ShowCard> = ({ show, index }) => {
           </p>
         </div>
       </button>
+      <style jsx>{`
+        .reveal {
+          animation: reveal 0.5s ease;
+        }
+        .unreveal {
+          animation: unreveal 0.5s ease;
+        }
+
+        @keyframes reveal {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0px);
+          }
+        }
+        @keyframes unreveal {
+          0% {
+            opacity: 1;
+            transform: translateY(0px);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+        }
+      `}</style>
     </div>
   );
 };
