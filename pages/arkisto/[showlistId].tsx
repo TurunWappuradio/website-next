@@ -1,4 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
+import { format } from 'date-fns';
+import { Dispatch, SetStateAction, useState } from 'react';
+
 import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
 import {
   fetchContent,
@@ -10,33 +14,14 @@ import {
   ShowlistPageDocument,
   ShowlistPageQuery,
 } from 'contentful/graphql/showlistPage.graphql';
-import { format } from 'date-fns';
-import Head from 'next/head';
 import Hero from 'components/hero';
-import fi from 'date-fns/locale/fi';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { ShowCard } from 'components/showcard';
+import ShowlistContent from 'components/showlistcontent';
 
 interface DateButton {
   value: string;
   isSelected: boolean;
   onClick: Dispatch<SetStateAction<string>>;
 }
-
-const DateButton: React.FC<DateButton> = ({ value, isSelected, onClick }) => {
-  const str = format(new Date(value), 'EEEE d.M', { locale: fi });
-  const text = str.charAt(0).toUpperCase() + str.slice(1);
-  return (
-    <button
-      className={`w-full rounded-sm p-2 text-left text-white ${
-        isSelected ? 'bg-coral' : 'bg-blue-dark hover:text-coral'
-      }`}
-      onClick={() => onClick(value)}
-    >
-      {text}
-    </button>
-  );
-};
 
 export enum Color {
   Night = 'night',
@@ -76,7 +61,7 @@ interface ShowListPageProps {
   heroSubtext: string;
 }
 
-export const ShowListPage: React.FC<ShowListPageProps> = ({
+export const ShowListPage: NextPage<ShowListPageProps> = ({
   name,
   id,
   byDate,
@@ -99,42 +84,11 @@ export const ShowListPage: React.FC<ShowListPageProps> = ({
         navigationItems={navigationItems}
         subtext={heroSubtext}
       />
-      <div className="mx-auto flex max-w-4xl flex-col px-4 pt-12 pb-12">
-        <h1 className="w-auto text-3xl font-bold text-coral md:text-5xl">
+      <div className="mx-auto flex max-w-6xl flex-col px-4 pt-12 pb-12">
+        <h1 className="w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
-        <div className="flex flex-col pt-8 md:flex-row">
-          <select
-            className="mb-4 flex h-8 rounded-sm border border-white bg-blue-dark px-2 text-white md:hidden"
-            onChange={(event) => setSelectedDate(event.target.value)}
-            value={selectedDate}
-          >
-            {Object.keys(byDate).map((date, i) => {
-              const str = format(new Date(date), 'EEEE d.M', { locale: fi });
-              const text = str.charAt(0).toUpperCase() + str.slice(1);
-              return (
-                <option key={date + i} value={date}>
-                  {text}
-                </option>
-              );
-            })}
-          </select>
-          <div className="mx-auto w-full space-y-4">
-            {byDate[selectedDate].map((show, i) => (
-              <ShowCard show={show} key={show.date + i} index={i} />
-            ))}
-          </div>
-          <div className="ml-4 hidden w-52 shrink-0 flex-col space-y-2 md:flex">
-            {Object.keys(byDate).map((date) => (
-              <DateButton
-                key={date}
-                value={date}
-                isSelected={selectedDate === date}
-                onClick={(date) => setSelectedDate(date)}
-              />
-            ))}
-          </div>
-        </div>
+        <ShowlistContent byDate={byDate} />
       </div>
     </div>
   );
