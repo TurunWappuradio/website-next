@@ -9,7 +9,7 @@ import {
 import { FaDiscord, FaTelegramPlane } from 'react-icons/fa';
 
 import { NavigationItem } from 'contentful/client';
-import { imageLoader } from 'contentful/imageLoader';
+import { staticImageLoader } from 'utils/staticImageLoader';
 
 interface FooterProps {
   navigationItems: NavigationItem[];
@@ -24,7 +24,7 @@ const Footer = ({ navigationItems }: FooterProps) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="relative h-36 w-36">
-            <Image src="/leima.svg" loader={imageLoader} layout="fill" alt="Logo of Turun Wappuradio ry" />
+            <Image src="/leima.svg" loader={staticImageLoader} layout="fill" alt="Logo of Turun Wappuradio ry" />
           </div>
           <Link href="/tietosuojaseloste">
             <a className="text-sm text-white opacity-25">

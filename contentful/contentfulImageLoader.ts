@@ -1,4 +1,4 @@
-const imageLoader = ({
+const contentfulImageLoader = ({
   src,
   width,
   quality,
@@ -10,4 +10,4 @@ const imageLoader = ({
   return `${src}?q=${quality || 100}&w=${width}&fm=webp`;
 };
 
-export { imageLoader };
+export { contentfulImageLoader };

@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useState } from 'react';
 
-import { imageLoader } from 'contentful/imageLoader';
+import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
+import { staticImageLoader } from 'utils/staticImageLoader';
 import { LinkButton } from './button';
 import { NavigationItem } from 'contentful/client';
 import heroImage from '../public/hero.jpeg';
@@ -31,7 +32,7 @@ const Hero: FC<HeroProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const url = image?.url || heroImage;
-  const loader = image?.url ? imageLoader : undefined;
+  const imageLoader = image?.url ? contentfulImageLoader : staticImageLoader;
 
   const handleHamburgerClick = () => {
     setIsOpen(!isOpen);
