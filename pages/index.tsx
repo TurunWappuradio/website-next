@@ -12,6 +12,7 @@ import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
+import Sponsors from 'components/sponsors';
 
 interface IndexProps {
   heroImage: {
@@ -102,6 +103,7 @@ const Index: NextPage<IndexProps> = ({
           />
         </div>
       </div>
+      <Sponsors />
       <Footer navigationItems={navigationItems} />
     </div>
   );
