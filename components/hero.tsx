@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import { staticImageLoader } from 'utils/staticImageLoader';
 import { LinkButton } from './button';
 import { NavigationItem } from 'contentful/client';
 import heroImage from '../public/hero.jpeg';
@@ -32,7 +31,7 @@ const Hero: FC<HeroProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const url = image?.url || heroImage;
-  const imageLoader = image?.url ? contentfulImageLoader : staticImageLoader;
+  const imageLoader = image?.url ? contentfulImageLoader : undefined;
 
   const handleHamburgerClick = () => {
     setIsOpen(!isOpen);
@@ -49,7 +48,9 @@ const Hero: FC<HeroProps> = ({
         <Image
           src={url}
           loader={imageLoader}
+          unoptimized={!image?.url}
           priority={true}
+          quality={50}
           layout="fill"
           objectFit="cover"
           className="z-0 opacity-[10%] grayscale"
@@ -75,7 +76,7 @@ const Hero: FC<HeroProps> = ({
               layout="fill"
               priority={true}
               alt="Logo of Turun Wappuradio ry"
-              loader={imageLoader}
+              unoptimized={true}
             />
           </div>
           <div className="flex flex-col p-8">

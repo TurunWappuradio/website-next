@@ -86,7 +86,9 @@ const Event: FC<{ event: Event }> = ({ event }) => {
       <div className="w-full p-2">
         <h3 className="text-xl font-bold text-coral">{event.summary}</h3>
         <div>{timeFormatted}</div>
-        <div>@ {event.location}</div>
+        {event.location && (
+          <div>@ {event.location}</div>
+        )}
       </div>
     </div>
   );
