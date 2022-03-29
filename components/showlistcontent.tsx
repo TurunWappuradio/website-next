@@ -37,9 +37,9 @@ export const ShowlistContent = ({ byDate }: ShowlistContentProps) => {
     Object.keys(byDate)[0]
   );
   return (
-    <div className="flex flex-col pt-8 md:flex-row">
+    <div className="flex flex-col pt-8 lg:flex-row">
       <select
-        className="mb-4 flex h-8 rounded-sm border border-white bg-blue-dark px-2 text-white md:hidden"
+        className="mb-4 flex h-8 rounded-sm border border-white bg-blue-dark px-2 text-white lg:hidden"
         onChange={(event) => setSelectedDate(event.target.value)}
         value={selectedDate}
       >
@@ -58,7 +58,7 @@ export const ShowlistContent = ({ byDate }: ShowlistContentProps) => {
           <ShowCard show={show} key={show.date + i} index={i} />
         ))}
       </div>
-      <div className="ml-4 hidden w-52 shrink-0 flex-col space-y-2 md:flex">
+      <div className="ml-4 hidden w-52 shrink-0 flex-col space-y-2 lg:flex">
         {Object.keys(byDate).map((date) => (
           <DateButton
             key={date}
