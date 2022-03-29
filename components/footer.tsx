@@ -44,7 +44,7 @@ const Footer = ({ navigationItems }: FooterProps) => {
 
 const SiteMap = ({ navigationItems }: FooterProps) => (
   <ul>
-    <NavLink slug="/" name="Radio" />
+    <NavLink slug="" name="Radio" />
     {navigationItems.map((navItem) => (
       <NavLink {...navItem} key={navItem.name} />
     ))}
@@ -69,25 +69,25 @@ const Socials = () => (
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiOutlineInstagram}
-      href="https://instagram.com/turunwappuradio"
+      href="instagram.com/turunwappuradio"
       ariaLabel="Instagram"
     />
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiFillFacebook}
-      href="https://facebook.com/turunwappuradio/"
+      href="facebook.com/turunwappuradio/"
       ariaLabel="Facebook"
     />
     <SomeLink
       text="Discord-serveri"
       LogoComponent={FaDiscord}
-      href="https://discord.gg/CpnVGckP9Z"
+      href="discord.gg/CpnVGckP9Z"
       ariaLabel="Discord"
     />
     <SomeLink
       text="t.me/turunwappuradio"
       LogoComponent={FaTelegramPlane}
-      href="https://t.me/turunwappuradio"
+      href="t.me/turunwappuradio"
       ariaLabel="Telegram"
     />
     <SomeLink
@@ -99,8 +99,8 @@ const Socials = () => (
     <SomeLink
       text="TurunWappuradio"
       LogoComponent={AiFillGithub}
-      href="https://github.com/TurunWappuradio"
-      ariaLabel="Github"
+      href="github.com/TurunWappuradio"
+      ariaLabel="GitHub"
     />
   </ul>
 );
