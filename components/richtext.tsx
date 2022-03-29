@@ -6,7 +6,7 @@ import {
 } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 
-import { imageLoader } from '../contentful/imageLoader';
+import { contentfulImageLoader } from '../contentful/contentfulImageLoader';
 import { LinkButton } from './button';
 
 const renderOptions = (links?: any): Options => {
@@ -92,7 +92,7 @@ const renderOptions = (links?: any): Options => {
           <div className="relative md:p-4">
             <Image
               src={asset.url}
-              loader={imageLoader}
+              loader={contentfulImageLoader}
               sizes="900px" // tailwind max-w-4xl
               width={asset.width}
               height={asset.height}

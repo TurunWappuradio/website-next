@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/Link';
+import Link from 'next/link';
 import {
   AiOutlineInstagram,
   AiFillFacebook,
@@ -9,6 +9,7 @@ import {
 import { FaDiscord, FaTelegramPlane } from 'react-icons/fa';
 
 import { NavigationItem } from 'contentful/client';
+import { staticImageLoader } from 'utils/staticImageLoader';
 
 interface FooterProps {
   navigationItems: NavigationItem[];
@@ -23,7 +24,7 @@ const Footer = ({ navigationItems }: FooterProps) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="relative h-36 w-36">
-            <Image src="/leima.svg" layout="fill" />
+            <Image src="/leima.svg" loader={staticImageLoader} layout="fill" alt="Logo of Turun Wappuradio ry" />
           </div>
           <Link href="/tietosuojaseloste">
             <a className="text-sm text-white opacity-25">
@@ -46,7 +47,7 @@ const SiteMap = ({ navigationItems }: FooterProps) => (
   <ul>
     <NavLink slug="/" name="Radio" />
     {navigationItems.map((navItem) => (
-      <NavLink {...navItem} />
+      <NavLink {...navItem} key={navItem.name} />
     ))}
   </ul>
 );
@@ -111,6 +112,7 @@ const SomeLink = ({ text, href, LogoComponent }: SomeLinkProps) => {
       <a
         href={href}
         target="_blank"
+        rel="noreferrer"
         className="flex items-center transition hover:underline"
       >
         <LogoComponent className="w-6 h-6" />
