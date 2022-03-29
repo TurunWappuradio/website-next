@@ -7,7 +7,7 @@ const contentfulImageLoader = ({
   width: number;
   quality: number;
 }) => {
-  return `${src}?q=${quality || 100}&w=${width}&fm=webp`;
+  return `${src}?q=${quality || 75}&w=${width}&fm=webp`;
 };
 
 export { contentfulImageLoader };

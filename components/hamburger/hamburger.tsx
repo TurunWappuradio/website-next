@@ -7,7 +7,7 @@ interface HamburgerProps {
 }
 
 const Hamburger = ({ className, isOpen, onClick }: HamburgerProps) => (
-  <button onClick={onClick} className={className}>
+  <button onClick={onClick} className={className} aria-label="navigation menu">
     <svg
       className={`${styles.ham} ${isOpen ? styles.ham_active : ''}`}
       viewBox="0 0 100 100"
