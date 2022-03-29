@@ -29,12 +29,12 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           : 'h-52'
       }`}
     >
-      <p className="-mx-8 mb-auto mt-11 h-6 shrink-0 rotate-90 text-center font-bold text-white shadow">
-        {format(new Date(show.start), 'p', { locale: fi })} -{' '}
+      <p className="mt-0 h-[24px] w-[25px] shrink-0 rotate-90 text-left font-bold text-white shadow lg:flex">
+        {format(new Date(show.start), 'p', { locale: fi })}&nbsp;-&nbsp;
         {format(new Date(show.end), 'p', { locale: fi })}
       </p>
       <button
-        className={`group relative flex h-full w-full flex-col overflow-hidden rounded transition-all md:flex-row ${
+        className={`group relative mr-6 flex h-full w-full flex-col overflow-hidden rounded transition-all md:flex-row lg:mr-0 ${
           isExpanded
             ? 'flex rounded md:contents'
             : 'bg-gradient-to-b from-transparent to-blue-darkest'

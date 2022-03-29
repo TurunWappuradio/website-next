@@ -84,8 +84,8 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         navigationItems={navigationItems}
         subtext={heroSubtext}
       />
-      <div className="mx-auto flex max-w-6xl flex-col px-4 pt-12 pb-12">
-        <h1 className="w-auto text-xl font-bold text-coral md:text-3xl">
+      <div className="mx-auto flex max-w-6xl flex-col px-4 py-6">
+        <h1 className="mx-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
         <ShowlistContent byDate={byDate} />

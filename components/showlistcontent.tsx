@@ -37,9 +37,9 @@ export const ShowlistContent = ({ byDate }: ShowlistContentProps) => {
     Object.keys(byDate)[0]
   );
   return (
-    <div className="flex flex-col pt-8 lg:flex-row">
+    <div className="flex flex-col pt-6 lg:flex-row">
       <select
-        className="mb-4 flex h-8 rounded-sm border border-white bg-blue-dark px-2 text-white lg:hidden"
+        className="mb-4 mr-[22px] ml-6 flex h-8 rounded-sm  bg-blue-dark px-2 font-bold text-coral lg:mr-0 lg:hidden"
         onChange={(event) => setSelectedDate(event.target.value)}
         value={selectedDate}
       >
