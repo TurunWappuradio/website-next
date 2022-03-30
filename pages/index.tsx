@@ -6,6 +6,7 @@ import {
   fetchNavigationItems,
   NavigationItem,
 } from 'contentful/client';
+import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
@@ -71,6 +72,7 @@ const Index: NextPage<IndexProps> = ({
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
+            loader={contentfulImageLoader}
             layout="fill"
             objectFit="cover"
             className="rounded"
@@ -98,6 +100,7 @@ const Index: NextPage<IndexProps> = ({
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={secondDecorativeImage.url}
+            loader={contentfulImageLoader}
             layout="fill"
             objectFit="cover"
             className="rounded"

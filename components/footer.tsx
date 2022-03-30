@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/Link';
+import Link from 'next/link';
 import {
   AiOutlineInstagram,
   AiFillFacebook,
@@ -23,10 +23,10 @@ const Footer = ({ navigationItems }: FooterProps) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="relative h-36 w-36">
-            <Image src="/leima.svg" layout="fill" />
+            <Image src="/leima.svg" unoptimized={true} layout="fill" alt="Logo of Turun Wappuradio ry" />
           </div>
           <Link href="/tietosuojaseloste">
-            <a className="text-sm text-white opacity-25">
+            <a className="text-sm text-white opacity-50">
               © Turun Wappuradio ry
               <br />
               Tietosuojaseloste
@@ -44,9 +44,9 @@ const Footer = ({ navigationItems }: FooterProps) => {
 
 const SiteMap = ({ navigationItems }: FooterProps) => (
   <ul>
-    <NavLink slug="/" name="Radio" />
+    <NavLink slug="" name="Radio" />
     {navigationItems.map((navItem) => (
-      <NavLink {...navItem} />
+      <NavLink {...navItem} key={navItem.name} />
     ))}
   </ul>
 );
@@ -69,32 +69,38 @@ const Socials = () => (
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiOutlineInstagram}
-      href="https://instagram.com/turunwappuradio"
+      href="instagram.com/turunwappuradio"
+      ariaLabel="Instagram"
     />
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiFillFacebook}
-      href="https://facebook.com/turunwappuradio/"
+      href="facebook.com/turunwappuradio/"
+      ariaLabel="Facebook"
     />
     <SomeLink
       text="Discord-serveri"
       LogoComponent={FaDiscord}
-      href="https://discord.gg/CpnVGckP9Z"
+      href="discord.gg/CpnVGckP9Z"
+      ariaLabel="Discord"
     />
     <SomeLink
       text="t.me/turunwappuradio"
       LogoComponent={FaTelegramPlane}
-      href="https://t.me/turunwappuradio"
+      href="t.me/turunwappuradio"
+      ariaLabel="Telegram"
     />
     <SomeLink
       text="toimitus[ät]turunwappuradio.com"
       LogoComponent={AiOutlineMail}
       href="mailto:toimitus@turunwappuradio.com"
+      ariaLabel="Email"
     />
     <SomeLink
       text="TurunWappuradio"
       LogoComponent={AiFillGithub}
-      href="https://github.com/TurunWappuradio"
+      href="github.com/TurunWappuradio"
+      ariaLabel="GitHub"
     />
   </ul>
 );
@@ -103,14 +109,17 @@ interface SomeLinkProps {
   text: string;
   href: string;
   LogoComponent: any;
+  ariaLabel: string;
 }
 
-const SomeLink = ({ text, href, LogoComponent }: SomeLinkProps) => {
+const SomeLink = ({ text, href, LogoComponent, ariaLabel }: SomeLinkProps) => {
   return (
     <li className="my-3">
       <a
         href={href}
         target="_blank"
+        rel="noreferrer"
+        aria-label={ariaLabel}
         className="flex items-center transition hover:underline"
       >
         <LogoComponent className="w-6 h-6" />
