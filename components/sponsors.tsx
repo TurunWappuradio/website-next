@@ -3,7 +3,7 @@ import Image from 'next/image';
 const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => (
   <a href={sponsor.link} target="_blank" rel="noreferrer">
     <div className="grid h-full content-center">
-      <div className="mx-4 my-4 max-w-[200px]">
+      <div className="mx-6 my-4 max-w-[200px]">
         {/*       <Image
         src={sponsor.logoImage.url}
         alt={sponsor.title}
