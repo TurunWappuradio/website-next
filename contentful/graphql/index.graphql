@@ -27,4 +27,18 @@ query Index {
       }
     }
   }
+
+  sponsorsCollection(limit: 1) {
+    items {
+      sponsorsCollection {
+        items {
+          title
+          link
+          logoImage {
+            url
+          }
+        }
+      }
+    }
+  }
 }

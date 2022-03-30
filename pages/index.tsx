@@ -12,7 +12,7 @@ import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
-import Sponsors from 'components/sponsors';
+import Sponsors, { ISponsorData } from 'components/sponsors';
 
 interface IndexProps {
   heroImage: {
@@ -34,6 +34,7 @@ interface IndexProps {
   firstContent: any;
   secondContent: any;
   thirdContent: any;
+  sponsors: ISponsorData[];
 }
 
 const Index: NextPage<IndexProps> = ({
@@ -48,9 +49,10 @@ const Index: NextPage<IndexProps> = ({
   firstContent,
   secondContent,
   thirdContent,
+  sponsors,
 }) => {
   return (
-    <div className="w-full min-h-screen">
+    <div className="min-h-screen w-full">
       <Head>
         <title>Turun Wappuradio</title>
         <meta name="description" content="Wappuradioo tält puolt jokkee" />
@@ -66,7 +68,7 @@ const Index: NextPage<IndexProps> = ({
 
       {/* First section */}
       <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
-        <div className="relative h-48 max-w-full m-10 w-128 md:m-8 md:h-96">
+        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
             layout="fill"
@@ -75,14 +77,14 @@ const Index: NextPage<IndexProps> = ({
             alt=""
           />
         </div>
-        <section className="max-w-full m-4 text-lg text-white w-128 md:m-8">
+        <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
           <RichText content={firstContent} />
         </section>
       </main>
 
       {/* Second section */}
-      <div className="flex flex-wrap items-center justify-center w-full py-4 min-h-32 bg-blue-dark md:py-8">
-        <section className="max-w-full m-4 text-base text-white w-128 md:m-8">
+      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
         <Calendar />
@@ -90,10 +92,10 @@ const Index: NextPage<IndexProps> = ({
 
       {/* Third section */}
       <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
-        <section className="max-w-full m-4 text-base text-white w-128 md:m-8">
+        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={thirdContent} />
         </section>
-        <div className="relative h-48 max-w-full m-10 w-128 md:m-8 md:h-96">
+        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={secondDecorativeImage.url}
             layout="fill"
@@ -103,7 +105,7 @@ const Index: NextPage<IndexProps> = ({
           />
         </div>
       </div>
-      <Sponsors />
+      <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
   );
@@ -125,6 +127,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     thirdContent,
   } = data.indexCollection.items[0];
 
+  const sponsors = data.sponsorsCollection.items[0].sponsorsCollection.items;
+
   const navigationItems = await fetchNavigationItems();
 
   return {
@@ -140,6 +144,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       firstContent,
       secondContent,
       thirdContent,
+      sponsors,
     },
   };
 };
