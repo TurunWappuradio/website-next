@@ -37,6 +37,7 @@ query Index {
           logoImage {
             url
           }
+          isRoundedBorders
         }
       }
     }

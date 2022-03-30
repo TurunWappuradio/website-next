@@ -1,14 +1,29 @@
 import Image from 'next/image';
 
 const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => (
-  <div className="relative m-4 h-[8rem] w-[8rem]">
-    <Image
-      src={sponsor.logoImage.url}
-      alt={sponsor.title}
-      layout="fill"
-      objectFit="contain"
-    />
-  </div>
+  <a href={sponsor.link}>
+    <div className="grid h-full content-center">
+      <div className="mx-4 my-4 max-w-[200px]">
+        {/*       <Image
+        src={sponsor.logoImage.url}
+        alt={sponsor.title}
+        layout="fill"
+        objectFit="contain"
+        quality={100}
+        className={sponsor.isRoundedBorders ? 'rounded-[4px]' : undefined}
+      /> */}
+        <img
+          src={sponsor.logoImage.url}
+          alt={sponsor.title}
+          style={{
+            maxHeight: '90px',
+            width: 'auto',
+            borderRadius: sponsor.isRoundedBorders ? '4px' : undefined,
+          }}
+        />
+      </div>
+    </div>
+  </a>
 );
 
 const Sponsors = ({ sponsors = [] }: SponsorProps) => (
@@ -31,6 +46,7 @@ export interface ISponsorData {
   logoImage?: {
     url?: string;
   };
+  isRoundedBorders?: boolean;
 }
 
 export default Sponsors;
