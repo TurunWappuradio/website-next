@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => (
-  <a href={sponsor.link}>
+  <a href={sponsor.link} target="_blank" rel="noreferrer">
     <div className="grid h-full content-center">
       <div className="mx-4 my-4 max-w-[200px]">
         {/*       <Image
@@ -18,7 +18,7 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => (
           style={{
             maxHeight: '90px',
             width: 'auto',
-            borderRadius: sponsor.isRoundedBorders ? '4px' : undefined,
+            borderRadius: sponsor.isRoundedBorders ? '4px' : null,
           }}
         />
       </div>
