@@ -4,22 +4,13 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => (
   <a href={sponsor.link} target="_blank" rel="noreferrer">
     <div className="grid h-full content-center">
       <div className="mx-6 my-4 max-w-[200px]">
-        {/*       <Image
-        src={sponsor.logoImage.url}
-        alt={sponsor.title}
-        layout="fill"
-        objectFit="contain"
-        quality={100}
-        className={sponsor.isRoundedBorders ? 'rounded-[4px]' : undefined}
-      /> */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={sponsor.logoImage.url}
           alt={sponsor.title}
-          style={{
-            maxHeight: '90px',
-            width: 'auto',
-            borderRadius: sponsor.isRoundedBorders ? '4px' : null,
-          }}
+          className={`max-h-24 w-auto ${
+            sponsor.isRoundedBorders ? 'rounded' : ''
+          }`}
         />
       </div>
     </div>
