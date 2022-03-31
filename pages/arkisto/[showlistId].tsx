@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -15,6 +15,7 @@ import {
   ShowlistPageQuery,
 } from 'contentful/graphql/showlistPage.graphql';
 import Hero from 'components/hero';
+import ShowlistContent from 'components/showlistcontent';
 
 export enum Color {
   Night = 'night',
@@ -80,6 +81,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         <h1 className="mx-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
+        <ShowlistContent showsByDate={showsByDate} />
       </div>
     </div>
   );
