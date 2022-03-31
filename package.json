@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "npm run codegen && next dev",
     "build": "npm run codegen && next build && next export",
+    "postbuild": "./scripts/remove-extensions.sh",
     "start": "npm run dev",
     "lint": "next lint --fix",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,graphql,css}\"",
