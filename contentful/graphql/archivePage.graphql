@@ -1,0 +1,12 @@
+query archivePage {
+  programmeCollection {
+    items {
+      id
+      name
+      coverImage {
+        url
+      }
+      shortDescription
+    }
+  }
+}
