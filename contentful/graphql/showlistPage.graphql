@@ -1,0 +1,33 @@
+query showlistPage($showlistId: String) {
+  programmeCollection(where: { id: $showlistId }, limit: 1) {
+    items {
+      name
+      id
+      heroSubtext
+      heroImage {
+        url
+      }
+      showsCollection {
+        items {
+          name
+          start
+          end
+          description
+          picture {
+            title
+            description
+            contentType
+            fileName
+            size
+            url
+            width
+            height
+          }
+          hosts
+          producer
+          color
+        }
+      }
+    }
+  }
+}

@@ -15,8 +15,8 @@ interface HeroProps {
   };
   title: string;
   subtext: string;
-  buttonText: string;
-  buttonLink: string;
+  buttonText?: string;
+  buttonLink?: string;
   navigationItems: NavigationItem[];
 }
 

@@ -1,0 +1,8 @@
+query showlistPaths {
+  programmeCollection {
+    items {
+      name
+      id
+    }
+  }
+}
