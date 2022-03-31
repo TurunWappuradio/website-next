@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npm run codegen && next dev",
     "build": "npm run codegen && next build && next export",
-    "start": "next start",
+    "start": "npm run dev",
     "lint": "next lint --fix",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,graphql,css}\"",
     "codegen": "graphql-let --require dotenv/config"

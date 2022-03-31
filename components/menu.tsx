@@ -33,6 +33,11 @@ const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
           </Link>
         </li>
       ))}
+      <li>
+        <Link href="/arkisto">
+          <a className="p-2 text-2xl">Arkisto</a>
+        </Link>
+      </li>
     </ul>
   </div>
 );
