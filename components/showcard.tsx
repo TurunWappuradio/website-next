@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import Image from 'next/image';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
