@@ -94,7 +94,8 @@ export const ShowCard = ({ show, index }: ShowCard) => {
       <style jsx>{`
         @media (min-width: 768px) {
           .text-box {
-            max-height: ${ref?.current?.getBoundingClientRect()?.height}px;
+            max-height: ${ref?.current?.getBoundingClientRect()?.height ||
+            300}px;
           }
         }
       `}</style>
