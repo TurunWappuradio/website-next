@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import Link from 'next/link';
+import { BsArrowLeft } from 'react-icons/bs';
 
 import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -62,9 +63,6 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   navigationItems,
   heroSubtext,
 }) => {
-  const [selectedDate, setSelectedDate] = useState<string>(
-    Object.keys(showsByDate)[0]
-  );
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -78,7 +76,13 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         subtext={heroSubtext}
       />
       <div className="mx-auto flex max-w-6xl flex-col px-4 py-6">
-        <h1 className="mx-6 w-auto text-xl font-bold text-coral md:text-3xl">
+        <Link href="/arkisto">
+          <a className="mx-6 my-6 flex font-bold text-teal transition hover:text-coral">
+            <BsArrowLeft className="mr-2 h-6 w-6" />
+            Kaikki ohjelmakartat
+          </a>
+        </Link>
+        <h1 className="mx-6 mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
         <ShowlistContent showsByDate={showsByDate} />
