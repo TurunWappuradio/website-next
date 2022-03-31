@@ -11,31 +11,33 @@ interface DateButton {
   onClick: Dispatch<SetStateAction<string>>;
 }
 
-const DateButton: React.FC<DateButton> = ({ value, isSelected, onClick }) => {
+const DateButton = ({ value, isSelected, onClick }: DateButton) => {
   const str = format(new Date(value), 'EEEE d.M', { locale: fi });
-  const text = str.charAt(0).toUpperCase() + str.slice(1);
   return (
     <button
-      className={`w-full rounded-sm p-2 text-left text-white ${
-        isSelected ? 'bg-coral' : 'bg-blue-dark hover:text-coral'
+      className={`w-full rounded-sm p-2 text-left capitalize text-white ${
+        isSelected ? 'bg-coral font-bold' : 'bg-blue-dark hover:text-coral'
       }`}
       onClick={() => onClick(value)}
     >
-      {text}
+      {str}
     </button>
   );
 };
 
 interface ShowlistContentProps {
-  byDate: {
+  showsByDate: {
     [key: string]: ShowsCollectionItem[];
   };
 }
 
-export const ShowlistContent = ({ byDate }: ShowlistContentProps) => {
+export const ShowlistContent = ({ showsByDate }: ShowlistContentProps) => {
   const [selectedDate, setSelectedDate] = useState<string>(
-    Object.keys(byDate)[0]
+    Object.keys(showsByDate).includes(format(new Date(), 'y.M.dd'))
+      ? format(new Date(), 'y.M.dd')
+      : Object.keys(showsByDate)[0]
   );
+
   return (
     <div className="flex flex-col pt-6 lg:flex-row">
       <select
@@ -43,7 +45,7 @@ export const ShowlistContent = ({ byDate }: ShowlistContentProps) => {
         onChange={(event) => setSelectedDate(event.target.value)}
         value={selectedDate}
       >
-        {Object.keys(byDate).map((date, i) => {
+        {Object.keys(showsByDate).map((date, i) => {
           const str = format(new Date(date), 'EEEE d.M', { locale: fi });
           const text = str.charAt(0).toUpperCase() + str.slice(1);
           return (
@@ -54,12 +56,12 @@ export const ShowlistContent = ({ byDate }: ShowlistContentProps) => {
         })}
       </select>
       <div className="mx-auto w-full space-y-4">
-        {byDate[selectedDate].map((show, i) => (
+        {showsByDate[selectedDate].map((show, i) => (
           <ShowCard show={show} key={show.date + i} index={i} />
         ))}
       </div>
       <div className="ml-4 hidden w-52 shrink-0 flex-col space-y-2 lg:flex">
-        {Object.keys(byDate).map((date) => (
+        {Object.keys(showsByDate).map((date) => (
           <DateButton
             key={date}
             value={date}

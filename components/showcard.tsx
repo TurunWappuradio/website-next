@@ -5,7 +5,7 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
 import { imageLoader } from 'contentful/imageLoader';
-import heroImage from '../public/hero.jpeg';
+import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 
 interface ShowCard {
   show: ShowsCollectionItem;
@@ -15,10 +15,9 @@ interface ShowCard {
 export const ShowCard = ({ show, index }: ShowCard) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const ref = useRef(null);
-  const [minWidth, setMinWidth] = useState<number>(200);
 
   const { picture } = show;
-  const url = picture?.url || heroImage;
+  const url = picture?.url || placeholderImage;
   const loader = picture?.url ? imageLoader : undefined;
 
   return (
@@ -60,8 +59,8 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           />
         </div>
         <div
-          className={`absolute bottom-1 left-2 z-20 mb-2 w-full flex-col text-left text-white transition  group-hover:translate-y-8 ${
-            isExpanded ? 'hidden' : 'flex'
+          className={`absolute bottom-1 left-2 z-20 mb-2 w-full flex-col text-left text-white group-hover:translate-y-8 ${
+            isExpanded ? 'opacity-0' : 'opacity-100'
           }`}
         >
           <p
@@ -74,8 +73,8 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           <p className="mt-1 px-2 text-sm">Juontaa: {show.hosts}</p>
         </div>
         <div
-          className={`text-box z-10 mt-auto h-auto flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left  md:ml-auto md:mt-0 md:w-[286px] ${
-            isExpanded ? 'reveal flex' : 'unreveal hidden'
+          className={`text-box z-10 mt-auto h-auto flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:w-[286px] ${
+            isExpanded ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <h2 className="text-base font-bold text-teal sm:text-lg">
@@ -84,43 +83,18 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
             Juontaa: {show.hosts}
           </h3>
+          <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
+            Tuottaa: {show.producer}
+          </h3>
           <p className="mt-4 text-xs text-white sm:text-sm">
             {show.description}
           </p>
         </div>
       </button>
       <style jsx>{`
-        .reveal {
-          animation: reveal 0.5s ease;
-        }
-        .unreveal {
-          animation: unreveal 0.5s ease;
-        }
-
         @media (min-width: 768px) {
           .text-box {
             max-height: ${ref?.current?.getBoundingClientRect()?.height}px;
-          }
-        }
-
-        @keyframes reveal {
-          0% {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0px);
-          }
-        }
-        @keyframes unreveal {
-          0% {
-            opacity: 1;
-            transform: translateY(0px);
-          }
-          100% {
-            opacity: 0;
-            transform: translateY(-20px);
           }
         }
       `}</style>

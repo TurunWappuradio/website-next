@@ -52,7 +52,7 @@ interface ShowListPageProps {
   name: string;
   id: string;
   navigationItems: NavigationItem[];
-  byDate: {
+  showsByDate: {
     [key: string]: ShowsCollectionItem[];
   };
   heroImage: {
@@ -63,14 +63,13 @@ interface ShowListPageProps {
 
 export const ShowListPage: NextPage<ShowListPageProps> = ({
   name,
-  id,
-  byDate,
+  showsByDate,
   heroImage,
   navigationItems,
   heroSubtext,
 }) => {
   const [selectedDate, setSelectedDate] = useState<string>(
-    Object.keys(byDate)[0]
+    Object.keys(showsByDate)[0]
   );
   return (
     <div className="min-h-screen w-full">
@@ -88,7 +87,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         <h1 className="mx-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
-        <ShowlistContent byDate={byDate} />
+        <ShowlistContent showsByDate={showsByDate} />
       </div>
     </div>
   );
@@ -138,7 +137,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }, {});
   };
 
-  const byDate = groupBy(shows, 'date');
+  const showsByDate = groupBy(shows, 'date');
 
   const navigationItems = await fetchNavigationItems();
 
@@ -146,7 +145,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       name,
       id,
-      byDate,
+      showsByDate,
       navigationItems,
       heroImage,
       heroSubtext,
