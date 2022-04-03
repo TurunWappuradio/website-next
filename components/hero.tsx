@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import { LinkButton } from './button';
 import { NavigationItem } from 'contentful/client';
-import heroImage from '../public/hero.jpeg';
+import heroImage from '../public/hero.webp';
 import Hamburger from './hamburger/hamburger';
 import Menu from './menu';
 
