@@ -12,7 +12,11 @@ interface DateButton {
 }
 
 const DateButton = ({ value, isSelected, onClick }: DateButton) => {
-  const str = format(new Date(value), 'EEEE d.M', { locale: fi });
+  const year = Number(value.split('.')[0]);
+  const month = Number(value.split('.')[1]);
+  const day = Number(value.split('.')[2]);
+  const date = new Date(year, month, day);
+  const str = format(date, 'EEEE d.M', { locale: fi });
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
@@ -46,7 +50,12 @@ export const ShowlistContent = ({ showsByDate }: ShowlistContentProps) => {
         value={selectedDate}
       >
         {Object.keys(showsByDate).map((date, i) => {
-          const str = format(new Date(date), 'EEEE d.M', { locale: fi });
+          const year = Number(date.split('.')[0]);
+          const month = Number(date.split('.')[1]);
+          const day = Number(date.split('.')[2]);
+          const generatedDate = new Date(year, month, day);
+
+          const str = format(generatedDate, 'EEEE d.M', { locale: fi });
           const text = str.charAt(0).toUpperCase() + str.slice(1);
           return (
             <option key={date + i} value={date}>
