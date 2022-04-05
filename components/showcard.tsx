@@ -59,8 +59,8 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           />
         </div>
         <div
-          className={`absolute bottom-1 left-2 z-20 mb-2 w-full flex-col text-left text-white group-hover:translate-y-8 ${
-            isExpanded ? 'opacity-0' : 'opacity-100'
+          className={`absolute bottom-1 left-2 z-20 mb-2 w-full flex-col text-left text-white transition group-hover:translate-y-8 ${
+            isExpanded ? 'hidden' : 'block'
           }`}
         >
           <p
