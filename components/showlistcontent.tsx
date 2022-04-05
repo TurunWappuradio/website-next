@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import { Dispatch, SetStateAction, useState } from 'react';
 
@@ -12,11 +12,9 @@ interface DateButton {
 }
 
 const DateButton = ({ value, isSelected, onClick }: DateButton) => {
-  const year = Number(value.split('.')[0]);
-  const month = Number(value.split('.')[1]);
-  const day = Number(value.split('.')[2]);
-  const date = new Date(year, month, day);
-  const str = format(date, 'EEEE d.M', { locale: fi });
+  const dateParsed = parse(value, 'y.M.dd', new Date());
+  const str = format(dateParsed, 'cccc d.M', { locale: fi });
+
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
@@ -50,12 +48,9 @@ export const ShowlistContent = ({ showsByDate }: ShowlistContentProps) => {
         value={selectedDate}
       >
         {Object.keys(showsByDate).map((date, i) => {
-          const year = Number(date.split('.')[0]);
-          const month = Number(date.split('.')[1]);
-          const day = Number(date.split('.')[2]);
-          const generatedDate = new Date(year, month, day);
+          const dateParsed = parse(date, 'y.M.dd', new Date());
 
-          const str = format(generatedDate, 'EEEE d.M', { locale: fi });
+          const str = format(dateParsed, 'cccc d.M', { locale: fi });
           const text = str.charAt(0).toUpperCase() + str.slice(1);
           return (
             <option key={date + i} value={date}>
