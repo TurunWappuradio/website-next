@@ -86,9 +86,7 @@ const Event: FC<{ event: Event }> = ({ event }) => {
       <div className="w-full p-2">
         <h3 className="text-xl font-bold text-coral">{event.summary}</h3>
         <div>{timeFormatted}</div>
-        {event.location && (
-          <div>@ {event.location}</div>
-        )}
+        {event.location && <div>@ {event.location}</div>}
       </div>
     </div>
   );
@@ -101,8 +99,12 @@ const formatWithTime = (start: Date, end: Date) => {
 };
 
 const formatWithoutTime = (start: Date, end: Date) => {
-  const startFormatted = format(start, 'd.M.', { locale: fi });
-  const endFormatted = format(end, 'd.M.', { locale: fi });
+  const startFormatted = format(start, 'cccc d.M.', { locale: fi });
+
+  // subtract one, as the end date is always set to midnight causing an off-by-one
+  end.setDate(end.getDate() - 1);
+
+  const endFormatted = format(end, 'cccc d.M.', { locale: fi });
   return `${startFormatted} - ${endFormatted}`;
 };
 

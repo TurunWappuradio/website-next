@@ -16,6 +16,7 @@ import {
   ContentPageQuery,
 } from 'contentful/graphql/contentPage.graphql';
 import Hero from 'components/hero';
+import Footer from 'components/footer';
 
 interface ContentPageProps {
   name: string;
@@ -57,6 +58,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
       <article className="max-w-4xl pt-12 mx-auto text-white">
         <RichText content={content} />
       </article>
+      <Footer navigationItems={navigationItems} />
     </div>
   );
 };
