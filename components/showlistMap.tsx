@@ -111,8 +111,6 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
                     locale: fi,
                   })}
                 </p>
-                {console.log(n)}
-                {console.log('!!' + format(firstDay, 'y.M.dd'))}
                 {n === format(firstDay, 'y.M.dd') && (
                   <div className="card-height" />
                 )}
