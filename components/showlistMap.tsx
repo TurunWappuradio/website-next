@@ -15,6 +15,7 @@ import fi from 'date-fns/locale/fi';
 import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
 import { ModeButton } from './button';
 import { WideScreencard } from './widescreen-card';
+import { ShowCard } from './showcard';
 
 interface ShowlistMapProps {
   shows: ShowsCollectionItem[];
@@ -36,6 +37,9 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
   const showsGroupedByWeek = groupByWeek(shows);
   const [openWeek, setWeek] = useState(
     getInitialWeek(Object.keys(showsGroupedByWeek))
+  );
+  const [selectedShow, setSelectedShow] = useState<ShowsCollectionItem | null>(
+    null
   );
   const groupWeekByDay = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
@@ -68,7 +72,15 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
   const firstDayHours = firstDay.getHours();
 
   return (
-    <div className="flex flex-col">
+    <div className="mb-4 flex flex-col">
+      {selectedShow && (
+        <ShowCard
+          show={selectedShow}
+          index={0}
+          className="mt-4 max-w-[750px]"
+          forceOpen={true}
+        />
+      )}
       <div className="flex space-x-2 p-6">
         {Object.keys(showsGroupedByWeek).map((n, i) => (
           <ModeButton
@@ -109,6 +121,7 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
                     return (
                       <>
                         <WideScreencard
+                          onClick={() => setSelectedShow(show)}
                           key={i}
                           showLength={differenceInMinutes(
                             new Date(show.end),

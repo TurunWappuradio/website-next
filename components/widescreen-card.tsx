@@ -1,12 +1,14 @@
 interface WideScreenCardProps {
   text: string;
   showLength: number;
+  onClick: () => void;
   color?: string;
 }
 
 export const WideScreencard = ({
   text,
   color,
+  onClick,
   showLength,
 }: WideScreenCardProps) => {
   const getBackgroundColor = () => {
@@ -19,7 +21,7 @@ export const WideScreencard = ({
   };
 
   return (
-    <div className="card-height flex p-2">
+    <button className="card-height flex p-2" onClick={onClick}>
       <div
         className={`flex h-full w-full rounded-sm px-1 ${getBackgroundColor()}`}
       >
@@ -33,6 +35,6 @@ export const WideScreencard = ({
           height: ${showLength}px;
         }
       `}</style>
-    </div>
+    </button>
   );
 };

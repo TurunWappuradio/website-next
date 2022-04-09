@@ -10,10 +10,12 @@ import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 interface ShowCard {
   show: ShowsCollectionItem;
   index: number;
+  className?: string;
+  forceOpen?: boolean;
 }
 
-export const ShowCard = ({ show, index }: ShowCard) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(forceOpen ?? false);
   const ref = useRef(null);
 
   const { picture } = show;
@@ -26,7 +28,7 @@ export const ShowCard = ({ show, index }: ShowCard) => {
         isExpanded
           ? 'h-auto rounded-l-none rounded-t lg:rounded-l lg:rounded-t-none'
           : 'h-52'
-      }`}
+      } ${className ? className : ''}`}
     >
       <p className="mt-0 h-[24px] w-[25px] shrink-0 rotate-90 text-left font-bold text-white shadow lg:flex">
         {format(new Date(show.start), 'p', { locale: fi })}&nbsp;-&nbsp;
