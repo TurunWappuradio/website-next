@@ -2,9 +2,9 @@ name: Deploy develop
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
   build:
@@ -34,6 +34,13 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: 'Set timezone'
+        uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: 'Europe/Helsinki'
+          timezoneMacos: 'Europe/Helsinki'
+          timezoneWindows: 'Helsinki Standard Time'
 
       - name: Install dependencies
         run: npm ci
