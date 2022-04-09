@@ -27,13 +27,15 @@ const DateButton = ({ value, isSelected, onClick }: DateButton) => {
   );
 };
 
-interface ShowlistContentProps {
+interface ResponsiveShowlistProps {
   showsByDate: {
     [key: string]: ShowsCollectionItem[];
   };
 }
 
-export const ShowlistContent = ({ showsByDate }: ShowlistContentProps) => {
+export const ResponsiveShowlist = ({
+  showsByDate,
+}: ResponsiveShowlistProps) => {
   const [selectedDate, setSelectedDate] = useState<string>(
     Object.keys(showsByDate).includes(format(new Date(), 'y.M.dd'))
       ? format(new Date(), 'y.M.dd')
@@ -78,4 +80,4 @@ export const ShowlistContent = ({ showsByDate }: ShowlistContentProps) => {
   );
 };
 
-export default ShowlistContent;
+export default ResponsiveShowlist;
