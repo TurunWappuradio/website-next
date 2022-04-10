@@ -81,19 +81,19 @@ const Socials = () => (
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiFillFacebook}
-      href="https:/facebook.com/turunwappuradio/"
+      href="https://facebook.com/turunwappuradio/"
       ariaLabel="Facebook"
     />
     <SomeLink
       text="Discord-serveri"
       LogoComponent={FaDiscord}
-      href="https:/discord.gg/CpnVGckP9Z"
+      href="https://discord.gg/CpnVGckP9Z"
       ariaLabel="Discord"
     />
     <SomeLink
       text="t.me/turunwappuradio"
       LogoComponent={FaTelegramPlane}
-      href="https:/t.me/turunwappuradio"
+      href="https://t.me/turunwappuradio"
       ariaLabel="Telegram"
     />
     <SomeLink
@@ -105,7 +105,7 @@ const Socials = () => (
     <SomeLink
       text="TurunWappuradio"
       LogoComponent={AiFillGithub}
-      href="https:/github.com/TurunWappuradio"
+      href="https://github.com/TurunWappuradio"
       ariaLabel="GitHub"
     />
   </ul>
