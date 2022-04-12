@@ -28,7 +28,7 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           : 'h-40'
       }`}
     >
-      <p className="mt-0 h-4 w-[25px] shrink-0 rotate-90 text-left font-bold text-white shadow lg:flex">
+      <p className="mt-0 h-[25px] w-[25px] shrink-0 rotate-90 text-left font-bold text-white shadow lg:flex">
         {format(new Date(show.start), 'p', { locale: fi })}&nbsp;-&nbsp;
         {format(new Date(show.end), 'p', { locale: fi })}
       </p>
@@ -71,7 +71,7 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           <h3 className="mt-1 text-sm font-bold text-white sm:text-base">
             Tuottaa: {show.producer}
           </h3>
-          <p className="mt-2 text-xs text-white sm:text-sm">
+          <p className="mt-2 text-sm text-white md:text-base">
             {show.description}
           </p>
         </div>
