@@ -50,6 +50,8 @@ interface IndexProps {
 interface PlayerControls {
   playing: boolean;
   onPlayPause: () => void;
+  muted: boolean;
+  onMute: () => void;
 }
 
 const Index: NextPage<IndexProps & PlayerControls> = ({
@@ -69,6 +71,8 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   sponsors,
   playing,
   onPlayPause,
+  muted,
+  onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -85,7 +89,14 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {isPlayerLive && <Player playing={playing} onPlayPause={onPlayPause} />}
+      {isPlayerLive && (
+        <Player
+          playing={playing}
+          onPlayPause={onPlayPause}
+          muted={muted}
+          onMute={onMute}
+        />
+      )}
 
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
