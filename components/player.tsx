@@ -1,3 +1,4 @@
+import useMetadata from 'hooks/useMetadata';
 import { BsPlay, BsPause, BsVolumeUp, BsVolumeMute } from 'react-icons/bs';
 
 interface PlayerProps {
@@ -8,8 +9,9 @@ interface PlayerProps {
 }
 
 const Player = ({ playing, onPlayPause, muted, onMute }: PlayerProps) => {
-  const PlayPauseIcon = playing ? BsPause : BsPlay;
   const MuteIcon = muted ? BsVolumeMute : BsVolumeUp;
+
+  const { song, artist } = useMetadata();
 
   return (
     <div className="bg-blue-darkest p-8">
@@ -20,18 +22,24 @@ const Player = ({ playing, onPlayPause, muted, onMute }: PlayerProps) => {
             playing ? 'bg-coral' : 'bg-teal'
           }`}
         >
-          <PlayPauseIcon size="6rem" className="mx-auto" />
+          {playing ? (
+            <BsPause size="6rem" />
+          ) : (
+            <BsPlay size="6rem" className="ml-2" />
+          )}
         </button>
         <button
           onClick={onMute}
-          className={`h-20 w-20 rounded-full ${muted ? 'bg-coral' : 'bg-teal'}`}
+          className={`ml-4 h-20 w-20 rounded-full ${
+            muted ? 'bg-coral' : 'bg-teal'
+          }`}
         >
           <MuteIcon size="3rem" className="mx-auto" />
         </button>
-        <div className="flex flex-col">
+        <div className="ml-4 flex flex-col">
           <span className="text-white">Nyt soi</span>
-          <span className="text-coral">Funny Funk</span>
-          <span className="text-coral">Jussi Halme</span>
+          <span className="text-coral">{song}</span>
+          <span className="text-coral opacity-60">{artist}</span>
         </div>
       </div>
     </div>
