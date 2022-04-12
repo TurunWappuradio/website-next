@@ -40,6 +40,16 @@ query Index {
           isRoundedBorders
         }
       }
+      bigPayersCollection {
+        items {
+          title
+          link
+          logoImage {
+            url
+          }
+          isRoundedBorders
+        }
+      }
     }
   }
 }

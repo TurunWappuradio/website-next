@@ -35,6 +35,7 @@ interface IndexProps {
   firstContent: any;
   secondContent: any;
   thirdContent: any;
+  bigSponsors: ISponsorData[];
   sponsors: ISponsorData[];
 }
 
@@ -50,6 +51,7 @@ const Index: NextPage<IndexProps> = ({
   firstContent,
   secondContent,
   thirdContent,
+  bigSponsors,
   sponsors,
 }) => {
   return (
@@ -108,7 +110,7 @@ const Index: NextPage<IndexProps> = ({
           />
         </div>
       </div>
-      <Sponsors sponsors={sponsors} />
+      <Sponsors sponsors={sponsors} bigSponsors={bigSponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
   );
@@ -130,6 +132,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     thirdContent,
   } = data.indexCollection.items[0];
 
+  const bigSponsors =
+    data.sponsorsCollection.items[0].bigPayersCollection.items;
   const sponsors = data.sponsorsCollection.items[0].sponsorsCollection.items;
 
   const navigationItems = await fetchNavigationItems();
@@ -147,6 +151,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       firstContent,
       secondContent,
       thirdContent,
+      bigSponsors,
       sponsors,
     },
   };
