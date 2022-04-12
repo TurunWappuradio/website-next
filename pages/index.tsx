@@ -47,7 +47,12 @@ interface IndexProps {
   sponsors: ISponsorData[];
 }
 
-const Index: NextPage<IndexProps> = ({
+interface PlayerControls {
+  playing: boolean;
+  onPlayPause: () => void;
+}
+
+const Index: NextPage<IndexProps & PlayerControls> = ({
   heroImage,
   heroTitle,
   heroSubtext,
@@ -62,6 +67,8 @@ const Index: NextPage<IndexProps> = ({
   // secondContent,
   // thirdContent,
   sponsors,
+  playing,
+  onPlayPause,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -78,7 +85,7 @@ const Index: NextPage<IndexProps> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {isPlayerLive && <Player />}
+      {isPlayerLive && <Player playing={playing} onPlayPause={onPlayPause} />}
 
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
