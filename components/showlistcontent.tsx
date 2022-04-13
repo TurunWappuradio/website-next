@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 import { ShowCard } from 'components/showcard';
 import { ShowsCollectionItem } from '../pages/arkisto/[showlistId]';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 interface NavButton {
   value: string | null;
@@ -15,15 +16,19 @@ interface NavButton {
 const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
   const disabled = !value;
   return (
-    <button
-      className={`text-middle w-48 rounded-sm p-2 capitalize text-white
-      ${disabled ? 'hidden' : ''}
-      ${alternate ? 'bg-teal' : 'bg-coral'}
-      `}
-      onClick={() => onClick(value)}
-    >
-      {text}
-    </button>
+    <>
+      <a
+        className={`${'flex py-8 font-bold text-teal transition hover:text-coral'}
+        ${disabled ? 'hidden' : ''}
+        ${alternate ? '' : ''}
+        `}
+        onClick={() => onClick(value)}
+      >
+        {alternate && <BsArrowLeft className="mr-2 h-6 w-6" />}
+        {text}
+        {!alternate && <BsArrowRight className="ml-2 h-6 w-6" />}
+      </a>
+    </>
   );
 };
 
@@ -113,7 +118,7 @@ export const ShowlistContent = ({ showsByDate }: ShowlistContentProps) => {
           ))}
         </div>
       </div>
-      <div className="flex w-full justify-center py-10 md:justify-end md:pr-64">
+      <div className="mt-2 flex w-full justify-center md:justify-end md:pr-64">
         <div className={`${getNextDate ? 'mr-6' : ''}`}>
           <NavButton
             text="Edellinen päivä"
