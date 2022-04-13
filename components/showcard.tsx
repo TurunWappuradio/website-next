@@ -87,6 +87,7 @@ export const ShowCard = ({ show, index }: ShowCard) => {
             unoptimized={picture?.url ? false : true}
             layout={'fill'}
             objectFit="cover"
+            objectPosition={'65% 35%'}
             className={`-z-10 ${
               isExpanded
                 ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none'
