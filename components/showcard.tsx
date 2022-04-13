@@ -51,8 +51,8 @@ export const ShowCard = ({ show, index }: ShowCard) => {
           >
             {show.name}
           </p>
-          <p className="mt-2 px-2 text-sm">Juontaa: {show.hosts}</p>
-          <p className="mt-1 px-2 text-sm">Tuottaa: {show.producer}</p>
+          <p className="mt-2 px-2 text-sm">Juontaa: {show.hosts ?? '-'}</p>
+          <p className="mt-1 px-2 text-sm">Tuottaa: {show.producer ?? '-'}</p>
           <p className="mt-4 h-6 w-80 truncate px-2 text-sm">
             {show.description}
           </p>
@@ -66,10 +66,10 @@ export const ShowCard = ({ show, index }: ShowCard) => {
             {show.name}
           </h2>
           <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
-            Juontaa: {show.hosts}
+            Juontaa: {show.hosts ?? '-'}
           </h3>
           <h3 className="mt-1 text-sm font-bold text-white sm:text-base">
-            Tuottaa: {show.producer}
+            Tuottaa: {show.producer ?? '-'}
           </h3>
           <p className="mt-2 text-sm text-white md:text-base">
             {show.description}
