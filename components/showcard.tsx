@@ -41,7 +41,7 @@ export const ShowCard = ({ show, index }: ShowCard) => {
         onClick={() => setIsExpanded((isExpanded) => !isExpanded)}
       >
         <div
-          className={`absolute bottom-1 left-2 z-20 mb-2 w-full translate-y-[4.3rem] flex-col text-left text-white transition group-hover:translate-y-0 group-hover:align-middle
+          className={`absolute bottom-1 left-2 z-20 mb-2 w-full translate-y-[4.3rem] flex-col text-left text-white transition group-hover:bottom-2 group-hover:translate-y-0
            ${isExpanded ? 'hidden' : 'block'}`}
         >
           <p
