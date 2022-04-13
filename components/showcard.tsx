@@ -36,7 +36,7 @@ export const ShowCard = ({ show, index }: ShowCard) => {
         className={`group relative flex h-full w-full flex-col flex-col-reverse overflow-hidden rounded transition-all md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
-            : 'bg-gradient-to-b from-transparent to-blue-darkest'
+            : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={() => setIsExpanded((isExpanded) => !isExpanded)}
       >
