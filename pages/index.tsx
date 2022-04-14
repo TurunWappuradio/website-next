@@ -64,7 +64,7 @@ const Index: NextPage<IndexProps> = ({
     <div className="min-h-screen w-full">
       <Head>
         <title>Turun Wappuradio</title>
-        <meta name="description" content="Wappuradioo tält puolt jokkee" />
+        <meta name="description" content={heroTitle} />
       </Head>
       <Hero
         image={heroImage}

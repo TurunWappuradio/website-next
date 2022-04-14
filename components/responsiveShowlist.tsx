@@ -124,7 +124,7 @@ export const ResponsiveShowlist = ({
           ))}
         </div>
       </div>
-      <div className="mt-2 flex w-full justify-center md:justify-end md:pr-64">
+      <div className="mx-auto mt-2 flex w-full max-w-6xl justify-center md:justify-end md:pr-64">
         <div className={`${getNextDate ? 'mr-6' : ''}`}>
           <NavButton
             text="Edellinen päivä"
