@@ -25,7 +25,7 @@ export const Showlist = ({ showsByDate, shows }: Showlist) => {
           Ohjelmistossa
         </h1>
         {isDesktop && (
-          <div className="ml-auto mt-auto space-x-2">
+          <div className="ml-auto mr-[15.5rem] mt-auto space-x-2">
             <ModeButton
               text={'Ohjelmalista'}
               isActive={mode === 'list'}

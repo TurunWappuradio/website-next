@@ -30,7 +30,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
           : 'h-40'
       }`}
     >
-      <p className="mt-0 h-[25px] w-[25px] shrink-0 rotate-90 text-left font-bold text-white shadow lg:flex">
+      <p className="mt-0 mt-1 h-[25px] w-[25px] shrink-0 rotate-90 text-left font-bold text-white shadow lg:flex">
         {format(new Date(show.start), 'p', { locale: fi })}&nbsp;-&nbsp;
         {format(new Date(show.end), 'p', { locale: fi })}
       </p>
