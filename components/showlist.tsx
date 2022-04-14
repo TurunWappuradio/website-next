@@ -19,8 +19,8 @@ export const Showlist = ({ showsByDate, shows }: Showlist) => {
   const { isDesktop } = useViewport();
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col px-4 py-6">
-      <div className="flex w-full">
+    <div className="mx-auto flex flex-col items-center py-6">
+      <div className="flex w-full max-w-6xl">
         <h1 className="mx-6 mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>

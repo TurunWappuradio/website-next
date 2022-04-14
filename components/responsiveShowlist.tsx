@@ -1,10 +1,10 @@
 import { format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 import { ShowCard } from 'components/showcard';
-import { ShowsCollectionItem } from '../pages/arkisto/[showlistId]';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { Show } from 'contentful/client';
 
 interface NavButton {
   value: string | null;
@@ -56,7 +56,7 @@ const DateButton = ({ value, isSelected, onClick }: DateButton) => {
 
 interface ResponsiveShowlistProps {
   showsByDate: {
-    [key: string]: ShowsCollectionItem[];
+    [key: string]: Show[];
   };
 }
 
@@ -88,7 +88,7 @@ export const ResponsiveShowlist = ({
   return (
     <>
       <div
-        className="flex max-w-6xl flex-col pt-6 pr-[25px] lg:flex-row"
+        className="flex w-full max-w-6xl flex-col pt-6 pr-[25px] lg:flex-row"
         id="showList"
       >
         <select
