@@ -23,6 +23,7 @@ const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
         ${alternate ? '' : ''}
         `}
         onClick={() => onClick(value)}
+        href="javascript:void(0);"
       >
         {alternate && <BsArrowLeft className="mr-2 h-6 w-6" />}
         {text}
@@ -86,7 +87,10 @@ export const ResponsiveShowlist = ({
 
   return (
     <>
-      <div className="flex flex-col pt-6 pr-[25px] lg:flex-row" id="showList">
+      <div
+        className="flex max-w-6xl flex-col pt-6 pr-[25px] lg:flex-row"
+        id="showList"
+      >
         <select
           className="mb-4 ml-6 flex h-8 rounded-sm  bg-blue-dark px-2 font-bold text-coral lg:hidden"
           onChange={(event) => setSelectedDate(event.target.value)}

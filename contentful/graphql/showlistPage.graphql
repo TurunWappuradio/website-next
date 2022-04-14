@@ -7,7 +7,7 @@ query showlistPage($showlistId: String) {
       heroImage {
         url
       }
-      showsCollection(limit:200) {
+      showsCollection(limit: 200) {
         items {
           name
           start

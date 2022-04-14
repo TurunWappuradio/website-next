@@ -72,7 +72,7 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
   const firstDayHours = firstDay.getHours();
 
   return (
-    <div className="mb-4 flex flex-col">
+    <div className="mb-4 flex flex-col pt-6">
       {selectedShow && (
         <ShowCard
           show={selectedShow}

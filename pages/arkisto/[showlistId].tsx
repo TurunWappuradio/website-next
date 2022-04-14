@@ -67,9 +67,6 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   navigationItems,
   heroSubtext,
 }) => {
-  // mode is week or show
-  const [mode, setMode] = useState<string>('show');
-
   return (
     <div className="min-h-screen w-full">
       <Head>
