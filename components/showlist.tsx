@@ -1,18 +1,16 @@
-import Link from 'next/link';
-import { BsArrowLeft } from 'react-icons/bs';
-
-import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
-import ResponsiveShowlist from './responsiveShowlist';
 import { useState } from 'react';
+
+import { Show } from 'contentful/client';
+import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
 import { ModeButton } from './button';
 import { useViewport } from 'hooks/useViewport';
 
 interface Showlist {
   showsByDate: {
-    [key: string]: ShowsCollectionItem[];
+    [key: string]: Show[];
   };
-  shows: ShowsCollectionItem[];
+  shows: Show[];
 }
 
 export const Showlist = ({ showsByDate, shows }: Showlist) => {
