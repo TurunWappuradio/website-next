@@ -101,7 +101,7 @@ const Hero: FC<HeroProps> = ({
       </div>
       {/* Mobile hamburger menu */}
       <Hamburger
-        className="fixed top-0 right-0 z-30 md:hidden"
+        className="fixed top-0 right-0 z-50 md:hidden"
         isOpen={isOpen}
         onClick={handleHamburgerClick}
       />

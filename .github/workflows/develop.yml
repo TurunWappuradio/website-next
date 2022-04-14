@@ -2,9 +2,9 @@ name: Deploy develop
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
   build:
@@ -35,6 +35,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
+      - name: 'Set timezone'
+        uses: szenius/set-timezone@v1.0
+        with:
+          timezoneLinux: 'Europe/Helsinki'
+          timezoneMacos: 'Europe/Helsinki'
+          timezoneWindows: 'Helsinki Standard Time'
+
       - name: Install dependencies
         run: npm ci
 
@@ -45,6 +52,7 @@ jobs:
           NEXT_PUBLIC_GOOGLE_CALENDAR_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CALENDAR_ID }}
           NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY }}
           NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL: ${{ secrets.NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL }}
+          NEXT_PUBLIC_METADATA_API: ${{ secrets.NEXT_PUBLIC_METADATA_API }}
         run: npm run build
 
       - name: Configure AWS credentials

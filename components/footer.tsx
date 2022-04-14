@@ -16,13 +16,10 @@ interface FooterProps {
 
 const Footer = ({ navigationItems }: FooterProps) => {
   return (
-    <div className="z-15 flex max-w-full flex-row flex-wrap justify-center bg-blue-darkest py-14 text-white md:flex-row">
-      <div className="mx-8 my-4 flex w-128 max-w-full justify-center md:justify-between">
-        <div className="hidden md:block">
-          <SiteMap navigationItems={navigationItems} />
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="relative h-36 w-36">
+    <footer className="z-15 flex max-w-full flex-col flex-wrap items-center justify-center bg-blue-darkest py-14 text-white lg:flex-row">
+      <div className="flex w-64 max-w-full justify-center lg:justify-start xl:w-128">
+        <div className="flex w-fit flex-col items-center">
+          <div className="relative flex h-36 w-36 md:h-52 md:w-52">
             <Image
               src="/leima.svg"
               unoptimized={true}
@@ -31,7 +28,7 @@ const Footer = ({ navigationItems }: FooterProps) => {
             />
           </div>
           <Link href="/tietosuojaseloste">
-            <a className="text-sm text-white opacity-50">
+            <a className="mt-6 text-sm text-white opacity-50">
               © Turun Wappuradio ry
               <br />
               Tietosuojaseloste
@@ -40,15 +37,18 @@ const Footer = ({ navigationItems }: FooterProps) => {
         </div>
       </div>
 
-      <div className="mx-8 my-4 w-128 max-w-full">
+      <div className="flex w-128 max-w-full flex-row">
+        <div className="my-4 hidden lg:block">
+          <SiteMap navigationItems={navigationItems} />
+        </div>
         <Socials />
       </div>
-    </div>
+    </footer>
   );
 };
 
 const SiteMap = ({ navigationItems }: FooterProps) => (
-  <ul>
+  <ul className="w-64">
     <NavLink slug="" name="Radio" />
     {navigationItems.map((navItem) => (
       <NavLink {...navItem} key={navItem.name} />
@@ -71,7 +71,7 @@ const NavLink = ({ slug, name }: NavLinkProps) => (
 );
 
 const Socials = () => (
-  <ul className="mx-auto flex w-80 flex-row items-center justify-around md:block md:w-full">
+  <ul className="mx-auto my-4 flex w-64 flex-row items-center justify-around lg:block lg:w-full">
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiOutlineInstagram}
@@ -81,23 +81,23 @@ const Socials = () => (
     <SomeLink
       text="@turunwappuradio"
       LogoComponent={AiFillFacebook}
-      href="https:/facebook.com/turunwappuradio/"
+      href="https://facebook.com/turunwappuradio/"
       ariaLabel="Facebook"
     />
     <SomeLink
       text="Discord-serveri"
       LogoComponent={FaDiscord}
-      href="https:/discord.gg/CpnVGckP9Z"
+      href="https://discord.gg/CpnVGckP9Z"
       ariaLabel="Discord"
     />
     <SomeLink
       text="t.me/turunwappuradio"
       LogoComponent={FaTelegramPlane}
-      href="https:/t.me/turunwappuradio"
+      href="https://t.me/turunwappuradio"
       ariaLabel="Telegram"
     />
     <SomeLink
-      text="toimitus[ät]turunwappuradio.com"
+      text="Sähköposti"
       LogoComponent={AiOutlineMail}
       href="mailto:toimitus@turunwappuradio.com"
       ariaLabel="Email"
@@ -105,7 +105,7 @@ const Socials = () => (
     <SomeLink
       text="TurunWappuradio"
       LogoComponent={AiFillGithub}
-      href="https:/github.com/TurunWappuradio"
+      href="https://github.com/TurunWappuradio"
       ariaLabel="GitHub"
     />
   </ul>
@@ -129,7 +129,7 @@ const SomeLink = ({ text, href, LogoComponent, ariaLabel }: SomeLinkProps) => {
         className="flex items-center transition hover:underline"
       >
         <LogoComponent className="h-6 w-6" />
-        <span className="ml-3 hidden md:block">{text}</span>
+        <span className="ml-3 hidden lg:block">{text}</span>
       </a>
     </li>
   );
