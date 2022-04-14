@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import Link from 'next/link';
-import { BsArrowLeft } from 'react-icons/bs';
+import { groupBy } from 'ramda';
+import { useState } from 'react';
 
 import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -16,7 +16,9 @@ import {
   ShowlistPageQuery,
 } from 'contentful/graphql/showlistPage.graphql';
 import Hero from 'components/hero';
-import ShowlistContent from 'components/showlistcontent';
+import { Showlist } from 'components/showlist';
+import { BsArrowLeft } from 'react-icons/bs';
+import Link from 'next/link';
 
 export enum Color {
   Night = 'night',
@@ -50,6 +52,7 @@ interface ShowListPageProps {
   showsByDate: {
     [key: string]: ShowsCollectionItem[];
   };
+  shows: ShowsCollectionItem[];
   heroImage: {
     url?: string;
   };
@@ -60,9 +63,13 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   name,
   showsByDate,
   heroImage,
+  shows,
   navigationItems,
   heroSubtext,
 }) => {
+  // mode is week or show
+  const [mode, setMode] = useState<string>('show');
+
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -77,16 +84,13 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
       />
       <div className="mx-auto flex max-w-6xl flex-col py-6">
         <Link href="/arkisto">
-          <a className="mx-6 my-6 flex font-bold text-teal transition hover:text-coral">
+          <a className="my-6 ml-4 mr-auto flex font-bold text-teal transition hover:text-coral">
             <BsArrowLeft className="mr-2 h-6 w-6" />
             Kaikki ohjelmakartat
           </a>
         </Link>
-        <h1 className="mx-6 mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
-          Ohjelmistossa
-        </h1>
-        <ShowlistContent showsByDate={showsByDate} />
       </div>
+      <Showlist showsByDate={showsByDate} shows={shows} />
     </div>
   );
 };
@@ -128,14 +132,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     color: item.color,
   }));
 
-  const groupBy = function (xs: any, key: any) {
-    return xs.reduce(function (rv: any, x: any) {
-      (rv[x[key]] = rv[x[key]] || []).push(x);
-      return rv;
-    }, {});
-  };
-
-  const showsByDate = groupBy(shows, 'date');
+  const showsByDate = groupBy(
+    (day: any) => format(new Date(day.start), 'y.M.dd'),
+    shows
+  );
 
   const navigationItems = await fetchNavigationItems();
 
@@ -144,6 +144,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       name,
       id,
       showsByDate,
+      shows,
       navigationItems,
       heroImage,
       heroSubtext,

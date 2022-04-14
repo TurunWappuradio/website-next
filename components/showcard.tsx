@@ -10,10 +10,12 @@ import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 interface ShowCard {
   show: ShowsCollectionItem;
   index: number;
+  className?: string;
+  forceOpen?: boolean;
 }
 
-export const ShowCard = ({ show, index }: ShowCard) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(forceOpen ?? false);
   const ref = useRef(null);
 
   const { picture } = show;

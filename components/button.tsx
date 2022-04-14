@@ -39,4 +39,24 @@ const LinkButton: FC<LinkButtonProps> = ({
   );
 };
 
-export { Button, LinkButton };
+interface ModeButton {
+  text: string;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+const ModeButton = ({ text, isActive, onClick, ...props }: ModeButton) => {
+  return (
+    <button
+      {...props}
+      className={`rounded-sm p-2 text-white ${
+        isActive ? 'bg-coral' : 'bg-blue-dark hover:text-coral'
+      }`}
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+};
+
+export { Button, LinkButton, ModeButton };
