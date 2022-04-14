@@ -3,12 +3,12 @@ import fi from 'date-fns/locale/fi';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
-import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
+import { Show } from 'contentful/client';
 
 interface ShowCard {
-  show: ShowsCollectionItem;
+  show: Show;
   index: number;
   className?: string;
   forceOpen?: boolean;

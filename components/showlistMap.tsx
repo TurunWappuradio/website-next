@@ -12,16 +12,16 @@ import { groupBy, uniq } from 'ramda';
 import { useState } from 'react';
 import fi from 'date-fns/locale/fi';
 
-import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
 import { ModeButton } from './button';
 import { WideScreencard } from './widescreen-card';
 import { ShowCard } from './showcard';
+import { Show } from 'contentful/client';
 
 interface ShowlistMapProps {
-  shows: ShowsCollectionItem[];
+  shows: Show[];
 }
 
-const groupByWeek = groupBy((show: ShowsCollectionItem) =>
+const groupByWeek = groupBy((show: Show) =>
   getISOWeek(new Date(show.start)).toString()
 );
 
@@ -38,16 +38,15 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
   const [openWeek, setWeek] = useState(
     getInitialWeek(Object.keys(showsGroupedByWeek))
   );
-  const [selectedShow, setSelectedShow] = useState<ShowsCollectionItem | null>(
-    null
-  );
+  const [selectedShow, setSelectedShow] = useState<Show | null>(null);
   const groupWeekByDay = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
     showsGroupedByWeek[openWeek]
   );
 
   // prettier-ignore
-  const timeStamps: string[] = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+  const timeStamps: string[] = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
+                                '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
 
   const daysInWeek = eachDayOfInterval({
     start: startOfWeek(
@@ -115,7 +114,7 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
                   <div className="card-height" />
                 )}
                 {groupWeekByDay[n]?.length > 0 &&
-                  groupWeekByDay[n]?.map((show: ShowsCollectionItem, i) => {
+                  groupWeekByDay[n]?.map((show: Show, i) => {
                     return (
                       <WideScreencard
                         onClick={() => setSelectedShow(show)}
