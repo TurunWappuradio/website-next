@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { format } from 'date-fns';
-import Link from 'next/link';
-import { BsArrowLeft } from 'react-icons/bs';
+import { groupBy } from 'ramda';
+import { useState } from 'react';
 
 import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -16,10 +16,9 @@ import {
   ShowlistPageQuery,
 } from 'contentful/graphql/showlistPage.graphql';
 import Hero from 'components/hero';
-import ResponsiveShowlist from 'components/responsiveShowlist';
-import { useState } from 'react';
 import { Showlist } from 'components/showlist';
-import { groupBy } from 'ramda';
+import { BsArrowLeft } from 'react-icons/bs';
+import Link from 'next/link';
 
 export enum Color {
   Night = 'night',
@@ -83,6 +82,14 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         navigationItems={navigationItems}
         subtext={heroSubtext}
       />
+      <div className="mx-auto flex max-w-6xl">
+        <Link href="/arkisto">
+          <a className="my-6 ml-4 mr-auto flex font-bold text-teal transition hover:text-coral">
+            <BsArrowLeft className="mr-2 h-6 w-6" />
+            Kaikki ohjelmakartat
+          </a>
+        </Link>
+      </div>
       <Showlist showsByDate={showsByDate} shows={shows} />
     </div>
   );

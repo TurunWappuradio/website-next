@@ -117,18 +117,16 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
                 {groupWeekByDay[n]?.length > 0 &&
                   groupWeekByDay[n]?.map((show: ShowsCollectionItem, i) => {
                     return (
-                      <>
-                        <WideScreencard
-                          onClick={() => setSelectedShow(show)}
-                          key={i}
-                          showLength={differenceInMinutes(
-                            new Date(show.end),
-                            new Date(show.start)
-                          )}
-                          text={show?.name}
-                          color={show?.color}
-                        />
-                      </>
+                      <WideScreencard
+                        onClick={() => setSelectedShow(show)}
+                        key={i}
+                        showLength={differenceInMinutes(
+                          new Date(show.end),
+                          new Date(show.start)
+                        )}
+                        text={show?.name}
+                        color={show?.color}
+                      />
                     );
                   })}
               </div>
