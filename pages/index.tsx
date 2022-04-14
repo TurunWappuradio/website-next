@@ -4,16 +4,19 @@ import { GetStaticProps, NextPage } from 'next';
 import {
   fetchContent,
   fetchNavigationItems,
+  fetchShowlist,
   NavigationItem,
+  Show,
 } from 'contentful/client';
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import RichText from 'components/richtext';
+// import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
+// import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
-import Image from 'next/image';
-import Calendar from 'components/calendar';
+// import Image from 'next/image';
+// import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
+import { Showlist } from 'components/showlist';
 
 interface IndexProps {
   heroImage: {
@@ -24,17 +27,20 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-  firstDecorativeImage: {
-    url?: string;
-    width?: number;
-    height?: number;
-  };
-  secondDecorativeImage: {
-    url?: string;
-  };
-  firstContent: any;
-  secondContent: any;
-  thirdContent: any;
+
+  showsByDate: Record<string, Show[]>;
+  shows: Show[];
+  // firstDecorativeImage: {
+  //   url?: string;
+  //   width?: number;
+  //   height?: number;
+  // };
+  // secondDecorativeImage: {
+  //   url?: string;
+  // };
+  // firstContent: any;
+  // secondContent: any;
+  // thirdContent: any;
   sponsors: ISponsorData[];
 }
 
@@ -45,18 +51,20 @@ const Index: NextPage<IndexProps> = ({
   heroButtonText,
   heroButtonLink,
   navigationItems,
-  firstDecorativeImage,
-  secondDecorativeImage,
-  firstContent,
-  secondContent,
-  thirdContent,
+  showsByDate,
+  shows,
+  // firstDecorativeImage,
+  // secondDecorativeImage,
+  // firstContent,
+  // secondContent,
+  // thirdContent,
   sponsors,
 }) => {
   return (
     <div className="min-h-screen w-full">
       <Head>
         <title>Turun Wappuradio</title>
-        <meta name="description" content="Wappuradioo tält puolt jokkee" />
+        <meta name="description" content={heroTitle} />
       </Head>
       <Hero
         image={heroImage}
@@ -67,8 +75,10 @@ const Index: NextPage<IndexProps> = ({
         navigationItems={navigationItems}
       />
 
+      <Showlist showsByDate={showsByDate} shows={shows} />
+
       {/* First section */}
-      <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+      {/* <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
@@ -82,18 +92,18 @@ const Index: NextPage<IndexProps> = ({
         <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
           <RichText content={firstContent} />
         </section>
-      </main>
+      </main> */}
 
       {/* Second section */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
         <Calendar />
-      </div>
+      </div> */}
 
       {/* Third section */}
-      <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+      {/* <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={thirdContent} />
         </section>
@@ -107,7 +117,7 @@ const Index: NextPage<IndexProps> = ({
             alt=""
           />
         </div>
-      </div>
+      </div> */}
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
@@ -134,6 +144,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
+  const { showsByDate, shows } = await fetchShowlist('wappuradio2022');
+
   return {
     props: {
       heroImage,
@@ -142,11 +154,13 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonText,
       heroButtonLink,
       navigationItems,
-      firstDecorativeImage,
-      secondDecorativeImage,
-      firstContent,
-      secondContent,
-      thirdContent,
+      showsByDate,
+      shows,
+      // firstDecorativeImage,
+      // secondDecorativeImage,
+      // firstContent,
+      // secondContent,
+      // thirdContent,
       sponsors,
     },
   };

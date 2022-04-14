@@ -1,0 +1,20 @@
+query showlist($showlistId: String) {
+  programmeCollection(where: { id: $showlistId }, limit: 1) {
+    items {
+      showsCollection(limit: 200) {
+        items {
+          name
+          start
+          end
+          description
+          picture {
+            url
+          }
+          hosts
+          producer
+          color
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,9 @@ import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql'
 import {
   fetchContent,
   fetchNavigationItems,
+  fetchShowlist,
   NavigationItem,
+  Show,
 } from 'contentful/client';
 import { ShowlistPathsQuery } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -20,39 +22,14 @@ import { Showlist } from 'components/showlist';
 import { BsArrowLeft } from 'react-icons/bs';
 import Link from 'next/link';
 
-export enum Color {
-  Night = 'night',
-  Promote = 'promote',
-}
-export interface ShowsCollectionItem {
-  name?: string;
-  start?: string;
-  end?: string;
-  date?: string;
-  description?: null | string;
-  picture?: Picture | null;
-  hosts?: null | string;
-  producer?: null | string;
-  color?: Color | null;
-}
-interface Picture {
-  title?: string;
-  description?: null;
-  contentType?: string;
-  fileName?: string;
-  size?: number;
-  url?: string;
-  width?: number;
-  height?: number;
-}
 interface ShowListPageProps {
   name: string;
   id: string;
   navigationItems: NavigationItem[];
   showsByDate: {
-    [key: string]: ShowsCollectionItem[];
+    [key: string]: Show[];
   };
-  shows: ShowsCollectionItem[];
+  shows: Show[];
   heroImage: {
     url?: string;
   };
@@ -67,9 +44,6 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   navigationItems,
   heroSubtext,
 }) => {
-  // mode is week or show
-  const [mode, setMode] = useState<string>('show');
-
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -117,25 +91,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     showlistId,
   });
 
-  const { name, id, showsCollection, heroImage, heroSubtext } =
+  const { name, id, heroImage, heroSubtext } =
     data.programmeCollection.items[0];
 
-  const shows = showsCollection.items.map((item) => ({
-    name: item.name,
-    start: item.start,
-    end: item.end,
-    date: format(new Date(item.start), 'y.M.dd'),
-    description: item.description,
-    picture: item.picture,
-    hosts: item.hosts,
-    producer: item.producer,
-    color: item.color,
-  }));
-
-  const showsByDate = groupBy(
-    (day: any) => format(new Date(day.start), 'y.M.dd'),
-    shows
-  );
+  const { showsByDate, shows } = await fetchShowlist(showlistId);
 
   const navigationItems = await fetchNavigationItems();
 

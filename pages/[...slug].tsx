@@ -42,7 +42,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
   content,
 }) => {
   return (
-    <div className="w-full min-h-screen">
+    <div className="min-h-screen w-full">
       <Head>
         <title>{name}</title>
         <meta name="description" content={description} />
@@ -55,7 +55,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
         buttonText={heroButtonText}
         navigationItems={navigationItems}
       />
-      <article className="max-w-4xl pt-12 mx-auto text-white">
+      <article className="mx-auto max-w-4xl pt-12 text-white">
         <RichText content={content} />
       </article>
       <Footer navigationItems={navigationItems} />

@@ -1,10 +1,10 @@
 import { format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 import { ShowCard } from 'components/showcard';
-import { ShowsCollectionItem } from '../pages/arkisto/[showlistId]';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { Show } from 'contentful/client';
 
 interface NavButton {
   value: string | null;
@@ -23,6 +23,7 @@ const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
         ${alternate ? '' : ''}
         `}
         onClick={() => onClick(value)}
+        href="javascript:void(0);"
       >
         {alternate && <BsArrowLeft className="mr-2 h-6 w-6" />}
         {text}
@@ -44,7 +45,7 @@ const DateButton = ({ value, isSelected, onClick }: DateButton) => {
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
-        isSelected ? 'bg-coral font-bold' : 'bg-blue-dark hover:text-coral'
+        isSelected ? 'bg-coral font-bold' : 'bg-blue-darkest hover:text-coral'
       }`}
       onClick={() => onClick(value)}
     >
@@ -55,7 +56,7 @@ const DateButton = ({ value, isSelected, onClick }: DateButton) => {
 
 interface ResponsiveShowlistProps {
   showsByDate: {
-    [key: string]: ShowsCollectionItem[];
+    [key: string]: Show[];
   };
 }
 
@@ -86,7 +87,10 @@ export const ResponsiveShowlist = ({
 
   return (
     <>
-      <div className="flex flex-col pt-6 pr-[25px] lg:flex-row" id="showList">
+      <div
+        className="flex w-full max-w-6xl flex-col pt-6 pr-[25px] lg:flex-row"
+        id="showList"
+      >
         <select
           className="mb-4 ml-6 flex h-8 rounded-sm  bg-blue-dark px-2 font-bold text-coral lg:hidden"
           onChange={(event) => setSelectedDate(event.target.value)}
@@ -120,7 +124,7 @@ export const ResponsiveShowlist = ({
           ))}
         </div>
       </div>
-      <div className="mt-2 flex w-full justify-center md:justify-end md:pr-64">
+      <div className="mx-auto mt-2 flex w-full max-w-6xl justify-center md:justify-end md:pr-64">
         <div className={`${getNextDate ? 'mr-6' : ''}`}>
           <NavButton
             text="Edellinen päivä"

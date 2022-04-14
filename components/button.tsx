@@ -50,7 +50,7 @@ const ModeButton = ({ text, isActive, onClick, ...props }: ModeButton) => {
     <button
       {...props}
       className={`rounded-sm p-2 text-white ${
-        isActive ? 'bg-coral' : 'bg-blue-dark hover:text-coral'
+        isActive ? 'bg-coral' : 'bg-blue-darkest hover:text-coral'
       }`}
       onClick={onClick}
     >

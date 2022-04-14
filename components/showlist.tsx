@@ -1,18 +1,16 @@
-import Link from 'next/link';
-import { BsArrowLeft } from 'react-icons/bs';
-
-import { ShowsCollectionItem } from 'pages/arkisto/[showlistId]';
-import ResponsiveShowlist from './responsiveShowlist';
 import { useState } from 'react';
+
+import { Show } from 'contentful/client';
+import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
 import { ModeButton } from './button';
 import { useViewport } from 'hooks/useViewport';
 
 interface Showlist {
   showsByDate: {
-    [key: string]: ShowsCollectionItem[];
+    [key: string]: Show[];
   };
-  shows: ShowsCollectionItem[];
+  shows: Show[];
 }
 
 export const Showlist = ({ showsByDate, shows }: Showlist) => {
@@ -21,13 +19,13 @@ export const Showlist = ({ showsByDate, shows }: Showlist) => {
   const { isDesktop } = useViewport();
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col px-4 py-6">
-      <div className="flex w-full">
+    <div className="mx-auto flex flex-col items-center py-6">
+      <div className="flex w-full max-w-6xl">
         <h1 className="mx-6 mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
         {isDesktop && (
-          <div className="ml-auto mt-auto space-x-2">
+          <div className="ml-auto mr-[15.5rem] mt-auto space-x-2">
             <ModeButton
               text={'Ohjelmalista'}
               isActive={mode === 'list'}
