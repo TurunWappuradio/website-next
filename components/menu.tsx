@@ -11,7 +11,7 @@ interface MenuProps {
 const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
   <div
     className={`
-      fixed top-0 left-0 z-20 h-screen w-full
+      fixed top-0 left-0 z-30 h-screen w-full
       transform-gpu bg-blue-darkest
       text-white transition-all md:hidden
       ${isOpen ? 'translate-x-0' : '-translate-x-full'}
