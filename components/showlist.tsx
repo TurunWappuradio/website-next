@@ -6,14 +6,14 @@ import ShowlistMap from './showlistMap';
 import { ModeButton } from './button';
 import { useViewport } from 'hooks/useViewport';
 
-interface Showlist {
+interface ShowlistProps {
   showsByDate: {
     [key: string]: Show[];
   };
-  shows: Show[];
+  weekKeys: Record<string, string[]>;
 }
 
-export const Showlist = ({ showsByDate, shows }: Showlist) => {
+export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
   const [mode, setMode] = useState<string>('list');
 
   const { isDesktop } = useViewport();
@@ -40,7 +40,9 @@ export const Showlist = ({ showsByDate, shows }: Showlist) => {
         )}
       </div>
       {mode === 'list' && <ResponsiveShowlist showsByDate={showsByDate} />}
-      {mode === 'map' && <ShowlistMap shows={shows} />}
+      {mode === 'map' && (
+        <ShowlistMap showsByDate={showsByDate} weekKeys={weekKeys} />
+      )}
     </div>
   );
 };

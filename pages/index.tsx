@@ -29,7 +29,7 @@ interface IndexProps {
   navigationItems: NavigationItem[];
 
   showsByDate: Record<string, Show[]>;
-  shows: Show[];
+  weekKeys: Record<string, string[]>;
   // firstDecorativeImage: {
   //   url?: string;
   //   width?: number;
@@ -52,7 +52,7 @@ const Index: NextPage<IndexProps> = ({
   heroButtonLink,
   navigationItems,
   showsByDate,
-  shows,
+  weekKeys,
   // firstDecorativeImage,
   // secondDecorativeImage,
   // firstContent,
@@ -75,7 +75,7 @@ const Index: NextPage<IndexProps> = ({
         navigationItems={navigationItems}
       />
 
-      <Showlist showsByDate={showsByDate} shows={shows} />
+      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
       {/* First section */}
       {/* <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
@@ -144,7 +144,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  const { showsByDate, shows } = await fetchShowlist('wappuradio2022');
+  const { showsByDate, weekKeys } = await fetchShowlist('wappuradio2022');
 
   return {
     props: {
@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonLink,
       navigationItems,
       showsByDate,
-      shows,
+      weekKeys,
       // firstDecorativeImage,
       // secondDecorativeImage,
       // firstContent,
