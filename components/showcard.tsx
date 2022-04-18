@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
@@ -16,15 +16,10 @@ interface ShowCard {
 
 export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(forceOpen ?? false);
-  const ref = useRef(null);
-
-  const { picture } = show;
-  const url = picture?.url || placeholderImage;
-  const loader = picture?.url ? contentfulImageLoader : undefined;
 
   return (
     <div
-      className={`flex w-full rounded ${
+      className={`flex w-full rounded ${className} ${
         isExpanded
           ? 'h-auto rounded-l-none rounded-t lg:rounded-l lg:rounded-t-none'
           : 'h-40'
@@ -41,27 +36,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
       >
         <TitleInfo show={show} isExpanded={isExpanded} index={index} />
         <Descriptions show={show} isExpanded={isExpanded} />
-        <div
-          ref={ref}
-          className={`aspect-[3/2] w-full ${
-            isExpanded ? 'image-container relative' : ''
-          }`}
-        >
-          <Image
-            src={url}
-            loader={loader}
-            unoptimized={picture?.url ? false : true}
-            layout={'fill'}
-            objectFit="cover"
-            objectPosition={'65% 35%'}
-            className={`-z-10 ${
-              isExpanded
-                ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none'
-                : ''
-            }`}
-            alt={picture?.title || ''}
-          />
-        </div>
+        <ShowImage show={show} isExpanded={isExpanded} />
       </button>
     </div>
   );
@@ -121,7 +96,7 @@ interface DescriptionsProps {
 const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
   return (
     <div
-      className={`z-10 mt-auto flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:w-[24rem] ${
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[25rem] ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -133,6 +108,42 @@ const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
         Tuottaa: {show.producer ?? 'Toimitus'}
       </h3>
       <p className="mt-2 text-sm text-white md:text-base">{show.description}</p>
+    </div>
+  );
+};
+
+interface ShowImageProps {
+  show: Show;
+  isExpanded: boolean;
+}
+
+const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
+  const { picture } = show;
+  const url = picture?.url || placeholderImage;
+  const loader = picture?.url ? contentfulImageLoader : undefined;
+
+  return (
+    <div
+      className={
+        isExpanded
+          ? 'relative flex h-full w-full flex-none md:h-[25rem] md:w-[37.5rem]'
+          : ''
+      }
+    >
+      <Image
+        src={url}
+        loader={loader}
+        unoptimized={picture?.url ? false : true}
+        layout={'fill'}
+        objectFit="cover"
+        objectPosition={'65% 35%'}
+        className={`-z-10 ${
+          isExpanded
+            ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none'
+            : ''
+        }`}
+        alt={picture?.title || ''}
+      />
     </div>
   );
 };

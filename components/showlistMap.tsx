@@ -1,16 +1,9 @@
-import { Show } from 'contentful/client';
-import {
-  addDays,
-  differenceInMinutes,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  format,
-  getISOWeek,
-  parse,
-} from 'date-fns';
-import fi from 'date-fns/locale/fi';
-import { head, keys, last } from 'ramda';
 import { useState } from 'react';
+import { differenceInMinutes, format, parse } from 'date-fns';
+import fi from 'date-fns/locale/fi';
+import { head, keys } from 'ramda';
+
+import { Show } from 'contentful/client';
 import { ModeButton } from './button';
 import { ShowCard } from './showcard';
 import { WideScreencard } from './widescreen-card';
@@ -38,7 +31,7 @@ export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
         <ShowCard
           show={selectedShow}
           index={0}
-          className="mt-4 max-w-[750px]"
+          className="mx-auto mt-4 max-w-4xl"
           forceOpen={true}
         />
       )}
