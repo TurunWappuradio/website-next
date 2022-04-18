@@ -88,7 +88,7 @@ export const ResponsiveShowlist = ({
   return (
     <>
       <div
-        className="flex w-full max-w-6xl flex-col pt-6 pr-[25px] lg:flex-row"
+        className="flex w-full max-w-7xl flex-col pt-6 pr-[25px] md:pr-0 lg:flex-row"
         id="showList"
       >
         <select
@@ -108,12 +108,13 @@ export const ResponsiveShowlist = ({
             );
           })}
         </select>
-        <div className="mx-auto w-full space-y-4">
+
+        <div className="mr-auto w-full space-y-4 lg:ml-[10rem]">
           {showsByDate[selectedDate].map((show, i) => (
             <ShowCard show={show} key={show.date + i} index={i} />
           ))}
         </div>
-        <div className="ml-4 hidden w-52 shrink-0 flex-col space-y-2 lg:flex">
+        <div className="ml-4 hidden w-[10rem] shrink-0 flex-col space-y-2 lg:flex">
           {Object.keys(showsByDate).map((date) => (
             <DateButton
               key={date}
@@ -124,7 +125,7 @@ export const ResponsiveShowlist = ({
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-2 flex w-full max-w-6xl justify-center md:justify-end md:pr-64">
+      <div className="mx-auto mt-2 flex w-full max-w-6xl justify-center md:justify-end md:pr-32">
         <div className={`${getNextDate ? 'mr-6' : ''}`}>
           <NavButton
             text="Edellinen päivä"

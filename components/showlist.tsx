@@ -20,12 +20,12 @@ export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
 
   return (
     <div className="mx-auto flex flex-col items-center py-6">
-      <div className="flex w-full max-w-6xl">
-        <h1 className="mx-6 mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
+      <div className="flex w-full max-w-[57rem]">
+        <h1 className="mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
           Ohjelmistossa
         </h1>
         {isDesktop && (
-          <div className="ml-auto mr-[15.5rem] mt-auto space-x-2">
+          <div className="ml-auto mt-auto space-x-2">
             <ModeButton
               text={'Ohjelmalista'}
               isActive={mode === 'list'}
