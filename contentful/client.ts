@@ -4,8 +4,15 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
-import { format } from 'date-fns';
-import { groupBy } from 'ramda';
+import {
+  addDays,
+  eachDayOfInterval,
+  eachWeekOfInterval,
+  format,
+  getISOWeek,
+  parse,
+} from 'date-fns';
+import { groupBy, head, keys, last } from 'ramda';
 import {
   NavigationItemsDocument,
   NavigationItemsQuery,
@@ -59,7 +66,7 @@ const fetchShowlist = async (
   showlistId: string | string[]
 ): Promise<{
   showsByDate: Record<string, Show[]>;
-  shows: Show[];
+  weekKeys: Record<string, string[]>;
 }> => {
   const data = await fetchContent<ShowlistQuery>(ShowlistDocument, {
     showlistId,
@@ -84,7 +91,31 @@ const fetchShowlist = async (
     shows
   );
 
-  return { showsByDate, shows };
+  const weekKeys = generateWeekObj(showsByDate);
+
+  return { showsByDate, weekKeys };
+};
+
+// Generate a nicely formatted object to use as keys.
+const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
+  const start = parse(head(keys(showsByDate)), 'y.M.dd', new Date());
+  const end = parse(last(keys(showsByDate)), 'y.M.dd', new Date());
+  const weeks = eachWeekOfInterval({ start, end }, { weekStartsOn: 1 });
+
+  const weekObj = weeks.reduce(
+    (acc: Record<string, string[]>, weekStart: Date) => {
+      const weekKey = getISOWeek(weekStart).toString();
+      const days = eachDayOfInterval({
+        start: weekStart,
+        end: addDays(new Date(weekStart), 6),
+      }).map((day: Date) => format(day, 'y.M.dd'));
+      acc[weekKey] = days;
+      return acc;
+    },
+    {}
+  );
+
+  return weekObj;
 };
 
 const fetchContent = async <T>(

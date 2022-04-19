@@ -1,74 +1,29 @@
-import {
-  format,
-  getISOWeek,
-  parse,
-  startOfWeek,
-  endOfWeek,
-  eachDayOfInterval,
-  differenceInMinutes,
-  min,
-} from 'date-fns';
-import { groupBy, uniq } from 'ramda';
 import { useState } from 'react';
+import { differenceInMinutes, format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
+import { head, keys } from 'ramda';
 
-import { ModeButton } from './button';
-import { WideScreencard } from './widescreen-card';
-import { ShowCard } from './showcard';
 import { Show } from 'contentful/client';
+import { ModeButton } from './button';
+import { ShowCard } from './showcard';
+import { WideScreencard } from './widescreen-card';
 
 interface ShowlistMapProps {
-  shows: Show[];
+  showsByDate: Record<string, Show[]>;
+  weekKeys: Record<string, string[]>;
 }
 
-const groupByWeek = groupBy((show: Show) =>
-  getISOWeek(new Date(show.start)).toString()
-);
+export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
+  const weeks = keys(weekKeys);
 
-const getInitialWeek = (weeks: any) => {
-  const currentWeek = getISOWeek(new Date());
-  if (weeks.includes(currentWeek)) {
-    return currentWeek;
-  }
-  return weeks[0];
-};
-
-export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
-  const showsGroupedByWeek = groupByWeek(shows);
-  const [openWeek, setWeek] = useState(
-    getInitialWeek(Object.keys(showsGroupedByWeek))
-  );
   const [selectedShow, setSelectedShow] = useState<Show | null>(null);
-  const groupWeekByDay = groupBy(
-    (day: any) => format(new Date(day.start), 'y.M.dd'),
-    showsGroupedByWeek[openWeek]
-  );
+  const [openWeek, setOpenWeek] = useState<string | null>(head(weeks));
+
+  const openWeekDays = weekKeys[openWeek] ?? [];
 
   // prettier-ignore
   const timeStamps: string[] = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
                                 '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
-
-  const daysInWeek = eachDayOfInterval({
-    start: startOfWeek(
-      parse(Object.keys(groupWeekByDay)[0], 'y.M.dd', new Date()),
-      {
-        weekStartsOn: 1,
-      }
-    ),
-    end: endOfWeek(
-      parse(Object.keys(groupWeekByDay)[0], 'y.M.dd', new Date()),
-      {
-        weekStartsOn: 1,
-      }
-    ),
-  });
-
-  const formattedDatesInWeek = daysInWeek.map((n) => format(n, 'y.M.dd'));
-  const allDates = shows.map((n) => new Date(n.start));
-
-  const firstDay = min(allDates);
-
-  const firstDayHours = firstDay.getHours();
 
   return (
     <div className="mb-4 flex flex-col pt-6">
@@ -76,16 +31,16 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
         <ShowCard
           show={selectedShow}
           index={0}
-          className="mt-4 max-w-[750px]"
+          className="mx-auto mt-4 max-w-[60rem]"
           forceOpen={true}
         />
       )}
       <div className="flex space-x-2 p-6">
-        {Object.keys(showsGroupedByWeek).map((n, i) => (
+        {weeks.map((n, i) => (
           <ModeButton
             key={n + i}
             text={'Viikko ' + n}
-            onClick={() => setWeek(n)}
+            onClick={() => setOpenWeek(n)}
             isActive={openWeek === n}
           />
         ))}
@@ -99,47 +54,57 @@ export const ShowlistMap = ({ shows }: ShowlistMapProps) => {
           ))}
         </div>
         <div className="flex w-full">
-          {formattedDatesInWeek.map((n, i) => {
+          {openWeekDays.map((day, i) => {
             return (
               <div
                 key={i}
                 className="flex w-full max-w-[1/7] flex-col text-center"
               >
                 <p className="mx-auto w-full font-bold text-white">
-                  {format(parse(n, 'y.M.dd', new Date()), 'EEEEEE dd.M.', {
+                  {format(parse(day, 'y.M.dd', new Date()), 'EEEEEE dd.M.', {
                     locale: fi,
                   })}
                 </p>
-                {n === format(firstDay, 'y.M.dd') && (
-                  <div className="card-height" />
+
+                {/* If the first show of the day does not start at midnight, add buffer */}
+                {showsByDate[day] && (
+                  <Buffer firstShow={showsByDate[day][0]} day={day} />
                 )}
-                {groupWeekByDay[n]?.length > 0 &&
-                  groupWeekByDay[n]?.map((show: Show, i) => {
-                    return (
-                      <WideScreencard
-                        onClick={() => setSelectedShow(show)}
-                        key={i}
-                        showLength={differenceInMinutes(
-                          new Date(show.end),
-                          new Date(show.start)
-                        )}
-                        text={show?.name}
-                        color={show?.color}
-                      />
-                    );
-                  })}
+
+                {showsByDate[day]?.map((show: Show, i) => {
+                  return (
+                    <WideScreencard
+                      onClick={() => setSelectedShow(show)}
+                      key={i}
+                      showLength={differenceInMinutes(
+                        new Date(show.end),
+                        new Date(show.start)
+                      )}
+                      text={show?.name}
+                      color={show?.color}
+                    />
+                  );
+                })}
               </div>
             );
           })}
         </div>
       </div>
-      <style jsx>{`
-        .card-height {
-          height: ${firstDayHours * 60}px;
-        }
-      `}</style>
     </div>
   );
+};
+
+// If the first show of the day does not start at midnight, add buffer
+const Buffer = ({ firstShow, day }: { firstShow: Show; day: string }) => {
+  const dayParsed = parse(day, 'y.M.dd', new Date());
+  const startTime = new Date(firstShow.start);
+  const diff = differenceInMinutes(startTime, dayParsed);
+
+  if (diff == 0) {
+    return null;
+  }
+
+  return <div style={{ height: `${diff}px` }} />;
 };
 
 export default ShowlistMap;

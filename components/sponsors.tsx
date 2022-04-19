@@ -24,10 +24,10 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
 
 const Sponsors = ({ sponsors = [] }: SponsorProps) => (
   <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4">
-    <h2 className="w-full max-w-6xl px-8 py-4 text-2xl font-bold text-coral">
+    <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-coral">
       Turun Wappuradion tukena
     </h2>
-    <div className="flex w-full max-w-6xl flex-wrap justify-center">
+    <div className="flex w-full max-w-5xl flex-wrap justify-center">
       {sponsors.map((s) => (
         <SponsorImage key={s.title} sponsor={s} />
       ))}
