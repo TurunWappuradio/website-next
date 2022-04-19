@@ -7,6 +7,7 @@ import useMetadata from 'hooks/useMetadata';
 import { Show } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
+import Controls from './controls';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 
@@ -64,42 +65,6 @@ const Player = ({
           />
         </div>
       </div>
-    </div>
-  );
-};
-
-interface ControlsProps {
-  playing: boolean;
-  onPlayPause: () => void;
-  muted: boolean;
-  onMute: () => void;
-}
-
-const Controls = ({ playing, onPlayPause, muted, onMute }: ControlsProps) => {
-  const MuteIcon = muted ? BsVolumeMute : BsVolumeUp;
-
-  return (
-    <div className="mt-4 flex items-center">
-      <button
-        onClick={onPlayPause}
-        className={`flex h-28 w-28 items-center justify-center rounded-full ${
-          playing ? 'bg-coral' : 'bg-teal'
-        }`}
-      >
-        {playing ? (
-          <BsPause size="6rem" />
-        ) : (
-          <BsPlay size="6rem" className="ml-2" />
-        )}
-      </button>
-      <button
-        onClick={onMute}
-        className={`ml-4 h-20 w-20 rounded-full ${
-          muted ? 'bg-coral' : 'bg-teal'
-        }`}
-      >
-        <MuteIcon size="3rem" className="mx-auto" />
-      </button>
     </div>
   );
 };

@@ -18,6 +18,7 @@ import Footer from 'components/footer';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 import { Showlist } from 'components/showlist';
 import Player from 'components/player';
+import PlayerControlPanel from 'components/playerControlPanel';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -52,6 +53,7 @@ interface PlayerControls {
   onPlayPause: () => void;
   muted: boolean;
   onMute: () => void;
+  playClicked: boolean;
 }
 
 const Index: NextPage<IndexProps & PlayerControls> = ({
@@ -73,6 +75,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   onPlayPause,
   muted,
   onMute,
+  playClicked,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -144,6 +147,14 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       </div> */}
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
+      {playClicked && (
+        <PlayerControlPanel
+          playing={playing}
+          onPlayPause={onPlayPause}
+          muted={muted}
+          onMute={onMute}
+        />
+      )}
     </div>
   );
 };

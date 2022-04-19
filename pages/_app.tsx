@@ -8,8 +8,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const audioEl = createRef<HTMLAudioElement>();
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [playClicked, setPlayClicked] = useState(false);
 
   const handlePlayPause = () => {
+    setPlayClicked(true);
+
     if (audioEl.current.paused) audioEl.current.play();
     else {
       // Pause, but then load the stream again ready to start
@@ -35,6 +38,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         onPlayPause={handlePlayPause}
         muted={muted}
         onMute={handleMute}
+        playClicked={playClicked}
       />
     </>
   );
