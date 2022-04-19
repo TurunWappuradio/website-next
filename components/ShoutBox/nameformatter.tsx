@@ -5,17 +5,17 @@ interface NameFormatterProps {
 }
 
 const NameFormatter = ({ name }: NameFormatterProps) => (
-  <div className={`sbNameText ${findStyle(name)}`}>{name}:</div>
+  <div className={`${findStyle(name)}`}>{name}:</div>
 );
 
 const findStyle = (name: string) => {
   switch (name) {
     case 'Toimitus':
-      return 'sbNameText-Staff';
+      return 'text-blue-darkest';
     case 'Palvelin':
-      return 'sbNameText-Server';
+      return 'text-blue-darkest';
     default:
-      return 'sbNameText-Default';
+      return 'text-white';
   }
 };
 

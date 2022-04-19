@@ -16,7 +16,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const [messages, setMessages] = useState([]);
   const [wsConnected, setWsConnected] = useState(false);
   const [colorSwitcher, setColorSwitcher] = useState(false);
-  const webSocket = useRef(null);
+  const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
 
   useEffect(() => {
@@ -67,20 +67,19 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
       return () => clearTimeout(timer);
     };
 
-    scrollToBottom();
-  }, [wsConnected]);
+    // scrollToBottom();
+  }, []);
 
   function addMessage(message: any) {
     message = {
       ...message,
       color: colorSwitcher,
     };
-    console.log(message);
-    console.log(messages);
 
-    setMessages([...messages, message].slice(-limit));
-    console.log(messages);
-    setColorSwitcher(!colorSwitcher);
+    console.log(colorSwitcher);
+
+    setMessages((messages) => [...messages, message].slice(-limit));
+    colorSwitcher ? setColorSwitcher(false) : setColorSwitcher(true);
     scrollToBottom();
   }
 
@@ -125,15 +124,15 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="ShoutBoxContainer">
-      <div className="sbMainWrapper">
-        <div className="sbMessageArea" ref={messagesViewport}>
+    <div className="flex max-h-60 w-full max-w-6xl flex-col py-6 px-[25px] lg:flex-row">
+      <div className="overflow-auto overflow-x-hidden" ref={messagesViewport}>
+        <div className="text-white">
           {messages.map((message, index) => (
             <MessageFormatter
               key={index}
               message={message.message}
               name={message.name}
-              color={message.color}
+              color={index % 2 === 0 ? 'bg-coral' : 'bg-teal'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
             />

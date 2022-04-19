@@ -16,9 +16,7 @@ const MessageFormatter = ({
   isAdmin,
   onBanClick,
 }: MessageFormatterProps) => (
-  <div
-    className={`sbSingleMessageBox ${color ? 'sbSingleMessageBox-dark' : ''}`}
-  >
+  <div className={color}>
     <div
       style={{
         width: isAdmin ? 'calc(100% - 94px)' : '100%',
