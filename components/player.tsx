@@ -34,14 +34,15 @@ const Player = ({
   const { song, artist } = useMetadata();
 
   return (
-    <div className="bg-blue-darkest p-8">
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center md:justify-start">
+    <div className="mx-auto rounded-3xl bg-gradient-to-b from-coral to-blue-lightest p-1.5 lg:max-w-4xl">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center rounded-[1.25rem] bg-blue-darkest md:justify-start">
         <div className="relative m-4 aspect-[3/2] w-60 md:w-96">
           <Image
             src={url}
             loader={loader}
             unoptimized={!picture?.url}
             layout="fill"
+            alt=""
           />
         </div>
         <div className="m-4 flex flex-col">
@@ -78,7 +79,7 @@ const Controls = ({ playing, onPlayPause, muted, onMute }: ControlsProps) => {
   const MuteIcon = muted ? BsVolumeMute : BsVolumeUp;
 
   return (
-    <div className="mt-4 flex">
+    <div className="mt-4 flex items-center">
       <button
         onClick={onPlayPause}
         className={`flex h-28 w-28 items-center justify-center rounded-full ${
@@ -107,7 +108,7 @@ const useCurrentShow = (showsByDate: Record<string, Show[]>) => {
   const [currentShow, setCurrentShow] = useState<Show | null>(null);
 
   const getCurrentShow = () => {
-    const now = new Date();
+    const now = new Date('2022-04-23');
     const currentDate = format(now, 'y.M.dd');
     const todaysShows = showsByDate[currentDate];
 
