@@ -88,7 +88,7 @@ export const ResponsiveShowlist = ({
   return (
     <>
       <div
-        className="flex w-full max-w-7xl flex-col pt-6 pr-[25px] md:pr-0 lg:flex-row"
+        className="flex w-full max-w-7xl flex-col pt-6 lg:flex-row"
         id="showList"
       >
         <select

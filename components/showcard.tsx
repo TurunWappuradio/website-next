@@ -17,6 +17,10 @@ interface ShowCard {
 export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(forceOpen ?? false);
 
+  const handleClick = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
   return (
     <div
       className={`flex w-full rounded ${className} ${
@@ -32,7 +36,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
             ? 'flex rounded md:contents'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
-        onClick={() => setIsExpanded((isExpanded) => !isExpanded)}
+        onClick={handleClick}
       >
         <TitleInfo show={show} isExpanded={isExpanded} index={index} />
         <Descriptions show={show} isExpanded={isExpanded} />
@@ -67,7 +71,7 @@ interface TitleInfoProps {
 const TitleInfo = ({ show, isExpanded, index }: TitleInfoProps) => {
   return (
     <div
-      className={`absolute bottom-1 left-2 z-20 mb-2 w-full translate-y-[4.3rem] flex-col text-left text-white transition group-hover:bottom-2 group-hover:translate-y-0
+      className={`bottom-1 left-2 z-20 mb-2 translate-y-[4.3rem] flex-col px-2 text-left text-white transition group-hover:bottom-2 group-hover:translate-y-0
            ${isExpanded ? 'hidden' : 'block'}`}
     >
       <p
@@ -96,7 +100,7 @@ interface DescriptionsProps {
 const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[25rem] ${
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -126,7 +130,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
     <div
       className={
         isExpanded
-          ? 'relative flex h-full w-full flex-none md:h-[25rem] md:w-[37.5rem]'
+          ? 'relative aspect-[3/2] h-full w-full flex-none md:h-[20rem] md:w-[30rem] xl:h-[25rem] xl:w-[37.5rem]'
           : ''
       }
     >

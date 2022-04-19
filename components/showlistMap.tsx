@@ -45,7 +45,7 @@ export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
           />
         ))}
       </div>
-      <div className="flex pr-6">
+      <div className="flex">
         <div className="-mt-3 p-6">
           {timeStamps.map((timeStamp, i) => (
             <p className="h-[60px] font-bold text-white" key={i}>

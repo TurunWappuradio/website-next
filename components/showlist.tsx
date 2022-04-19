@@ -14,14 +14,14 @@ interface ShowlistProps {
 }
 
 export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
-  const [mode, setMode] = useState<string>('list');
+  const [mode, setMode] = useState<'list' | 'map'>('list');
 
   const { isDesktop } = useViewport();
 
   return (
-    <div className="mx-auto flex flex-col items-center py-6">
-      <div className="flex w-full max-w-[57rem]">
-        <h1 className="mt-6 w-auto text-xl font-bold text-coral md:text-3xl">
+    <div className="mx-auto flex flex-col items-center py-6 pr-[25px] lg:pl-[25px]">
+      <div className="flex w-full lg:max-w-[70%] xl:max-w-[57rem]">
+        <h1 className="mt-6 w-auto pl-6 text-xl font-bold text-coral md:text-3xl lg:pl-0">
           Ohjelmistossa
         </h1>
         {isDesktop && (
@@ -39,12 +39,40 @@ export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
           </div>
         )}
       </div>
-      {mode === 'list' && <ResponsiveShowlist showsByDate={showsByDate} />}
-      {mode === 'map' && (
-        <ShowlistMap showsByDate={showsByDate} weekKeys={weekKeys} />
-      )}
+      <ShowlistSelector
+        showsByDate={showsByDate}
+        weekKeys={weekKeys}
+        mode={mode}
+      />
     </div>
   );
+};
+
+interface ShowlistSelectorProps {
+  showsByDate: {
+    [key: string]: Show[];
+  };
+  weekKeys: Record<string, string[]>;
+  mode: 'list' | 'map';
+}
+
+const ShowlistSelector = ({
+  showsByDate,
+  weekKeys,
+  mode,
+}: ShowlistSelectorProps) => {
+  const { isDesktop } = useViewport();
+
+  if (!isDesktop) {
+    return <ResponsiveShowlist showsByDate={showsByDate} />;
+  }
+
+  switch (mode) {
+    case 'list':
+      return <ResponsiveShowlist showsByDate={showsByDate} />;
+    case 'map':
+      return <ShowlistMap showsByDate={showsByDate} weekKeys={weekKeys} />;
+  }
 };
 
 export default Showlist;
