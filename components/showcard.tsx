@@ -31,7 +31,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
     >
       <Time start={show.start} end={show.end} />
       <button
-        className={`group relative flex h-full w-full flex-col flex-col-reverse overflow-hidden rounded transition-all md:flex-row  ${
+        className={`group relative flex h-full w-full flex-col flex-col-reverse overflow-hidden rounded md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
@@ -71,7 +71,7 @@ interface TitleInfoProps {
 const TitleInfo = ({ show, isExpanded, index }: TitleInfoProps) => {
   return (
     <div
-      className={`bottom-1 left-2 z-20 mb-2 translate-y-[4.3rem] flex-col px-2 text-left text-white transition group-hover:bottom-2 group-hover:translate-y-0
+      className={`absolute bottom-1 z-20 max-w-full flex-col px-2 text-left text-white
            ${isExpanded ? 'hidden' : 'block'}`}
     >
       <p
@@ -84,10 +84,6 @@ const TitleInfo = ({ show, isExpanded, index }: TitleInfoProps) => {
       <p className="mt-2 px-2 text-sm">
         Juontaa: {show.hosts ?? 'Haamujuontaja'}
       </p>
-      <p className="mt-1 px-2 text-sm">
-        Tuottaa: {show.producer ?? 'Toimitus'}
-      </p>
-      <p className="mt-4 h-6 w-80 truncate px-2 text-sm">{show.description}</p>
     </div>
   );
 };
@@ -141,10 +137,10 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
         layout={'fill'}
         objectFit="cover"
         objectPosition={'65% 35%'}
-        className={`-z-10 ${
+        className={`-z-10  ${
           isExpanded
-            ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none'
-            : ''
+            ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
+            : 'transition duration-300 ease-in-out group-hover:scale-110'
         }`}
         alt={picture?.title || ''}
       />
