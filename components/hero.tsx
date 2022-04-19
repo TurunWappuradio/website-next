@@ -18,6 +18,7 @@ interface HeroProps {
   buttonText?: string;
   buttonLink?: string;
   navigationItems: NavigationItem[];
+  isCompact?: boolean;
 }
 
 const Hero: FC<HeroProps> = ({
@@ -27,6 +28,7 @@ const Hero: FC<HeroProps> = ({
   buttonText,
   buttonLink,
   navigationItems,
+  isCompact = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +45,11 @@ const Hero: FC<HeroProps> = ({
 
   return (
     <>
-      <div className="relative flex h-128 w-full flex-col xl:h-160">
+      <div
+        className={`relative flex w-full flex-col ${
+          isCompact ? 'h-96' : 'h-128 xl:h-160'
+        }`}
+      >
         {/* Hero image */}
         <Image
           src={url}
@@ -73,7 +79,13 @@ const Hero: FC<HeroProps> = ({
 
         {/* Hero content */}
         <div className="z-10 flex h-full flex-col items-center justify-center md:flex-row">
-          <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
+          <div
+            className={`relative ${
+              isCompact
+                ? 'h-44 w-44 md:h-52 md:w-52'
+                : 'h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96'
+            }`}
+          >
             <Image
               src="/leima.svg"
               layout="fill"

@@ -17,6 +17,9 @@ import Footer from 'components/footer';
 // import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 import { Showlist } from 'components/showlist';
+import Player from 'components/player';
+
+const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
 interface IndexProps {
   heroImage: {
@@ -73,7 +76,9 @@ const Index: NextPage<IndexProps> = ({
         buttonLink={heroButtonLink}
         buttonText={heroButtonText}
         navigationItems={navigationItems}
+        isCompact={isPlayerLive}
       />
+      {isPlayerLive && <Player />}
 
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
