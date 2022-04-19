@@ -95,6 +95,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           onPlayPause={onPlayPause}
           muted={muted}
           onMute={onMute}
+          showsByDate={showsByDate}
         />
       )}
 
