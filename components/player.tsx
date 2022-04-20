@@ -7,6 +7,7 @@ import useMetadata from 'hooks/useMetadata';
 import { Show } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
+import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import Controls from './controls';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
@@ -28,34 +29,35 @@ const Player = ({
 }: PlayerProps) => {
   const show = useCurrentShow(showsByDate);
 
-  const { picture, name } = show ?? {};
-  const url = picture?.url || testcard;
+  const { picture, name, hosts } = show ?? {};
+  const url = name
+    ? (picture?.url ?? placeholderImage)
+    : testcard;
+
   const loader = picture?.url ? contentfulImageLoader : undefined;
 
-  const { song, artist } = useMetadata();
-
   return (
-    <div className="mx-auto rounded-3xl bg-gradient-to-b from-coral to-blue-lightest p-1.5 lg:max-w-4xl">
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center rounded-[1.25rem] bg-blue-darkest md:justify-start">
-        <div className="relative m-4 aspect-[3/2] w-60 md:w-96">
-          <Image
-            src={url}
-            loader={loader}
-            unoptimized={!picture?.url}
-            layout="fill"
-            alt=""
-          />
+    <div className="flex justify-center p-6">
+      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
+        <div className="rounded bg-gradient-to-t from-coral via-blue-lightest to-teal p-1.5">
+          <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
+            <Image
+              src={url}
+              loader={loader}
+              objectFit="cover"
+              unoptimized={!picture?.url}
+              layout="fill"
+              alt=""
+            />
+          </div>
         </div>
-        <div className="m-4 flex flex-col">
+        <div className="mx-6 flex flex-col justify-between py-4 text-white md:mx-10 md:h-full md:py-10">
           {name && (
-            <>
-              <span className="text-white">Studiossa nyt</span>
-              <span className="text-xl font-bold text-coral">{name}</span>
-
-              <span className="mt-4 text-white">Nyt soi</span>
-              <span className="text-xl font-bold text-coral">{song}</span>
-              <span className="text-coral">{artist}</span>
-            </>
+            <div className="flex flex-col">
+              <span className="text-teal">Ohjelmassa nyt</span>
+              <span className="text-lg font-bold">{name}</span>
+              <span className="opacity-80">Juontaa: {hosts ?? 'Haamujuontaja'}</span>
+            </div>
           )}
           <Controls
             playing={playing}
@@ -73,7 +75,7 @@ const useCurrentShow = (showsByDate: Record<string, Show[]>) => {
   const [currentShow, setCurrentShow] = useState<Show | null>(null);
 
   const getCurrentShow = () => {
-    const now = new Date('2022-04-23');
+    const now = new Date();
     const currentDate = format(now, 'y.M.dd');
     const todaysShows = showsByDate[currentDate];
 
