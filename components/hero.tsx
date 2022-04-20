@@ -78,7 +78,7 @@ const Hero: FC<HeroProps> = ({
         </header>
 
         {/* Hero content */}
-        <div className="z-10 flex h-full flex-col items-center justify-center md:flex-row">
+        <div className="z-10 mx-auto flex h-full w-[21rem] max-w-full flex-col items-center md:w-[59rem] md:flex-row">
           <div
             className={`relative ${
               isCompact
@@ -95,10 +95,10 @@ const Hero: FC<HeroProps> = ({
             />
           </div>
           <div className="flex flex-col pb-6">
-            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-3 md:text-4xl">
+            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
               {title}
             </h1>
-            <p className="my-1 text-xl text-white md:my-3 md:text-3xl">
+            <p className="my-1 max-w-[14rem] text-lg text-white md:my-1 md:max-w-[16rem] md:text-2xl">
               {subtext}
             </p>
 

@@ -140,7 +140,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
         className={`-z-10  ${
           isExpanded
             ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
-            : 'opacity-70 transition duration-300 ease-in-out group-hover:scale-110 group-hover:opacity-100'
+            : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={picture?.title || ''}
       />
