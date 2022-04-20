@@ -73,7 +73,7 @@ const useCurrentShow = (showsByDate: Record<string, Show[]>) => {
   const [currentShow, setCurrentShow] = useState<Show | null>(null);
 
   const getCurrentShow = () => {
-    const now = new Date('2022-04-27T16:01');
+    const now = new Date();
     const currentDate = format(now, 'y.M.dd');
     const todaysShows = showsByDate[currentDate];
 

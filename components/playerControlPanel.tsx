@@ -20,7 +20,7 @@ const PlayerControlPanel = ({
   const showMeta = new Date() > new Date('2022-04-21:12:00+03:00');
 
   return (
-    <div className="fixed bottom-0 z-50 w-full bg-blue-darkest px-6 py-6 text-white brightness-75">
+    <div className="fixed bottom-0 z-50 w-full bg-blue-darkestest px-6 py-6 text-white">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <Controls
           playing={playing}

@@ -21,6 +21,7 @@ const Controls = ({
     <div className="mt-4 flex items-center text-white">
       <button
         onClick={onPlayPause}
+        title="Play/Pause"
         className={`flex items-center justify-center rounded-full ${
           playing ? 'bg-teal' : 'bg-coral'
         } ${isSmall ? 'h-12 w-12' : 'h-20 w-20'}`}
@@ -36,6 +37,7 @@ const Controls = ({
       </button>
       <button
         onClick={onMute}
+        title="Mute"
         className={`ml-4 h-12 w-12 rounded-full ${
           muted ? 'bg-teal' : 'bg-coral'
         }`}

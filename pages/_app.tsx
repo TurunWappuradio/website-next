@@ -1,6 +1,7 @@
 import { createRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
+import PlayerControlPanel from 'components/playerControlPanel';
 
 const AUDIO_STREAM_URL = 'https://player.turunwappuradio.com/wappuradio.mp3';
 
@@ -38,8 +39,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         onPlayPause={handlePlayPause}
         muted={muted}
         onMute={handleMute}
-        playClicked={playClicked}
       />
+      {playClicked && (
+        <PlayerControlPanel
+          playing={playing}
+          onPlayPause={handlePlayPause}
+          muted={muted}
+          onMute={handleMute}
+        />
+      )}
     </>
   );
 };
