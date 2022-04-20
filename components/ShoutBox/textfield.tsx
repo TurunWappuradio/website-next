@@ -15,10 +15,10 @@ const TextField = ({
   onChange,
   type,
 }: TextFieldProps) => (
-  <div className="TextFieldArea">
+  <div className="TextFieldArea mr-[16px] inline-flex w-full justify-around">
     {label}
     <input
-      className="TextField"
+      className="TextField w-full border-b-2 border-solid border-blue-darkest"
       type={type || 'text'}
       placeholder={placeholder}
       value={value}

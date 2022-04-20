@@ -39,7 +39,7 @@ const MessageInput = ({ name, onSubmitMessage }: MessageInputProps) => {
         setMessage('');
         setTimeoutLeft(true);
       }}
-      className="sbInputForm"
+      className="sbInputForm px[10px] flex h-full flex-row"
     >
       <TextField
         label={<NameFormatter name={name} />}
@@ -48,11 +48,11 @@ const MessageInput = ({ name, onSubmitMessage }: MessageInputProps) => {
         onChange={(ev: ChangeEvent<HTMLInputElement>) => changeMessage(ev)}
         type={''}
       />
-      <div className="sbButtonArea">
+      <div className="sbButtonArea flex flex-col items-center justify-center">
         <button
           type="submit"
           value="Send"
-          className="sbSubmitButton"
+          className="sbSubmitButton inline-block cursor-pointer select-none rounded border-[3px] border-white bg-transparent py-1.5 px-3 text-center align-middle text-base font-bold text-white disabled:opacity-50"
           disabled={isButtonDisabled(message, timeoutLeft)}
         >
           Lähetä

@@ -5,15 +5,21 @@ interface NameFormatterProps {
 }
 
 const NameFormatter = ({ name }: NameFormatterProps) => (
-  <div className={`${findStyle(name)}`}>{name}:</div>
+  <div
+    className={` flex flex-col justify-center pr-2 text-sm font-bold ${findStyle(
+      name
+    )}`}
+  >
+    {name}:
+  </div>
 );
 
 const findStyle = (name: string) => {
   switch (name) {
     case 'Toimitus':
-      return 'text-blue-darkest';
+      return 'text-coral';
     case 'Palvelin':
-      return 'text-blue-darkest';
+      return 'text-coral';
     default:
       return 'text-white';
   }

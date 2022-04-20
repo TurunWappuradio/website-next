@@ -24,7 +24,7 @@ const MessageFormatter = ({
       }}
     >
       <NameFormatter name={name} />
-      <div className="sbMessageText">{message}</div>
+      <div className=" mt-2 break-words text-sm">{message}</div>
     </div>
     {isAdmin && name !== 'Toimitus' && name !== 'Palvelin' && (
       <button onClick={() => onBanClick(name)}>Bännää</button>

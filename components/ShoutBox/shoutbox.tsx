@@ -124,26 +124,29 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="flex max-h-60 w-full max-w-6xl flex-col py-6 px-[25px] lg:flex-row">
-      <div className="overflow-auto overflow-x-hidden" ref={messagesViewport}>
-        <div className="text-white">
+    <div className="flex max-h-96 w-full max-w-6xl flex-col py-6 px-[25px] lg:flex-row">
+      <div
+        className="my-0 mx-auto h-full w-full overflow-auto overflow-x-hidden shadow-md"
+        ref={messagesViewport}
+      >
+        <div className="h-[85%] overflow-auto overflow-x-hidden py-2 px-0 text-white">
           {messages.map((message, index) => (
             <MessageFormatter
               key={index}
               message={message.message}
               name={message.name}
-              color={index % 2 === 0 ? 'bg-coral' : 'bg-teal'}
+              color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
             />
           ))}
           {!wsConnected && (
-            <div className="sbNotConnectedText">
+            <div className=" m-4 text-center text-white">
               Ei yhteyttä chat-palvelimeen
             </div>
           )}
         </div>
-        <div className="sbInputArea">
+        <div className="h-[15%] w-full">
           {name ? (
             <MessageInput
               name={isAdmin ? 'Toimitus' : name}
