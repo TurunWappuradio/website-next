@@ -1,4 +1,4 @@
-import { BsPause, BsPlay, BsVolumeMute, BsVolumeUp } from 'react-icons/bs';
+import { FiPlay, FiPause, FiVolumeX, FiVolume2 } from 'react-icons/fi';
 
 interface ControlsProps {
   playing: boolean;
@@ -15,7 +15,7 @@ const Controls = ({
   onMute,
   isSmall = false,
 }: ControlsProps) => {
-  const MuteIcon = muted ? BsVolumeMute : BsVolumeUp;
+  const MuteIcon = muted ? FiVolumeX : FiVolume2;
 
   return (
     <div className="mt-4 flex items-center text-white">
@@ -26,9 +26,12 @@ const Controls = ({
         } ${isSmall ? 'h-12 w-12' : 'h-20 w-20'}`}
       >
         {playing ? (
-          <BsPause size="6rem" />
+          <FiPause size={isSmall ? '1.7rem' : '3rem'} />
         ) : (
-          <BsPlay size="6rem" className="ml-2" />
+          <FiPlay
+            size={isSmall ? '1.7rem' : '3rem'}
+            className={isSmall ? 'ml-1' : 'ml-2'}
+          />
         )}
       </button>
       <button

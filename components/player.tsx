@@ -1,9 +1,7 @@
-import { BsPlay, BsPause, BsVolumeUp, BsVolumeMute } from 'react-icons/bs';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
-import useMetadata from 'hooks/useMetadata';
 import { Show } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
@@ -30,9 +28,7 @@ const Player = ({
   const show = useCurrentShow(showsByDate);
 
   const { picture, name, hosts } = show ?? {};
-  const url = name
-    ? (picture?.url ?? placeholderImage)
-    : testcard;
+  const url = name ? picture?.url ?? placeholderImage : testcard;
 
   const loader = picture?.url ? contentfulImageLoader : undefined;
 
@@ -56,7 +52,9 @@ const Player = ({
             <div className="flex flex-col">
               <span className="text-teal">Ohjelmassa nyt</span>
               <span className="text-lg font-bold">{name}</span>
-              <span className="opacity-80">Juontaa: {hosts ?? 'Haamujuontaja'}</span>
+              <span className="opacity-80">
+                Juontaa: {hosts ?? 'Haamujuontaja'}
+              </span>
             </div>
           )}
           <Controls
@@ -75,7 +73,7 @@ const useCurrentShow = (showsByDate: Record<string, Show[]>) => {
   const [currentShow, setCurrentShow] = useState<Show | null>(null);
 
   const getCurrentShow = () => {
-    const now = new Date();
+    const now = new Date('2022-04-27T16:01');
     const currentDate = format(now, 'y.M.dd');
     const todaysShows = showsByDate[currentDate];
 
