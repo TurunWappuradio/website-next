@@ -47,7 +47,7 @@ const Hero: FC<HeroProps> = ({
     <>
       <div
         className={`relative flex w-full flex-col ${
-          isCompact ? 'h-96' : 'h-128 xl:h-160'
+          isCompact ? 'h-72' : 'h-128 xl:h-160'
         }`}
       >
         {/* Hero image */}
@@ -94,11 +94,13 @@ const Hero: FC<HeroProps> = ({
               unoptimized={true}
             />
           </div>
-          <div className="flex flex-col p-8">
-            <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">
+          <div className="flex flex-col pb-6">
+            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-3 md:text-4xl">
               {title}
             </h1>
-            <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
+            <p className="my-1 text-xl text-white md:my-3 md:text-3xl">
+              {subtext}
+            </p>
 
             {buttonText && buttonLink ? (
               <LinkButton
