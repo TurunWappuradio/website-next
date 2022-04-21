@@ -18,7 +18,6 @@ import Footer from 'components/footer';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 import { Showlist } from 'components/showlist';
 import Player from 'components/player';
-import Chat from 'components/ShoutBox/shoutbox';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -99,7 +98,6 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           showsByDate={showsByDate}
         />
       )}
-      <Chat limit={200} isOpen={true} />
 
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
