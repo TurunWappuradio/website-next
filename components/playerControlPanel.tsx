@@ -42,19 +42,17 @@ const PlayerControlPanel = ({
         <div className={`w-full ${chatOpen ? 'block' : 'hidden'}`}>
           <Chat limit={100} isOpen={true} />
         </div>
-        <div
-          className={`h-96 w-full bg-blue-darkest md:h-[36rem] ${
-            videoOpen ? 'block' : 'hidden'
-          }`}
-        >
-          <iframe
-            /** Add parent &parent=localhost if testing */
-            src="https://player.twitch.tv/?channel=turunwappuradio&parent=www.turunwappuradio.com&parent=turunwappuradio.com&muted=true"
-            height="100%"
-            width="100%"
-            allowFullScreen={true}
-          ></iframe>
-        </div>
+        {videoOpen && (
+          <div className={`block h-96 w-full bg-blue-darkest md:h-[36rem]`}>
+            <iframe
+              /** Add parent &parent=localhost if testing */
+              src="https://player.twitch.tv/?channel=turunwappuradio&parent=www.turunwappuradio.com&parent=turunwappuradio.com&muted=true"
+              height="100%"
+              width="100%"
+              allowFullScreen={true}
+            />
+          </div>
+        )}
       </div>
       <div className="bg-blue-darkestest px-4 text-white md:px-6">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
