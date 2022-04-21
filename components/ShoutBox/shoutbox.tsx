@@ -115,7 +115,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex max-h-96 w-full max-w-6xl py-6 px-[25px] md:max-h-[36rem]">
+    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[36rem]">
       <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
           className="h-[81%] overflow-auto overflow-x-hidden py-2 px-0 text-white md:h-[85%]"
