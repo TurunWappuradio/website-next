@@ -9,6 +9,7 @@ import {
 import { FaDiscord, FaTelegramPlane } from 'react-icons/fa';
 
 import { NavigationItem } from 'contentful/client';
+import ContentWrapper from './ContentWrapper';
 
 interface FooterProps {
   navigationItems: NavigationItem[];
@@ -16,33 +17,37 @@ interface FooterProps {
 
 const Footer = ({ navigationItems }: FooterProps) => {
   return (
-    <footer className="z-15 flex max-w-full flex-col flex-wrap items-center justify-center bg-blue-darkest py-14 text-white lg:flex-row">
-      <div className="flex w-64 max-w-full justify-center lg:justify-start xl:w-128">
-        <div className="flex w-fit flex-col items-center">
-          <div className="relative flex h-36 w-36 md:h-52 md:w-52">
-            <Image
-              src="/leima.svg"
-              unoptimized={true}
-              layout="fill"
-              alt="Logo of Turun Wappuradio ry"
-            />
+    <footer className="z-15 max-w-full bg-blue-darkest">
+      <ContentWrapper>
+        <div className="flex flex-col flex-wrap items-center justify-center py-14 text-white lg:flex-row">
+          <div className="flex w-full justify-center lg:justify-start xl:w-128">
+            <div className="flex w-fit flex-col items-center">
+              <div className="relative flex h-36 w-36 md:h-52 md:w-52">
+                <Image
+                  src="/leima.svg"
+                  unoptimized={true}
+                  layout="fill"
+                  alt="Logo of Turun Wappuradio ry"
+                />
+              </div>
+              <Link href="/tietosuojaseloste">
+                <a className="mt-6 text-sm text-white opacity-50">
+                  © Turun Wappuradio ry
+                  <br />
+                  Tietosuojaseloste
+                </a>
+              </Link>
+            </div>
           </div>
-          <Link href="/tietosuojaseloste">
-            <a className="mt-6 text-sm text-white opacity-50">
-              © Turun Wappuradio ry
-              <br />
-              Tietosuojaseloste
-            </a>
-          </Link>
-        </div>
-      </div>
 
-      <div className="flex w-128 max-w-full flex-row">
-        <div className="my-4 hidden lg:block">
-          <SiteMap navigationItems={navigationItems} />
+          <div className="flex w-128 max-w-full flex-row">
+            <div className="my-4 hidden lg:block">
+              <SiteMap navigationItems={navigationItems} />
+            </div>
+            <Socials />
+          </div>
         </div>
-        <Socials />
-      </div>
+      </ContentWrapper>
     </footer>
   );
 };

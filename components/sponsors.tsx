@@ -1,3 +1,5 @@
+import ContentWrapper from './ContentWrapper';
+
 const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
   const { link, logoImage, title, isRoundedBorders } = sponsor;
 
@@ -24,14 +26,16 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
 
 const Sponsors = ({ sponsors = [] }: SponsorProps) => (
   <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4">
-    <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-coral">
-      Turun Wappuradion tukena
-    </h2>
-    <div className="flex w-full max-w-5xl flex-wrap justify-center">
-      {sponsors.map((s) => (
-        <SponsorImage key={s.title} sponsor={s} />
-      ))}
-    </div>
+    <ContentWrapper>
+      <h2 className="w-full text-2xl font-bold text-coral">
+        Turun Wappuradion tukena
+      </h2>
+      <div className="grid grid-cols-4 place-content-around justify-center gap-4">
+        {sponsors.map((s) => (
+          <SponsorImage key={s.title} sponsor={s} />
+        ))}
+      </div>
+    </ContentWrapper>
   </div>
 );
 
