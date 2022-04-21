@@ -5,6 +5,7 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 import { ShowCard } from 'components/showcard';
 import { Show } from 'contentful/client';
+import ContentWrapper from './ContentWrapper';
 
 interface NavButton {
   value: string | null;
@@ -86,11 +87,8 @@ export const ResponsiveShowlist = ({
       : null;
 
   return (
-    <>
-      <div
-        className="flex w-full max-w-7xl flex-col pt-6 lg:flex-row"
-        id="showList"
-      >
+    <ContentWrapper>
+      <div className="flex w-full flex-col pt-6 lg:flex-row" id="showList">
         <select
           className="mb-4 ml-6 flex h-8 rounded-sm  bg-blue-dark px-2 font-bold text-coral lg:hidden"
           onChange={(event) => setSelectedDate(event.target.value)}
@@ -109,12 +107,12 @@ export const ResponsiveShowlist = ({
           })}
         </select>
 
-        <div className="mr-auto w-full space-y-4 lg:ml-[10rem]">
+        <div className="ml-[-1.5rem] w-[calc(100%+1.5rem)] space-y-4">
           {showsByDate[selectedDate].map((show, i) => (
             <ShowCard show={show} key={show.date + i} index={i} />
           ))}
         </div>
-        <div className="ml-4 hidden w-[10rem] shrink-0 flex-col space-y-2 lg:flex">
+        <div className="ml-4 mr-[-11rem] hidden w-[10rem] shrink-0 flex-col space-y-2 lg:flex">
           {Object.keys(showsByDate).map((date) => (
             <DateButton
               key={date}
@@ -125,7 +123,7 @@ export const ResponsiveShowlist = ({
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-2 flex w-full max-w-6xl justify-center md:justify-end md:pr-32">
+      <div className="mx-auto mt-2 flex w-full justify-center md:justify-end">
         <div className={`${getNextDate ? 'mr-6' : ''}`}>
           <NavButton
             text="Edellinen päivä"
@@ -140,7 +138,7 @@ export const ResponsiveShowlist = ({
           onClick={(date) => setDateAndScroll(date)}
         />
       </div>
-    </>
+    </ContentWrapper>
   );
 };
 

@@ -134,7 +134,7 @@ const Hero: FC<HeroProps> = ({
 };
 
 const NavLink = ({ href, name }: { href: string; name: string }) => (
-  <li className="p-4">
+  <li className="py-4 pl-8">
     <Link href={href}>
       <a className="text-xl text-white transition hover:text-coral">{name}</a>
     </Link>
