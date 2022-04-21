@@ -13,9 +13,23 @@ interface ShoutBoxProps {
 }
 
 export const ChatWrapper = () => {
-  const [isOpen] = useShoutBox();
+  const [isOpen, setChatOpen] = useShoutBox();
   return (
-    <div className={`bg-blue-darkest ${isOpen ? 'block' : 'hidden'}`}>
+    <div
+      className={`w-full flex-col items-center bg-blue-darkest ${
+        isOpen ? 'flex' : 'hidden'
+      }`}
+    >
+      <div className="flex w-full max-w-6xl items-end justify-end">
+        <button
+          onClick={() => setChatOpen(false)}
+          title="chat"
+          className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
+        >
+          <FiXCircle size="1.7rem" className="mx-auto" />
+        </button>
+      </div>
+
       <Chat limit={100} isOpen={true} />
     </div>
   );
@@ -28,7 +42,6 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const [wsConnected, setWsConnected] = useState(false);
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
-  const [_, setChatOpen] = useShoutBox();
 
   useEffect(() => {
     // Connect client
@@ -127,17 +140,8 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[36rem]">
+    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[38rem]">
       <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
-        <div className="flex w-full items-end justify-end">
-          <button
-            onClick={() => setChatOpen(false)}
-            title="chat"
-            className="ml-3 h-10 w-10 rounded-full bg-coral"
-          >
-            <FiXCircle size="1.7rem" className="mx-auto" />
-          </button>
-        </div>
         <div
           className="h-[81%] overflow-auto overflow-x-hidden py-2 px-0 text-white md:h-[85%]"
           ref={messagesViewport}
