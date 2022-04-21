@@ -1,6 +1,6 @@
 import useMetadata from 'hooks/useMetadata';
 import { useState } from 'react';
-import { FiMessageSquare } from 'react-icons/fi';
+import { FiMessageSquare, FiVideo } from 'react-icons/fi';
 import Controls from './controls';
 import Chat from './ShoutBox/shoutbox';
 
@@ -18,19 +18,42 @@ const PlayerControlPanel = ({
   onMute,
 }: PlayerControlPanelProps) => {
   const [chatOpen, setChatOpen] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
   const { song, artist } = useMetadata();
 
   const handleChatToggle = () => {
     setChatOpen(!chatOpen);
   };
 
+  const handleVideoToggle = () => {
+    setVideoOpen(!videoOpen);
+  };
+
   // Show metadata only after the lähetys starts.
   const showMeta = new Date() > new Date('2022-04-21:12:00+03:00');
 
   return (
-    <div className="fixed bottom-0 z-50 w-full ">
-      <div className={`bg-blue-darkest ${chatOpen ? 'block' : 'hidden'}`}>
-        <Chat limit={100} isOpen={true} />
+    <div className="fixed bottom-0 z-50 w-full">
+      <div
+        className={`bg-blue-darkest md:flex md:px-32 ${
+          chatOpen || videoOpen ? 'block' : 'hidden'
+        }`}
+      >
+        <div className={`w-full ${chatOpen ? 'block' : 'hidden'}`}>
+          <Chat limit={100} isOpen={true} />
+        </div>
+        <div
+          className={`h-96 w-full bg-blue-darkest md:h-[36rem] ${
+            videoOpen ? 'block' : 'hidden'
+          }`}
+        >
+          <iframe
+            src="https://player.twitch.tv/?turunwappuradio&amp;parent=turunwappuradio.com"
+            height="100%"
+            width="100%"
+            allowFullScreen={true}
+          ></iframe>
+        </div>
       </div>
       <div className="bg-blue-darkestest px-4 text-white md:px-6">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
@@ -42,15 +65,27 @@ const PlayerControlPanel = ({
               onMute={onMute}
               isSmall={true}
             />
-            <button
-              onClick={handleChatToggle}
-              title="chat"
-              className={`ml-3 h-12 w-12 rounded-full ${
-                chatOpen ? 'bg-teal' : 'bg-coral'
-              }`}
-            >
-              <FiMessageSquare size="1.7rem" className="mx-auto" />
-            </button>
+            <div className="ml-6">
+              <button
+                onClick={handleChatToggle}
+                title="Shoutbox"
+                className={`ml-3 h-12 w-12 rounded-full ${
+                  chatOpen ? 'bg-teal' : 'bg-coral'
+                }`}
+              >
+                <FiMessageSquare size="1.7rem" className="mx-auto" />
+              </button>
+
+              <button
+                onClick={handleVideoToggle}
+                title="Webcam"
+                className={`ml-3 h-12 w-12 rounded-full ${
+                  videoOpen ? 'bg-teal' : 'bg-coral'
+                }`}
+              >
+                <FiVideo size="1.7rem" className="mx-auto" />
+              </button>
+            </div>
           </div>
 
           {showMeta && (
