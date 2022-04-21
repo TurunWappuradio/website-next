@@ -7,6 +7,7 @@ import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import Controls from './controls';
+import ContentWrapper from './ContentWrapper';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 
@@ -33,41 +34,43 @@ const Player = ({
   const loader = picture?.url ? contentfulImageLoader : undefined;
 
   return (
-    <div className="flex justify-center p-6">
-      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
-        <div className="rounded bg-gradient-to-t from-coral via-blue-lightest to-teal p-1.5">
-          <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
-            <Image
-              src={url}
-              loader={loader}
-              objectFit="cover"
-              unoptimized={!picture?.url}
-              layout="fill"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="mx-6 flex flex-col justify-between py-4 text-white md:mx-10 md:h-full md:py-10">
-          {name && (
-            <div className="flex flex-col">
-              <span className="text-teal">Ohjelmassa nyt</span>
-              <span className="text-lg font-bold">{name}</span>
-              <span className="opacity-80">
-                Juontaa: {hosts ?? 'Haamujuontaja'}
-              </span>
+    <ContentWrapper>
+      <div className="flex justify-center py-6">
+        <div className="flex w-full flex-wrap items-center rounded bg-blue-darkest md:flex-nowrap md:justify-start">
+          <div className="rounded bg-gradient-to-t from-coral via-blue-lightest to-teal p-1.5">
+            <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
+              <Image
+                src={url}
+                loader={loader}
+                objectFit="cover"
+                unoptimized={!picture?.url}
+                layout="fill"
+                alt=""
+              />
             </div>
-          )}
-          <div className="mt-4">
-            <Controls
-              playing={playing}
-              onPlayPause={onPlayPause}
-              muted={muted}
-              onMute={onMute}
-            />
+          </div>
+          <div className="mx-6 flex flex-col justify-between py-4 text-white md:mx-10 md:h-full md:py-10">
+            {name && (
+              <div className="flex flex-col">
+                <span className="text-teal">Ohjelmassa nyt</span>
+                <span className="text-lg font-bold">{name}</span>
+                <span className="opacity-80">
+                  Juontaa: {hosts ?? 'Haamujuontaja'}
+                </span>
+              </div>
+            )}
+            <div className="mt-4">
+              <Controls
+                playing={playing}
+                onPlayPause={onPlayPause}
+                muted={muted}
+                onMute={onMute}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ContentWrapper>
   );
 };
 

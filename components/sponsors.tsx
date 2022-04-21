@@ -30,9 +30,11 @@ const Sponsors = ({ sponsors = [] }: SponsorProps) => (
       <h2 className="w-full text-2xl font-bold text-coral">
         Turun Wappuradion tukena
       </h2>
-      <div className="grid grid-cols-4 place-content-around justify-center gap-4">
+      <div className="grid grid-cols-4 place-content-around gap-4">
         {sponsors.map((s) => (
-          <SponsorImage key={s.title} sponsor={s} />
+          <div key={s.title} className="flex justify-center">
+            <SponsorImage sponsor={s} />
+          </div>
         ))}
       </div>
     </ContentWrapper>
