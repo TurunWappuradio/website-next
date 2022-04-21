@@ -90,7 +90,7 @@ export const ResponsiveShowlist = ({
     <ContentWrapper>
       <div className="flex w-full flex-col pt-6 lg:flex-row" id="showList">
         <select
-          className="mb-4 ml-6 flex h-8 rounded-sm  bg-blue-dark px-2 font-bold text-coral lg:hidden"
+          className="mb-4 flex h-8 rounded-sm bg-blue-dark px-2 font-bold text-coral lg:hidden"
           onChange={(event) => setSelectedDate(event.target.value)}
           value={selectedDate}
         >

@@ -27,7 +27,7 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
 const Sponsors = ({ sponsors = [] }: SponsorProps) => (
   <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4">
     <ContentWrapper>
-      <h2 className="w-full text-center text-2xl font-bold text-coral md:text-left">
+      <h2 className="w-full text-center text-2xl font-bold text-coral lg:text-left">
         Turun Wappuradion tukena
       </h2>
       <div className="grid place-content-around gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

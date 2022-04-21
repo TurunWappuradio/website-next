@@ -22,8 +22,8 @@ export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
   return (
     <ContentWrapper>
       <div className="mx-auto flex flex-col items-center py-6">
-        <div className="flex w-full">
-          <h1 className="mt-6 w-full text-center text-xl font-bold text-coral md:w-auto md:text-left md:text-3xl">
+        <div className="flex w-full justify-center lg:justify-start">
+          <h1 className="mt-6 w-full text-center text-xl font-bold text-coral md:w-auto md:text-3xl">
             Ohjelmistossa
           </h1>
           {isDesktop && (
