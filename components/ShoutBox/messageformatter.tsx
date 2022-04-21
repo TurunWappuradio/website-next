@@ -16,7 +16,7 @@ const MessageFormatter = ({
   isAdmin,
   onBanClick,
 }: MessageFormatterProps) => (
-  <div className={color}>
+  <div className={` flex ${color}`}>
     <div
       style={{
         width: isAdmin ? 'calc(100% - 94px)' : '100%',
@@ -26,9 +26,14 @@ const MessageFormatter = ({
       <NameFormatter name={name} />
       <div className=" mt-2 break-words text-sm">{message}</div>
     </div>
-    {isAdmin && name !== 'Toimitus' && name !== 'Palvelin' && (
-      <button onClick={() => onBanClick(name)}>Bännää</button>
-    )}
+    {/* {isAdmin && name !== 'Toimitus' && name !== 'Palvelin' && ( */}
+    <button
+      className="m-1 inline-block cursor-pointer select-none rounded border-[1px] border-white bg-transparent py-1.5 px-3 text-center align-middle text-base font-bold text-coral"
+      onClick={() => onBanClick(name)}
+    >
+      Bännää
+    </button>
+    {/* )} */}
   </div>
 );
 
