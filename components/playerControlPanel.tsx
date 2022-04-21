@@ -25,7 +25,7 @@ const PlayerControlPanel = ({
   };
 
   // Show metadata only after the lähetys starts.
-  const showMeta = new Date() > new Date('2022-04-21:12:00+03:00');
+  const showMeta = true;
 
   return (
     <div className="fixed bottom-0 z-50 w-full ">
