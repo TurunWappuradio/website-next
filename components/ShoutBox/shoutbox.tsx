@@ -124,12 +124,12 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="flex max-h-96 w-full max-w-6xl flex-col py-6 px-[25px] lg:flex-row">
-      <div
-        className="my-0 mx-auto h-full w-full overflow-auto overflow-x-hidden shadow-md"
-        ref={messagesViewport}
-      >
-        <div className="h-[85%] overflow-auto overflow-x-hidden py-2 px-0 text-white">
+    <div className="mx-auto flex max-h-96 w-full max-w-6xl py-6 px-[25px]">
+      <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
+        <div
+          className="h-[85%] overflow-auto overflow-x-hidden py-2 px-0 text-white"
+          ref={messagesViewport}
+        >
           {messages.map((message, index) => (
             <MessageFormatter
               key={index}
