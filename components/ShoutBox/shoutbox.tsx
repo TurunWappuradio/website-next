@@ -15,7 +15,6 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const [isAdmin, setAdmin] = useState(false);
   const [messages, setMessages] = useState([]);
   const [wsConnected, setWsConnected] = useState(false);
-  const [colorSwitcher, setColorSwitcher] = useState(false);
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
 
@@ -71,15 +70,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }, []);
 
   function addMessage(message: any) {
-    message = {
-      ...message,
-      color: colorSwitcher,
-    };
-
-    console.log(colorSwitcher);
-
     setMessages((messages) => [...messages, message].slice(-limit));
-    colorSwitcher ? setColorSwitcher(false) : setColorSwitcher(true);
     scrollToBottom();
   }
 
@@ -124,7 +115,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex max-h-96 w-full max-w-6xl py-6 px-[25px]">
+    <div className="mx-auto flex max-h-96 w-full max-w-6xl py-6 px-[25px] md:max-h-[36rem]">
       <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
           className="h-[85%] overflow-auto overflow-x-hidden py-2 px-0 text-white"

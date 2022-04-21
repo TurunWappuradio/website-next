@@ -18,7 +18,7 @@ const TextField = ({
   <div className="TextFieldArea mr-[16px] inline-flex w-full justify-around">
     {label}
     <input
-      className="TextField w-full border-b-2 border-solid border-blue-darkest"
+      className="TextField w-full border-b-2 border-solid border-blue-lightest bg-transparent"
       type={type || 'text'}
       placeholder={placeholder}
       value={value}
