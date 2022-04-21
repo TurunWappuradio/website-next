@@ -118,7 +118,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     <div className="mx-auto flex max-h-96 w-full max-w-6xl py-6 px-[25px] md:max-h-[36rem]">
       <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
-          className="h-[85%] overflow-auto overflow-x-hidden py-2 px-0 text-white"
+          className="h-[81%] overflow-auto overflow-x-hidden py-2 px-0 text-white md:h-[85%]"
           ref={messagesViewport}
         >
           {messages.map((message, index) => (
@@ -137,7 +137,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
             </div>
           )}
         </div>
-        <div className="h-[15%] w-full">
+        <div className="h-[4rem] w-full">
           {name ? (
             <MessageInput
               name={isAdmin ? 'Toimitus' : name}

@@ -57,12 +57,14 @@ const Player = ({
               </span>
             </div>
           )}
-          <Controls
-            playing={playing}
-            onPlayPause={onPlayPause}
-            muted={muted}
-            onMute={onMute}
-          />
+          <div className="mt-4">
+            <Controls
+              playing={playing}
+              onPlayPause={onPlayPause}
+              muted={muted}
+              onMute={onMute}
+            />
+          </div>
         </div>
       </div>
     </div>

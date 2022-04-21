@@ -18,7 +18,7 @@ const Controls = ({
   const MuteIcon = muted ? FiVolumeX : FiVolume2;
 
   return (
-    <div className="mt-4 flex items-center text-white">
+    <div className={`flex items-center text-white`}>
       <button
         onClick={onPlayPause}
         title="Play/Pause"
@@ -38,7 +38,7 @@ const Controls = ({
       <button
         onClick={onMute}
         title="Mute"
-        className={`ml-4 h-12 w-12 rounded-full ${
+        className={`h-12 w-12 rounded-full ${isSmall ? 'ml-3' : 'ml-4'} ${
           muted ? 'bg-teal' : 'bg-coral'
         }`}
       >

@@ -1,4 +1,5 @@
 import React, { ChangeEvent, Component, useEffect, useState } from 'react';
+import { AiOutlineSend } from 'react-icons/ai';
 import NameFormatter from './nameformatter';
 import TextField from './textfield';
 
@@ -55,7 +56,7 @@ const MessageInput = ({ name, onSubmitMessage }: MessageInputProps) => {
           className="sbSubmitButton inline-block cursor-pointer select-none rounded border-[3px] border-white bg-transparent py-1.5 px-3 text-center align-middle text-base font-bold text-white disabled:opacity-50"
           disabled={isButtonDisabled(message, timeoutLeft)}
         >
-          Lähetä
+          <AiOutlineSend />
         </button>
       </div>
     </form>

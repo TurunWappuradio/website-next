@@ -32,9 +32,9 @@ const PlayerControlPanel = ({
       <div className={`bg-blue-darkest ${chatOpen ? 'block' : 'hidden'}`}>
         <Chat limit={100} isOpen={true} />
       </div>
-      <div className="bg-blue-darkestest p-6 text-white">
+      <div className="bg-blue-darkestest px-4 text-white md:px-6">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
-          <div className="flex items-center">
+          <div className="flex items-center py-6">
             <Controls
               playing={playing}
               onPlayPause={onPlayPause}
@@ -45,7 +45,7 @@ const PlayerControlPanel = ({
             <button
               onClick={handleChatToggle}
               title="chat"
-              className={`mt-4 ml-4 h-12 w-12 rounded-full ${
+              className={`ml-3 h-12 w-12 rounded-full ${
                 chatOpen ? 'bg-teal' : 'bg-coral'
               }`}
             >
