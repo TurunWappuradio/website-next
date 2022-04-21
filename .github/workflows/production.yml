@@ -52,6 +52,7 @@ jobs:
           NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY }}
           NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL: ${{ secrets.NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL }}
           NEXT_PUBLIC_METADATA_API: ${{ secrets.NEXT_PUBLIC_METADATA_API }}
+          NEXT_PUBLIC_PLAYER_MODE: ${{ secrets.NEXT_PUBLIC_PLAYER_MODE_PROD }}
         run: npm run build
 
       - name: Configure AWS credentials

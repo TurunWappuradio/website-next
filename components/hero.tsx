@@ -18,6 +18,7 @@ interface HeroProps {
   buttonText?: string;
   buttonLink?: string;
   navigationItems: NavigationItem[];
+  isCompact?: boolean;
 }
 
 const Hero: FC<HeroProps> = ({
@@ -27,6 +28,7 @@ const Hero: FC<HeroProps> = ({
   buttonText,
   buttonLink,
   navigationItems,
+  isCompact = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +45,11 @@ const Hero: FC<HeroProps> = ({
 
   return (
     <>
-      <div className="relative flex h-128 w-full flex-col xl:h-160">
+      <div
+        className={`relative flex w-full flex-col ${
+          isCompact ? 'h-72' : 'h-128 xl:h-160'
+        }`}
+      >
         {/* Hero image */}
         <Image
           src={url}
@@ -72,8 +78,14 @@ const Hero: FC<HeroProps> = ({
         </header>
 
         {/* Hero content */}
-        <div className="z-10 flex h-full flex-col items-center justify-center md:flex-row">
-          <div className="relative h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96">
+        <div className="z-10 mx-auto flex h-full w-[21rem] max-w-full flex-col items-center md:w-[59rem] md:flex-row">
+          <div
+            className={`relative ${
+              isCompact
+                ? 'h-44 w-44 md:h-52 md:w-52'
+                : 'h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96'
+            }`}
+          >
             <Image
               src="/leima.svg"
               layout="fill"
@@ -82,11 +94,13 @@ const Hero: FC<HeroProps> = ({
               unoptimized={true}
             />
           </div>
-          <div className="flex flex-col p-8">
-            <h1 className="my-3 text-3xl font-bold text-coral md:text-5xl">
+          <div className="flex flex-col pb-6">
+            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
               {title}
             </h1>
-            <p className="my-3 text-xl text-white md:text-3xl">{subtext}</p>
+            <p className="my-1 max-w-[14rem] text-lg text-white md:my-1 md:max-w-[16rem] md:text-2xl">
+              {subtext}
+            </p>
 
             {buttonText && buttonLink ? (
               <LinkButton

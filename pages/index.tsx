@@ -17,6 +17,9 @@ import Footer from 'components/footer';
 // import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 import { Showlist } from 'components/showlist';
+import Player from 'components/player';
+
+const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
 interface IndexProps {
   heroImage: {
@@ -44,7 +47,14 @@ interface IndexProps {
   sponsors: ISponsorData[];
 }
 
-const Index: NextPage<IndexProps> = ({
+interface PlayerControls {
+  playing: boolean;
+  onPlayPause: () => void;
+  muted: boolean;
+  onMute: () => void;
+}
+
+const Index: NextPage<IndexProps & PlayerControls> = ({
   heroImage,
   heroTitle,
   heroSubtext,
@@ -59,6 +69,10 @@ const Index: NextPage<IndexProps> = ({
   // secondContent,
   // thirdContent,
   sponsors,
+  playing,
+  onPlayPause,
+  muted,
+  onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -73,7 +87,17 @@ const Index: NextPage<IndexProps> = ({
         buttonLink={heroButtonLink}
         buttonText={heroButtonText}
         navigationItems={navigationItems}
+        isCompact={isPlayerLive}
       />
+      {isPlayerLive && (
+        <Player
+          playing={playing}
+          onPlayPause={onPlayPause}
+          muted={muted}
+          onMute={onMute}
+          showsByDate={showsByDate}
+        />
+      )}
 
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
