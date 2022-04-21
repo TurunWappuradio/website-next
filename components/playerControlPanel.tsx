@@ -37,15 +37,6 @@ const PlayerControlPanel = ({
             onMute={onMute}
             isSmall={true}
           />
-          <button
-            onClick={handleChatToggle}
-            title="chat"
-            className={`ml-3 h-12 w-12 rounded-full ${
-              chatOpen ? 'bg-teal' : 'bg-coral'
-            }`}
-          >
-            <FiMessageSquare size="1.7rem" className="mx-auto" />
-          </button>
         </div>
 
         {showMeta && (
