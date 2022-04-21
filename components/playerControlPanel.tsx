@@ -48,7 +48,8 @@ const PlayerControlPanel = ({
           }`}
         >
           <iframe
-            src="https://player.twitch.tv/?turunwappuradio&amp;parent=turunwappuradio.com"
+            /** Add parent &parent=localhost if testing */
+            src="https://player.twitch.tv/?channel=turunwappuradio&parent=www.turunwappuradio.com&parent=turunwappuradio.com&muted=true"
             height="100%"
             width="100%"
             allowFullScreen={true}
