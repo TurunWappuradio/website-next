@@ -5,6 +5,7 @@ import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
 import { ModeButton } from './button';
 import { useViewport } from 'hooks/useViewport';
+import ContentWrapper from './ContentWrapper';
 
 interface ShowlistProps {
   showsByDate: {
@@ -19,32 +20,34 @@ export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
   const { isDesktop } = useViewport();
 
   return (
-    <div className="mx-auto flex flex-col items-center py-6 pr-[25px] lg:pl-[25px]">
-      <div className="flex w-full lg:max-w-[70%] xl:max-w-[57rem]">
-        <h1 className="mt-6 w-auto pl-6 text-xl font-bold text-coral md:text-3xl lg:pl-0">
-          Ohjelmistossa
-        </h1>
-        {isDesktop && (
-          <div className="ml-auto mt-auto space-x-2">
-            <ModeButton
-              text={'Ohjelmalista'}
-              isActive={mode === 'list'}
-              onClick={() => setMode('list')}
-            />
-            <ModeButton
-              text={'Ohjelmakartta'}
-              isActive={mode === 'map'}
-              onClick={() => setMode('map')}
-            />
-          </div>
-        )}
+    <ContentWrapper>
+      <div className="mx-auto flex flex-col items-center py-6">
+        <div className="flex w-full justify-center lg:justify-start">
+          <h1 className="mt-6 w-full text-center text-xl font-bold text-coral md:w-auto md:text-3xl">
+            Ohjelmistossa
+          </h1>
+          {isDesktop && (
+            <div className="ml-auto mt-auto space-x-2">
+              <ModeButton
+                text={'Ohjelmalista'}
+                isActive={mode === 'list'}
+                onClick={() => setMode('list')}
+              />
+              <ModeButton
+                text={'Ohjelmakartta'}
+                isActive={mode === 'map'}
+                onClick={() => setMode('map')}
+              />
+            </div>
+          )}
+        </div>
+        <ShowlistSelector
+          showsByDate={showsByDate}
+          weekKeys={weekKeys}
+          mode={mode}
+        />
       </div>
-      <ShowlistSelector
-        showsByDate={showsByDate}
-        weekKeys={weekKeys}
-        mode={mode}
-      />
-    </div>
+    </ContentWrapper>
   );
 };
 

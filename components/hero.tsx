@@ -8,6 +8,7 @@ import { NavigationItem } from 'contentful/client';
 import heroImage from '../public/hero.webp';
 import Hamburger from './hamburger/hamburger';
 import Menu from './menu';
+import ContentWrapper from './ContentWrapper';
 
 interface HeroProps {
   image?: {
@@ -64,54 +65,58 @@ const Hero: FC<HeroProps> = ({
         />
 
         {/* Navigation */}
-        <header className="z-10 mx-auto h-16 w-screen max-w-4xl">
-          {/* Desktop navigation bar */}
-          <ul className="hidden w-full justify-end md:flex">
-            <NavLink href="/" name="Radio" />
+        <header className="z-10 mx-auto h-16">
+          <ContentWrapper>
+            {/* Desktop navigation bar */}
+            <ul className="hidden w-full justify-end md:flex">
+              <NavLink href="/" name="Radio" />
 
-            {navigationItems.map(({ name, slug }) => (
-              <NavLink key={slug} href={`/${slug}`} name={name} />
-            ))}
+              {navigationItems.map(({ name, slug }) => (
+                <NavLink key={slug} href={`/${slug}`} name={name} />
+              ))}
 
-            <NavLink href="/arkisto" name="Arkisto" />
-          </ul>
+              <NavLink href="/arkisto" name="Arkisto" />
+            </ul>
+          </ContentWrapper>
         </header>
 
         {/* Hero content */}
-        <div className="z-10 mx-auto flex h-full w-[21rem] max-w-full flex-col items-center md:w-[59rem] md:flex-row">
-          <div
-            className={`relative ${
-              isCompact
-                ? 'h-44 w-44 md:h-52 md:w-52'
-                : 'h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96'
-            }`}
-          >
-            <Image
-              src="/leima.svg"
-              layout="fill"
-              priority={true}
-              alt="Logo of Turun Wappuradio ry"
-              unoptimized={true}
-            />
-          </div>
-          <div className="flex flex-col pb-6">
-            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
-              {title}
-            </h1>
-            <p className="my-1 max-w-[14rem] text-lg text-white md:my-1 md:max-w-[16rem] md:text-2xl">
-              {subtext}
-            </p>
+        <ContentWrapper>
+          <div className="z-10 mx-auto flex h-full flex-col items-center md:flex-row">
+            <div
+              className={`relative ${
+                isCompact
+                  ? 'h-44 w-44 md:h-52 md:w-52'
+                  : 'h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96'
+              }`}
+            >
+              <Image
+                src="/leima.svg"
+                layout="fill"
+                priority={true}
+                alt="Logo of Turun Wappuradio ry"
+                unoptimized={true}
+              />
+            </div>
+            <div className="flex flex-col pb-6">
+              <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
+                {title}
+              </h1>
+              <p className="my-1 max-w-[14rem] text-lg text-white md:my-1 md:max-w-[16rem] md:text-2xl">
+                {subtext}
+              </p>
 
-            {buttonText && buttonLink ? (
-              <LinkButton
-                className="text-md my-3 ml-auto md:text-xl"
-                href={buttonLink}
-              >
-                {buttonText}
-              </LinkButton>
-            ) : null}
+              {buttonText && buttonLink ? (
+                <LinkButton
+                  className="text-md my-3 ml-auto md:text-xl"
+                  href={buttonLink}
+                >
+                  {buttonText}
+                </LinkButton>
+              ) : null}
+            </div>
           </div>
-        </div>
+        </ContentWrapper>
       </div>
       {/* Mobile hamburger menu */}
       <Hamburger
@@ -129,7 +134,7 @@ const Hero: FC<HeroProps> = ({
 };
 
 const NavLink = ({ href, name }: { href: string; name: string }) => (
-  <li className="p-4">
+  <li className="py-4 pl-8">
     <Link href={href}>
       <a className="text-xl text-white transition hover:text-coral">{name}</a>
     </Link>
