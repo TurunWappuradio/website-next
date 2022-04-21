@@ -4,6 +4,17 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    screens: {
+      sm: '640px',
+
+      md: '768px',
+
+      lg: '1160px',
+
+      xl: '1420px',
+
+      '2xl': '1536px',
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
