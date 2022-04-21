@@ -2,6 +2,8 @@ import { createRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
 import PlayerControlPanel from 'components/playerControlPanel';
+import { ShoutBoxProvider } from 'hooks/useShoutbox';
+import Chat, { ChatWrapper } from 'components/ShoutBox/shoutbox';
 
 const AUDIO_STREAM_URL = 'https://player.turunwappuradio.com/wappuradio.mp3';
 
@@ -29,7 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   };
 
   return (
-    <>
+    <ShoutBoxProvider>
       <audio ref={audioEl}>
         <source src={AUDIO_STREAM_URL} type="audio/mpeg" />
       </audio>
@@ -40,15 +42,19 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         muted={muted}
         onMute={handleMute}
       />
-      {playClicked && (
-        <PlayerControlPanel
-          playing={playing}
-          onPlayPause={handlePlayPause}
-          muted={muted}
-          onMute={handleMute}
-        />
-      )}
-    </>
+      <div className="fixed bottom-0 z-50 w-full ">
+        <ChatWrapper />
+
+        {playClicked && (
+          <PlayerControlPanel
+            playing={playing}
+            onPlayPause={handlePlayPause}
+            muted={muted}
+            onMute={handleMute}
+          />
+        )}
+      </div>
+    </ShoutBoxProvider>
   );
 };
 

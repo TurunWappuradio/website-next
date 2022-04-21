@@ -1,4 +1,11 @@
-import { FiPlay, FiPause, FiVolumeX, FiVolume2 } from 'react-icons/fi';
+import useShoutBox from 'hooks/useShoutbox';
+import {
+  FiPlay,
+  FiPause,
+  FiVolumeX,
+  FiVolume2,
+  FiMessageSquare,
+} from 'react-icons/fi';
 
 interface ControlsProps {
   playing: boolean;
@@ -6,6 +13,7 @@ interface ControlsProps {
   muted: boolean;
   onMute: () => void;
   isSmall?: boolean;
+  showChat?: boolean;
 }
 
 const Controls = ({
@@ -14,8 +22,10 @@ const Controls = ({
   muted,
   onMute,
   isSmall = false,
+  showChat = false,
 }: ControlsProps) => {
   const MuteIcon = muted ? FiVolumeX : FiVolume2;
+  const [chatOpen, setChatOpen] = useShoutBox();
 
   return (
     <div className={`flex items-center text-white`}>
@@ -44,6 +54,17 @@ const Controls = ({
       >
         <MuteIcon size="1.7rem" className="mx-auto" />
       </button>
+      {showChat && (
+        <button
+          onClick={() => setChatOpen(!chatOpen)}
+          title="chat"
+          className={`ml-3 h-12 w-12 rounded-full ${
+            chatOpen ? 'bg-teal' : 'bg-coral'
+          }`}
+        >
+          <FiMessageSquare size="1.7rem" className="mx-auto" />
+        </button>
+      )}
     </div>
   );
 };
