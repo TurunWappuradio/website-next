@@ -1,6 +1,4 @@
 import useMetadata from 'hooks/useMetadata';
-import useShoutBox from 'hooks/useShoutbox';
-import { FiMessageSquare } from 'react-icons/fi';
 import Controls from './controls';
 
 interface PlayerControlPanelProps {
@@ -16,12 +14,7 @@ const PlayerControlPanel = ({
   muted,
   onMute,
 }: PlayerControlPanelProps) => {
-  const [chatOpen, setChatOpen] = useShoutBox();
   const { song, artist } = useMetadata();
-
-  const handleChatToggle = () => {
-    setChatOpen(!chatOpen);
-  };
 
   // Show metadata only after the lähetys starts.
   const showMeta = new Date() > new Date('2022-04-21:12:00+03:00');

@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
 import PlayerControlPanel from 'components/playerControlPanel';
 import { ShoutBoxProvider } from 'hooks/useShoutbox';
-import Chat, { ChatWrapper } from 'components/ShoutBox/shoutbox';
+import { ChatWrapper } from 'components/ShoutBox/shoutbox';
 
 const AUDIO_STREAM_URL = 'https://player.turunwappuradio.com/wappuradio.mp3';
 
