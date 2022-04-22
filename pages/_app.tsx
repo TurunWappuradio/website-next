@@ -42,7 +42,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         muted={muted}
         onMute={handleMute}
       />
-      <div className="fixed bottom-0 z-50 w-full ">
+      <div className="fixed bottom-0 z-50 w-full">
         <ChatWrapper />
 
         {playClicked && (
