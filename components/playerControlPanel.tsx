@@ -16,35 +16,13 @@ const PlayerControlPanel = ({
   muted,
   onMute,
 }: PlayerControlPanelProps) => {
-  const [videoOpen, setVideoOpen] = useState(false);
   const { song, artist } = useMetadata();
-
-  const handleVideoToggle = () => {
-    setVideoOpen(!videoOpen);
-  };
 
   // Show metadata only after the lähetys starts.
   const showMeta = true;
 
   return (
     <>
-      <div
-        className={`bg-blue-darkest md:flex md:px-32 ${
-          videoOpen ? 'block' : 'hidden'
-        }`}
-      >
-        {videoOpen && (
-          <div className={`block h-96 w-full bg-blue-darkest md:h-[36rem]`}>
-            <iframe
-              /** Add parent &parent=localhost if testing */
-              src="https://player.twitch.tv/?channel=turunwappuradio&parent=www.turunwappuradio.com&parent=turunwappuradio.com&muted=true"
-              height="100%"
-              width="100%"
-              allowFullScreen={true}
-            />
-          </div>
-        )}
-      </div>
       <div className="bg-blue-darkestest px-4 text-white md:px-6">
         <div className="mx-auto flex max-w-4xl items-center justify-between">
           <div className="flex items-center py-6">
@@ -55,16 +33,6 @@ const PlayerControlPanel = ({
               onMute={onMute}
               isSmall={true}
             />
-
-            <button
-              onClick={handleVideoToggle}
-              title="Webcam"
-              className={`ml-3 h-12 w-12 rounded-full ${
-                videoOpen ? 'bg-teal' : 'bg-coral'
-              }`}
-            >
-              <FiVideo size="1.7rem" className="mx-auto" />
-            </button>
           </div>
 
           {showMeta && (

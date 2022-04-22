@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { GrFormClose } from 'react-icons/gr';
+
 import MessageInput from './messageinput';
 import NameInput from './nameinput';
 import MessageFormatter from './messageformatter';
-import useShoutBox from '../../hooks/useShoutbox';
-import { FiXCircle } from 'react-icons/fi';
+import useShoutBoxAndVideo from '../../hooks/useShoutboxAndVideo';
 
 const wsURL = process.env.NEXT_PUBLIC_SHOUTBOX_SOURCE || 'ws://localhost:3030';
 
@@ -13,20 +14,25 @@ interface ShoutBoxProps {
 }
 
 export const ChatWrapper = () => {
-  const [isOpen, setChatOpen] = useShoutBox();
+  const { shoutboxOpen, setShoutboxOpen } = useShoutBoxAndVideo();
+
+  const handleClose = () => {
+    setShoutboxOpen(false);
+  };
+
   return (
     <div
-      className={`w-full flex-col items-center bg-blue-darkest ${
-        isOpen ? 'flex' : 'hidden'
+      className={`w-full flex-col items-center ${
+        shoutboxOpen ? 'flex' : 'hidden'
       }`}
     >
       <div className="flex w-full max-w-6xl items-end justify-end">
         <button
-          onClick={() => setChatOpen(false)}
+          onClick={handleClose}
           title="chat"
           className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
         >
-          <FiXCircle size="1.7rem" className="mx-auto" />
+          <GrFormClose size="1.7rem" className="mx-auto" />
         </button>
       </div>
 

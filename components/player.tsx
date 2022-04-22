@@ -7,8 +7,6 @@ import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import Controls from './controls';
-import useShoutBox from 'hooks/useShoutbox';
-import { FiMessageSquare } from 'react-icons/fi';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 
@@ -65,7 +63,7 @@ const Player = ({
               onPlayPause={onPlayPause}
               muted={muted}
               onMute={onMute}
-              showChat
+              showChatAndVideo
             />
           </div>
         </div>
