@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { GrFormClose } from 'react-icons/gr';
+
 import MessageInput from './messageinput';
 import NameInput from './nameinput';
 import MessageFormatter from './messageformatter';
+import useShoutBoxAndVideo from '../../hooks/useShoutboxAndVideo';
 
 const wsURL = process.env.NEXT_PUBLIC_SHOUTBOX_SOURCE || 'ws://localhost:3030';
 
@@ -9,6 +12,34 @@ interface ShoutBoxProps {
   limit: number;
   isOpen: boolean;
 }
+
+export const ChatWrapper = () => {
+  const { shoutboxOpen, setShoutboxOpen } = useShoutBoxAndVideo();
+
+  const handleClose = () => {
+    setShoutboxOpen(false);
+  };
+
+  return (
+    <div
+      className={`w-full flex-col items-center ${
+        shoutboxOpen ? 'flex' : 'hidden'
+      }`}
+    >
+      <div className="flex w-full max-w-6xl items-end justify-end">
+        <button
+          onClick={handleClose}
+          title="chat"
+          className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
+        >
+          <GrFormClose size="1.7rem" className="mx-auto" />
+        </button>
+      </div>
+
+      <Chat limit={100} isOpen={true} />
+    </div>
+  );
+};
 
 const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const [name, setName] = useState('');
@@ -115,7 +146,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[36rem]">
+    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[38rem]">
       <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
           className="h-[81%] overflow-auto overflow-x-hidden py-2 px-0 text-white md:h-[85%]"
@@ -159,4 +190,4 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   );
 };
 
-export default Chat;
+export default ChatWrapper;

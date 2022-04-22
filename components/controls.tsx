@@ -1,11 +1,20 @@
-import { FiPlay, FiPause, FiVolumeX, FiVolume2 } from 'react-icons/fi';
+import {
+  FiPlay,
+  FiPause,
+  FiVolumeX,
+  FiVolume2,
+  FiMessageSquare,
+  FiVideo,
+} from 'react-icons/fi';
 
+import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
 interface ControlsProps {
   playing: boolean;
   onPlayPause: () => void;
   muted: boolean;
   onMute: () => void;
   isSmall?: boolean;
+  showChatAndVideo?: boolean;
 }
 
 const Controls = ({
@@ -14,8 +23,20 @@ const Controls = ({
   muted,
   onMute,
   isSmall = false,
+  showChatAndVideo = false,
 }: ControlsProps) => {
   const MuteIcon = muted ? FiVolumeX : FiVolume2;
+
+  const { shoutboxOpen, setShoutboxOpen, videoOpen, setVideoOpen } =
+    useShoutBoxAndVideo();
+
+  const handleShoutboxToggle = () => {
+    setShoutboxOpen(!shoutboxOpen);
+  };
+
+  const handleVideoToggle = () => {
+    setVideoOpen(!videoOpen);
+  };
 
   return (
     <div className={`flex items-center text-white`}>
@@ -44,6 +65,28 @@ const Controls = ({
       >
         <MuteIcon size="1.7rem" className="mx-auto" />
       </button>
+      {showChatAndVideo && (
+        <>
+          <button
+            onClick={handleShoutboxToggle}
+            title="chat"
+            className={`ml-3 h-12 w-12 rounded-full ${
+              shoutboxOpen ? 'bg-teal' : 'bg-coral'
+            }`}
+          >
+            <FiMessageSquare size="1.7rem" className="mx-auto" />
+          </button>
+          <button
+            onClick={handleVideoToggle}
+            title="Webcam"
+            className={`ml-3 h-12 w-12 rounded-full ${
+              videoOpen ? 'bg-teal' : 'bg-coral'
+            }`}
+          >
+            <FiVideo size="1.7rem" className="mx-auto" />
+          </button>
+        </>
+      )}
     </div>
   );
 };

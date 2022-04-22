@@ -63,6 +63,7 @@ const Player = ({
               onPlayPause={onPlayPause}
               muted={muted}
               onMute={onMute}
+              showChatAndVideo
             />
           </div>
         </div>
