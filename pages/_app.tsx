@@ -1,4 +1,4 @@
-import { createRef, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 import 'tailwindcss/tailwind.css';
 
@@ -14,6 +14,28 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [playClicked, setPlayClicked] = useState(false);
+
+  const [playerMounted, setPlayerMounted] = useState(true);
+
+  const handleEnded = () => {
+    // remount the audio element to reset the audio stream
+    setPlayerMounted(false);
+  };
+
+  useEffect(() => {
+    audioEl?.current?.addEventListener('ended', handleEnded);
+    return () => audioEl?.current?.removeEventListener('ended', handleEnded);
+  }, [audioEl]);
+
+  useEffect(() => {
+    if (!playerMounted) {
+      setPlayerMounted(true);
+    }
+    if (playerMounted && playing) {
+      audioEl?.current?.play();
+      setPlaying(true);
+    }
+  }, [playerMounted]);
 
   const handlePlayPause = () => {
     setPlayClicked(true);
@@ -34,9 +56,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ShoutBoxAndVideoProvider>
-      <audio ref={audioEl}>
-        <source src={AUDIO_STREAM_URL} type="audio/mpeg" />
-      </audio>
+      {playerMounted && (
+        <audio ref={audioEl}>
+          <source src={AUDIO_STREAM_URL} type="audio/mpeg" />
+        </audio>
+      )}
       <Component
         {...pageProps}
         playing={playing}
