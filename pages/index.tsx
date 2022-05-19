@@ -6,21 +6,24 @@ import {
   fetchNavigationItems,
   fetchShowlist,
   NavigationItem,
-  Show,
+  // Show,
 } from 'contentful/client';
-// import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-// import RichText from 'components/richtext';
+import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
+import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
-// import Image from 'next/image';
-// import Calendar from 'components/calendar';
+import Image from 'next/image';
+import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
-import { Showlist } from 'components/showlist';
-import Player from 'components/player';
+// import { Showlist } from 'components/showlist';
+// import Player from 'components/player';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
+// !!!
+// Hox! Tässä tiedostossa on paljon kommentoitua koodia, joka tarvitaan vain lähetyksen ajan.
+// !!!
 interface IndexProps {
   heroImage: {
     url?: string;
@@ -30,20 +33,19 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
-  // firstDecorativeImage: {
-  //   url?: string;
-  //   width?: number;
-  //   height?: number;
-  // };
-  // secondDecorativeImage: {
-  //   url?: string;
-  // };
-  // firstContent: any;
-  // secondContent: any;
-  // thirdContent: any;
+  // showsByDate: Record<string, Show[]>;
+  // weekKeys: Record<string, string[]>;
+  firstDecorativeImage: {
+    url?: string;
+    width?: number;
+    height?: number;
+  };
+  secondDecorativeImage: {
+    url?: string;
+  };
+  firstContent: any;
+  secondContent: any;
+  thirdContent: any;
   sponsors: ISponsorData[];
 }
 
@@ -61,18 +63,18 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonText,
   heroButtonLink,
   navigationItems,
-  showsByDate,
-  weekKeys,
-  // firstDecorativeImage,
-  // secondDecorativeImage,
-  // firstContent,
-  // secondContent,
-  // thirdContent,
+  // showsByDate,
+  // weekKeys,
+  firstDecorativeImage,
+  secondDecorativeImage,
+  firstContent,
+  secondContent,
+  thirdContent,
   sponsors,
-  playing,
-  onPlayPause,
-  muted,
-  onMute,
+  // playing,
+  // onPlayPause,
+  // muted,
+  // onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -89,7 +91,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {isPlayerLive && (
+      {/* {isPlayerLive && (
         <Player
           playing={playing}
           onPlayPause={onPlayPause}
@@ -99,10 +101,10 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         />
       )}
 
-      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
+      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} /> */}
 
       {/* First section */}
-      {/* <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+      <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
@@ -116,18 +118,18 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
           <RichText content={firstContent} />
         </section>
-      </main> */}
+      </main>
 
       {/* Second section */}
-      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
         <Calendar />
-      </div> */}
+      </div>
 
       {/* Third section */}
-      {/* <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+      <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={thirdContent} />
         </section>
@@ -141,7 +143,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
             alt=""
           />
         </div>
-      </div> */}
+      </div>
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
@@ -168,7 +170,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  const { showsByDate, weekKeys } = await fetchShowlist('wappuradio2022');
+  // const { showsByDate, weekKeys } = await fetchShowlist('wappuradio2022');
 
   return {
     props: {
@@ -178,13 +180,13 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonText,
       heroButtonLink,
       navigationItems,
-      showsByDate,
-      weekKeys,
-      // firstDecorativeImage,
-      // secondDecorativeImage,
-      // firstContent,
-      // secondContent,
-      // thirdContent,
+      // showsByDate,
+      // weekKeys,
+      firstDecorativeImage,
+      secondDecorativeImage,
+      firstContent,
+      secondContent,
+      thirdContent,
       sponsors,
     },
   };

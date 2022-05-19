@@ -98,7 +98,7 @@ const Hero: FC<HeroProps> = ({
             <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
               {title}
             </h1>
-            <p className="my-1 max-w-[14rem] text-lg text-white md:my-1 md:max-w-[16rem] md:text-2xl">
+            <p className="my-1 text-lg text-white md:my-1 md:text-2xl">
               {subtext}
             </p>
 

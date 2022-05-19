@@ -54,8 +54,7 @@ const ArchivePage: NextPage<ArchivePageProps> = ({
           Menneet lähetykset
         </h1>
 
-        {/* FIXME: remove this slice after Wappu. */}
-        {showLists.slice(1).map((showList) => (
+        {showLists.map((showList) => (
           <ShowListCard showList={showList} key={showList.id} />
         ))}
       </article>
