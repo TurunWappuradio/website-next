@@ -22,7 +22,7 @@ export const ChatWrapper = () => {
 
   return (
     <div
-      className={`w-full flex-col items-center ${
+      className={`max-w-[61rem] flex-col items-center ${
         shoutboxOpen ? 'flex' : 'hidden'
       }`}
     >
