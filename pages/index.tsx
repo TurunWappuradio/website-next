@@ -6,7 +6,7 @@ import {
   fetchNavigationItems,
   fetchShowlist,
   NavigationItem,
-  // Show,
+  Show,
 } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import RichText from 'components/richtext';
@@ -16,8 +16,8 @@ import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
-// import { Showlist } from 'components/showlist';
-// import Player from 'components/player';
+import { Showlist } from 'components/showlist';
+import Player from 'components/player';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -33,8 +33,8 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-  // showsByDate: Record<string, Show[]>;
-  // weekKeys: Record<string, string[]>;
+  showsByDate: Record<string, Show[]>;
+  weekKeys: Record<string, string[]>;
   firstDecorativeImage: {
     url?: string;
     width?: number;
@@ -63,18 +63,18 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonText,
   heroButtonLink,
   navigationItems,
-  // showsByDate,
-  // weekKeys,
+  showsByDate,
+  weekKeys,
   firstDecorativeImage,
   secondDecorativeImage,
   firstContent,
   secondContent,
   thirdContent,
   sponsors,
-  // playing,
-  // onPlayPause,
-  // muted,
-  // onMute,
+  playing,
+  onPlayPause,
+  muted,
+  onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -91,7 +91,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {/* {isPlayerLive && (
+      {isPlayerLive && (
         <Player
           playing={playing}
           onPlayPause={onPlayPause}
@@ -101,7 +101,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         />
       )}
 
-      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} /> */}
+      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
       {/* First section */}
       <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
@@ -121,7 +121,8 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       </main>
 
       {/* Second section */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8"> */}
+      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-purple-dark py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
@@ -170,7 +171,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  // const { showsByDate, weekKeys } = await fetchShowlist('wappuradio2022');
+  const { showsByDate, weekKeys } = await fetchShowlist('syssyradio-2022');
 
   return {
     props: {
@@ -180,8 +181,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonText,
       heroButtonLink,
       navigationItems,
-      // showsByDate,
-      // weekKeys,
+      showsByDate,
+      weekKeys,
       firstDecorativeImage,
       secondDecorativeImage,
       firstContent,
