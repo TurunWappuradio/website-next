@@ -5,6 +5,7 @@ import {
   Options,
 } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
+import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 
 import { contentfulImageLoader } from '../contentful/contentfulImageLoader';
 import { LinkButton } from './button';
@@ -54,6 +55,13 @@ const renderOptions = (links?: any): Options => {
       ),
       [BLOCKS.OL_LIST]: (node, children) => (
         <ol className="ml-8 list-decimal">{children}</ol>
+      ),
+      [BLOCKS.QUOTE]: (node, children) => (
+        <span className="my-1 ml-6 inline-flex">
+          <FaQuoteLeft className="mt-3 text-blue-lightest" />
+          <blockquote>{children}</blockquote>
+          <FaQuoteRight className="mb-3 self-end text-blue-lightest" />
+        </span>
       ),
       [INLINES.HYPERLINK]: ({ data }, children) => {
         /* This is a hack.
