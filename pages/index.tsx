@@ -104,7 +104,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
       {/* First section */}
-      <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+      {/* <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
@@ -118,19 +118,19 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
           <RichText content={firstContent} />
         </section>
-      </main>
+      </main> */}
 
       {/* Second section */}
       {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8"> */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-purple-dark py-4 md:py-8">
+      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-purple-dark py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
         <Calendar />
-      </div>
+      </div> */}
 
       {/* Third section */}
-      <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+      {/* <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={thirdContent} />
         </section>
@@ -144,10 +144,10 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
             alt=""
           />
         </div>
-      </div>
+      </div> */}
       <Sponsors sponsors={sponsors} />
-      <Footer navigationItems={navigationItems} />
-    </div>
+    <Footer navigationItems={navigationItems} />
+    </div> 
   );
 };
 

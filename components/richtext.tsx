@@ -32,22 +32,22 @@ const renderOptions = (links?: any): Options => {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => <p className="m-3">{children}</p>,
       [BLOCKS.HEADING_1]: (node, children) => (
-        <h1 className="mx-3 my-4 text-3xl font-bold text-coral">{children}</h1>
+        <h1 className="mx-3 my-4 text-3xl font-bold text-greyish">{children}</h1>
       ),
       [BLOCKS.HEADING_2]: (node, children) => (
-        <h2 className="m-3 text-3xl font-bold text-coral">{children}</h2>
+        <h2 className="m-3 text-3xl font-bold text-greyish">{children}</h2>
       ),
       [BLOCKS.HEADING_3]: (node, children) => (
-        <h3 className="m-3 text-2xl font-bold text-coral">{children}</h3>
+        <h3 className="m-3 text-2xl font-bold text-greyish">{children}</h3>
       ),
       [BLOCKS.HEADING_4]: (node, children) => (
-        <h4 className="m-3 text-xl font-bold text-coral">{children}</h4>
+        <h4 className="m-3 text-xl font-bold text-greyish">{children}</h4>
       ),
       [BLOCKS.HEADING_5]: (node, children) => (
-        <h5 className="m-3 text-lg font-bold text-coral">{children}</h5>
+        <h5 className="m-3 text-lg font-bold text-greyish">{children}</h5>
       ),
       [BLOCKS.HEADING_6]: (node, children) => (
-        <h6 className="m-3 text-lg font-bold text-coral">{children}</h6>
+        <h6 className="m-3 text-lg font-bold text-greyish">{children}</h6>
       ),
       [BLOCKS.UL_LIST]: (node, children) => (
         <ul className="ml-8 list-disc">{children}</ul>
@@ -80,7 +80,7 @@ const renderOptions = (links?: any): Options => {
         }
 
         return (
-          <a href={data.uri} className="font-bold text-teal underline">
+          <a href={data.uri} className="font-bold text-orange underline">
             {children}
           </a>
         );
