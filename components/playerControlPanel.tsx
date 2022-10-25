@@ -41,9 +41,11 @@ const PlayerControlPanel = ({
 
         <div className="hidden text-right lg:block">
           <span className="font-bold md:text-xl">Turun Wappuradio</span>
+          {/* uncomment for next wappu ;)
           <div>
             <span>Taajuudella</span> <b>93,8 MHz</b>
           </div>
+          */}
           <div>
             <span>Studio</span> <b>023 619 1502</b>
           </div>
