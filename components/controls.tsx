@@ -44,7 +44,7 @@ const Controls = ({
         onClick={onPlayPause}
         title="Play/Pause"
         className={`flex items-center justify-center rounded-full ${
-          playing ? 'bg-teal' : 'bg-coral'
+          playing ? 'bg-purple-darkest' : 'bg-orange'
         } ${isSmall ? 'h-12 w-12' : 'h-20 w-20'}`}
       >
         {playing ? (
@@ -60,7 +60,7 @@ const Controls = ({
         onClick={onMute}
         title="Mute"
         className={`h-12 w-12 rounded-full ${isSmall ? 'ml-3' : 'ml-4'} ${
-          muted ? 'bg-teal' : 'bg-coral'
+          muted ? 'bg-purple-darkest' : 'bg-orange'
         }`}
       >
         <MuteIcon size="1.7rem" className="mx-auto" />
@@ -71,7 +71,7 @@ const Controls = ({
             onClick={handleShoutboxToggle}
             title="chat"
             className={`ml-3 h-12 w-12 rounded-full ${
-              shoutboxOpen ? 'bg-teal' : 'bg-coral'
+              shoutboxOpen ? 'bg-purple-darkest' : 'bg-orange'
             }`}
           >
             <FiMessageSquare size="1.7rem" className="mx-auto" />
@@ -80,7 +80,7 @@ const Controls = ({
             onClick={handleVideoToggle}
             title="Webcam"
             className={`ml-3 h-12 w-12 rounded-full ${
-              videoOpen ? 'bg-teal' : 'bg-coral'
+              videoOpen ? 'bg-purple-darkest' : 'bg-orange'
             }`}
           >
             <FiVideo size="1.7rem" className="mx-auto" />
