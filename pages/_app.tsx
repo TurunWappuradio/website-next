@@ -45,7 +45,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         onMute={handleMute}
       />
       <div className="fixed bottom-0 z-50 w-full">
-        <div className="flex flex-col bg-blue-darkest md:flex-row">
+        <div className="flex flex-col bg-purple-darkest md:flex-row">
           <VideoPlayer />
           <ChatWrapper />
         </div>
