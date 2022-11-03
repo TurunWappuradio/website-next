@@ -34,8 +34,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
         className={`group relative flex h-full w-full flex-col flex-col-reverse overflow-hidden rounded md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
-            /* : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest' */
-            : 'bg-gradient-to-bl from-transparent via-transparent to-purple-darkest'
+            : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={handleClick}
       >
@@ -97,8 +96,7 @@ interface DescriptionsProps {
 const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
   return (
     <div
-      /* className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${ */
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-purple-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >

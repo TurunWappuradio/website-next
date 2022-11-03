@@ -16,13 +16,6 @@ module.exports = {
         light: '#00254a',
         lightest: '#60A3EE',
       },
-      orange: {
-        DEFAULT: '#ee6b60',
-      },
-      purple: {
-        dark: '#803346',
-        darkest: '#6d2c3c',
-      },
       coral: '#F65F52',
       teal: '#5bbfbf',
     },

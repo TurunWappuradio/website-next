@@ -78,8 +78,7 @@ const Event: FC<{ event: Event }> = ({ event }) => {
       : formatWithoutTime(start, end);
 
   return (
-    <div className="my-2 flex flex-row bg-purple-darkest p-2 text-white">
-      {/* <div className="my-2 flex flex-row bg-blue-darkest p-2 text-white"> */}
+    <div className="my-2 flex flex-row bg-blue-darkest p-2 text-white">
       <div className="flex w-28 flex-col items-center justify-center p-2">
         <div className="text-3xl font-bold">{dateFormatted}</div>
         <div className="text-lg font-bold">{weekday}</div>
