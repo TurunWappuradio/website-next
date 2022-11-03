@@ -17,16 +17,14 @@ module.exports = {
         lightest: '#60A3EE',
       },
       orange: {
-        DEFAULT: '#db8841',
+        DEFAULT: '#ee6b60',
       },
       purple: {
-        light: '#58265d',
-        dark: '#9b3970',
-        darkest: '#230127',
+        dark: '#803346',
+        darkest: '#6d2c3c',
       },
       coral: '#F65F52',
       teal: '#5bbfbf',
-      greyish: '#eef2b0',
     },
     fontFamily: {
       sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
