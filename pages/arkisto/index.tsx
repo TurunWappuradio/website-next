@@ -48,6 +48,7 @@ const ArchivePage: NextPage<ArchivePageProps> = ({
         title="Arkisto"
         subtext="Kokoelma Turun Wappuradion ohjelmakarttoja"
         navigationItems={navigationItems}
+        isCompact={true}
       />
       <article className="mx-auto max-w-4xl px-4 pt-12 pb-20 text-white">
         <h1 className="my-4 text-3xl font-bold text-coral">

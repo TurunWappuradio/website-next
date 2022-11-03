@@ -1,6 +1,4 @@
 import useMetadata from 'hooks/useMetadata';
-import { useState } from 'react';
-import { FiVideo } from 'react-icons/fi';
 import Controls from './controls';
 
 interface PlayerControlPanelProps {
@@ -36,7 +34,7 @@ const PlayerControlPanel = ({
           </div>
 
           {showMeta && (
-            <div className="flex max-w-[50%] py-6 flex-col text-right lg:text-center">
+            <div className="flex max-w-[50%] flex-col py-6 text-right lg:text-center">
               <span className="font-bold md:text-xl">{song}</span>
               <span className="text-sm opacity-80 md:text-base">{artist}</span>
             </div>

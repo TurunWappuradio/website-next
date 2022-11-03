@@ -82,7 +82,7 @@ const Hero: FC<HeroProps> = ({
           <div
             className={`relative ${
               isCompact
-                ? 'h-44 w-44 md:h-52 md:w-52'
+                ? 'h-44 w-44 md:mr-4 md:h-52 md:w-52'
                 : 'h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96'
             }`}
           >

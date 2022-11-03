@@ -47,9 +47,7 @@ const Calendar: FC = () => {
       ))}
       <a
         className="ml-auto font-bold text-teal underline transition hover:text-coral"
-        href={
-          process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL || ''
-        }
+        href={process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL || ''}
         target="_blank"
         rel="noreferrer"
       >
