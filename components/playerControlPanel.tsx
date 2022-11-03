@@ -1,4 +1,6 @@
 import useMetadata from 'hooks/useMetadata';
+import { useState } from 'react';
+import { FiVideo } from 'react-icons/fi';
 import Controls from './controls';
 
 interface PlayerControlPanelProps {
@@ -20,38 +22,38 @@ const PlayerControlPanel = ({
   const showMeta = true;
 
   return (
-    <div className="bg-purple-light px-4 text-white md:px-6">
-      <div className="mx-auto flex max-w-4xl items-center justify-between">
-        <div className="flex items-center py-6">
-          <Controls
-            playing={playing}
-            onPlayPause={onPlayPause}
-            muted={muted}
-            onMute={onMute}
-            isSmall={true}
-          />
-        </div>
-
-        {showMeta && (
-          <div className="flex max-w-[50%] flex-col py-6 text-right lg:text-center">
-            <span className="font-bold md:text-xl">{song}</span>
-            <span className="text-sm opacity-80 md:text-base">{artist}</span>
+    <>
+      <div className="bg-blue-darkestest px-4 text-white md:px-6">
+        <div className="mx-auto flex max-w-4xl items-center justify-between">
+          <div className="flex items-center py-6">
+            <Controls
+              playing={playing}
+              onPlayPause={onPlayPause}
+              muted={muted}
+              onMute={onMute}
+              isSmall={true}
+            />
           </div>
-        )}
 
-        <div className="hidden text-right lg:block">
-          <span className="font-bold md:text-xl">Turun Wappuradio</span>
-          {/* uncomment for next wappu ;)
-          <div>
-            <span>Taajuudella</span> <b>93,8 MHz</b>
-          </div>
-          */}
-          <div>
-            <span>Studio</span> <b>023 619 1502</b>
+          {showMeta && (
+            <div className="flex max-w-[50%] py-6 flex-col text-right lg:text-center">
+              <span className="font-bold md:text-xl">{song}</span>
+              <span className="text-sm opacity-80 md:text-base">{artist}</span>
+            </div>
+          )}
+
+          <div className="hidden text-right lg:block">
+            <span className="font-bold md:text-xl">Turun Wappuradio</span>
+            <div>
+              <span>Taajuudella</span> <b>93,8 MHz</b>
+            </div>
+            <div>
+              <span>Studio</span> <b>023 619 0516</b>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

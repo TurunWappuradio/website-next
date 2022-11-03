@@ -24,7 +24,7 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
 
 const Sponsors = ({ sponsors = [] }: SponsorProps) => (
   /*   <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4"> */
-  <div className="flex max-w-full flex-col items-center bg-purple-light pb-14 pt-4">
+  <div className="flex max-w-full flex-col items-center bg-purple-darkest pb-14 pt-4">
     <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-greyish">
       Turun Wappuradion tukena
     </h2>

@@ -53,7 +53,7 @@ const MessageInput = ({ name, onSubmitMessage }: MessageInputProps) => {
         <button
           type="submit"
           value="Send"
-          className="sbSubmitButton inline-block cursor-pointer select-none rounded border-[3px] border-orange bg-transparent py-1.5 px-3 text-center align-middle text-base font-bold text-white disabled:opacity-50"
+          className="sbSubmitButton inline-block cursor-pointer select-none rounded border-[3px] border-white bg-transparent py-1.5 px-3 text-center align-middle text-base font-bold text-white disabled:opacity-50"
           disabled={isButtonDisabled(message, timeoutLeft)}
         >
           <AiOutlineSend />
