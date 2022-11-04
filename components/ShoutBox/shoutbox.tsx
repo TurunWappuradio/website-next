@@ -30,7 +30,7 @@ export const ChatWrapper = () => {
         <button
           onClick={handleClose}
           title="chat"
-          className="mr-5 mt-5 h-10 w-10 rounded-full bg-orange"
+          className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
         >
           <GrFormClose size="1.7rem" className="mx-auto" />
         </button>
@@ -96,6 +96,8 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
       const timer = setTimeout(() => setWsConnected(false), 5000);
       return () => clearTimeout(timer);
     };
+
+    // scrollToBottom();
   }, []);
 
   function addMessage(message: any) {
@@ -155,7 +157,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               key={index}
               message={message.message}
               name={message.name}
-              color={index % 2 === 0 ? 'bg-purple-darker' : 'bg-purple-light'}
+              color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
             />

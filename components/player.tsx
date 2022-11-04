@@ -34,8 +34,8 @@ const Player = ({
 
   return (
     <div className="flex justify-center p-6">
-      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-purple-light md:w-full md:flex-nowrap md:justify-start">
-        <div className="rounded bg-gradient-to-t from-greyish via-orange to-purple-dark p-1.5">
+      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
+        <div className="rounded bg-gradient-to-t from-coral via-blue-lightest to-teal p-1.5">
           <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
             <Image
               src={url}

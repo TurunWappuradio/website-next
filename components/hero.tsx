@@ -82,13 +82,12 @@ const Hero: FC<HeroProps> = ({
           <div
             className={`relative ${
               isCompact
-                ? 'h-44 w-44 md:h-52 md:w-52'
+                ? 'h-44 w-44 md:mr-4 md:h-52 md:w-52'
                 : 'h-52 w-52 lg:h-80 lg:w-80 xl:h-96 xl:w-96'
             }`}
           >
             <Image
-              src="/syssyleima.png"
-              /* src="/leima.svg" */
+              src="/leima.svg"
               layout="fill"
               priority={true}
               alt="Logo of Turun Wappuradio ry"
@@ -96,7 +95,7 @@ const Hero: FC<HeroProps> = ({
             />
           </div>
           <div className="flex flex-col pb-6">
-            <h1 className="my-1 text-[1.6rem] font-bold text-greyish md:my-1 md:text-4xl">
+            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
               {title}
             </h1>
             <p className="my-1 text-lg text-white md:my-1 md:text-2xl">
@@ -132,7 +131,7 @@ const Hero: FC<HeroProps> = ({
 const NavLink = ({ href, name }: { href: string; name: string }) => (
   <li className="p-4">
     <Link href={href}>
-      <a className="text-xl text-white transition hover:text-greyish">{name}</a>
+      <a className="text-xl text-white transition hover:text-coral">{name}</a>
     </Link>
   </li>
 );

@@ -1,8 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import { format } from 'date-fns';
-import { groupBy } from 'ramda';
-import { useState } from 'react';
 
 import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -55,6 +52,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         image={heroImage}
         navigationItems={navigationItems}
         subtext={heroSubtext}
+        isCompact={true}
       />
       <div className="mx-auto flex max-w-6xl flex-col py-6">
         <Link href="/arkisto">

@@ -16,18 +16,8 @@ module.exports = {
         light: '#00254a',
         lightest: '#60A3EE',
       },
-      orange: {
-        DEFAULT: '#db8841',
-      },
-      purple: {
-        light: '#58265d',
-        dark: '#9b3970',
-        darker: '#3E1442',
-        darkest: '#230127',
-      },
       coral: '#F65F52',
       teal: '#5bbfbf',
-      greyish: '#eef2b0',
     },
     fontFamily: {
       sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
