@@ -1,3 +1,35 @@
+interface SponsorProps {
+  sponsors?: ISponsorData[];
+}
+
+const Sponsors = ({ sponsors = [] }: SponsorProps) => {
+  if (sponsors.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4">
+      <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-coral">
+        Turun Wappuradion tukena
+      </h2>
+      <div className="flex w-full max-w-5xl flex-wrap justify-center">
+        {sponsors.map((s) => (
+          <SponsorImage key={s.title} sponsor={s} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export interface ISponsorData {
+  title?: string;
+  link?: string;
+  logoImage?: {
+    url?: string;
+  };
+  isRoundedBorders?: boolean;
+}
+
 const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
   const { link, logoImage, title, isRoundedBorders } = sponsor;
 
@@ -21,31 +53,5 @@ const SponsorImage = ({ sponsor }: { sponsor: ISponsorData }) => {
     </a>
   );
 };
-
-const Sponsors = ({ sponsors = [] }: SponsorProps) => (
-  <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4">
-    <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-coral">
-      Turun Wappuradion tukena
-    </h2>
-    <div className="flex w-full max-w-5xl flex-wrap justify-center">
-      {sponsors.map((s) => (
-        <SponsorImage key={s.title} sponsor={s} />
-      ))}
-    </div>
-  </div>
-);
-
-interface SponsorProps {
-  sponsors?: ISponsorData[];
-}
-
-export interface ISponsorData {
-  title?: string;
-  link?: string;
-  logoImage?: {
-    url?: string;
-  };
-  isRoundedBorders?: boolean;
-}
 
 export default Sponsors;
