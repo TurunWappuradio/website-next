@@ -29,9 +29,6 @@ const Player = ({
 
   const { picture, name, hosts } = show ?? {};
   const url = name ? picture?.url ?? placeholderImage : testcard;
-
-  const loader = picture?.url ? contentfulImageLoader : undefined;
-
   return (
     <div className="flex justify-center p-6">
       <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
@@ -39,9 +36,7 @@ const Player = ({
           <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
             <Image
               src={url}
-              loader={loader}
               objectFit="cover"
-              unoptimized={!picture?.url}
               layout="fill"
               alt=""
             />
@@ -72,13 +67,13 @@ const Player = ({
   );
 };
 
-const useCurrentShow = (showsByDate: Record<string, Show[]>) => {
+const useCurrentShow = (showsByDate?: Record<string, Show[]>) => {
   const [currentShow, setCurrentShow] = useState<Show | null>(null);
 
   const getCurrentShow = () => {
     const now = new Date();
     const currentDate = format(now, 'y.M.dd');
-    const todaysShows = showsByDate[currentDate];
+    const todaysShows = showsByDate?.[currentDate];
 
     if (!todaysShows) {
       setCurrentShow(null);

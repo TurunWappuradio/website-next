@@ -1,8 +1,10 @@
+import { Color } from 'contentful/client';
+
 interface WideScreenCardProps {
   text: string;
   showLength: number;
   onClick: () => void;
-  color?: string;
+  color?: Color;
 }
 
 export const WideScreencard = ({
@@ -13,9 +15,9 @@ export const WideScreencard = ({
 }: WideScreenCardProps) => {
   const getBackgroundColor = () => {
     if (!color) return 'bg-coral';
-    else if (color === 'promote') {
+    else if (color === Color.Promote) {
       return 'bg-teal';
-    } else if (color === 'night') {
+    } else if (color === Color.Night) {
       return 'bg-blue-lightest';
     }
   };

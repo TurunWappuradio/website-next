@@ -92,7 +92,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { name, id, heroImage, heroSubtext } =
     data.programmeCollection.items[0];
 
-  const { showsByDate, weekKeys } = await fetchShowlist(showlistId);
+  // TODO: old showlists used contentful. Bring back old implementation
+  const { showsByDate, weekKeys } = await fetchShowlist();
 
   const navigationItems = await fetchNavigationItems();
 
