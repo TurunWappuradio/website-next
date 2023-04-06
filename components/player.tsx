@@ -29,6 +29,7 @@ const Player = ({
 
   const { picture, name, hosts } = show ?? {};
   const url = name ? picture?.url ?? placeholderImage : testcard;
+  const loader = picture?.url ? null : contentfulImageLoader; // Required to render next images
   return (
     <div className="flex justify-center p-6">
       <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
@@ -36,7 +37,9 @@ const Player = ({
           <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
             <Image
               src={url}
+              loader={loader}
               objectFit="cover"
+              unoptimized={!picture?.url}
               layout="fill"
               alt=""
             />
