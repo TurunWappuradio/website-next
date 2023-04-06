@@ -74,9 +74,13 @@ const parseSheetToShowList = async (googleSheetData: sheets_v4.Schema$ValueRange
     const durationMillis = durationNumber*1000*60*60;
     const endDate = new Date(addMilliseconds(startDate, durationMillis));
 
-    const showColor = color || getIsNightTime(startDate)
+    const showColor = (color === Color.Night || getIsNightTime(startDate))
       ? Color.Night
-      : null;
+      : color === Color.Promote
+        ? Color.Promote
+        :  null;
+
+    console.log(showColor, color);
     const fileId = googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1]; // Parse id from query params `id=*`
     const picture = await downloadShowFile(fileId, name, { apiKey });
     
