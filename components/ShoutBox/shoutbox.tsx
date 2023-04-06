@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 
 import MessageInput from './messageinput';
@@ -49,6 +49,12 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
 
+
+  const addMessage = useCallback((message: any) => {
+    setMessages((messages) => [...messages, message].slice(-limit));
+    scrollToBottom();
+  }, [limit]);
+
   useEffect(() => {
     // Connect client
     webSocket.current = new WebSocket(wsURL);
@@ -98,12 +104,8 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     };
 
     // scrollToBottom();
-  }, []);
+  }, [addMessage, messages, name]);
 
-  function addMessage(message: any) {
-    setMessages((messages) => [...messages, message].slice(-limit));
-    scrollToBottom();
-  }
 
   function submitMessage(messageString: string) {
     // on submitting the MessageSend form, send the message, add it to the list and reset the input

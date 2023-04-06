@@ -45,14 +45,5 @@ const downloadFile = async (url: string, path: string, filename: string) => {
 
   }
   return newFilename;
-  
-  // console.log({ filename, newFilename, newFilePath});
-  // const writeStream = fs.createWriteStream(newFilePath);
-  // await finished(
-  //   body
-  //     .pipe(compressImageAndSaveStream)
-  //     .pipe(writeStream)
-  // );
-  // return newFilename;
 };
 export default downloadFile;
