@@ -4,7 +4,6 @@ import { GetStaticProps, NextPage } from 'next';
 import {
   fetchContent,
   fetchNavigationItems,
-  fetchShowlist,
   NavigationItem,
   Show,
   // Show,
@@ -19,6 +18,7 @@ import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 import { Showlist } from 'components/showlist';
 import Player from 'components/player';
+import { fetchShowlist } from 'google/client';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 

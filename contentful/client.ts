@@ -4,25 +4,20 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
-import { sheets_v4 } from '@googleapis/sheets';
 import {
   addDays,
-  addHours,
   eachDayOfInterval,
   eachWeekOfInterval,
   format,
-  formatISO,
-  getHours,
   getISOWeek,
   parse,
 } from 'date-fns';
-import { getFile, getSheet } from 'google/google';
 import { groupBy, head, keys, last } from 'ramda';
-import downloadFile from 'utils/downloadFile';
 import {
   NavigationItemsDocument,
   NavigationItemsQuery,
 } from './graphql/navigation.graphql';
+import { ShowlistDocument, ShowlistQuery } from './graphql/showlist.graphql';
 
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
@@ -67,107 +62,38 @@ export interface Picture {
   height?: number;
 }
 
-const parseSheetToShowList = async (googleSheetData: sheets_v4.Schema$ValueRange, { apiKey }: { apiKey: string}): Promise<Show[]> => {  
-  const showStartTime = process.env.SHOW_START_TIME;
-  if(!showStartTime) {
-    throw new Error('Env "SHOW_START_TIME" is missing');
-  }
-  const nightTimeHourStart = 22;
-  const nightTimeHourEnd = 6;
-
-  const getIsNightTime = (date:Date) => {
-    const startHour = getHours(date);
-    return startHour >= nightTimeHourStart && startHour <= 23 || startHour <= nightTimeHourEnd && startHour >= 0;
-  };
-  const showList =  googleSheetData.values.reduce<Promise<Show[]>>(async (acc, sheetRow, index) => {
-    if(!sheetRow || !Array.isArray(sheetRow)) {
-      return acc;
-    }
-    const [_id, duration, _start, _end, producer, name, description, hosts, googleFileUrl , color] = sheetRow;
-    // Lookup didn't find a show
-    if(!name || name === '#N/A') {
-      return acc;
-    }
-    const shows = await acc;
-
-    const previousEndTime = index ? shows[index-1].end : showStartTime;
-    const startDate = new Date(previousEndTime);
-    const endDate = new Date(addHours(startDate, duration));
-
-    const showColor = color || getIsNightTime(startDate)
-      ? Color.Night
-      : null;
-    const fileId = googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1]; // Parse id from query params `id=*`
-    const picture = await downloadShowFile(fileId, name, { apiKey });
-    
-    return shows.concat({
-      name,
-      start: formatISO(startDate),
-      end: formatISO(endDate),
-      date: formatISO(startDate),
-      description,
-      picture,
-      hosts,
-      producer,
-      color: showColor,
-    });
-  }, Promise.resolve([]));
-  return showList;
-};
-
 const fetchShowlist = async (
+  showlistId: string | string[]
 ): Promise<{
   showsByDate: Record<string, Show[]>;
   weekKeys: Record<string, string[]>;
 }> => {
-
-  const data = await getSheet({
-    apiKey: process.env.GA_API_KEY,
-    spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
-    range: process.env.GA_SPREADSHEET_RANGE
+  const data = await fetchContent<ShowlistQuery>(ShowlistDocument, {
+    showlistId,
   });
-  if(!data) {
-    return {
-      showsByDate: {},
-      weekKeys: {}
-    };
-  }
+  const showsCollection =
+    data.programmeCollection.items[0].showsCollection.items;
 
-  const shows = data ? await parseSheetToShowList(data, {apiKey: process.env.GA_API_KEY}) : [];
+  const shows = showsCollection.map((item: any) => ({
+    name: item.name,
+    start: item.start,
+    end: item.end,
+    date: format(new Date(item.start), 'y.M.dd'),
+    description: item.description,
+    picture: item.picture,
+    hosts: item.hosts,
+    producer: item.producer,
+    color: item.color,
+  }));
 
   const showsByDate = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
     shows
   );
-  const weekKeys = generateWeekObj(showsByDate);
-  return { showsByDate, weekKeys };
-};
 
-const downloadShowFile = async (fileId: string, fileTitle: string, { apiKey }:{apiKey:string}): Promise<Picture> => {
-  if(!fileId || !apiKey) {
-    return null;
-  }
-  const result = await getFile({
-    apiKey,
-    fileId,
-    fields: ['originalFilename', 'mimeType', 'webContentLink', 'size', 'mimeType']
-  });
-  const { originalFilename, mimeType, webContentLink, size  } = result.data;
-  const nextUrl = `/showlist`;
-  const fileUrl = `./public${nextUrl}`;
-  try {
-    await downloadFile(webContentLink, fileUrl, originalFilename);
-  } catch (error) {
-    console.error(`Failed to load google file ${fileId}`);
-    console.error(error);
-    return null;
-  }
-  return {
-    title: fileTitle,
-    url: `${nextUrl}/${originalFilename}`,
-    size: size ? Number(size) : null,
-    contentType: mimeType
-  };
+  const weekKeys = generateWeekObj(showsByDate);
+
+  return { showsByDate, weekKeys };
 };
 
 // Generate a nicely formatted object to use as keys.
@@ -192,7 +118,7 @@ const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
   return weekObj;
 };
 
-const fetchContent = async <T,>(
+const fetchContent = async <T>(
   query: DocumentNode,
   variables?: any
 ): Promise<T> => {
