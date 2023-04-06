@@ -1,7 +1,6 @@
 import fs from 'node:fs';
-import { join } from 'node:path';
-import stream from 'node:stream';
-import { finished } from 'node:stream/promises';
+import { join, parse } from 'node:path';
+import sharp from 'sharp';
 
 const scandicRegex = /[ÄäÖöÅå]/g;
 const scandicCharMap:Record<string, string> = {
@@ -16,22 +15,36 @@ const scandicCharMap:Record<string, string> = {
 export const replaceScandicCharacters = (text: string) =>
   text.replace(scandicRegex, char => scandicCharMap[char]);
   
+  
 const downloadFile = async (url: string, path: string, filename: string) => {
   if(!fs.existsSync(path)) { 
     fs.mkdirSync(path, { recursive: true });
   }
   const filePath = join(path, filename);
-  console.log(filePath, path, filename);
   if(fs.existsSync(filePath)) {
-    return;
+    return null;
   }
   const response = await fetch(url);
-  // @ts-ignore fromWeb is not found even it is there
-  const body = stream.Readable.fromWeb(response.body);
-  const writeStream = fs.createWriteStream(filePath);
-  await finished(
-    body
-      .pipe(writeStream)
-  );
+  
+  const extension = parse(filename).ext;  
+  const newFilename = filename.replace(extension, '.jpeg');
+  const newFilePath = join(path, newFilename);
+
+  const buffer = await response.arrayBuffer();
+
+  await sharp(buffer)
+    .resize(900)
+    .jpeg()
+    .toFile(newFilePath);
+  return newFilename;
+  
+  // console.log({ filename, newFilename, newFilePath});
+  // const writeStream = fs.createWriteStream(newFilePath);
+  // await finished(
+  //   body
+  //     .pipe(compressImageAndSaveStream)
+  //     .pipe(writeStream)
+  // );
+  // return newFilename;
 };
 export default downloadFile;
