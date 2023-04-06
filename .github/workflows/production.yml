@@ -54,6 +54,20 @@ jobs:
           NEXT_PUBLIC_METADATA_API: ${{ secrets.NEXT_PUBLIC_METADATA_API }}
           NEXT_PUBLIC_PLAYER_MODE: ${{ secrets.NEXT_PUBLIC_PLAYER_MODE_PROD }}
           NEXT_PUBLIC_SHOUTBOX_SOURCE: ${{ secrets.NEXT_PUBLIC_SHOUTBOX_SOURCE }}
+          SHOW_START_TIME: ${{ secrets.SHOW_START_TIME}}
+          GA_API_KEY: ${{ secrets.GA_API_KEY}}
+          GA_TYPE: ${{ secrets.GA_TYPE}}
+          GA_PROJECT_ID: ${{ secrets.GA_PROJECT_ID}}
+          GA_PRIVATE_KEY_ID: ${{ secrets.GA_PRIVATE_KEY_ID}}
+          GA_PRIVATE_KEY: ${{ secrets.GA_PRIVATE_KEY}}
+          GA_CLIENT_EMAIL: ${{ secrets.GA_CLIENT_EMAIL}}
+          GA_CLIENT_ID: ${{ secrets.GA_CLIENT_ID}}
+          GA_AUTH_URI: ${{ secrets.GA_AUTH_URI}}
+          GA_TOKEN_URI: ${{ secrets.GA_TOKEN_URI}}
+          GA_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.GA_AUTH_PROVIDER_X509_CERT_URL}}
+          GA_CLIENT_X509_CERT_URL: ${{ secrets.GA_CLIENT_X509_CERT_URL}}
+          GA_SPREADSHEET_SHOWLIST: ${{ secrets.GA_SPREADSHEET_SHOWLIST}}
+          GA_SPREADSHEET_RANGE: ${{ secrets.GA_SPREADSHEET_RANGE}}
         run: npm run build
 
       - name: Configure AWS credentials
