@@ -68,7 +68,11 @@ export const getFileRequest = async (jwt: auth.JWT, apiKey: string, fileId: stri
     const fieldString = fields?.join(',') || null;
     const result = await drive.files.get({ 
       fileId,
-      fields: fieldString
+      fields: fieldString,
+      alt: 'media'
+    },
+    {
+      responseType: 'arraybuffer'
     });
     if(result.status !== 200) {
       throw new Error(`Failed to load file ${fileId}`);

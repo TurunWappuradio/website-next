@@ -1,22 +1,17 @@
 
 import { sheets_v4 } from '@googleapis/sheets';
-import { getMinutes } from 'date-fns';
-import { addMinutes } from 'date-fns';
-import { addMilliseconds } from 'date-fns';
 import {
-  addDays,
-  addHours,
-  eachDayOfInterval,
+  addDays, addMilliseconds, eachDayOfInterval,
   eachWeekOfInterval,
   format,
   formatISO,
   getHours,
   getISOWeek,
-  parse,
+  parse
 } from 'date-fns';
 import { getFile, getSheet } from 'google/google';
 import { groupBy, head, keys, last } from 'ramda';
-import downloadFile from 'utils/downloadFile';
+import { doesFileExist, ensureDirectoryExists, getImagePath, saveArrayBufferToFile } from 'utils/fileHelpers';
 
 export enum Color {
   Night = 'night',
@@ -44,6 +39,9 @@ export interface Picture {
   height?: number;
 }
 
+const NEXT_URL = '/showlist' as const;
+const FILE_URL = `./public${NEXT_URL}` as const;
+
 const parseSheetToShowList = async (googleSheetData: sheets_v4.Schema$ValueRange, { apiKey }: { apiKey: string}): Promise<Show[]> => {  
   const showStartTime = process.env.SHOW_START_TIME;
   if(!showStartTime) {
@@ -56,6 +54,9 @@ const parseSheetToShowList = async (googleSheetData: sheets_v4.Schema$ValueRange
     const startHour = getHours(date);
     return startHour >= nightTimeHourStart && startHour <= 23 || startHour <= nightTimeHourEnd && startHour >= 0;
   };
+
+  ensureDirectoryExists(FILE_URL);
+  
   const showList =  googleSheetData.values.reduce<Promise<Show[]>>(async (acc, sheetRow, index) => {
     if(!sheetRow || !Array.isArray(sheetRow)) {
       return acc;
@@ -80,7 +81,6 @@ const parseSheetToShowList = async (googleSheetData: sheets_v4.Schema$ValueRange
         ? Color.Promote
         :  null;
 
-    console.log(showColor, color);
     const fileId = googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1]; // Parse id from query params `id=*`
     const picture = await downloadShowFile(fileId, name, { apiKey });
     
@@ -116,9 +116,7 @@ export const fetchShowlist = async (
       weekKeys: {}
     };
   }
-
   const shows = data ? await parseSheetToShowList(data, {apiKey: process.env.GA_API_KEY}) : [];
-
   const showsByDate = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
     shows
@@ -131,17 +129,22 @@ const downloadShowFile = async (fileId: string, fileTitle: string, { apiKey }:{a
   if(!fileId || !apiKey) {
     return null;
   }
+  const publicFileUrl = getImagePath(NEXT_URL, fileTitle);
+  if(doesFileExist(FILE_URL, fileTitle)) {
+    return       {
+      title: fileTitle,
+      url: publicFileUrl,
+      contentType: 'image/jpeg',
+      size: null,
+    };
+  }
   const result = await getFile({
     apiKey,
-    fileId,
-    fields: ['originalFilename', 'mimeType', 'webContentLink', 'size', 'mimeType']
+    fileId
   });
-  const { originalFilename, mimeType, webContentLink, size  } = result.data;
-  const nextUrl = `/showlist`;
-  const fileUrl = `./public${nextUrl}`;
-  let newFilename = null;
   try {
-    newFilename = await downloadFile(webContentLink, fileUrl, originalFilename);
+    const imageArrayBuffer = result.data as ArrayBuffer; // Me just lazy...
+    await saveArrayBufferToFile(imageArrayBuffer, FILE_URL, fileTitle);
   } catch (error) {
     console.error(`Failed to load google file ${fileId}`);
     console.error(error);
@@ -149,9 +152,9 @@ const downloadShowFile = async (fileId: string, fileTitle: string, { apiKey }:{a
   }
   return {
     title: fileTitle,
-    url: `${nextUrl}/${newFilename}`,
-    size: size ? Number(size) : null,
-    contentType: mimeType
+    url: publicFileUrl,
+    contentType: 'image/jpeg',
+    size: null,
   };
 };
 
