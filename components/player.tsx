@@ -6,7 +6,8 @@ import { Show } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
-import Controls from './controls';
+import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
+import { FiPause, FiPlay, FiMessageSquare, FiVideo } from 'react-icons/fi';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 
@@ -18,14 +19,19 @@ interface PlayerProps {
   showsByDate: Record<string, Show[]>;
 }
 
-const Player = ({
-  playing,
-  onPlayPause,
-  muted,
-  onMute,
-  showsByDate,
-}: PlayerProps) => {
+const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
   const show = useCurrentShow(showsByDate);
+
+  const { shoutboxOpen, setShoutboxOpen, videoOpen, setVideoOpen } =
+    useShoutBoxAndVideo();
+
+  const handleShoutboxToggle = () => {
+    setShoutboxOpen(!shoutboxOpen);
+  };
+
+  const handleVideoToggle = () => {
+    setVideoOpen(!videoOpen);
+  };
 
   const { picture, name, hosts } = show ?? {};
   const url = name ? picture?.url ?? placeholderImage : testcard;
@@ -47,7 +53,7 @@ const Player = ({
         </div>
         <div className="mx-6 flex flex-col justify-between py-4 text-white md:mx-10 md:h-full md:py-10">
           {name && (
-            <div className="flex flex-col">
+            <div className="mb-4 flex flex-col">
               <span className="text-teal">Ohjelmassa nyt</span>
               <span className="text-lg font-bold">{name}</span>
               <span className="opacity-80">
@@ -55,14 +61,38 @@ const Player = ({
               </span>
             </div>
           )}
-          <div className="mt-4">
-            <Controls
-              playing={playing}
-              onPlayPause={onPlayPause}
-              muted={muted}
-              onMute={onMute}
-              showChatAndVideo
-            />
+
+          <div className="flex w-full flex-wrap items-center gap-4">
+            <button
+              onClick={onPlayPause}
+              title="Play/Pause"
+              className={`flex h-20 w-20 items-center justify-center rounded-full ${
+                playing ? 'bg-teal' : 'bg-coral'
+              }`}
+            >
+              {playing ? <FiPause size="3rem" /> : <FiPlay size="3rem" />}
+            </button>
+
+            <div className={`flex items-center gap-4`}>
+              <button
+                onClick={handleShoutboxToggle}
+                title="chat"
+                className={`h-12 w-12 rounded-full ${
+                  shoutboxOpen ? 'bg-teal' : 'bg-coral'
+                }`}
+              >
+                <FiMessageSquare size="1.7rem" className="mx-auto" />
+              </button>
+              <button
+                onClick={handleVideoToggle}
+                title="Webcam"
+                className={`h-12 w-12 rounded-full ${
+                  videoOpen ? 'bg-teal' : 'bg-coral'
+                }`}
+              >
+                <FiVideo size="1.7rem" className="mx-auto" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

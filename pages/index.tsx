@@ -6,7 +6,6 @@ import {
   fetchNavigationItems,
   NavigationItem,
   Show,
-  // Show,
 } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import RichText from 'components/richtext';
