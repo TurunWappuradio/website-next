@@ -25,7 +25,7 @@ export const WideScreencard = ({
   return (
     <button className="card-height flex p-2" onClick={onClick}>
       <div
-        className={`flex h-full w-full rounded-sm px-1 ${getBackgroundColor()}`}
+        className={`flex h-full w-full rounded-sm px-1 overflow-hidden ${getBackgroundColor()}`}
       >
         <p
           className="m-auto text-sm text-white"
