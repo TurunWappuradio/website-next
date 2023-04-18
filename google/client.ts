@@ -108,7 +108,14 @@ const parseSheetToShowList = async (
         ? Color.Promote
         : null;
 
-      const fileId = googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1]; // Parse id from query params `id=*`
+      // Google file urls have two types:
+      // from forms: https://drive.google.com/open?id=<fileId>'
+      // direct file link: https://drive.google.com/file/d/<fileId>/view?usp=share_link
+      // Handle both cases
+      const fileId =
+        googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1] ||
+        googleFileUrl?.match(/.*file\/d\/(.*[^&])\/+.*/)?.[1];
+
       const picture = await downloadShowFile(fileId, name, { apiKey });
 
       return shows.concat({
