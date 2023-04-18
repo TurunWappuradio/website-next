@@ -78,19 +78,19 @@ const useCurrentShow = (showsByDate?: Record<string, Show[]>) => {
       const now = new Date();
       const currentDate = format(now, 'y.M.dd');
       const todaysShows = showsByDate?.[currentDate];
-  
+
       if (!todaysShows) {
         setCurrentShow(null);
         return;
       }
-  
+
       const currentShow: Show | null = todaysShows.find((show) => {
         const startTime = new Date(show.start);
         const endTime = new Date(show.end);
-  
+
         return now >= startTime && now <= endTime;
       });
-  
+
       setCurrentShow(currentShow);
     };
 

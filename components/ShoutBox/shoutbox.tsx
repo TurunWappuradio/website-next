@@ -49,11 +49,13 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
 
-
-  const addMessage = useCallback((message: any) => {
-    setMessages((messages) => [...messages, message].slice(-limit));
-    scrollToBottom();
-  }, [limit]);
+  const addMessage = useCallback(
+    (message: any) => {
+      setMessages((messages) => [...messages, message].slice(-limit));
+      scrollToBottom();
+    },
+    [limit]
+  );
 
   useEffect(() => {
     // Connect client
@@ -105,7 +107,6 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
 
     // scrollToBottom();
   }, [addMessage, messages, name]);
-
 
   function submitMessage(messageString: string) {
     // on submitting the MessageSend form, send the message, add it to the list and reset the input

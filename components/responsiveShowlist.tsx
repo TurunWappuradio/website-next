@@ -82,7 +82,7 @@ export const ResponsiveShowlist = ({
   const getPreviousDate =
     dates.indexOf(selectedDate) <= dates.length - 1
       ? dates[dates.indexOf(selectedDate) - 1]
-      : null;      
+      : null;
   return (
     <>
       <div

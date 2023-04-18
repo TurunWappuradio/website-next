@@ -1,17 +1,23 @@
-
 import { sheets_v4 } from '@googleapis/sheets';
 import {
-  addDays, addMilliseconds, eachDayOfInterval,
+  addDays,
+  addMilliseconds,
+  eachDayOfInterval,
   eachWeekOfInterval,
   format,
   formatISO,
   getHours,
   getISOWeek,
-  parse
+  parse,
 } from 'date-fns';
 import { getFile, getSheet } from 'google/google';
 import { groupBy, head, keys, last } from 'ramda';
-import { doesFileExist, ensureDirectoryExists, getImagePath, saveArrayBufferToFile } from 'utils/fileHelpers';
+import {
+  doesFileExist,
+  ensureDirectoryExists,
+  getImagePath,
+  saveArrayBufferToFile,
+} from 'utils/fileHelpers';
 
 export enum Color {
   Night = 'night',
@@ -42,81 +48,104 @@ export interface Picture {
 const NEXT_URL = '/showlist' as const;
 const FILE_URL = `./public${NEXT_URL}` as const;
 
-const parseSheetToShowList = async (googleSheetData: sheets_v4.Schema$ValueRange, { apiKey }: { apiKey: string}): Promise<Show[]> => {  
+const parseSheetToShowList = async (
+  googleSheetData: sheets_v4.Schema$ValueRange,
+  { apiKey }: { apiKey: string }
+): Promise<Show[]> => {
   const showStartTime = process.env.SHOW_START_TIME;
-  if(!showStartTime) {
+  if (!showStartTime) {
     throw new Error('Env "SHOW_START_TIME" is missing');
   }
   const nightTimeHourStart = 22;
   const nightTimeHourEnd = 6;
 
-  const getIsNightTime = (date:Date) => {
+  const getIsNightTime = (date: Date) => {
     const startHour = getHours(date);
-    return startHour >= nightTimeHourStart && startHour <= 23 || startHour <= nightTimeHourEnd && startHour >= 0;
+    return (
+      (startHour >= nightTimeHourStart && startHour <= 23) ||
+      (startHour <= nightTimeHourEnd && startHour >= 0)
+    );
   };
 
   ensureDirectoryExists(FILE_URL);
-  
-  const showList =  googleSheetData.values.reduce<Promise<Show[]>>(async (acc, sheetRow, index) => {
-    if(!sheetRow || !Array.isArray(sheetRow)) {
-      return acc;
-    }
-    const [_id, duration, _start, _end, producer, name, description, hosts, googleFileUrl , color] = sheetRow;
-    // Duration can be decimal and because google sheet requires comma, make those a number
-    const durationNumber = duration.includes(',') ? Number(duration?.replace(',','.')) : duration;
-    // Lookup didn't find a show
-    if(!name || name === '#N/A') {
-      return acc;
-    }
-    const shows = await acc;
 
-    const previousEndTime = index ? shows[index-1].end : showStartTime;
-    const startDate = new Date(previousEndTime);
-    const durationMillis = durationNumber*1000*60*60;
-    const endDate = new Date(addMilliseconds(startDate, durationMillis));
+  const showList = googleSheetData.values.reduce<Promise<Show[]>>(
+    async (acc, sheetRow, index) => {
+      if (!sheetRow || !Array.isArray(sheetRow)) {
+        return acc;
+      }
+      const [
+        _id,
+        duration,
+        _start,
+        _end,
+        producer,
+        name,
+        description,
+        hosts,
+        googleFileUrl,
+        color,
+      ] = sheetRow;
+      // Duration can be decimal and because google sheet requires comma, make those a number
+      const durationNumber = duration.includes(',')
+        ? Number(duration?.replace(',', '.'))
+        : duration;
+      // Lookup didn't find a show
+      if (!name || name === '#N/A') {
+        return acc;
+      }
+      const shows = await acc;
 
-    const showColor = (color === Color.Night || getIsNightTime(startDate))
-      ? Color.Night
-      : color === Color.Promote
+      const previousEndTime = index ? shows[index - 1].end : showStartTime;
+      const startDate = new Date(previousEndTime);
+      const durationMillis = durationNumber * 1000 * 60 * 60;
+      const endDate = new Date(addMilliseconds(startDate, durationMillis));
+
+      const isNight = color === Color.Night || getIsNightTime(startDate);
+      const showColor = isNight
+        ? Color.Night
+        : color === Color.Promote
         ? Color.Promote
-        :  null;
+        : null;
 
-    const fileId = googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1]; // Parse id from query params `id=*`
-    const picture = await downloadShowFile(fileId, name, { apiKey });
-    
-    return shows.concat({
-      name,
-      start: formatISO(startDate),
-      end: formatISO(endDate),
-      date: formatISO(startDate),
-      description,
-      picture,
-      hosts,
-      producer,
-      color: showColor,
-    });
-  }, Promise.resolve([]));
+      const fileId = googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1]; // Parse id from query params `id=*`
+      const picture = await downloadShowFile(fileId, name, { apiKey });
+
+      return shows.concat({
+        name,
+        start: formatISO(startDate),
+        end: formatISO(endDate),
+        date: formatISO(startDate),
+        description,
+        picture,
+        hosts,
+        producer,
+        color: showColor,
+      });
+    },
+    Promise.resolve([])
+  );
   return showList;
 };
 
-export const fetchShowlist = async (
-): Promise<{
+export const fetchShowlist = async (): Promise<{
   showsByDate: Record<string, Show[]>;
   weekKeys: Record<string, string[]>;
 }> => {
-
   const data = await getSheet({
     apiKey: process.env.GA_API_KEY,
     spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
-    range: process.env.GA_SPREADSHEET_RANGE
+    range: process.env.GA_SPREADSHEET_RANGE,
   });
-  if(!data) {
+  if (!data) {
     return {
       showsByDate: {},
-      weekKeys: {}
+      weekKeys: {},
     };
   }
-  const shows = data ? await parseSheetToShowList(data, {apiKey: process.env.GA_API_KEY}) : [];
+  const shows = data
+    ? await parseSheetToShowList(data, { apiKey: process.env.GA_API_KEY })
+    : [];
   const showsByDate = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
     shows
@@ -125,13 +154,17 @@ export const fetchShowlist = async (
   return { showsByDate, weekKeys };
 };
 
-const downloadShowFile = async (fileId: string, fileTitle: string, { apiKey }:{apiKey:string}): Promise<Picture> => {
-  if(!fileId || !apiKey) {
+const downloadShowFile = async (
+  fileId: string,
+  fileTitle: string,
+  { apiKey }: { apiKey: string }
+): Promise<Picture> => {
+  if (!fileId || !apiKey) {
     return null;
   }
   const publicFileUrl = getImagePath(NEXT_URL, fileTitle);
-  if(doesFileExist(FILE_URL, fileTitle)) {
-    return       {
+  if (doesFileExist(FILE_URL, fileTitle)) {
+    return {
       title: fileTitle,
       url: publicFileUrl,
       contentType: 'image/jpeg',
@@ -140,7 +173,7 @@ const downloadShowFile = async (fileId: string, fileTitle: string, { apiKey }:{a
   }
   const result = await getFile({
     apiKey,
-    fileId
+    fileId,
   });
   try {
     const imageArrayBuffer = result.data as ArrayBuffer; // Me just lazy...
