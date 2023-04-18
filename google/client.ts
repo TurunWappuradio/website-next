@@ -125,8 +125,8 @@ const parseSheetToShowList = async (
         date: formatISO(startDate),
         description,
         picture,
-        hosts,
-        producer,
+        hosts: hosts || null,
+        producer: producer || null,
         color: showColor,
       });
     },
