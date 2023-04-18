@@ -105,46 +105,46 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
       {/* First section */}
-      <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
-        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
-          <Image
-            src={firstDecorativeImage.url}
-            loader={contentfulImageLoader}
-            layout="fill"
-            objectFit="cover"
-            className="rounded"
-            alt=""
-          />
-        </div>
-        <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
-          <RichText content={firstContent} />
-        </section>
-      </main>
+      {/* <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8"> */}
+      {/*   <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96"> */}
+      {/*     <Image */}
+      {/*       src={firstDecorativeImage.url} */}
+      {/*       loader={contentfulImageLoader} */}
+      {/*       layout="fill" */}
+      {/*       objectFit="cover" */}
+      {/*       className="rounded" */}
+      {/*       alt="" */}
+      {/*     /> */}
+      {/*   </div> */}
+      {/*   <section className="m-4 w-128 max-w-full text-lg text-white md:m-8"> */}
+      {/*     <RichText content={firstContent} /> */}
+      {/*   </section> */}
+      {/* </main> */}
 
       {/* Second section */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
-        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
-          <RichText content={secondContent} />
-        </section>
-        <Calendar />
-      </div>
+      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8"> */}
+      {/*   <section className="m-4 w-128 max-w-full text-base text-white md:m-8"> */}
+      {/*     <RichText content={secondContent} /> */}
+      {/*   </section> */}
+      {/*   <Calendar /> */}
+      {/* </div> */}
 
       {/* Third section */}
-      <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
-        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
-          <RichText content={thirdContent} />
-        </section>
-        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
-          <Image
-            src={secondDecorativeImage.url}
-            loader={contentfulImageLoader}
-            layout="fill"
-            objectFit="cover"
-            className="rounded"
-            alt=""
-          />
-        </div>
-      </div>
+      {/* <div className="flex flex-wrap items-center justify-center py-4 md:py-8"> */}
+      {/*   <section className="m-4 w-128 max-w-full text-base text-white md:m-8"> */}
+      {/*     <RichText content={thirdContent} /> */}
+      {/*   </section> */}
+      {/*   <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96"> */}
+      {/*     <Image */}
+      {/*       src={secondDecorativeImage.url} */}
+      {/*       loader={contentfulImageLoader} */}
+      {/*       layout="fill" */}
+      {/*       objectFit="cover" */}
+      {/*       className="rounded" */}
+      {/*       alt="" */}
+      {/*     /> */}
+      {/*   </div> */}
+      {/* </div> */}
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
