@@ -18,6 +18,7 @@
 # misc
 .DS_Store
 *.pem
+/stuff
 
 # debug
 npm-debug.log*
@@ -38,3 +39,6 @@ yarn-error.log*
 *.graphqls.d.ts
 /.cache
 .vscode
+
+# showlist files
+/public/showlist

@@ -23,7 +23,6 @@ const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
         ${alternate ? '' : ''}
         `}
         onClick={() => onClick(value)}
-        href="javascript:void(0);"
       >
         {alternate && <BsArrowLeft className="mr-2 h-6 w-6" />}
         {text}
@@ -84,7 +83,6 @@ export const ResponsiveShowlist = ({
     dates.indexOf(selectedDate) <= dates.length - 1
       ? dates[dates.indexOf(selectedDate) - 1]
       : null;
-
   return (
     <>
       <div
@@ -110,7 +108,7 @@ export const ResponsiveShowlist = ({
         </select>
 
         <div className="mr-auto w-full space-y-4 lg:ml-[10rem]">
-          {showsByDate[selectedDate].map((show, i) => (
+          {showsByDate[selectedDate]?.map((show, i) => (
             <ShowCard show={show} key={show.date + i} index={i} />
           ))}
         </div>

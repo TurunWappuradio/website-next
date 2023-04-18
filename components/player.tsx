@@ -29,9 +29,7 @@ const Player = ({
 
   const { picture, name, hosts } = show ?? {};
   const url = name ? picture?.url ?? placeholderImage : testcard;
-
-  const loader = picture?.url ? contentfulImageLoader : undefined;
-
+  const loader = picture?.url ? null : contentfulImageLoader; // Required to render next images
   return (
     <div className="flex justify-center p-6">
       <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
@@ -72,34 +70,34 @@ const Player = ({
   );
 };
 
-const useCurrentShow = (showsByDate: Record<string, Show[]>) => {
+const useCurrentShow = (showsByDate?: Record<string, Show[]>) => {
   const [currentShow, setCurrentShow] = useState<Show | null>(null);
 
-  const getCurrentShow = () => {
-    const now = new Date();
-    const currentDate = format(now, 'y.M.dd');
-    const todaysShows = showsByDate[currentDate];
-
-    if (!todaysShows) {
-      setCurrentShow(null);
-      return;
-    }
-
-    const currentShow: Show | null = todaysShows.find((show) => {
-      const startTime = new Date(show.start);
-      const endTime = new Date(show.end);
-
-      return now >= startTime && now <= endTime;
-    });
-
-    setCurrentShow(currentShow);
-  };
-
   useEffect(() => {
+    const getCurrentShow = () => {
+      const now = new Date();
+      const currentDate = format(now, 'y.M.dd');
+      const todaysShows = showsByDate?.[currentDate];
+
+      if (!todaysShows) {
+        setCurrentShow(null);
+        return;
+      }
+
+      const currentShow: Show | null = todaysShows.find((show) => {
+        const startTime = new Date(show.start);
+        const endTime = new Date(show.end);
+
+        return now >= startTime && now <= endTime;
+      });
+
+      setCurrentShow(currentShow);
+    };
+
     getCurrentShow();
     const updater = setInterval(getCurrentShow, SHOW_REFRESH_TIME);
     return () => clearInterval(updater);
-  }, []);
+  }, [showsByDate]);
 
   return currentShow;
 };
