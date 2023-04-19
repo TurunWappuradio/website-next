@@ -39,7 +39,7 @@ interface DateButton {
 }
 const DateButton = ({ value, isSelected, onClick }: DateButton) => {
   const dateParsed = parse(value, 'y.M.dd', new Date());
-  const str = format(dateParsed, 'cccc d.M', { locale: fi });
+  const str = format(dateParsed, 'cccc d.M.', { locale: fi });
 
   return (
     <button
@@ -70,7 +70,7 @@ export const ResponsiveShowlist = ({
 
   const setDateAndScroll = (date: string) => {
     setSelectedDate(date);
-    var element = document.getElementById('showList');
+    const element = document.getElementById('showList');
     element.scrollIntoView(true);
   };
 
