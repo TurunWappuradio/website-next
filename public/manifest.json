@@ -1,5 +1,6 @@
 {
-  "short_name": "Turun Wappuradio",
+  "short_name": "Wappuradio",
+  "name": "Turun Wappuradio",
   "start_url": "/",
   "display": "fullscreen",
   "icons": [

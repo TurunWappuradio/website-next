@@ -64,6 +64,11 @@ class MyDocument extends Document {
             name="msapplication-square310x310logo"
             content="/logo@310.png"
           />
+
+          {/* Apple */}
+          <link rel="apple-touch-icon" href="/logo@32.png" />
+          <link rel="apple-touch-icon" sizes="192x192" href="/logo@192.png" />
+          <link rel="apple-touch-icon" sizes="512x512" href="/logo@512.png" />
         </Head>
         <body className="bg-blue bg-gradient-to-b from-blue to-blue-light">
           <Main />
