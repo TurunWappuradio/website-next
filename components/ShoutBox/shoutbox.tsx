@@ -49,14 +49,6 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
 
-  const addMessage = useCallback(
-    (message: any) => {
-      setMessages((messages) => [...messages, message].slice(-limit));
-      scrollToBottom();
-    },
-    [limit]
-  );
-
   useEffect(() => {
     // Connect client
     webSocket.current = new WebSocket(wsURL);
@@ -106,7 +98,12 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     };
 
     // scrollToBottom();
-  }, [addMessage, messages, name]);
+  }, []);
+
+  function addMessage(message: any) {
+    setMessages((messages) => [...messages, message].slice(-limit));
+    scrollToBottom();
+  }
 
   function submitMessage(messageString: string) {
     // on submitting the MessageSend form, send the message, add it to the list and reset the input
@@ -149,10 +146,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[38rem]">
-      <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
+    <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem]">
+      <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
-          className="h-[81%] overflow-auto overflow-x-hidden py-2 px-0 text-white md:h-[85%]"
+          className="h-[81%] overflow-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%]"
           ref={messagesViewport}
         >
           {messages.map((message, index) => (
