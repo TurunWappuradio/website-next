@@ -10,6 +10,8 @@ interface PlayerControlPanelProps {
   onVolumeChange: (value: number) => void;
 }
 
+const SHOW_START_TIME = process.env.NEXT_PUBLIC_SHOW_START_TIME;
+
 const PlayerControlPanel = ({
   playing,
   onPlayPause,
@@ -21,7 +23,7 @@ const PlayerControlPanel = ({
   const { song, artist } = useMetadata();
 
   // Show metadata only after the lähetys starts.
-  const showMeta = true;
+  const showMeta = new Date().getTime() > Date.parse(SHOW_START_TIME);
 
   return (
     <>

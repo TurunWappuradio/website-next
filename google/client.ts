@@ -52,9 +52,9 @@ const parseSheetToShowList = async (
   googleSheetData: sheets_v4.Schema$ValueRange,
   { apiKey }: { apiKey: string }
 ): Promise<Show[]> => {
-  const showStartTime = process.env.SHOW_START_TIME;
+  const showStartTime = process.env.NEXT_PUBLIC_SHOW_START_TIME;
   if (!showStartTime) {
-    throw new Error('Env "SHOW_START_TIME" is missing');
+    throw new Error('Env "NEXT_PUBLIC_SHOW_START_TIME" is missing');
   }
   const nightTimeHourStart = 22;
   const nightTimeHourEnd = 6;
