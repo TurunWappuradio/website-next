@@ -1,18 +1,25 @@
+import { format } from 'date-fns';
 import React from 'react';
 
 interface NameFormatterProps {
   name: string;
+  timestamp?: number;
 }
 
-const NameFormatter = ({ name }: NameFormatterProps) => (
-  <div
-    className={` flex flex-col justify-center pr-2 text-sm font-bold ${findStyle(
-      name
-    )}`}
-  >
-    {name}:
-  </div>
-);
+const NameFormatter = ({ name, timestamp }: NameFormatterProps) => {
+  const time = timestamp ? format(new Date(timestamp), 'HH:mm') : null;
+
+  return (
+    <div
+      className={`flex items-center pr-2 text-sm font-bold ${findStyle(name)}`}
+    >
+      {name}
+      {time ? (
+        <span className="pl-2 text-xs font-normal opacity-70">{time}</span>
+      ) : null}
+    </div>
+  );
+};
 
 const findStyle = (name: string) => {
   switch (name) {

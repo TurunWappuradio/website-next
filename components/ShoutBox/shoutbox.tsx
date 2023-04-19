@@ -41,10 +41,16 @@ export const ChatWrapper = () => {
   );
 };
 
+interface Message {
+  name: string;
+  message: string;
+  timestamp: number;
+}
+
 const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const [name, setName] = useState('');
   const [isAdmin, setAdmin] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [wsConnected, setWsConnected] = useState(false);
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
@@ -72,10 +78,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
         return webSocket.current.send('PONG');
       }
 
-      const { type, name, message } = JSON.parse(e.data);
+      const { type, name, message, timestamp } = JSON.parse(e.data);
 
       if (type === 'message' && name && message) {
-        addMessage({ name, message });
+        addMessage({ name, message, timestamp });
       } else if (type === 'admin') {
         setAdmin(true);
       }
@@ -157,6 +163,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               key={index}
               message={message.message}
               name={message.name}
+              timestamp={message.timestamp}
               color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
