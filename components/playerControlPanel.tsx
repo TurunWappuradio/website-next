@@ -6,6 +6,8 @@ interface PlayerControlPanelProps {
   onPlayPause: () => void;
   muted: boolean;
   onMute: () => void;
+  volume: number;
+  onVolumeChange: (value: number) => void;
 }
 
 const PlayerControlPanel = ({
@@ -13,6 +15,8 @@ const PlayerControlPanel = ({
   onPlayPause,
   muted,
   onMute,
+  volume,
+  onVolumeChange,
 }: PlayerControlPanelProps) => {
   const { song, artist } = useMetadata();
 
@@ -29,7 +33,8 @@ const PlayerControlPanel = ({
               onPlayPause={onPlayPause}
               muted={muted}
               onMute={onMute}
-              isSmall={true}
+              volume={volume}
+              onVolumeChange={onVolumeChange}
             />
           </div>
 
