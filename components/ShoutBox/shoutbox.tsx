@@ -41,21 +41,19 @@ export const ChatWrapper = () => {
   );
 };
 
+interface Message {
+  name: string;
+  message: string;
+  timestamp: number;
+}
+
 const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   const [name, setName] = useState('');
   const [isAdmin, setAdmin] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [wsConnected, setWsConnected] = useState(false);
   const webSocket = useRef<WebSocket>(null);
   const messagesViewport = useRef(null);
-
-  const addMessage = useCallback(
-    (message: any) => {
-      setMessages((messages) => [...messages, message].slice(-limit));
-      scrollToBottom();
-    },
-    [limit]
-  );
 
   useEffect(() => {
     // Connect client
@@ -80,10 +78,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
         return webSocket.current.send('PONG');
       }
 
-      const { type, name, message } = JSON.parse(e.data);
+      const { type, name, message, timestamp } = JSON.parse(e.data);
 
       if (type === 'message' && name && message) {
-        addMessage({ name, message });
+        addMessage({ name, message, timestamp });
       } else if (type === 'admin') {
         setAdmin(true);
       }
@@ -106,7 +104,12 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     };
 
     // scrollToBottom();
-  }, [addMessage, messages, name]);
+  }, []);
+
+  function addMessage(message: any) {
+    setMessages((messages) => [...messages, message].slice(-limit));
+    scrollToBottom();
+  }
 
   function submitMessage(messageString: string) {
     // on submitting the MessageSend form, send the message, add it to the list and reset the input
@@ -149,10 +152,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex h-96 w-full max-w-6xl py-6 px-[25px] md:h-[38rem]">
-      <div className="my-0 mx-auto h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
+    <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem]">
+      <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
-          className="h-[81%] overflow-auto overflow-x-hidden py-2 px-0 text-white md:h-[85%]"
+          className="h-[81%] overflow-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%]"
           ref={messagesViewport}
         >
           {messages.map((message, index) => (
@@ -160,6 +163,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               key={index}
               message={message.message}
               name={message.name}
+              timestamp={message.timestamp}
               color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}

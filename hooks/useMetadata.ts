@@ -21,6 +21,11 @@ const useMetadata = (): Metadata => {
     // Update only if changed to avoid unnecessary re-renders
     if (data.song != metadata.song || data.artist != metadata.artist) {
       setMetadata(data);
+
+      // show metadata in mobile media widget.
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = buildMediaMetadata(data);
+      }
     }
   };
 
@@ -31,6 +36,35 @@ const useMetadata = (): Metadata => {
   }, []);
 
   return metadata;
+};
+
+const buildMediaMetadata = ({ song, artist }: Metadata): MediaMetadata => {
+  return new MediaMetadata({
+    title: song,
+    artist,
+    artwork: [
+      {
+        src: '/logo@512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+      {
+        src: '/logo@310.png',
+        sizes: '310x310',
+        type: 'image/png',
+      },
+      {
+        src: '/logo@192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: '/logo@152.png',
+        sizes: '152x152',
+        type: 'image/png',
+      },
+    ],
+  });
 };
 
 export default useMetadata;

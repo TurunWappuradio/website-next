@@ -1,0 +1,18 @@
+{
+  "short_name": "Wappuradio",
+  "name": "Turun Wappuradio",
+  "start_url": "/",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/logo@512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/logo@192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
