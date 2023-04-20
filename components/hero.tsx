@@ -46,7 +46,7 @@ const Hero: FC<HeroProps> = ({
   return (
     <>
       <div
-        className={`relative flex w-full flex-col ${
+        className={`relative flex w-full flex-col py-2 ${
           isCompact ? 'h-72' : 'h-128 xl:h-160'
         }`}
       >
@@ -94,17 +94,17 @@ const Hero: FC<HeroProps> = ({
               unoptimized={true}
             />
           </div>
-          <div className="flex flex-col pb-6">
-            <h1 className="my-1 text-[1.6rem] font-bold text-coral md:my-1 md:text-4xl">
+          <div className="flex flex-col">
+            <h1 className="my-1 text-[1.2rem] font-bold text-coral md:my-1 md:text-4xl">
               {title}
             </h1>
-            <p className="my-1 text-lg text-white md:my-1 md:text-2xl">
-              {subtext}
-            </p>
+            <p className="text-md my-1 text-white md:text-xl">{subtext}</p>
 
             {buttonText && buttonLink ? (
               <LinkButton
-                className="text-md my-3 ml-auto md:text-xl"
+                className={`${
+                  isCompact ? 'md:text-md text-sm' : 'text-md md:text-xl'
+                } my-3 ml-auto`}
                 href={buttonLink}
               >
                 {buttonText}
@@ -115,7 +115,7 @@ const Hero: FC<HeroProps> = ({
       </div>
       {/* Mobile hamburger menu */}
       <Hamburger
-        className="fixed top-0 right-0 z-50 md:hidden"
+        className="fixed right-0 top-0 z-50 md:hidden"
         isOpen={isOpen}
         onClick={handleHamburgerClick}
       />

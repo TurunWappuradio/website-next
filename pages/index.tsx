@@ -89,7 +89,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         buttonLink={heroButtonLink}
         buttonText={heroButtonText}
         navigationItems={navigationItems}
-        isCompact={false}
+        isCompact={true}
       />
       {isPlayerLive && (
         <Player
