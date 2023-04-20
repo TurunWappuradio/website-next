@@ -35,7 +35,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
 
   const { picture, name, hosts } = show ?? {};
   const url = testcard;
-  const loader = null; // Required to render next images
+  const loader: any = null; // Required to render next images
 
   return (
     <div className="flex justify-center p-6">
