@@ -53,7 +53,7 @@ const PlayerControlPanel = ({
               <span>Taajuudella</span> <b>93,8 MHz</b>
             </div>
             <div>
-              <span>Studio</span> <b>023 619 0516</b>
+              <span>Studio</span> <b>02 3619 2819</b>
             </div>
           </div>
         </div>
