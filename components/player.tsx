@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 import { Show } from 'contentful/client';
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import testcard from '../public/testcard.webp';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
@@ -34,9 +33,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
   };
 
   const { picture, name, hosts } = show ?? {};
-  const url = testcard;
-  const loader: any = null; // Required to render next images
-
+  const url = name ? picture?.url ?? placeholderImage : testcard;
   return (
     <div className="flex justify-center p-6">
       <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
@@ -44,9 +41,8 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
           <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
             <Image
               src={url}
-              loader={loader}
               objectFit="cover"
-              unoptimized={true}
+              unoptimized={true} // next.config.js has `loader:'custom'` therefore Image component expects loader-prop. Show images 2023 are optimized on built time.
               layout="fill"
               alt=""
             />
