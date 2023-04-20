@@ -30,9 +30,18 @@ const LinkButton: FC<LinkButtonProps> = ({
   href,
   ...props
 }) => {
+  const isExternal = !href.startsWith('https://turunwappuradio.com');
+  const target = isExternal ? '_blank' : null;
+  const rel = isExternal ? 'noopener noreferrer' : null;
+
   return (
     <Link href={href}>
-      <a className={`${buttonStyle} ${className || ''}`} {...props}>
+      <a
+        target={target}
+        rel={rel}
+        className={`${buttonStyle} ${className || ''}`}
+        {...props}
+      >
         {children}
       </a>
     </Link>
