@@ -46,8 +46,8 @@ jobs:
           NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL: ${{ secrets.NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL }}
           NEXT_PUBLIC_METADATA_PI: ${{ secrets.NEXT_PUBLIC_METADATA_API }}
           NEXT_PUBLIC_PLAYER_MODE: ${{ secrets.NEXT_PUBLIC_PLAYER_MODE_DEVELOP }}
-          SHOW_START_TIME: ${{ secrets.SHOW_START_TIME}}
-          GA_API_KEY: ${{ secrets.GA_API_KEY}}
+          NEXT_PUBLIC_SHOW_START_TIME: ${{ secrets.NEXT_PUBLIC_SHOW_START_TIME }}
+          GA_API_KEY: ${{ secrets.GA_API_KEY }}
           GA_TYPE: ${{ secrets.GA_TYPE}}
           GA_PROJECT_ID: ${{ secrets.GA_PROJECT_ID}}
           GA_PRIVATE_KEY_ID: ${{ secrets.GA_PRIVATE_KEY_ID}}

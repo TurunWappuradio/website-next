@@ -6,18 +6,24 @@ interface PlayerControlPanelProps {
   onPlayPause: () => void;
   muted: boolean;
   onMute: () => void;
+  volume: number;
+  onVolumeChange: (value: number) => void;
 }
+
+const SHOW_START_TIME = process.env.NEXT_PUBLIC_SHOW_START_TIME;
 
 const PlayerControlPanel = ({
   playing,
   onPlayPause,
   muted,
   onMute,
+  volume,
+  onVolumeChange,
 }: PlayerControlPanelProps) => {
   const { song, artist } = useMetadata();
 
   // Show metadata only after the lähetys starts.
-  const showMeta = true;
+  const showMeta = new Date().getTime() > Date.parse(SHOW_START_TIME);
 
   return (
     <>
@@ -29,7 +35,8 @@ const PlayerControlPanel = ({
               onPlayPause={onPlayPause}
               muted={muted}
               onMute={onMute}
-              isSmall={true}
+              volume={volume}
+              onVolumeChange={onVolumeChange}
             />
           </div>
 

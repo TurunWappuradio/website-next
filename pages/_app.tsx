@@ -13,6 +13,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const audioEl = createRef<HTMLAudioElement>();
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [volume, setVolume] = useState(0.8);
   const [playClicked, setPlayClicked] = useState(false);
 
   const handlePlayPause = () => {
@@ -29,7 +30,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   const handleMute = () => {
     setMuted(!muted);
-    audioEl.current.muted = !audioEl.current.muted;
+    audioEl.current.muted = !muted;
+  };
+
+  const handleSetVolume = (value: number) => {
+    const newVolume = Math.min(value, 1);
+    setVolume(newVolume);
+    audioEl.current.volume = newVolume;
   };
 
   return (
@@ -41,8 +48,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         {...pageProps}
         playing={playing}
         onPlayPause={handlePlayPause}
-        muted={muted}
-        onMute={handleMute}
       />
       <div className="fixed bottom-0 z-50 w-full">
         <div className="flex flex-col bg-blue-darkest md:flex-row">
@@ -56,6 +61,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             onPlayPause={handlePlayPause}
             muted={muted}
             onMute={handleMute}
+            volume={volume}
+            onVolumeChange={handleSetVolume}
           />
         )}
       </div>
