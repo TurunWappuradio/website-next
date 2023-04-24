@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 
 import MessageInput from './messageinput';
@@ -102,13 +102,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
       const timer = setTimeout(() => setWsConnected(false), 5000);
       return () => clearTimeout(timer);
     };
-
-    // scrollToBottom();
   }, []);
 
   function addMessage(message: any) {
     setMessages((messages) => [...messages, message].slice(-limit));
-    scrollToBottom();
   }
 
   function submitMessage(messageString: string) {
@@ -140,13 +137,6 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     webSocket.current.send(JSON.stringify(message));
   }
 
-  function scrollToBottom() {
-    const el = messagesViewport.current;
-    if (el) {
-      el.scrollTo(0, el.scrollHeight);
-    }
-  }
-
   if (!isOpen) {
     return null;
   }
@@ -155,7 +145,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem]">
       <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
         <div
-          className="h-[81%] overflow-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%]"
+          className="h-[81%] flex-col-reverse overflow-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%]"
           ref={messagesViewport}
         >
           {messages.map((message, index) => (
