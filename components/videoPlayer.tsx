@@ -10,7 +10,7 @@ const VideoPlayer = () => {
 
   return (
     videoOpen && (
-      <div className="mx-auto block w-full max-w-6xl">
+      <div className="block w-full max-w-[61rem]">
         <div className="flex w-full items-end justify-end text-coral">
           <button
             onClick={handleClose}
