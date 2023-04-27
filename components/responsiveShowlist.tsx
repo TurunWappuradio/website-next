@@ -34,17 +34,17 @@ const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
 
 interface DateButton {
   value: string;
-  isSelected: boolean;
+  currentDate: string;
   onClick: Dispatch<SetStateAction<string>>;
 }
-const DateButton = ({ value, isSelected, onClick }: DateButton) => {
+const DateButton = ({ value, currentDate, onClick }: DateButton) => {
   const dateParsed = parse(value, 'y.M.dd', new Date());
   const str = format(dateParsed, 'cccc d.M.', { locale: fi });
 
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
-        isSelected ? 'bg-coral font-bold' : 'bg-blue-darkest hover:text-coral'
+        (value === currentDate) ? 'bg-coral font-bold' : 'bg-blue-darkest hover:text-coral'
       }`}
       onClick={() => onClick(value)}
     >
@@ -117,7 +117,7 @@ export const ResponsiveShowlist = ({
             <DateButton
               key={date}
               value={date}
-              isSelected={selectedDate === date}
+              currentDate={selectedDate}
               onClick={(date) => setSelectedDate(date)}
             />
           ))}
