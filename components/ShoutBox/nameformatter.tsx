@@ -4,9 +4,10 @@ import React from 'react';
 interface NameFormatterProps {
   name: string;
   timestamp?: number;
+  telegram: boolean;
 }
 
-const NameFormatter = ({ name, timestamp }: NameFormatterProps) => {
+const NameFormatter = ({ name, timestamp, telegram }: NameFormatterProps) => {
   const time = timestamp ? format(new Date(timestamp), 'HH:mm') : null;
 
   return (
@@ -14,10 +15,13 @@ const NameFormatter = ({ name, timestamp }: NameFormatterProps) => {
       className={`flex items-center pr-2 text-sm font-bold ${findStyle(name)}`}
     >
       {name}
-      {time ? (
-        <span className="pl-2 text-xs font-normal opacity-70">{time}</span>
-      ) : null}
-    </div>
+      {telegram ? <a target="_blank" href="https://t.me/turunwappuradio"><img className="ml-2 w-3.5 h-3.5" src="/telegram.svg"></img></a> : null}
+      {
+        time ? (
+          <span className="pl-2 text-xs font-normal opacity-70" > {time}</span>
+        ) : null
+      }
+    </div >
   );
 };
 
