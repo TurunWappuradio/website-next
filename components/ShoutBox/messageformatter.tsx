@@ -8,6 +8,7 @@ interface MessageFormatterProps {
   color: string;
   isAdmin: boolean;
   onBanClick: (name: string) => void;
+  telegram: boolean;
 }
 
 const MessageFormatter = ({
@@ -17,6 +18,7 @@ const MessageFormatter = ({
   color,
   isAdmin,
   onBanClick,
+  telegram,
 }: MessageFormatterProps) => (
   <div className={` flex ${color} py-3`}>
     <div
@@ -25,7 +27,7 @@ const MessageFormatter = ({
         paddingLeft: '0.5rem',
       }}
     >
-      <NameFormatter name={name} timestamp={timestamp} />
+      <NameFormatter telegram={telegram} name={name} timestamp={timestamp} />
       <div className="break-words text-sm">{message}</div>
     </div>
     {isAdmin && name !== 'Toimitus' && name !== 'Palvelin' && (

@@ -22,9 +22,8 @@ export const ChatWrapper = () => {
 
   return (
     <div
-      className={`w-full flex-col items-center ${
-        shoutboxOpen ? 'flex' : 'hidden'
-      }`}
+      className={`w-full flex-col items-center ${shoutboxOpen ? 'flex' : 'hidden'
+        }`}
     >
       <div className="flex w-full max-w-6xl items-end justify-end">
         <button
@@ -45,6 +44,7 @@ interface Message {
   name: string;
   message: string;
   timestamp: number;
+  source?: string;
 }
 
 const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
@@ -78,10 +78,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
         return webSocket.current.send('PONG');
       }
 
-      const { type, name, message, timestamp } = JSON.parse(e.data);
+      const { type, name, message, timestamp, source } = JSON.parse(e.data);
 
       if (type === 'message' && name && message) {
-        addMessage({ name, message, timestamp });
+        addMessage({ name, message, timestamp, source });
       } else if (type === 'admin') {
         setAdmin(true);
       }
@@ -157,6 +157,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
+              telegram={message.source === "telegram"}
             />
           ))}
           {!wsConnected && (
