@@ -1,16 +1,25 @@
 import { FC, useState, useEffect } from 'react';
-import { startOfDay, format, parseISO } from 'date-fns';
+import { startOfDay, format, parseISO, isSameDay } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 
 // Fetch next events but not more than 6 months from now
-const EVENT_COUNT = 3;
 const MONTHS_COUNT = 6;
 const dateMax = new Date();
 dateMax.setMonth(new Date().getMonth() + MONTHS_COUNT);
-const TIME_MIN = startOfDay(new Date()).toISOString();
-const TIME_MAX = dateMax.toISOString();
 
-const eventsUrl = `https://content.googleapis.com/calendar/v3/calendars/${process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID}/events?alwaysIncludeEmail=false&maxResults=${EVENT_COUNT}&timeMin=${TIME_MIN}&timeMax=${TIME_MAX}&showDeleted=false&showHiddenInvitations=false&singleEvents=true&key=${process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY}&orderBy=startTime`;
+const params = new URLSearchParams({
+  alwaysIncludeEmail: 'false',
+  maxResults: '3',
+  timeMin: startOfDay(new Date()).toISOString(),
+  timeMax: dateMax.toISOString(),
+  showDeleted: 'false',
+  showHiddenInvitations: 'false',
+  singleEvents: 'true',
+  key: process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY,
+  orderBy: 'startTime',
+}).toString();
+
+const eventsUrl = `https://content.googleapis.com/calendar/v3/calendars/${process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ID}/events?${params}`;
 
 interface EventWithDate {
   start: { date: string };
@@ -71,7 +80,7 @@ const Event: FC<{ event: Event }> = ({ event }) => {
   const weekday = format(start, 'eee', { locale: fi }).slice(0, 2);
 
   const timeFormatted =
-    'dateTime' in event.start
+    'dateTime' in event.start && isSameDay(start, end)
       ? formatWithTime(start, end)
       : formatWithoutTime(start, end);
 
@@ -103,6 +112,9 @@ const formatWithoutTime = (start: Date, end: Date) => {
   end.setDate(end.getDate() - 1);
 
   const endFormatted = format(end, 'cccc d.M.', { locale: fi });
+
+  if (startFormatted === endFormatted) return 'Koko päivä';
+
   return `${startFormatted} - ${endFormatted}`;
 };
 
