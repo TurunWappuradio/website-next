@@ -18,7 +18,7 @@ const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
   return (
     <>
       <a
-        className={`${'flex py-8 font-bold text-teal transition hover:text-coral'}
+        className={`${'flex py-8 font-bold text-greyish transition hover:text-orange'}
         ${disabled ? 'hidden' : ''}
         ${alternate ? '' : ''}
         `}
@@ -44,7 +44,9 @@ const DateButton = ({ value, currentDate, onClick }: DateButton) => {
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
-        (value === currentDate) ? 'bg-coral font-bold' : 'bg-blue-darkest hover:text-coral'
+        value === currentDate
+          ? 'bg-orange font-bold'
+          : 'bg-purple-darkest hover:text-greyish'
       }`}
       onClick={() => onClick(value)}
     >
@@ -90,7 +92,7 @@ export const ResponsiveShowlist = ({
         id="showList"
       >
         <select
-          className="mb-4 ml-6 flex h-8 rounded-sm  bg-blue-dark px-2 font-bold text-coral lg:hidden"
+          className="mb-4 ml-6 flex h-8 rounded-sm bg-purple-light px-2 font-bold text-white lg:hidden"
           onChange={(event) => setSelectedDate(event.target.value)}
           value={selectedDate}
         >

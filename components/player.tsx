@@ -36,8 +36,8 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
   const url = name ? picture?.url ?? placeholderImage : testcard;
   return (
     <div className="flex justify-center p-6">
-      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">
-        <div className="rounded bg-gradient-to-t from-coral via-blue-lightest to-teal p-1.5">
+      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-purple-light md:w-full md:flex-nowrap md:justify-start">
+        <div className="rounded bg-gradient-to-t from-greyish via-orange to-purple-dark p-1.5">
           <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
             <Image
               src={url}
@@ -51,7 +51,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
         <div className="mx-6 flex flex-col justify-between py-4 text-white md:mx-10 md:h-full md:py-10">
           {name && (
             <div className="mb-4 flex flex-col">
-              <span className="text-teal">Ohjelmassa nyt</span>
+              <span className="text-greyish">Ohjelmassa nyt</span>
               <span className="text-lg font-bold">{name}</span>
               <span className="opacity-80">
                 Juontaa: {hosts ?? 'Haamujuontaja'}
@@ -64,7 +64,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
               onClick={onPlayPause}
               title="Play/Pause"
               className={`flex h-20 w-20 items-center justify-center rounded-full ${
-                playing ? 'bg-teal' : 'bg-coral'
+                playing ? 'bg-purple-darkest' : 'bg-orange'
               }`}
             >
               {playing ? <FiPause size="3rem" /> : <FiPlay size="3rem" />}
@@ -75,7 +75,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
                 onClick={handleShoutboxToggle}
                 title="chat"
                 className={`h-12 w-12 rounded-full ${
-                  shoutboxOpen ? 'bg-teal' : 'bg-coral'
+                  shoutboxOpen ? 'bg-purple-darkest' : 'bg-orange'
                 }`}
               >
                 <FiMessageSquare size="1.7rem" className="mx-auto" />
@@ -84,7 +84,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
                 onClick={handleVideoToggle}
                 title="Webcam"
                 className={`h-12 w-12 rounded-full ${
-                  videoOpen ? 'bg-teal' : 'bg-coral'
+                  videoOpen ? 'bg-purple-darkest' : 'bg-orange'
                 }`}
               >
                 <FiVideo size="1.7rem" className="mx-auto" />

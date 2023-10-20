@@ -50,8 +50,8 @@ const ArchivePage: NextPage<ArchivePageProps> = ({
         navigationItems={navigationItems}
         isCompact={true}
       />
-      <article className="mx-auto max-w-4xl px-4 pt-12 pb-20 text-white">
-        <h1 className="my-4 text-3xl font-bold text-coral">
+      <article className="mx-auto max-w-4xl px-4 pb-20 pt-12 text-white">
+        <h1 className="my-4 text-3xl font-bold text-greyish">
           Menneet lähetykset
         </h1>
 
@@ -69,7 +69,7 @@ const ShowListCard = ({ showList }: { showList: ShowList }) => {
 
   return (
     <Link href={`/arkisto/${id}`}>
-      <a className="group my-4 flex flex-col overflow-hidden rounded bg-blue-dark transition hover:scale-[1.03] md:flex-row">
+      <a className="group my-4 flex flex-col overflow-hidden rounded bg-purple-darkest transition hover:scale-[1.03] md:flex-row">
         <div className="relative inline h-40 w-full max-w-full shrink-0 grow-0 md:h-48 md:w-64">
           <Image
             src={coverImage.url}
@@ -80,9 +80,9 @@ const ShowListCard = ({ showList }: { showList: ShowList }) => {
           />
         </div>
         <div className="flex flex-col p-4 md:p-6">
-          <h2 className="mb-2 text-xl font-bold text-coral">{name}</h2>
+          <h2 className="mb-2 text-xl font-bold text-greyish">{name}</h2>
           {shortDescription}
-          <div className="mt-auto ml-auto flex items-center pt-2 font-bold text-teal">
+          <div className="ml-auto mt-auto flex items-center pt-2 font-bold text-orange">
             Ohjelmakartta
             <BsArrowRight className="ml-2 h-6 w-6" />
           </div>
