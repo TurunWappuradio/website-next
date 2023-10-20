@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 
 const buttonStyle =
-  'bg-teal px-6 md:px-8 py-2 md:py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded';
+  'bg-orange px-6 md:px-8 py-2 md:py-3 text-blue font-bold hover:bg-coral transition ease-in-out rounded';
 
 interface ButtonProps {
   children: ReactNode;
@@ -59,7 +59,7 @@ const ModeButton = ({ text, isActive, onClick, ...props }: ModeButton) => {
     <button
       {...props}
       className={`rounded-sm p-2 text-white ${
-        isActive ? 'bg-coral' : 'bg-blue-darkest hover:text-coral'
+        isActive ? 'bg-orange' : 'bg-purple-darkest hover:text-greyish'
       }`}
       onClick={onClick}
     >

@@ -14,7 +14,7 @@ import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
-// import Sponsors, { ISponsorData } from 'components/sponsors';
+import Sponsors, { ISponsorData } from 'components/sponsors';
 // import { Showlist } from 'components/showlist';
 // import Player from 'components/player';
 // import { fetchShowlist } from 'google/client';
@@ -46,7 +46,7 @@ interface IndexProps {
   firstContent: any;
   secondContent: any;
   thirdContent: any;
-  // sponsors: ISponsorData[];
+  sponsors: ISponsorData[];
 }
 
 interface PlayerControls {
@@ -70,7 +70,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   firstContent,
   secondContent,
   thirdContent,
-  // sponsors,
+  sponsors,
   // playing,
   // onPlayPause,
   // muted,
@@ -91,15 +91,15 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {/* {isPlayerLive && ( */}
-      {/*   <Player */}
-      {/*     playing={playing} */}
-      {/*     onPlayPause={onPlayPause} */}
-      {/*     muted={muted} */}
-      {/*     onMute={onMute} */}
-      {/*     showsByDate={showsByDate} */}
-      {/*   /> */}
-      {/* )} */}
+      {/* {isPlayerLive && (
+        <Player
+          playing={playing}
+          onPlayPause={onPlayPause}
+          muted={muted}
+          onMute={onMute}
+          showsByDate={showsByDate}
+        />
+      )} */}
 
       {/* <Showlist showsByDate={showsByDate} weekKeys={weekKeys} /> */}
 
@@ -121,7 +121,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       </main>
 
       {/* Second section */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-purple-darkest py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
@@ -144,7 +144,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           />
         </div>
       </div>
-      {/* <Sponsors sponsors={sponsors} /> */}
+      <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
   );
@@ -166,7 +166,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     thirdContent,
   } = data.indexCollection.items[0];
 
-  // const sponsors = data.sponsorsCollection.items[0].sponsorsCollection.items;
+  const sponsors = data.sponsorsCollection.items[0].sponsorsCollection.items;
 
   const navigationItems = await fetchNavigationItems();
 
@@ -187,7 +187,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       firstContent,
       secondContent,
       thirdContent,
-      // sponsors,
+      sponsors,
     },
   };
 };
