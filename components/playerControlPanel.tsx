@@ -26,39 +26,39 @@ const PlayerControlPanel = ({
   const showMeta = new Date().getTime() > Date.parse(SHOW_START_TIME);
 
   return (
-    <>
-      <div className="bg-blue-darkestest px-4 text-white md:px-6">
-        <div className="mx-auto flex max-w-4xl items-center justify-between">
-          <div className="flex items-center py-6">
-            <Controls
-              playing={playing}
-              onPlayPause={onPlayPause}
-              muted={muted}
-              onMute={onMute}
-              volume={volume}
-              onVolumeChange={onVolumeChange}
-            />
+    <div className="bg-purple-light px-4 text-white md:px-6">
+      <div className="mx-auto flex max-w-4xl items-center justify-between">
+        <div className="flex items-center py-6">
+          <Controls
+            playing={playing}
+            onPlayPause={onPlayPause}
+            muted={muted}
+            onMute={onMute}
+            volume={volume}
+            onVolumeChange={onVolumeChange}
+          />
+        </div>
+
+        {showMeta && (
+          <div className="flex max-w-[50%] flex-col py-6 text-right lg:text-center">
+            <span className="font-bold md:text-xl">{song}</span>
+            <span className="text-sm opacity-80 md:text-base">{artist}</span>
           </div>
+        )}
 
-          {showMeta && (
-            <div className="flex max-w-[50%] flex-col py-6 text-right lg:text-center">
-              <span className="font-bold md:text-xl">{song}</span>
-              <span className="text-sm opacity-80 md:text-base">{artist}</span>
-            </div>
-          )}
-
-          <div className="hidden text-right lg:block">
-            <span className="font-bold md:text-xl">Turun Wappuradio</span>
+        <div className="hidden text-right lg:block">
+          <span className="font-bold md:text-xl">Turun Wappuradio</span>
+          {/* TODO: Uncomment me
             <div>
               <span>Taajuudella</span> <b>93,8 MHz</b>
             </div>
             <div>
               <span>Studio</span> <b>02 3619 2819</b>
             </div>
-          </div>
+          */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
