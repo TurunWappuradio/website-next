@@ -5,7 +5,7 @@ import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-  // Show,
+  Show,
 } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import RichText from 'components/richtext';
@@ -15,9 +15,9 @@ import Footer from 'components/footer';
 import Image from 'next/image';
 import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
-// import { Showlist } from 'components/showlist';
+import { Showlist } from 'components/showlist';
 // import Player from 'components/player';
-// import { fetchShowlist } from 'google/client';
+import { fetchShowlist } from 'google/client';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -33,8 +33,8 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-  // showsByDate: Record<string, Show[]>;
-  // weekKeys: Record<string, string[]>;
+  showsByDate: Record<string, Show[]>;
+  weekKeys: Record<string, string[]>;
   firstDecorativeImage: {
     url?: string;
     width?: number;
@@ -63,8 +63,8 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonText,
   heroButtonLink,
   navigationItems,
-  // showsByDate,
-  // weekKeys,
+  showsByDate,
+  weekKeys,
   firstDecorativeImage,
   secondDecorativeImage,
   firstContent,
@@ -101,7 +101,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         />
       )} */}
 
-      {/* <Showlist showsByDate={showsByDate} weekKeys={weekKeys} /> */}
+      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
       {/* First section */}
       <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
@@ -170,7 +170,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  // const { showsByDate, weekKeys } = await fetchShowlist();
+  const { showsByDate, weekKeys } = await fetchShowlist();
 
   return {
     props: {
@@ -180,8 +180,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonText,
       heroButtonLink,
       navigationItems,
-      // showsByDate,
-      // weekKeys,
+      showsByDate,
+      weekKeys,
       firstDecorativeImage,
       secondDecorativeImage,
       firstContent,
