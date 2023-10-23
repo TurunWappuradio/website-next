@@ -16,7 +16,7 @@ import Footer from 'components/footer';
 // import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 import { Showlist } from 'components/showlist';
-// import Player from 'components/player';
+import Player from 'components/player';
 import { fetchShowlist } from 'google/client';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
@@ -71,10 +71,10 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   // secondContent,
   // thirdContent,
   sponsors,
-  // playing,
-  // onPlayPause,
-  // muted,
-  // onMute,
+  playing,
+  onPlayPause,
+  muted,
+  onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -91,7 +91,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {/* {isPlayerLive && (
+      {isPlayerLive && (
         <Player
           playing={playing}
           onPlayPause={onPlayPause}
@@ -99,7 +99,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           onMute={onMute}
           showsByDate={showsByDate}
         />
-      )} */}
+      )}
 
       <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
 
