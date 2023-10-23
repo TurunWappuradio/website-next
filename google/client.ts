@@ -182,6 +182,9 @@ const downloadShowFile = async (
     apiKey,
     fileId,
   });
+  if(!result) {
+    return null;
+  }
   try {
     const imageArrayBuffer = result.data as ArrayBuffer; // Me just lazy...
     await saveArrayBufferToFile(imageArrayBuffer, FILE_URL, fileTitle);
