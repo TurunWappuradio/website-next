@@ -41,11 +41,19 @@ const ContentPage: NextPage<ContentPageProps> = ({
   navigationItems,
   content,
 }) => {
+  const title = `${name} | Turun Wappuradio`;
+
   return (
     <div className="min-h-screen w-full">
       <Head>
-        <title>{name}</title>
+        <title>{title}</title>
+        <meta name="og:title" content={title} />
+        <meta name="og:site_name" content={title} />
+        <meta name="twitter:title" content={title} />
+
         <meta name="description" content={description} />
+        <meta name="og:description" content={description} />
+        <meta name="twitter:description" content={description} />
       </Head>
       <Hero
         image={heroImage}
