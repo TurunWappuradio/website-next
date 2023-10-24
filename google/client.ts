@@ -160,7 +160,7 @@ export const fetchShowlist = async (): Promise<{
   );
   const weekKeys = generateWeekObj(showsByDate);
 
-  saveShowlistJson(shows);
+  saveShowlistJson(showsByDate);
   return { showsByDate, weekKeys };
 };
 
@@ -226,5 +226,5 @@ const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
   return weekObj;
 };
 
-const saveShowlistJson = (shows: Show) =>
-  writeFile(`${FILE_URL}/ohjelmakartta.json`, JSON.stringify(shows));
+const saveShowlistJson = (showsByDate: Record<string, Show[]>) =>
+  writeFile(`${FILE_URL}/ohjelmakartta.json`, JSON.stringify(showsByDate));
