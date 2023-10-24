@@ -41,11 +41,19 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   navigationItems,
   heroSubtext,
 }) => {
+  const title = `${name} | Turun Wappuradio`;
+
   return (
     <div className="min-h-screen w-full">
       <Head>
-        <title>{`Turun Wappuradio ${name}`}</title>
-        <meta name="description" content="Wappuradioo tält puolt jokkee" />
+        <title>{title}</title>
+        <meta name="og:title" content={title} />
+        <meta name="og:site_name" content={title} />
+        <meta name="twitter:title" content={title} />
+
+        <meta name="description" content={heroSubtext} />
+        <meta name="og:description" content={heroSubtext} />
+        <meta name="twitter:description" content={heroSubtext} />
       </Head>
       <Hero
         title={name}
