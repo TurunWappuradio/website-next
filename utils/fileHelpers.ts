@@ -60,3 +60,6 @@ const downloadFile = async (url: string, path: string, filename: string) => {
   return newFilename;
 };
 export default downloadFile;
+
+export const writeFile = (path: string, data: string) =>
+  fs.writeFileSync(path, data, 'utf-8');
