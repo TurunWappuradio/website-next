@@ -80,7 +80,13 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
     <div className="min-h-screen w-full">
       <Head>
         <title>{heroTitle}</title>
+        <meta name="og:title" content={heroTitle} />
+        <meta name="og:site_name" content={heroTitle} />
+        <meta name="twitter:title" content={heroTitle} />
+
         <meta name="description" content={heroSubtext} />
+        <meta name="og:description" content={heroSubtext} />
+        <meta name="twitter:description" content={heroSubtext} />
       </Head>
       <Hero
         image={heroImage}

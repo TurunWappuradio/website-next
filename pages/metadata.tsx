@@ -66,7 +66,7 @@ const Metadata: NextPage = () => {
         {loading ? (
           <p className="ml-auto mt-4 px-8 py-3 text-coral">Lähetetään...</p>
         ) : (
-          <Button className="mt-4 ml-auto">Tallenna</Button>
+          <Button className="ml-auto mt-4">Tallenna</Button>
         )}
       </form>
     </div>

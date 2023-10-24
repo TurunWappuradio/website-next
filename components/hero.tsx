@@ -87,7 +87,7 @@ const Hero: FC<HeroProps> = ({
             }`}
           >
             <Image
-              src="/leima.svg"
+              src="/syssyleima.png"
               layout="fill"
               priority={true}
               alt="Logo of Turun Wappuradio ry"
