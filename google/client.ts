@@ -17,6 +17,7 @@ import {
   ensureDirectoryExists,
   getImagePath,
   saveArrayBufferToFile,
+  writeFile,
 } from 'utils/fileHelpers';
 
 export enum Color {
@@ -158,6 +159,8 @@ export const fetchShowlist = async (): Promise<{
     shows
   );
   const weekKeys = generateWeekObj(showsByDate);
+
+  saveShowlistJson(showsByDate);
   return { showsByDate, weekKeys };
 };
 
@@ -222,3 +225,6 @@ const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
 
   return weekObj;
 };
+
+const saveShowlistJson = (showsByDate: Record<string, Show[]>) =>
+  writeFile(`${FILE_URL}/ohjelmakartta.json`, JSON.stringify(showsByDate));
