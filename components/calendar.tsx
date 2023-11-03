@@ -102,20 +102,17 @@ const Event: FC<{ event: Event }> = ({ event }) => {
 const formatWithTime = (start: Date, end: Date) => {
   const startFormatted = format(start, 'HH:mm', { locale: fi });
   const endFormatted = format(end, 'HH:mm', { locale: fi });
-  return `kello ${startFormatted} - ${endFormatted}`;
+  return `kello ${startFormatted} &ndash; ${endFormatted}`;
 };
 
 const formatWithoutTime = (start: Date, end: Date) => {
   const startFormatted = format(start, 'cccc d.M.', { locale: fi });
 
-  // subtract one, as the end date is always set to midnight causing an off-by-one
-  end.setDate(end.getDate() - 1);
-
   const endFormatted = format(end, 'cccc d.M.', { locale: fi });
 
   if (startFormatted === endFormatted) return 'Koko päivä';
 
-  return `${startFormatted} - ${endFormatted}`;
+  return `${startFormatted} &ndash; ${endFormatted}`;
 };
 
 export default Calendar;
