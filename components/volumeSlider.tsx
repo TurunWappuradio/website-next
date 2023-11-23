@@ -22,8 +22,8 @@ const VolumeSlider = ({ volume, onVolumeChange, muted }: VolumeSliderProps) => {
       className={`transparent h-1 w-[6.66rem] appearance-none rounded-lg
           ${
             muted
-              ? 'bg-purple-darkest [&::-moz-range-thumb]:bg-purple-darkest [&::-webkit-slider-thumb]:bg-purple-darkest'
-              : 'bg-orange [&::-moz-range-thumb]:bg-orange [&::-webkit-slider-thumb]:bg-orange'
+              ? 'bg-teal [&::-moz-range-thumb]:bg-teal [&::-webkit-slider-thumb]:bg-teal'
+              : 'bg-coral [&::-moz-range-thumb]:bg-coral [&::-webkit-slider-thumb]:bg-coral'
           }
           [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5
           [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-none

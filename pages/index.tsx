@@ -71,10 +71,10 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   secondContent,
   thirdContent,
   sponsors,
-  playing,
-  onPlayPause,
-  muted,
-  onMute,
+  // playing,
+  // onPlayPause,
+  // muted,
+  // onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -127,7 +127,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       </main>
 
       {/* Second section */}
-      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-purple-darkest py-4 md:py-8">
+      <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>

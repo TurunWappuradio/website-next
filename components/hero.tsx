@@ -94,8 +94,8 @@ const Hero: FC<HeroProps> = ({
               unoptimized={true}
             />
           </div>
-          <div className="flex flex-col pb-6">
-            <h1 className="my-1 text-[1.2rem] font-bold text-greyish md:my-1 md:text-4xl">
+          <div className="flex flex-col">
+            <h1 className="my-1 text-[1.2rem] font-bold text-coral md:my-1 md:text-4xl">
               {title}
             </h1>
             <p className="text-md my-1 text-white md:text-xl">{subtext}</p>
@@ -131,7 +131,7 @@ const Hero: FC<HeroProps> = ({
 const NavLink = ({ href, name }: { href: string; name: string }) => (
   <li className="p-4">
     <Link href={href}>
-      <a className="text-xl text-white transition hover:text-greyish">{name}</a>
+      <a className="text-xl text-white transition hover:text-coral">{name}</a>
     </Link>
   </li>
 );
