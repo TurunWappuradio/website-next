@@ -21,7 +21,7 @@ const Footer = ({ navigationItems }: FooterProps) => {
         <div className="flex w-fit flex-col items-center">
           <div className="relative flex h-36 w-36 md:h-52 md:w-52">
             <Image
-              src="/syssyleima.png"
+              src="/leima.svg"
               unoptimized={true}
               layout="fill"
               alt="Logo of Turun Wappuradio ry"
