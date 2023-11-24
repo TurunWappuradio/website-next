@@ -22,15 +22,14 @@ export const ChatWrapper = () => {
 
   return (
     <div
-      className={`w-full flex-col items-center ${
-        shoutboxOpen ? 'flex' : 'hidden'
-      }`}
+      className={`w-full flex-col items-center ${shoutboxOpen ? 'flex' : 'hidden'
+        }`}
     >
       <div className="flex w-full max-w-6xl items-end justify-end">
         <button
           onClick={handleClose}
           title="chat"
-          className="mr-5 mt-5 h-10 w-10 rounded-full bg-orange"
+          className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
         >
           <GrFormClose size="1.7rem" className="mx-auto" />
         </button>
@@ -155,10 +154,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               message={message.message}
               name={message.name}
               timestamp={message.timestamp}
-              color={index % 2 === 0 ? 'bg-purple-dark' : 'bg-purple-light'}
+              color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
-              telegram={message.source === 'telegram'}
+              telegram={message.source === "telegram"}
             />
           ))}
           {!wsConnected && (
