@@ -70,7 +70,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" sizes="192x192" href="/logo@192.png" />
           <link rel="apple-touch-icon" sizes="512x512" href="/logo@512.png" />
         </Head>
-        <body className="bg-purple-darkest bg-gradient-to-b from-purple-darkest to-purple-light">
+        <body className="bg-blue bg-gradient-to-b from-blue to-blue-light">
           <Main />
           <NextScript />
         </body>

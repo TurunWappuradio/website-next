@@ -14,11 +14,11 @@ export const WideScreencard = ({
   showLength,
 }: WideScreenCardProps) => {
   const getBackgroundColor = () => {
-    if (!color) return 'bg-orange';
+    if (!color) return 'bg-coral';
     else if (color === Color.Promote) {
-      return 'bg-purple-dark';
+      return 'bg-teal';
     } else if (color === Color.Night) {
-      return 'bg-purple-light';
+      return 'bg-blue-lightest';
     }
   };
 

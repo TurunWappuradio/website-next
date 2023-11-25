@@ -15,7 +15,7 @@ const VideoPlayer = () => {
           <button
             onClick={handleClose}
             title="chat"
-            className="mr-5 mt-5 h-10 w-10 rounded-full bg-orange"
+            className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
           >
             <GrFormClose size="1.7rem" className="mx-auto" />
           </button>

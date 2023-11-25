@@ -64,7 +64,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
       />
       <div className="mx-auto flex max-w-6xl flex-col py-6">
         <Link href="/arkisto">
-          <a className="my-6 ml-28 mr-auto flex font-bold text-orange transition hover:text-coral">
+          <a className="my-6 ml-28 mr-auto flex font-bold text-teal transition hover:text-coral">
             <BsArrowLeft className="mr-2 h-6 w-6" />
             Kaikki ohjelmakartat
           </a>
