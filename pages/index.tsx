@@ -81,7 +81,6 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       <Head>
         <title>{heroTitle}</title>
         <meta name="og:title" content={heroTitle} />
-        <meta name="og:site_name" content={heroTitle} />
         <meta name="twitter:title" content={heroTitle} />
 
         <meta name="description" content={heroSubtext} />

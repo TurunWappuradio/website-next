@@ -48,7 +48,6 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
       <Head>
         <title>{title}</title>
         <meta name="og:title" content={title} />
-        <meta name="og:site_name" content={title} />
         <meta name="twitter:title" content={title} />
 
         <meta name="description" content={heroSubtext} />
