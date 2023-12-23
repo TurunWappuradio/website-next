@@ -40,15 +40,11 @@ class MyDocument extends Document {
 
           <meta name="theme-color" content="#001326" />
 
-          <meta property="og:title" content="Turun Wappuradio" />
           <meta property="og:site_name" content="Turun Wappuradio" />
-          <meta property="og:description" content="Lähetys 20.–30.4." />
           <meta property="og:image" content="/logo@192.png" />
           <meta property="og:url" content="https://www.turunwappuradio.com" />
 
           {/* Social media stuff */}
-          <meta name="twitter:title" content="Turun Wappuradio" />
-          <meta name="twitter:description" content="Lähetys 20.–30.4." />
           <meta name="twitter:image" content="/logo@192.png" />
           <meta name="twitter:card" content="summary_large_image" />
 

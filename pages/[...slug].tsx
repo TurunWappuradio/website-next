@@ -48,12 +48,11 @@ const ContentPage: NextPage<ContentPageProps> = ({
       <Head>
         <title>{title}</title>
         <meta name="og:title" content={title} />
-        <meta name="og:site_name" content={title} />
         <meta name="twitter:title" content={title} />
 
-        <meta name="description" content={description} />
-        <meta name="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
+        {heroSubtext && <meta name="description" content={heroSubtext} />}
+        {heroSubtext && <meta name="og:description" content={heroSubtext} />}
+        {heroSubtext && <meta name="twitter:description" content={heroSubtext} />}
       </Head>
       <Hero
         image={heroImage}
