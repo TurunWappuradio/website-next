@@ -50,7 +50,7 @@ const ArchivePage: NextPage<ArchivePageProps> = ({
         navigationItems={navigationItems}
         isCompact={true}
       />
-      <article className="mx-auto max-w-4xl px-4 pt-12 pb-20 text-white">
+      <article className="mx-auto max-w-4xl px-4 pb-20 pt-12 text-white">
         <h1 className="my-4 text-3xl font-bold text-coral">
           Menneet lähetykset
         </h1>
@@ -82,7 +82,7 @@ const ShowListCard = ({ showList }: { showList: ShowList }) => {
         <div className="flex flex-col p-4 md:p-6">
           <h2 className="mb-2 text-xl font-bold text-coral">{name}</h2>
           {shortDescription}
-          <div className="mt-auto ml-auto flex items-center pt-2 font-bold text-teal">
+          <div className="ml-auto mt-auto flex items-center pt-2 font-bold text-teal">
             Ohjelmakartta
             <BsArrowRight className="ml-2 h-6 w-6" />
           </div>

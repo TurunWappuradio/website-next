@@ -44,7 +44,9 @@ const DateButton = ({ value, currentDate, onClick }: DateButton) => {
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
-        (value === currentDate) ? 'bg-coral font-bold' : 'bg-blue-darkest hover:text-coral'
+        value === currentDate
+          ? 'bg-coral font-bold'
+          : 'bg-blue-darkest hover:text-coral'
       }`}
       onClick={() => onClick(value)}
     >

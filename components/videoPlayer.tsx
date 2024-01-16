@@ -21,7 +21,7 @@ const VideoPlayer = () => {
           </button>
         </div>
 
-        <div className="h-96 py-6 px-[25px] md:h-[38rem]">
+        <div className="h-96 px-[25px] py-6 md:h-[38rem]">
           <iframe
             /** Add parent &parent=localhost if testing */
             src="https://player.twitch.tv/?channel=turunwappuradio&parent=www.turunwappuradio.com&parent=turunwappuradio.com&muted=true"
