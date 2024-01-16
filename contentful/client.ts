@@ -44,33 +44,14 @@ export interface Show {
   name?: string;
   start?: string;
   end?: string;
-  date?: string;
   description?: null | string;
-  picture?: Picture | null;
+  pictureUrl?: string | null;
   hosts?: null | string;
   producer?: null | string;
   color?: Color | null;
 }
-export interface Picture {
-  title?: string;
-  description?: null;
-  contentType?: string;
-  fileName?: string;
-  size?: number;
-  url?: string;
-  width?: number;
-  height?: number;
-}
 
-const fetchShowlist = async (
-  showlistId: string | string[]
-): Promise<{
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
-}> => {
-  const data = await fetchContent<ShowlistQuery>(ShowlistDocument, {
-    showlistId,
-  });
+export const parseQueryResultToShowlist = (data: ShowlistQuery) => {
   const showsCollection =
     data.programmeCollection.items[0].showsCollection.items;
 
@@ -85,15 +66,30 @@ const fetchShowlist = async (
     producer: item.producer,
     color: item.color,
   }));
+  return shows;
+};
 
+export const showsToGroups = (shows: Show[]) => {
   const showsByDate = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
     shows
   );
-
   const weekKeys = generateWeekObj(showsByDate);
-
   return { showsByDate, weekKeys };
+};
+
+const fetchShowlist = async (
+  showlistId: string | string[]
+): Promise<{
+  showsByDate: Record<string, Show[]>;
+  weekKeys: Record<string, string[]>;
+}> => {
+  const data = await fetchContent<ShowlistQuery>(ShowlistDocument, {
+    showlistId,
+  });
+
+  const shows = parseQueryResultToShowlist(data);
+  return showsToGroups(shows);
 };
 
 // Generate a nicely formatted object to use as keys.

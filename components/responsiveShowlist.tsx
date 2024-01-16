@@ -111,7 +111,7 @@ export const ResponsiveShowlist = ({
 
         <div className="mr-auto w-full space-y-4 lg:ml-[10rem]">
           {showsByDate[selectedDate]?.map((show, i) => (
-            <ShowCard show={show} key={show.date + i} index={i} />
+            <ShowCard show={show} key={show.start + i} index={i} />
           ))}
         </div>
         <div className="ml-4 hidden w-[10rem] shrink-0 flex-col space-y-2 lg:flex">

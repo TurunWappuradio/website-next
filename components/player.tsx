@@ -32,8 +32,8 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
     setVideoOpen(!videoOpen);
   };
 
-  const { picture, name, hosts } = show ?? {};
-  const url = name ? picture?.url ?? placeholderImage : testcard;
+  const { pictureUrl, name, hosts } = show ?? {};
+  const url = name ? pictureUrl ?? placeholderImage : testcard;
   return (
     <div className="flex justify-center p-6">
       <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-blue-darkest md:w-full md:flex-nowrap md:justify-start">

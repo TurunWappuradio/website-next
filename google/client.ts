@@ -30,20 +30,10 @@ export interface Show {
   end?: string;
   date?: string;
   description?: null | string;
-  picture?: Picture | null;
+  pictureUrl?: string | null;
   hosts?: null | string;
   producer?: null | string;
   color?: Color | null;
-}
-export interface Picture {
-  title?: string;
-  description?: null;
-  contentType?: string;
-  fileName?: string;
-  size?: number;
-  url?: string;
-  width?: number;
-  height?: number;
 }
 
 const NEXT_URL = '/showlist' as const;
@@ -168,24 +158,19 @@ const downloadShowFile = async (
   fileId: string,
   fileTitle: string,
   { apiKey }: { apiKey: string }
-): Promise<Picture> => {
+): Promise<string> => {
   if (!fileId || !apiKey) {
     return null;
   }
   const publicFileUrl = getImagePath(NEXT_URL, fileTitle);
   if (doesFileExist(FILE_URL, fileTitle)) {
-    return {
-      title: fileTitle,
-      url: publicFileUrl,
-      contentType: 'image/jpeg',
-      size: null,
-    };
+    return publicFileUrl;
   }
   const result = await getFile({
     apiKey,
     fileId,
   });
-  if(!result) {
+  if (!result) {
     return null;
   }
   try {
@@ -196,12 +181,7 @@ const downloadShowFile = async (
     console.error(error);
     return null;
   }
-  return {
-    title: fileTitle,
-    url: publicFileUrl,
-    contentType: 'image/jpeg',
-    size: null,
-  };
+  return publicFileUrl;
 };
 
 // Generate a nicely formatted object to use as keys.

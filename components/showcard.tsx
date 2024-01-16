@@ -118,9 +118,9 @@ interface ShowImageProps {
 }
 
 const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
-  const { picture } = show;
-  const url = picture?.url || placeholderImage;
-  const loader = picture?.url ? contentfulImageLoader : undefined;
+  const { pictureUrl, name } = show;
+  const url = pictureUrl || placeholderImage;
+  const loader = pictureUrl ? contentfulImageLoader : undefined;
 
   return (
     <div
@@ -133,7 +133,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
       <Image
         src={url}
         loader={loader}
-        unoptimized={picture?.url ? false : true}
+        unoptimized={pictureUrl ? false : true}
         layout={'fill'}
         objectFit="cover"
         objectPosition={'65% 35%'}
@@ -142,7 +142,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
             ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
-        alt={picture?.title || ''}
+        alt={name || ''}
       />
     </div>
   );
