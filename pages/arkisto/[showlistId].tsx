@@ -5,7 +5,6 @@ import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql'
 import {
   fetchContent,
   fetchNavigationItems,
-  fetchShowlist,
   NavigationItem,
   Show,
 } from 'contentful/client';
@@ -18,6 +17,7 @@ import Hero from 'components/hero';
 import { Showlist } from 'components/showlist';
 import { BsArrowLeft } from 'react-icons/bs';
 import Link from 'next/link';
+import { fetchArchivedShowlist } from 'archiver/archive';
 
 interface ShowListPageProps {
   name: string;
@@ -92,14 +92,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { showlistId } = context.params;
 
+  const currentShowlistId = Array.isArray(showlistId)
+     ? showlistId[0]
+     : showlistId;
+
+
   const data = await fetchContent<ShowlistPageQuery>(ShowlistPageDocument, {
-    showlistId,
+    showlistId: currentShowlistId,
   });
 
   const { name, id, heroImage, heroSubtext } =
     data.programmeCollection.items[0];
 
-  const { showsByDate, weekKeys } = await fetchShowlist(showlistId);
+  const { showsByDate, weekKeys } =  await fetchArchivedShowlist(currentShowlistId);
 
   const navigationItems = await fetchNavigationItems();
 
