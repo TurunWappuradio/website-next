@@ -1,19 +1,31 @@
+import { Show, showsToGroups } from 'contentful/client';
+import { Showlist } from 'google/client';
+
+const showlistBaseUrl = process.env.ARCHIVE_SOURCE_URL;
+const emptyResponse = { showsByDate: [], weekKeys: {} } as const;
+
 export const fetchArchivedShowlist = async (showlistId: string) => {
-  const showlistBaseUrl = process.env.ARCHIVE_SOURCE_URL;
   if(!showlistBaseUrl) {
     console.error('Arkiston polkua ei ole määritetty');
-    return [];
+    return emptyResponse;
   }
   const url = `${showlistBaseUrl}${showlistId}/showlist.json`;
 
   try {
     const response = await fetch(url);
-    const showlist = await response.json();
-    return showlist;
-  } catch (error) {
+    const showlist: Showlist | Show[] = await response.json();
+
+    if(Array.isArray(showlist)) {
+      return showsToGroups(showlist);
+    }
+    if(showlist?.showsByDate) {
+      return showlist;
+    }
+    return emptyResponse;
+  } catch(error) {
     console.error(error);
     console.error('Ohjelmakartan nouto epäonnistui');
   }
-  return { showsByDate: [], weekKeys: {} };
+  return emptyResponse;
 
 };

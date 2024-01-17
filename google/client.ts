@@ -35,6 +35,11 @@ export interface Show {
   color?: Color | null;
 }
 
+export interface Showlist {
+  showsByDate: Record<string, Show[]>;
+  weekKeys: Record<string, string[]>;
+}
+
 const NEXT_URL = '/showlist' as const;
 const FILE_URL = `./public${NEXT_URL}` as const;
 
@@ -150,10 +155,7 @@ export const showsToGroups = (shows: Show[]) => {
   return { showsByDate, weekKeys };
 };
 
-export const fetchShowlist = async (): Promise<{
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
-}> => {
+export const fetchShowlist = async (): Promise<Showlist> => {
   const data = await getSheet({
     apiKey: process.env.GA_API_KEY,
     spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
