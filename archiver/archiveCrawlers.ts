@@ -16,19 +16,19 @@ import { getImagePath } from 'utils/fileHelpers';
 
 export const archiveOldShowlists = async () => {
   // NOTE: Uncomment for archiving contentful data
-  // const contentfullIds = [
-  //   // { showlistId: 'syssyradio2020', name: '2020-syssy' },
-  //   // { showlistId: 'wappuradio2021', name: '2021-wappu' },
-  //   // { showlistId: 'wappuradio2022', name: '2022-wappu' },
-  //   // { showlistId: 'syssyradio-2022', name: '2022-syssy' },
-  // ];
-  // for (const { showlistId, name } of contentfullIds) {
-  //   await archiveContentful(showlistId, name);
-  // }
+  const contentfullIds = [
+    { showlistId: 'syssyradio2020', name: '2020-syssy' },
+    // { showlistId: 'wappuradio2021', name: '2021-wappu' },
+    // { showlistId: 'wappuradio2022', name: '2022-wappu' },
+    // { showlistId: 'syssyradio-2022', name: '2022-syssy' },
+  ];
+  for (const { showlistId, name } of contentfullIds) {
+    await archiveContentful(showlistId, name);
+  }
   // NOTE: Uncomment for archiving google sheet data
   // const sheetConfigs = [
-  //   { name: 'wappuradio2023', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1eHDK-MYm6B3BH8rewQr04-pd2IK4iFwsPY5HKkrVNJg', range: 'Ohjelmakartta!A3:J120' } },
-  //   // { name: 'syssyradio2023', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '', range: 'Ohjelmakartta!A3:J120' } }
+  //   { name: '2023-wappu', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1eHDK-MYm6B3BH8rewQr04-pd2IK4iFwsPY5HKkrVNJg', range: 'Ohjelmakartta!A3:J5' } },
+  //   { name: '2023-syssy', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '18UqWSStevUGa_rdIi9zF6NuCzbZc7H1ZnVMaIObV_Cg', range: 'Ohjelmakartta!A3:J32' } }
   // ];
   // for(const { config, name, showStartTime } of sheetConfigs) {
   //   await archiveGogleSheet(config, name, showStartTime);
@@ -64,6 +64,7 @@ const downloadFile = async (url: string, destinationPath: string) => {
 };
 
 /** Contentful - Pre wappu 2023 */
+const ARCHIVE_SOURCE_URL = process.env.ARCHIVE_SOURCE_URL || '';
 
 const archiveContentful = async (showlistId: string, name: string) => {
   const archivePath = getArchivePath(name);
@@ -81,7 +82,8 @@ const archiveContentful = async (showlistId: string, name: string) => {
 
   const showsWithNewFilePaths = await reconnectShowsWithLocalFiles(
     shows,
-    pictureFolder
+    pictureFolder,
+    ARCHIVE_SOURCE_URL
   );
   const showlistData = showsToGroups(showsWithNewFilePaths);
 
@@ -90,7 +92,8 @@ const archiveContentful = async (showlistId: string, name: string) => {
 
 const reconnectShowsWithLocalFiles = async (
   shows: Show[],
-  archivePath: string
+  archivePath: string,
+  archiveUrl: string
 ): Promise<Show[]> => {
   const showsWithLocalFiles = [];
   for (const show of shows) {
@@ -100,12 +103,14 @@ const reconnectShowsWithLocalFiles = async (
       continue;
     }
 
+
     const extension = path.parse(pictureUrl).ext;
     const newFilename = getImagePath('', name, extension);
     const filePath = path.join(archivePath, newFilename);
+    const archiveFileUrl = path.join(archiveUrl, newFilename);
     await downloadFile(pictureUrl, filePath);
 
-    showsWithLocalFiles.push({ ...show, pictureUrl: filePath });
+    showsWithLocalFiles.push({ ...show, pictureUrl: archiveFileUrl });
   }
   return showsWithLocalFiles;
 };
@@ -125,7 +130,7 @@ const archiveGogleSheet = async (
   const showlistResponse = await getSheet(config);
   const showlist = await parseSheetToShowList(showlistResponse, {
     apiKey: process.env.GA_API_KEY,
-    fileUrlBase: path.join(name, 'pictures'),
+    fileUrlBase: path.join(ARCHIVE_SOURCE_URL, name, 'pictures'),
     localFilePath: pictureFolder,
     showStartTime,
   });
