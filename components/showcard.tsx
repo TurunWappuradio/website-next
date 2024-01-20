@@ -3,7 +3,6 @@ import fi from 'date-fns/locale/fi';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import { Show } from 'contentful/client';
 
@@ -31,7 +30,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
     >
       <Time start={show.start} end={show.end} />
       <button
-        className={`group relative flex h-full w-full flex-col flex-col-reverse overflow-hidden rounded md:flex-row  ${
+        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
@@ -120,7 +119,6 @@ interface ShowImageProps {
 const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
   const { pictureUrl, name } = show;
   const url = pictureUrl || placeholderImage;
-  const loader = pictureUrl ? contentfulImageLoader : undefined;
 
   return (
     <div
@@ -132,8 +130,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
     >
       <Image
         src={url}
-        loader={loader}
-        unoptimized={pictureUrl ? false : true}
+        unoptimized
         layout={'fill'}
         objectFit="cover"
         objectPosition={'65% 35%'}
