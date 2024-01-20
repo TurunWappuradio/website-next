@@ -16,15 +16,15 @@ import { getImagePath } from 'utils/fileHelpers';
 
 export const archiveOldShowlists = async () => {
   // NOTE: Uncomment for archiving contentful data
-  const contentfullIds = [
-    { showlistId: 'syssyradio2020', name: '2020-syssy' },
-    // { showlistId: 'wappuradio2021', name: '2021-wappu' },
-    // { showlistId: 'wappuradio2022', name: '2022-wappu' },
-    // { showlistId: 'syssyradio-2022', name: '2022-syssy' },
-  ];
-  for (const { showlistId, name } of contentfullIds) {
-    await archiveContentful(showlistId, name);
-  }
+  // const contentfullIds = [
+  //   { showlistId: 'syssyradio2020', name: '2020-syssy' },
+  //   { showlistId: 'wappuradio2021', name: '2021-wappu' },
+  //   { showlistId: 'wappuradio2022', name: '2022-wappu' },
+  //   { showlistId: 'syssyradio-2022', name: '2022-syssy' },
+  // ];
+  // for (const { showlistId, name } of contentfullIds) {
+  //   await archiveContentful(showlistId, name);
+  // }
   // NOTE: Uncomment for archiving google sheet data
   // const sheetConfigs = [
   //   { name: '2023-wappu', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1eHDK-MYm6B3BH8rewQr04-pd2IK4iFwsPY5HKkrVNJg', range: 'Ohjelmakartta!A3:J5' } },
@@ -55,7 +55,6 @@ const archiveJson = async (archivePath: string, showlistData: {}) => {
 };
 
 const downloadFile = async (url: string, destinationPath: string) => {
-  // TODO: stream files directly to AWS?
   const response = await fetch(url);
   const arrayBuffer = await response.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
@@ -102,8 +101,6 @@ const reconnectShowsWithLocalFiles = async (
       showsWithLocalFiles.push(show);
       continue;
     }
-
-
     const extension = path.parse(pictureUrl).ext;
     const newFilename = getImagePath('', name, extension);
     const filePath = path.join(archivePath, newFilename);

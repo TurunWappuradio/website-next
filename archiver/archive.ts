@@ -4,8 +4,11 @@ import { Showlist } from 'google/client';
 const showlistBaseUrl = process.env.ARCHIVE_SOURCE_URL;
 const emptyResponse = { showsByDate: [], weekKeys: {} } as const;
 
+/**
+ * Archive S3 bucket API
+ */
 export const fetchArchivedShowlist = async (showlistId: string) => {
-  if(!showlistBaseUrl) {
+  if (!showlistBaseUrl) {
     console.error('Arkiston polkua ei ole määritetty');
     return emptyResponse;
   }
@@ -13,19 +16,18 @@ export const fetchArchivedShowlist = async (showlistId: string) => {
 
   try {
     const response = await fetch(url);
-    const showlist: Showlist | Show[] = await response.json();
+    const showlist: Show[] | Showlist = await response.json();
 
-    if(Array.isArray(showlist)) {
+    if (Array.isArray(showlist)) {
       return showsToGroups(showlist);
     }
-    if(showlist?.showsByDate) {
+    if (showlist?.showsByDate) {
       return showlist;
     }
     return emptyResponse;
-  } catch(error) {
+  } catch (error) {
     console.error(error);
     console.error('Ohjelmakartan nouto epäonnistui');
   }
   return emptyResponse;
-
 };

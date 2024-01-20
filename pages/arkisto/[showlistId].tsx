@@ -93,9 +93,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { showlistId } = context.params;
 
   const currentShowlistId = Array.isArray(showlistId)
-     ? showlistId[0]
-     : showlistId;
-
+    ? showlistId[0]
+    : showlistId;
 
   const data = await fetchContent<ShowlistPageQuery>(ShowlistPageDocument, {
     showlistId: currentShowlistId,
@@ -104,7 +103,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { name, id, heroImage, heroSubtext } =
     data.programmeCollection.items[0];
 
-  const { showsByDate, weekKeys } =  await fetchArchivedShowlist(currentShowlistId);
+  const { showsByDate, weekKeys } = await fetchArchivedShowlist(
+    currentShowlistId
+  );
 
   const navigationItems = await fetchNavigationItems();
 
