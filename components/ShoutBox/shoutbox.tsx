@@ -66,7 +66,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
         }),
       );
 
-      if (!!name) {
+      if (name) {
         handleSubmitName(name);
       }
 
