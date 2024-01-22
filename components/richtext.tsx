@@ -4,7 +4,7 @@ import {
   documentToReactComponents,
   Options,
 } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 import { contentfulImageLoader } from '../contentful/contentfulImageLoader';
 import { LinkButton } from './button';

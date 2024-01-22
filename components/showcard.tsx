@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import fi from 'date-fns/locale/fi';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { useState } from 'react';
 
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
