@@ -3,7 +3,6 @@ import fi from 'date-fns/locale/fi';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import { Show } from 'contentful/client';
 
@@ -31,7 +30,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
     >
       <Time start={show.start} end={show.end} />
       <button
-        className={`group relative flex h-full w-full flex-col flex-col-reverse overflow-hidden rounded md:flex-row  ${
+        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
@@ -118,9 +117,8 @@ interface ShowImageProps {
 }
 
 const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
-  const { picture } = show;
-  const url = picture?.url || placeholderImage;
-  const loader = picture?.url ? contentfulImageLoader : undefined;
+  const { pictureUrl, name } = show;
+  const url = pictureUrl || placeholderImage;
 
   return (
     <div
@@ -132,8 +130,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
     >
       <Image
         src={url}
-        loader={loader}
-        unoptimized={picture?.url ? false : true}
+        unoptimized
         layout={'fill'}
         objectFit="cover"
         objectPosition={'65% 35%'}
@@ -142,7 +139,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
             ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
-        alt={picture?.title || ''}
+        alt={name || ''}
       />
     </div>
   );

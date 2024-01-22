@@ -94,11 +94,10 @@ export const getFileRequest = async (
       }
     );
 
-    if(result.status === 404) {
+    if (result.status === 404) {
       console.warn('File not found', fileId);
       return null;
-    }
-    else if (result.status !== 200) {
+    } else if (result.status !== 200) {
       throw new Error(`Failed to load file ${fileId}`);
     }
     return result;

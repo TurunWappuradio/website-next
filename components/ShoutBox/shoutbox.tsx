@@ -22,8 +22,9 @@ export const ChatWrapper = () => {
 
   return (
     <div
-      className={`w-full flex-col items-center ${shoutboxOpen ? 'flex' : 'hidden'
-        }`}
+      className={`w-full flex-col items-center ${
+        shoutboxOpen ? 'flex' : 'hidden'
+      }`}
     >
       <div className="flex w-full max-w-6xl items-end justify-end">
         <button
@@ -157,7 +158,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               color={index % 2 === 0 ? 'bg-blue' : 'bg-blue-light'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
-              telegram={message.source === "telegram"}
+              telegram={message.source === 'telegram'}
             />
           ))}
           {!wsConnected && (

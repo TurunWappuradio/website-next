@@ -68,6 +68,7 @@ jobs:
           GA_CLIENT_X509_CERT_URL: ${{ secrets.GA_CLIENT_X509_CERT_URL}}
           GA_SPREADSHEET_SHOWLIST: ${{ secrets.GA_SPREADSHEET_SHOWLIST}}
           GA_SPREADSHEET_RANGE: ${{ secrets.GA_SPREADSHEET_RANGE}}
+          ARCHIVE_SOURCE_URL: ${{ secrets.ARCHIVE_SOURCE_URL}}
         run: npm run build
 
       - name: Configure AWS credentials

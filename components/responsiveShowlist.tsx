@@ -44,7 +44,9 @@ const DateButton = ({ value, currentDate, onClick }: DateButton) => {
   return (
     <button
       className={`w-full rounded-sm p-2 text-left capitalize text-white ${
-        (value === currentDate) ? 'bg-coral font-bold' : 'bg-blue-darkest hover:text-coral'
+        value === currentDate
+          ? 'bg-coral font-bold'
+          : 'bg-blue-darkest hover:text-coral'
       }`}
       onClick={() => onClick(value)}
     >
@@ -109,7 +111,7 @@ export const ResponsiveShowlist = ({
 
         <div className="mr-auto w-full space-y-4 lg:ml-[10rem]">
           {showsByDate[selectedDate]?.map((show, i) => (
-            <ShowCard show={show} key={show.date + i} index={i} />
+            <ShowCard show={show} key={show.start + i} index={i} />
           ))}
         </div>
         <div className="ml-4 hidden w-[10rem] shrink-0 flex-col space-y-2 lg:flex">

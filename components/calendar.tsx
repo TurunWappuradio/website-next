@@ -102,7 +102,11 @@ const Event: FC<{ event: Event }> = ({ event }) => {
 const formatWithTime = (start: Date, end: Date) => {
   const startFormatted = format(start, 'HH:mm', { locale: fi });
   const endFormatted = format(end, 'HH:mm', { locale: fi });
-  return <>kello {startFormatted} &ndash; {endFormatted}</>;
+  return (
+    <>
+      kello {startFormatted} &ndash; {endFormatted}
+    </>
+  );
 };
 
 const formatWithoutTime = (start: Date, end: Date) => {
@@ -112,7 +116,11 @@ const formatWithoutTime = (start: Date, end: Date) => {
 
   if (startFormatted === endFormatted) return 'Koko päivä';
 
-  return <>{startFormatted} &ndash; {endFormatted}</>;
+  return (
+    <>
+      {startFormatted} &ndash; {endFormatted}
+    </>
+  );
 };
 
 export default Calendar;
