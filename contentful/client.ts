@@ -44,23 +44,38 @@ export interface Show {
   name?: string;
   start?: string;
   end?: string;
-  date?: string;
   description?: null | string;
-  picture?: Picture | null;
+  pictureUrl?: string | null;
   hosts?: null | string;
   producer?: null | string;
   color?: Color | null;
 }
-export interface Picture {
-  title?: string;
-  description?: null;
-  contentType?: string;
-  fileName?: string;
-  size?: number;
-  url?: string;
-  width?: number;
-  height?: number;
-}
+
+export const parseQueryResultToShowlist = (data: ShowlistQuery) => {
+  const showsCollection =
+    data.programmeCollection.items[0].showsCollection.items;
+
+  const shows = showsCollection.map((item: any) => ({
+    name: item.name,
+    start: item.start,
+    end: item.end,
+    description: item.description,
+    pictureUrl: item.picture?.url || null,
+    hosts: item.hosts,
+    producer: item.producer,
+    color: item.color,
+  }));
+  return shows;
+};
+
+export const showsToGroups = (shows: Show[]) => {
+  const showsByDate = groupBy(
+    (day: any) => format(new Date(day.start), 'y.M.dd'),
+    shows
+  );
+  const weekKeys = generateWeekObj(showsByDate);
+  return { showsByDate, weekKeys };
+};
 
 const fetchShowlist = async (
   showlistId: string | string[]
@@ -71,29 +86,9 @@ const fetchShowlist = async (
   const data = await fetchContent<ShowlistQuery>(ShowlistDocument, {
     showlistId,
   });
-  const showsCollection =
-    data.programmeCollection.items[0].showsCollection.items;
 
-  const shows = showsCollection.map((item: any) => ({
-    name: item.name,
-    start: item.start,
-    end: item.end,
-    date: format(new Date(item.start), 'y.M.dd'),
-    description: item.description,
-    picture: item.picture,
-    hosts: item.hosts,
-    producer: item.producer,
-    color: item.color,
-  }));
-
-  const showsByDate = groupBy(
-    (day: any) => format(new Date(day.start), 'y.M.dd'),
-    shows
-  );
-
-  const weekKeys = generateWeekObj(showsByDate);
-
-  return { showsByDate, weekKeys };
+  const shows = parseQueryResultToShowlist(data);
+  return showsToGroups(shows);
 };
 
 // Generate a nicely formatted object to use as keys.

@@ -8,9 +8,9 @@ export const ensureDirectoryExists = (path: string) => {
   }
 };
 
-export const getImagePath = (path: string, basename: string) => {
+export const getImagePath = (path: string, basename: string, ext?: string) => {
   const sanitized = basename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-  const filename = sanitized + '.jpg';
+  const filename = `${sanitized}${ext || '.jpg'}`;
   return join(path, filename);
 };
 

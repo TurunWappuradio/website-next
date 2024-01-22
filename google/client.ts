@@ -17,7 +17,6 @@ import {
   ensureDirectoryExists,
   getImagePath,
   saveArrayBufferToFile,
-  writeFile,
 } from 'utils/fileHelpers';
 
 export enum Color {
@@ -30,30 +29,37 @@ export interface Show {
   end?: string;
   date?: string;
   description?: null | string;
-  picture?: Picture | null;
+  pictureUrl?: string | null;
   hosts?: null | string;
   producer?: null | string;
   color?: Color | null;
 }
-export interface Picture {
-  title?: string;
-  description?: null;
-  contentType?: string;
-  fileName?: string;
-  size?: number;
-  url?: string;
-  width?: number;
-  height?: number;
+
+export interface Showlist {
+  showsByDate: Record<string, Show[]>;
+  weekKeys: Record<string, string[]>;
 }
 
 const NEXT_URL = '/showlist' as const;
 const FILE_URL = `./public${NEXT_URL}` as const;
 
-const parseSheetToShowList = async (
+type SheetParserConfig = {
+  apiKey: string;
+  showStartTime?: string;
+  localFilePath?: string;
+  fileUrlBase?: string;
+};
+export const parseSheetToShowList = async (
   googleSheetData: sheets_v4.Schema$ValueRange,
-  { apiKey }: { apiKey: string }
+  parserConfig: SheetParserConfig
 ): Promise<Show[]> => {
-  const showStartTime = process.env.NEXT_PUBLIC_SHOW_START_TIME;
+  const {
+    apiKey,
+    showStartTime = process.env.NEXT_PUBLIC_SHOW_START_TIME,
+    localFilePath = FILE_URL,
+    fileUrlBase = NEXT_URL,
+  } = parserConfig;
+
   if (!showStartTime) {
     throw new Error('Env "NEXT_PUBLIC_SHOW_START_TIME" is missing');
   }
@@ -68,7 +74,7 @@ const parseSheetToShowList = async (
     );
   };
 
-  ensureDirectoryExists(FILE_URL);
+  ensureDirectoryExists(localFilePath);
 
   const showList = googleSheetData.values.reduce<Promise<Show[]>>(
     async (acc, sheetRow, index) => {
@@ -117,7 +123,11 @@ const parseSheetToShowList = async (
         googleFileUrl?.match(/.*id=(.*[^&]).*/)?.[1] ||
         googleFileUrl?.match(/.*file\/d\/(.*[^&])\/+.*/)?.[1];
 
-      const picture = await downloadShowFile(fileId, name, { apiKey });
+      const pictureUrl = await downloadShowFile(fileId, name, {
+        apiKey,
+        localFilePath,
+        fileUrlBase,
+      });
 
       return shows.concat({
         name,
@@ -125,7 +135,7 @@ const parseSheetToShowList = async (
         end: formatISO(endDate),
         date: formatISO(startDate),
         description,
-        picture,
+        pictureUrl,
         hosts: hosts || null,
         producer: producer || null,
         color: showColor,
@@ -136,10 +146,16 @@ const parseSheetToShowList = async (
   return showList;
 };
 
-export const fetchShowlist = async (): Promise<{
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
-}> => {
+export const showsToGroups = (shows: Show[]) => {
+  const showsByDate = groupBy(
+    (day: any) => format(new Date(day.start), 'y.M.dd'),
+    shows
+  );
+  const weekKeys = generateWeekObj(showsByDate);
+  return { showsByDate, weekKeys };
+};
+
+export const fetchShowlist = async (): Promise<Showlist> => {
   const data = await getSheet({
     apiKey: process.env.GA_API_KEY,
     spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
@@ -154,54 +170,38 @@ export const fetchShowlist = async (): Promise<{
   const shows = data
     ? await parseSheetToShowList(data, { apiKey: process.env.GA_API_KEY })
     : [];
-  const showsByDate = groupBy(
-    (day: any) => format(new Date(day.start), 'y.M.dd'),
-    shows
-  );
-  const weekKeys = generateWeekObj(showsByDate);
-
-  saveShowlistJson(showsByDate);
-  return { showsByDate, weekKeys };
+  return showsToGroups(shows);
 };
 
 const downloadShowFile = async (
   fileId: string,
   fileTitle: string,
-  { apiKey }: { apiKey: string }
-): Promise<Picture> => {
+  parserConfig: SheetParserConfig
+): Promise<string> => {
+  const { apiKey, fileUrlBase, localFilePath } = parserConfig;
   if (!fileId || !apiKey) {
     return null;
   }
-  const publicFileUrl = getImagePath(NEXT_URL, fileTitle);
-  if (doesFileExist(FILE_URL, fileTitle)) {
-    return {
-      title: fileTitle,
-      url: publicFileUrl,
-      contentType: 'image/jpeg',
-      size: null,
-    };
+  const publicFileUrl = getImagePath(fileUrlBase, fileTitle);
+  if (doesFileExist(localFilePath, fileTitle)) {
+    return publicFileUrl;
   }
   const result = await getFile({
     apiKey,
     fileId,
   });
-  if(!result) {
+  if (!result) {
     return null;
   }
   try {
     const imageArrayBuffer = result.data as ArrayBuffer; // Me just lazy...
-    await saveArrayBufferToFile(imageArrayBuffer, FILE_URL, fileTitle);
+    await saveArrayBufferToFile(imageArrayBuffer, localFilePath, fileTitle);
   } catch (error) {
     console.error(`Failed to load google file ${fileId}`);
     console.error(error);
     return null;
   }
-  return {
-    title: fileTitle,
-    url: publicFileUrl,
-    contentType: 'image/jpeg',
-    size: null,
-  };
+  return publicFileUrl;
 };
 
 // Generate a nicely formatted object to use as keys.
@@ -225,6 +225,3 @@ const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
 
   return weekObj;
 };
-
-const saveShowlistJson = (showsByDate: Record<string, Show[]>) =>
-  writeFile(`${FILE_URL}/ohjelmakartta.json`, JSON.stringify(showsByDate));
