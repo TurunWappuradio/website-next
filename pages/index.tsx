@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import Calendar from '@/components/calendar';
 import Footer from '@/components/footer';
@@ -13,26 +13,11 @@ import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-<<<<<<< HEAD
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
 import { fetchShowlist } from '@/scripts/google/client';
 import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
-=======
-} from 'contentful/client';
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import RichText from 'components/richtext';
-import Hero from 'components/hero';
-import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
-import Footer from 'components/footer';
-import Image from "next/legacy/image";
-import Calendar from 'components/calendar';
-import Sponsors, { ISponsorData } from 'components/sponsors';
-// import { Showlist } from 'components/showlist';
-// import Player from 'components/player';
-// import { fetchShowlist } from 'scripts/google/client';
->>>>>>> 7f5adeb (chore: upgrade Next & React, run Next codemods)
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 

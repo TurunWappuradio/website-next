@@ -62,9 +62,10 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
       <div className="mx-auto flex max-w-6xl flex-col py-6">
         <Link
           href="/arkisto"
-          className="my-6 ml-28 mr-auto flex font-bold text-teal transition hover:text-coral">
-
-          <BsArrowLeft className="mr-2 h-6 w-6" />Kaikki ohjelmakartat
+          className="my-6 ml-28 mr-auto flex font-bold text-teal transition hover:text-coral"
+        >
+          <BsArrowLeft className="mr-2 h-6 w-6" />
+          Kaikki ohjelmakartat
         </Link>
       </div>
       <Showlist showsByDate={showsByDate} />
@@ -74,7 +75,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pathsResult = await fetchContent<ShowlistPathsQuery>(
-    ShowlistPathsDocument
+    ShowlistPathsDocument,
   );
   const paths = pathsResult.programmeCollection.items.map((item) => ({
     params: {

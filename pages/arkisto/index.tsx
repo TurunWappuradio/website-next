@@ -1,7 +1,7 @@
 import { BsArrowRight } from 'react-icons/bs';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 
 import Footer from '@/components/footer';
@@ -15,15 +15,7 @@ import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import {
   ArchivePageDocument,
   ArchivePageQuery,
-<<<<<<< HEAD
 } from '@/contentful/graphql/archivePage.graphql';
-=======
-} from 'contentful/graphql/archivePage.graphql';
-import Image from "next/legacy/image";
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import Footer from 'components/footer';
-import Link from 'next/link';
->>>>>>> 7f5adeb (chore: upgrade Next & React, run Next codemods)
 
 interface ShowList {
   id?: string;
@@ -77,10 +69,10 @@ const ShowListCard = ({ showList }: { showList: ShowList }) => {
   const { id, coverImage, name, shortDescription } = showList;
 
   return (
-    (<Link
+    <Link
       href={`/arkisto/${id}`}
-      className="group my-4 flex flex-col overflow-hidden rounded bg-blue-dark transition hover:scale-[1.03] md:flex-row">
-
+      className="group my-4 flex flex-col overflow-hidden rounded bg-blue-dark transition hover:scale-[1.03] md:flex-row"
+    >
       <div className="relative inline h-40 w-full max-w-full shrink-0 grow-0 md:h-48 md:w-64">
         <Image
           src={coverImage.url}
@@ -98,8 +90,7 @@ const ShowListCard = ({ showList }: { showList: ShowList }) => {
           <BsArrowRight className="ml-2 h-6 w-6" />
         </div>
       </div>
-
-    </Link>)
+    </Link>
   );
 };
 

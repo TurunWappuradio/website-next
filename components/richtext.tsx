@@ -63,7 +63,7 @@ const renderOptions = (links?: any): Options => {
         if (
           React.Children.map(
             children,
-            (child: any) => child?.type === 'u'
+            (child: any) => child?.type === 'u',
           ).every(Boolean)
         ) {
           return (
@@ -72,7 +72,7 @@ const renderOptions = (links?: any): Options => {
                 {React.Children.map(children, (child: any) =>
                   React.cloneElement(child, {
                     className: 'no-underline',
-                  })
+                  }),
                 )}
               </LinkButton>
             </span>

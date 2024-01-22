@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
+import { FC, useState } from 'react';
 
 import { NavigationItem } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
