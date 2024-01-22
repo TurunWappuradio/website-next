@@ -21,37 +21,37 @@ export interface NavigationItem {
 
 const fetchNavigationItems = async (): Promise<NavigationItem[]> => {
   const navigationItems = await fetchContent<NavigationItemsQuery>(
-    NavigationItemsDocument
+    NavigationItemsDocument,
   );
   return navigationItems.navigationCollection.items[0].pagesCollection.items;
 };
 
-const fetchContent = async <T>(
+const fetchContent = async<T>(
   query: DocumentNode,
-  variables?: any
+  variables ?: any
 ): Promise<T> => {
   try {
     const _apolloClient = apolloClient ?? createApolloClient();
-    const { data } = await _apolloClient.query({ query, variables });
+  const {data} = await _apolloClient.query({query, variables});
 
-    return data;
+  return data;
   } catch (error) {
     console.error(
-      `There was a problem retrieving entries with the query ${query}`
+      `There was a problem retrieving entries with the query ${query}`,
     );
-    console.error(error);
+  console.error(error);
   }
 };
 
 const createApolloClient = () => {
   return new ApolloClient({
     uri:
-      'https://graphql.contentful.com/content/v1/spaces/' + CONTENTFUL_SPACE_ID,
-    headers: {
-      Authorization: 'Bearer ' + CONTENTFUL_ACCESS_TOKEN,
+  'https://graphql.contentful.com/content/v1/spaces/' + CONTENTFUL_SPACE_ID,
+  headers: {
+    Authorization: 'Bearer ' + CONTENTFUL_ACCESS_TOKEN,
     },
-    cache: new InMemoryCache(),
+  cache: new InMemoryCache(),
   });
 };
 
-export { fetchContent, fetchNavigationItems };
+  export {fetchContent, fetchNavigationItems};

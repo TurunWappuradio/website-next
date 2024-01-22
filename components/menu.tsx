@@ -27,9 +27,7 @@ const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
       {navigationItems.map(({ name, slug }) => (
         <li key={slug} className="my-5">
           <Link href={`/${slug}`} className="p-2 text-2xl" onClick={closeMenu}>
-
             {name}
-
           </Link>
         </li>
       ))}

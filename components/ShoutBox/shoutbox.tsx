@@ -63,7 +63,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
       webSocket.current.send(
         JSON.stringify({
           type: 'reload',
-        })
+        }),
       );
 
       if (!!name) {

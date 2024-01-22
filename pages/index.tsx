@@ -11,7 +11,7 @@ import RichText from 'components/richtext';
 import Hero from 'components/hero';
 import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
 import Footer from 'components/footer';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 // import { Showlist } from 'components/showlist';

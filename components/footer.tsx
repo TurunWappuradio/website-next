@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import {
   AiOutlineInstagram,
@@ -27,8 +27,13 @@ const Footer = ({ navigationItems }: FooterProps) => {
               alt="Logo of Turun Wappuradio ry"
             />
           </div>
-          <Link href="/tietosuojaseloste" className="mt-6 text-sm text-white opacity-50">
-            © Turun Wappuradio ry<br />Tietosuojaseloste
+          <Link
+            href="/tietosuojaseloste"
+            className="mt-6 text-sm text-white opacity-50"
+          >
+            © Turun Wappuradio ry
+            <br />
+            Tietosuojaseloste
           </Link>
         </div>
       </div>

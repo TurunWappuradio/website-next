@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
