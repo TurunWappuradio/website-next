@@ -4,7 +4,7 @@ import {
   eachWeekOfInterval,
   format,
   getISOWeek,
-  parse
+  parse,
 } from 'date-fns';
 import { groupBy, head, keys, last } from 'ramda';
 
@@ -28,7 +28,6 @@ export interface Showlist {
   showsByDate: Record<string, Show[]>;
   weekKeys: Record<string, string[]>;
 }
-
 
 export const showsToGroups = (shows: Show[]) => {
   const showsByDate = groupBy(

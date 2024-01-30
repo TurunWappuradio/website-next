@@ -6,7 +6,7 @@ import testcard from '../public/testcard.webp';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
 import { FiPause, FiPlay, FiMessageSquare, FiVideo } from 'react-icons/fi';
-import { Show } from 'google/showlistHelpers';
+import { Show } from 'scripts/google/showlistHelpers';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 
@@ -63,8 +63,9 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
             <button
               onClick={onPlayPause}
               title="Play/Pause"
-              className={`flex h-20 w-20 items-center justify-center rounded-full ${playing ? 'bg-teal' : 'bg-coral'
-                }`}
+              className={`flex h-20 w-20 items-center justify-center rounded-full ${
+                playing ? 'bg-teal' : 'bg-coral'
+              }`}
             >
               {playing ? <FiPause size="3rem" /> : <FiPlay size="3rem" />}
             </button>
@@ -73,16 +74,18 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
               <button
                 onClick={handleShoutboxToggle}
                 title="chat"
-                className={`h-12 w-12 rounded-full ${shoutboxOpen ? 'bg-teal' : 'bg-coral'
-                  }`}
+                className={`h-12 w-12 rounded-full ${
+                  shoutboxOpen ? 'bg-teal' : 'bg-coral'
+                }`}
               >
                 <FiMessageSquare size="1.7rem" className="mx-auto" />
               </button>
               <button
                 onClick={handleVideoToggle}
                 title="Webcam"
-                className={`h-12 w-12 rounded-full ${videoOpen ? 'bg-teal' : 'bg-coral'
-                  }`}
+                className={`h-12 w-12 rounded-full ${
+                  videoOpen ? 'bg-teal' : 'bg-coral'
+                }`}
               >
                 <FiVideo size="1.7rem" className="mx-auto" />
               </button>
@@ -103,7 +106,7 @@ const useCurrentShow = (showsByDate?: Record<string, Show[]>) => {
       const currentDate = format(now, 'y.M.dd');
       const todaysShows = showsByDate?.[currentDate];
 
-      if(!todaysShows) {
+      if (!todaysShows) {
         setCurrentShow(null);
         return;
       }

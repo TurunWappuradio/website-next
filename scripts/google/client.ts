@@ -1,10 +1,6 @@
 import { sheets_v4 } from '@googleapis/sheets';
-import {
-  addMilliseconds,
-  formatISO,
-  getHours
-} from 'date-fns';
-import { getFile, getSheet } from 'google/google';
+import { addMilliseconds, formatISO, getHours } from 'date-fns';
+import { getFile, getSheet } from 'scripts/google/google';
 import {
   doesFileExist,
   ensureDirectoryExists,
@@ -33,7 +29,7 @@ export const parseSheetToShowList = async (
     fileUrlBase = NEXT_URL,
   } = parserConfig;
 
-  if(!showStartTime) {
+  if (!showStartTime) {
     throw new Error('Env "NEXT_PUBLIC_SHOW_START_TIME" is missing');
   }
   const nightTimeHourStart = 22;
@@ -51,7 +47,7 @@ export const parseSheetToShowList = async (
 
   const showList = googleSheetData.values.reduce<Promise<Show[]>>(
     async (acc, sheetRow, index) => {
-      if(!sheetRow || !Array.isArray(sheetRow)) {
+      if (!sheetRow || !Array.isArray(sheetRow)) {
         return acc;
       }
       const [
@@ -71,7 +67,7 @@ export const parseSheetToShowList = async (
         ? Number(duration?.replace(',', '.'))
         : duration;
       // Lookup didn't find a show
-      if(!name || name === '#N/A') {
+      if (!name || name === '#N/A') {
         return acc;
       }
       const shows = await acc;
@@ -85,8 +81,8 @@ export const parseSheetToShowList = async (
       const showColor = isNight
         ? Color.Night
         : color === Color.Promote
-          ? Color.Promote
-          : null;
+        ? Color.Promote
+        : null;
 
       // Google file urls have two types:
       // from forms: https://drive.google.com/open?id=<fileId>'
@@ -125,7 +121,7 @@ export const fetchShowlist = async (): Promise<Showlist> => {
     spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
     range: process.env.GA_SPREADSHEET_RANGE,
   });
-  if(!data) {
+  if (!data) {
     return {
       showsByDate: {},
       weekKeys: {},
@@ -143,24 +139,24 @@ const downloadShowFile = async (
   parserConfig: SheetParserConfig
 ): Promise<string> => {
   const { apiKey, fileUrlBase, localFilePath } = parserConfig;
-  if(!fileId || !apiKey) {
+  if (!fileId || !apiKey) {
     return null;
   }
   const publicFileUrl = getImagePath(fileUrlBase, fileTitle);
-  if(doesFileExist(localFilePath, fileTitle)) {
+  if (doesFileExist(localFilePath, fileTitle)) {
     return publicFileUrl;
   }
   const result = await getFile({
     apiKey,
     fileId,
   });
-  if(!result) {
+  if (!result) {
     return null;
   }
   try {
     const imageArrayBuffer = result.data as ArrayBuffer; // Me just lazy...
     await saveArrayBufferToFile(imageArrayBuffer, localFilePath, fileTitle);
-  } catch(error) {
+  } catch (error) {
     console.error(`Failed to load google file ${fileId}`);
     console.error(error);
     return null;

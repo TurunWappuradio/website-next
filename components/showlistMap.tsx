@@ -3,7 +3,7 @@ import { differenceInMinutes, format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import { head, keys } from 'ramda';
 
-import { Show } from 'google/showlistHelpers';
+import { Show } from 'scripts/google/showlistHelpers';
 import { ModeButton } from './button';
 import { ShowCard } from './showcard';
 import { WideScreencard } from './widescreen-card';
@@ -100,7 +100,7 @@ const Buffer = ({ firstShow, day }: { firstShow: Show; day: string }) => {
   const startTime = new Date(firstShow.start);
   const diff = differenceInMinutes(startTime, dayParsed);
 
-  if(diff == 0) {
+  if (diff == 0) {
     return null;
   }
 

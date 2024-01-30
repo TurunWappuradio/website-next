@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 import { ShowCard } from 'components/showcard';
-import { Show } from 'google/showlistHelpers';
+import { Show } from 'scripts/google/showlistHelpers';
 
 interface NavButton {
   value: string | null;
@@ -43,10 +43,11 @@ const DateButton = ({ value, currentDate, onClick }: DateButton) => {
 
   return (
     <button
-      className={`w-full rounded-sm p-2 text-left capitalize text-white ${value === currentDate
+      className={`w-full rounded-sm p-2 text-left capitalize text-white ${
+        value === currentDate
           ? 'bg-coral font-bold'
           : 'bg-blue-darkest hover:text-coral'
-        }`}
+      }`}
       onClick={() => onClick(value)}
     >
       {str}
