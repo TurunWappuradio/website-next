@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 import { ShowCard } from 'components/showcard';
-import { Show } from 'contentful/client';
+import { Show } from 'scripts/google/showlistHelpers';
 
 interface NavButton {
   value: string | null;

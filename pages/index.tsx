@@ -5,7 +5,6 @@ import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-  Show,
 } from 'contentful/client';
 import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
 import RichText from 'components/richtext';
@@ -16,8 +15,8 @@ import Image from 'next/image';
 import Calendar from 'components/calendar';
 import Sponsors, { ISponsorData } from 'components/sponsors';
 // import { Showlist } from 'components/showlist';
-import Player from 'components/player';
-import { fetchShowlist } from 'google/client';
+// import Player from 'components/player';
+// import { fetchShowlist } from 'scripts/google/client';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 

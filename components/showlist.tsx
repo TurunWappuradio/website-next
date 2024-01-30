@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Show } from 'contentful/client';
+import { Show } from 'scripts/google/showlistHelpers';
 import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
 import { ModeButton } from './button';

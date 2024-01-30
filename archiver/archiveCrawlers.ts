@@ -1,30 +1,11 @@
-import {
-  Show,
-  fetchContent as fetchContentfulContent,
-  parseQueryResultToShowlist,
-} from 'contentful/client';
-import {
-  ShowlistDocument,
-  ShowlistQuery,
-} from 'contentful/graphql/showlist.graphql';
-import { parseSheetToShowList, showsToGroups } from 'google/client';
-import { GoogleConfigSheets, getSheet } from 'google/google';
+import { parseSheetToShowList } from 'scripts/google/client';
+import { GoogleConfigSheets, getSheet } from 'scripts/google/google';
 import { mkdirSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getImagePath } from 'utils/fileHelpers';
 
 export const archiveOldShowlists = async () => {
-  // NOTE: Uncomment for archiving contentful data
-  // const contentfullIds = [
-  //   { showlistId: 'syssyradio2020', name: '2020-syssy' },
-  //   { showlistId: 'wappuradio2021', name: '2021-wappu' },
-  //   { showlistId: 'wappuradio2022', name: '2022-wappu' },
-  //   { showlistId: 'syssyradio-2022', name: '2022-syssy' },
-  // ];
-  // for (const { showlistId, name } of contentfullIds) {
-  //   await archiveContentful(showlistId, name);
-  // }
   // NOTE: Uncomment for archiving google sheet data
   // const sheetConfigs = [
   //   { name: '2023-wappu', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1eHDK-MYm6B3BH8rewQr04-pd2IK4iFwsPY5HKkrVNJg', range: 'Ohjelmakartta!A3:J5' } },
@@ -54,63 +35,8 @@ const archiveJson = async (archivePath: string, showlistData: {}) => {
   await fs.writeFile(archiveFilePath, JSON.stringify(showlistData), 'utf-8');
 };
 
-const downloadFile = async (url: string, destinationPath: string) => {
-  const response = await fetch(url);
-  const arrayBuffer = await response.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-
-  await fs.writeFile(destinationPath, buffer);
-};
-
 /** Contentful - Pre wappu 2023 */
 const ARCHIVE_SOURCE_URL = process.env.ARCHIVE_SOURCE_URL || '';
-
-const archiveContentful = async (showlistId: string, name: string) => {
-  const archivePath = getArchivePath(name);
-  const pictureFolder = path.join(archivePath, 'pictures');
-  mkdirp(archivePath);
-  mkdirp(pictureFolder);
-
-  const showlistResponse = await fetchContentfulContent<ShowlistQuery>(
-    ShowlistDocument,
-    { showlistId }
-  );
-  // NOTE: when data is stored locally
-  // const showlistResponse = raw as ShowlistQuery;
-  const shows = parseQueryResultToShowlist(showlistResponse);
-
-  const showsWithNewFilePaths = await reconnectShowsWithLocalFiles(
-    shows,
-    pictureFolder,
-    ARCHIVE_SOURCE_URL
-  );
-  const showlistData = showsToGroups(showsWithNewFilePaths);
-
-  await archiveJson(archivePath, showlistData);
-};
-
-const reconnectShowsWithLocalFiles = async (
-  shows: Show[],
-  archivePath: string,
-  archiveUrl: string
-): Promise<Show[]> => {
-  const showsWithLocalFiles = [];
-  for (const show of shows) {
-    const { name, pictureUrl } = show;
-    if (!pictureUrl) {
-      showsWithLocalFiles.push(show);
-      continue;
-    }
-    const extension = path.parse(pictureUrl).ext;
-    const newFilename = getImagePath('', name, extension);
-    const filePath = path.join(archivePath, newFilename);
-    const archiveFileUrl = path.join(archiveUrl, newFilename);
-    await downloadFile(pictureUrl, filePath);
-
-    showsWithLocalFiles.push({ ...show, pictureUrl: archiveFileUrl });
-  }
-  return showsWithLocalFiles;
-};
 
 /** Google Sheets - Post wappu 2023 */
 
