@@ -1,5 +1,4 @@
-import { Show, showsToGroups } from 'contentful/client';
-import { Showlist } from 'google/client';
+import { Show, Showlist, showsToGroups } from 'scripts/google/showlistHelpers';
 
 const showlistBaseUrl = process.env.ARCHIVE_SOURCE_URL;
 const emptyResponse = { showsByDate: [], weekKeys: {} } as const;

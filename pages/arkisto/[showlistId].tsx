@@ -6,7 +6,6 @@ import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-  Show,
 } from 'contentful/client';
 import { ShowlistPathsQuery } from 'contentful/graphql/showlistPaths.graphql';
 import {
@@ -18,6 +17,7 @@ import { Showlist } from 'components/showlist';
 import { BsArrowLeft } from 'react-icons/bs';
 import Link from 'next/link';
 import { fetchArchivedShowlist } from 'archiver/archive';
+import { Show } from 'scripts/google/showlistHelpers';
 
 interface ShowListPageProps {
   name: string;
