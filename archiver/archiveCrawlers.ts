@@ -25,7 +25,7 @@ const mkdirp = async (filePath: string) => {
   try {
     // Ensure dirs exists with mkdir
     mkdirSync(filePath, { recursive: true });
-  } catch(error) {
+  } catch (error) {
     // noop. Throws error if dirs exists
   }
 };
