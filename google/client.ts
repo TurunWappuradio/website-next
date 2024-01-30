@@ -1,44 +1,17 @@
 import { sheets_v4 } from '@googleapis/sheets';
 import {
-  addDays,
   addMilliseconds,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  format,
   formatISO,
-  getHours,
-  getISOWeek,
-  parse,
+  getHours
 } from 'date-fns';
 import { getFile, getSheet } from 'google/google';
-import { groupBy, head, keys, last } from 'ramda';
 import {
   doesFileExist,
   ensureDirectoryExists,
   getImagePath,
   saveArrayBufferToFile,
 } from 'utils/fileHelpers';
-
-export enum Color {
-  Night = 'night',
-  Promote = 'promote',
-}
-export interface Show {
-  name?: string;
-  start?: string;
-  end?: string;
-  date?: string;
-  description?: null | string;
-  pictureUrl?: string | null;
-  hosts?: null | string;
-  producer?: null | string;
-  color?: Color | null;
-}
-
-export interface Showlist {
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
-}
+import { Color, Show, Showlist, showsToGroups } from './showlistHelpers';
 
 const NEXT_URL = '/showlist' as const;
 const FILE_URL = `./public${NEXT_URL}` as const;
@@ -60,7 +33,7 @@ export const parseSheetToShowList = async (
     fileUrlBase = NEXT_URL,
   } = parserConfig;
 
-  if (!showStartTime) {
+  if(!showStartTime) {
     throw new Error('Env "NEXT_PUBLIC_SHOW_START_TIME" is missing');
   }
   const nightTimeHourStart = 22;
@@ -78,7 +51,7 @@ export const parseSheetToShowList = async (
 
   const showList = googleSheetData.values.reduce<Promise<Show[]>>(
     async (acc, sheetRow, index) => {
-      if (!sheetRow || !Array.isArray(sheetRow)) {
+      if(!sheetRow || !Array.isArray(sheetRow)) {
         return acc;
       }
       const [
@@ -98,7 +71,7 @@ export const parseSheetToShowList = async (
         ? Number(duration?.replace(',', '.'))
         : duration;
       // Lookup didn't find a show
-      if (!name || name === '#N/A') {
+      if(!name || name === '#N/A') {
         return acc;
       }
       const shows = await acc;
@@ -112,8 +85,8 @@ export const parseSheetToShowList = async (
       const showColor = isNight
         ? Color.Night
         : color === Color.Promote
-        ? Color.Promote
-        : null;
+          ? Color.Promote
+          : null;
 
       // Google file urls have two types:
       // from forms: https://drive.google.com/open?id=<fileId>'
@@ -146,22 +119,13 @@ export const parseSheetToShowList = async (
   return showList;
 };
 
-export const showsToGroups = (shows: Show[]) => {
-  const showsByDate = groupBy(
-    (day: any) => format(new Date(day.start), 'y.M.dd'),
-    shows
-  );
-  const weekKeys = generateWeekObj(showsByDate);
-  return { showsByDate, weekKeys };
-};
-
 export const fetchShowlist = async (): Promise<Showlist> => {
   const data = await getSheet({
     apiKey: process.env.GA_API_KEY,
     spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
     range: process.env.GA_SPREADSHEET_RANGE,
   });
-  if (!data) {
+  if(!data) {
     return {
       showsByDate: {},
       weekKeys: {},
@@ -179,49 +143,27 @@ const downloadShowFile = async (
   parserConfig: SheetParserConfig
 ): Promise<string> => {
   const { apiKey, fileUrlBase, localFilePath } = parserConfig;
-  if (!fileId || !apiKey) {
+  if(!fileId || !apiKey) {
     return null;
   }
   const publicFileUrl = getImagePath(fileUrlBase, fileTitle);
-  if (doesFileExist(localFilePath, fileTitle)) {
+  if(doesFileExist(localFilePath, fileTitle)) {
     return publicFileUrl;
   }
   const result = await getFile({
     apiKey,
     fileId,
   });
-  if (!result) {
+  if(!result) {
     return null;
   }
   try {
     const imageArrayBuffer = result.data as ArrayBuffer; // Me just lazy...
     await saveArrayBufferToFile(imageArrayBuffer, localFilePath, fileTitle);
-  } catch (error) {
+  } catch(error) {
     console.error(`Failed to load google file ${fileId}`);
     console.error(error);
     return null;
   }
   return publicFileUrl;
-};
-
-// Generate a nicely formatted object to use as keys.
-const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
-  const start = parse(head(keys(showsByDate)), 'y.M.dd', new Date());
-  const end = parse(last(keys(showsByDate)), 'y.M.dd', new Date());
-  const weeks = eachWeekOfInterval({ start, end }, { weekStartsOn: 1 });
-
-  const weekObj = weeks.reduce(
-    (acc: Record<string, string[]>, weekStart: Date) => {
-      const weekKey = getISOWeek(weekStart).toString();
-      const days = eachDayOfInterval({
-        start: weekStart,
-        end: addDays(new Date(weekStart), 6),
-      }).map((day: Date) => format(day, 'y.M.dd'));
-      acc[weekKey] = days;
-      return acc;
-    },
-    {}
-  );
-
-  return weekObj;
 };

@@ -1,4 +1,4 @@
-import { Color } from 'google/client';
+import { Color } from 'google/showlistHelpers';
 
 interface WideScreenCardProps {
   text: string;
@@ -14,10 +14,10 @@ export const WideScreencard = ({
   showLength,
 }: WideScreenCardProps) => {
   const getBackgroundColor = () => {
-    if (!color) return 'bg-coral';
-    else if (color === Color.Promote) {
+    if(!color) return 'bg-coral';
+    else if(color === Color.Promote) {
       return 'bg-teal';
-    } else if (color === Color.Night) {
+    } else if(color === Color.Night) {
       return 'bg-blue-lightest';
     }
   };

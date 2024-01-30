@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
-import { Show } from 'google/client';
+import { Show } from 'google/showlistHelpers';
 
 interface ShowCard {
   show: Show;
@@ -22,19 +22,17 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
 
   return (
     <div
-      className={`flex w-full rounded ${className} ${
-        isExpanded
+      className={`flex w-full rounded ${className} ${isExpanded
           ? 'h-auto rounded-l-none rounded-t lg:rounded-l lg:rounded-t-none'
           : 'h-40'
-      }`}
+        }`}
     >
       <Time start={show.start} end={show.end} />
       <button
-        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
-          isExpanded
+        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${isExpanded
             ? 'flex rounded md:contents'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
-        }`}
+          }`}
         onClick={handleClick}
       >
         <TitleInfo show={show} isExpanded={isExpanded} index={index} />
@@ -74,9 +72,8 @@ const TitleInfo = ({ show, isExpanded, index }: TitleInfoProps) => {
            ${isExpanded ? 'hidden' : 'block'}`}
     >
       <p
-        className={`w-fit rounded-sm px-2 text-base font-bold md:text-lg ${
-          index % 2 === 0 ? 'bg-coral' : 'bg-teal'
-        }`}
+        className={`w-fit rounded-sm px-2 text-base font-bold md:text-lg ${index % 2 === 0 ? 'bg-coral' : 'bg-teal'
+          }`}
       >
         {show.name}
       </p>
@@ -95,9 +92,8 @@ interface DescriptionsProps {
 const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
-        isExpanded ? 'opacity-100' : 'opacity-0'
-      }`}
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${isExpanded ? 'opacity-100' : 'opacity-0'
+        }`}
     >
       <h2 className="text-base font-bold text-teal sm:text-lg">{show.name}</h2>
       <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
@@ -134,11 +130,10 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
         layout={'fill'}
         objectFit="cover"
         objectPosition={'65% 35%'}
-        className={`-z-10  ${
-          isExpanded
+        className={`-z-10  ${isExpanded
             ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
-        }`}
+          }`}
         alt={name || ''}
       />
     </div>

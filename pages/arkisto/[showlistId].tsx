@@ -17,7 +17,7 @@ import { Showlist } from 'components/showlist';
 import { BsArrowLeft } from 'react-icons/bs';
 import Link from 'next/link';
 import { fetchArchivedShowlist } from 'archiver/archive';
-import { Show } from 'google/client';
+import { Show } from 'google/showlistHelpers';
 
 interface ShowListPageProps {
   name: string;

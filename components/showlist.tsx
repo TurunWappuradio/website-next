@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Show } from 'google/client';
+import { Show } from 'google/showlistHelpers';
 import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
 import { ModeButton } from './button';
@@ -63,11 +63,11 @@ const ShowlistSelector = ({
 }: ShowlistSelectorProps) => {
   const { isDesktop } = useViewport();
 
-  if (!isDesktop) {
+  if(!isDesktop) {
     return <ResponsiveShowlist showsByDate={showsByDate} />;
   }
 
-  switch (mode) {
+  switch(mode) {
     case 'list':
       return <ResponsiveShowlist showsByDate={showsByDate} />;
     case 'map':
