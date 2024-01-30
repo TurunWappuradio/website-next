@@ -4,7 +4,7 @@ import {
   documentToReactComponents,
   Options,
 } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { contentfulImageLoader } from '../contentful/contentfulImageLoader';
 import { LinkButton } from './button';
@@ -63,7 +63,7 @@ const renderOptions = (links?: any): Options => {
         if (
           React.Children.map(
             children,
-            (child: any) => child?.type === 'u'
+            (child: any) => child?.type === 'u',
           ).every(Boolean)
         ) {
           return (
@@ -72,7 +72,7 @@ const renderOptions = (links?: any): Options => {
                 {React.Children.map(children, (child: any) =>
                   React.cloneElement(child, {
                     className: 'no-underline',
-                  })
+                  }),
                 )}
               </LinkButton>
             </span>

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { FC, useState } from 'react';
 
@@ -130,8 +130,11 @@ const Hero: FC<HeroProps> = ({
 
 const NavLink = ({ href, name }: { href: string; name: string }) => (
   <li className="p-4">
-    <Link href={href}>
-      <a className="text-xl text-white transition hover:text-coral">{name}</a>
+    <Link
+      href={href}
+      className="text-xl text-white transition hover:text-coral"
+    >
+      {name}
     </Link>
   </li>
 );

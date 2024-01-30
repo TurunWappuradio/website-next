@@ -32,7 +32,7 @@ export interface Showlist {
 export const showsToGroups = (shows: Show[]) => {
   const showsByDate = groupBy(
     (day: any) => format(new Date(day.start), 'y.M.dd'),
-    shows
+    shows,
   );
   const weekKeys = generateWeekObj(showsByDate);
   return { showsByDate, weekKeys };
@@ -54,7 +54,7 @@ const generateWeekObj = (showsByDate: Record<string, Show[]>) => {
       acc[weekKey] = days;
       return acc;
     },
-    {}
+    {},
   );
 
   return weekObj;

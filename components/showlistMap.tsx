@@ -78,7 +78,7 @@ export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
                       key={i}
                       showLength={differenceInMinutes(
                         new Date(show.end),
-                        new Date(show.start)
+                        new Date(show.start),
                       )}
                       text={show?.name}
                       color={show?.color}

@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 interface NameFormatterProps {
   name: string;

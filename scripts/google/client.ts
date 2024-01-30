@@ -20,7 +20,7 @@ type SheetParserConfig = {
 };
 export const parseSheetToShowList = async (
   googleSheetData: sheets_v4.Schema$ValueRange,
-  parserConfig: SheetParserConfig
+  parserConfig: SheetParserConfig,
 ): Promise<Show[]> => {
   const {
     apiKey,
@@ -81,8 +81,8 @@ export const parseSheetToShowList = async (
       const showColor = isNight
         ? Color.Night
         : color === Color.Promote
-        ? Color.Promote
-        : null;
+          ? Color.Promote
+          : null;
 
       // Google file urls have two types:
       // from forms: https://drive.google.com/open?id=<fileId>'
@@ -110,7 +110,7 @@ export const parseSheetToShowList = async (
         color: showColor,
       });
     },
-    Promise.resolve([])
+    Promise.resolve([]),
   );
   return showList;
 };
@@ -136,7 +136,7 @@ export const fetchShowlist = async (): Promise<Showlist> => {
 const downloadShowFile = async (
   fileId: string,
   fileTitle: string,
-  parserConfig: SheetParserConfig
+  parserConfig: SheetParserConfig,
 ): Promise<string> => {
   const { apiKey, fileUrlBase, localFilePath } = parserConfig;
   if (!fileId || !apiKey) {
