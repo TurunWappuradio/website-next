@@ -3,7 +3,7 @@ import { differenceInMinutes, format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 import { head, keys } from 'ramda';
 
-import { Show } from 'contentful/client';
+import { Show } from 'google/client';
 import { ModeButton } from './button';
 import { ShowCard } from './showcard';
 import { WideScreencard } from './widescreen-card';

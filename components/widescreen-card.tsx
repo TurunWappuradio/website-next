@@ -1,4 +1,4 @@
-import { Color } from 'contentful/client';
+import { Color } from 'google/client';
 
 interface WideScreenCardProps {
   text: string;

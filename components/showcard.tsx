@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
-import { Show } from 'contentful/client';
+import { Show } from 'google/client';
 
 interface ShowCard {
   show: Show;

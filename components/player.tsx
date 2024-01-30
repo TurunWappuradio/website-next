@@ -2,11 +2,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
-import { Show } from 'contentful/client';
 import testcard from '../public/testcard.webp';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
 import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
 import { FiPause, FiPlay, FiMessageSquare, FiVideo } from 'react-icons/fi';
+import { Show } from 'google/client';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 
