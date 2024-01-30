@@ -21,6 +21,7 @@ interface ShowList {
   id?: string;
   name?: string;
   shortDescription?: string;
+  showOrder?: number;
   coverImage?: {
     url?: string;
   };
