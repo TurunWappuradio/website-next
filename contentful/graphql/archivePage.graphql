@@ -1,12 +1,13 @@
 query archivePage {
-  programmeCollection {
+  programmeCollection(order: [showOrder_DESC]) {
     items {
       id
-      name
+      name,
       coverImage {
         url
       }
-      shortDescription
+      shortDescription,
+      showOrder
     }
   }
 }
