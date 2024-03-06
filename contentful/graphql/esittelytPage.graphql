@@ -1,0 +1,13 @@
+query esittelyt {
+  hallitusJaTiimiesittelyt2024Collection {
+    items {
+      name
+      description {
+        json
+      }
+      picture {
+        url
+      }
+    }
+  }
+}
