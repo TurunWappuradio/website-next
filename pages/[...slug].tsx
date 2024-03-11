@@ -1,22 +1,22 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 
+import Footer from '@/components/footer';
+import Hero from '@/components/hero';
+import RichText from '@/components/richtext';
 import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-} from 'contentful/client';
-import RichText from 'components/richtext';
-import {
-  ContentPagePathsDocument,
-  ContentPagePathsQuery,
-} from 'contentful/graphql/contentPagePaths.graphql';
+} from '@/contentful/client';
 import {
   ContentPageDocument,
   ContentPageQuery,
-} from 'contentful/graphql/contentPage.graphql';
-import Hero from 'components/hero';
-import Footer from 'components/footer';
+} from '@/contentful/graphql/contentPage.graphql';
+import {
+  ContentPagePathsDocument,
+  ContentPagePathsQuery,
+} from '@/contentful/graphql/contentPagePaths.graphql';
 
 interface ContentPageProps {
   name: string;

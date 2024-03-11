@@ -1,11 +1,6 @@
 {
-  "extends": [
-    "next",
-    "prettier"
-  ],
-  "plugins": [
-    "simple-import-sort"
-  ],
+  "extends": ["next", "prettier"],
+  "plugins": ["simple-import-sort"],
   "rules": {
     "semi": 2,
     "simple-import-sort/imports": [

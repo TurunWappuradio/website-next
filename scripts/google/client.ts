@@ -1,13 +1,14 @@
+import { Color, Show, Showlist, showsToGroups } from './showlistHelpers';
 import { sheets_v4 } from '@googleapis/sheets';
 import { addMilliseconds, formatISO, getHours } from 'date-fns';
-import { getFile, getSheet } from 'scripts/google/google';
+
+import { getFile, getSheet } from '@/scripts/google/google';
 import {
   doesFileExist,
   ensureDirectoryExists,
   getImagePath,
   saveArrayBufferToFile,
-} from 'utils/fileHelpers';
-import { Color, Show, Showlist, showsToGroups } from './showlistHelpers';
+} from '@/utils/fileHelpers';
 
 const NEXT_URL = '/showlist' as const;
 const FILE_URL = `./public${NEXT_URL}` as const;

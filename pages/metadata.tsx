@@ -1,8 +1,8 @@
-import { NextPage } from 'next';
 import { FormEvent, useState } from 'react';
+import { NextPage } from 'next';
 
-import { Input } from 'components/input';
-import { Button } from 'components/button';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
 
 const Metadata: NextPage = () => {
   const [loading, setLoading] = useState(false);

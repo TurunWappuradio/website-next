@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { NavigationItem } from 'contentful/client';
+import { NavigationItem } from '@/contentful/client';
 
 interface MenuProps {
   navigationItems: NavigationItem[];

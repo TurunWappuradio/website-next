@@ -1,14 +1,14 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import {
-  AiOutlineInstagram,
   AiFillFacebook,
-  AiOutlineMail,
   AiFillGithub,
+  AiOutlineInstagram,
+  AiOutlineMail,
 } from 'react-icons/ai';
 import { FaDiscord, FaTelegramPlane } from 'react-icons/fa';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { NavigationItem } from 'contentful/client';
+import { NavigationItem } from '@/contentful/client';
 
 interface FooterProps {
   navigationItems: NavigationItem[];

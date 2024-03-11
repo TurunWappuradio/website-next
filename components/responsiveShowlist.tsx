@@ -1,10 +1,10 @@
-import { format, parse } from 'date-fns';
-import fi from 'date-fns/locale/fi';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { format, parse } from 'date-fns';
+import fi from 'date-fns/locale/fi';
 
-import { ShowCard } from 'components/showcard';
-import { Show } from 'scripts/google/showlistHelpers';
+import { ShowCard } from '@/components/showcard';
+import { Show } from '@/scripts/google/showlistHelpers';
 
 interface NavButton {
   value: string | null;

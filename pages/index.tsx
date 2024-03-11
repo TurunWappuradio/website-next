@@ -1,22 +1,22 @@
-import Head from 'next/head';
 import { GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
 
+import Calendar from '@/components/calendar';
+import Footer from '@/components/footer';
+import Hero from '@/components/hero';
+import RichText from '@/components/richtext';
+import Sponsors, { ISponsorData } from '@/components/sponsors';
 import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-} from 'contentful/client';
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import RichText from 'components/richtext';
-import Hero from 'components/hero';
-import { IndexDocument, IndexQuery } from 'contentful/graphql/index.graphql';
-import Footer from 'components/footer';
-import Image from 'next/image';
-import Calendar from 'components/calendar';
-import Sponsors, { ISponsorData } from 'components/sponsors';
-// import { Showlist } from 'components/showlist';
-// import Player from 'components/player';
-// import { fetchShowlist } from 'scripts/google/client';
+} from '@/contentful/client';
+import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
+import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
+// import { Showlist } from '@/components/showlist';
+// import Player from '@/components/player';
+// import { fetchShowlist } from '@/scripts/google/client';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 

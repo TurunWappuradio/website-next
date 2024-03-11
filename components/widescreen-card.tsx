@@ -1,4 +1,4 @@
-import { Color } from 'scripts/google/showlistHelpers';
+import { Color } from '@/scripts/google/showlistHelpers';
 
 interface WideScreenCardProps {
   text: string;
