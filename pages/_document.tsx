@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 // A custom Document for Next.js to inject Tailwind styles to the body.
 class MyDocument extends Document {

@@ -1,21 +1,21 @@
+import { BsArrowRight } from 'react-icons/bs';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import { BsArrowRight } from 'react-icons/bs';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import Hero from 'components/hero';
+import Footer from '@/components/footer';
+import Hero from '@/components/hero';
 import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-} from 'contentful/client';
+} from '@/contentful/client';
+import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import {
   ArchivePageDocument,
   ArchivePageQuery,
-} from 'contentful/graphql/archivePage.graphql';
-import Image from 'next/image';
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import Footer from 'components/footer';
-import Link from 'next/link';
+} from '@/contentful/graphql/archivePage.graphql';
 
 interface ShowList {
   id?: string;

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types';
+import Image from 'next/image';
 import {
   documentToReactComponents,
   Options,
 } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 import { contentfulImageLoader } from '../contentful/contentfulImageLoader';
 import { LinkButton } from './button';

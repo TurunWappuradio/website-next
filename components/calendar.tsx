@@ -1,5 +1,5 @@
-import { FC, useState, useEffect } from 'react';
-import { startOfDay, format, parseISO, isSameDay } from 'date-fns';
+import { FC, useEffect, useState } from 'react';
+import { format, isSameDay, parseISO, startOfDay } from 'date-fns';
 import fi from 'date-fns/locale/fi';
 
 // Fetch next events but not more than 6 months from now

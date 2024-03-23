@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 
+import useShoutBoxAndVideo from '../../hooks/useShoutboxAndVideo';
+import MessageFormatter from './messageformatter';
 import MessageInput from './messageinput';
 import NameInput from './nameinput';
-import MessageFormatter from './messageformatter';
-import useShoutBoxAndVideo from '../../hooks/useShoutboxAndVideo';
 
 const wsURL = process.env.NEXT_PUBLIC_SHOUTBOX_SOURCE || 'ws://localhost:3030';
 

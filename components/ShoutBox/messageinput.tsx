@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Component, useEffect, useState } from 'react';
 import { AiOutlineSend } from 'react-icons/ai';
+
 import NameFormatter from './nameformatter';
 import TextField from './textfield';
 
