@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { Show } from 'scripts/google/showlistHelpers';
+import { useViewport } from '@/hooks/useViewport';
+import { Show } from '@/scripts/google/showlistHelpers';
+import { ModeButton } from './button';
 import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
-import { ModeButton } from './button';
-import { useViewport } from 'hooks/useViewport';
 
 interface ShowlistProps {
   showsByDate: {

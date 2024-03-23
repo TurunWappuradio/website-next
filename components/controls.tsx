@@ -1,4 +1,4 @@
-import { FiPlay, FiPause, FiVolumeX, FiVolume2 } from 'react-icons/fi';
+import { FiPause, FiPlay, FiVolume2, FiVolumeX } from 'react-icons/fi';
 
 import VolumeSlider from './volumeSlider';
 

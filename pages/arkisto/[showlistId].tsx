@@ -1,23 +1,23 @@
+import { BsArrowLeft } from 'react-icons/bs';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 
-import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
+import { fetchArchivedShowlist } from '@/archiver/archive';
+import Hero from '@/components/hero';
+import { Showlist } from '@/components/showlist';
 import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-} from 'contentful/client';
-import { ShowlistPathsQuery } from 'contentful/graphql/showlistPaths.graphql';
+} from '@/contentful/client';
 import {
   ShowlistPageDocument,
   ShowlistPageQuery,
-} from 'contentful/graphql/showlistPage.graphql';
-import Hero from 'components/hero';
-import { Showlist } from 'components/showlist';
-import { BsArrowLeft } from 'react-icons/bs';
-import Link from 'next/link';
-import { fetchArchivedShowlist } from 'archiver/archive';
-import { Show } from 'scripts/google/showlistHelpers';
+} from '@/contentful/graphql/showlistPage.graphql';
+import { ShowlistPathsDocument } from '@/contentful/graphql/showlistPaths.graphql';
+import { ShowlistPathsQuery } from '@/contentful/graphql/showlistPaths.graphql';
+import { Show } from '@/scripts/google/showlistHelpers';
 
 interface ShowListPageProps {
   name: string;

@@ -1,9 +1,9 @@
-import { parseSheetToShowList } from 'scripts/google/client';
-import { GoogleConfigSheets, getSheet } from 'scripts/google/google';
 import { mkdirSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { getImagePath } from 'utils/fileHelpers';
+
+import { parseSheetToShowList } from '@/scripts/google/client';
+import { getSheet, GoogleConfigSheets } from '@/scripts/google/google';
 
 export const archiveOldShowlists = async () => {
   // NOTE: Uncomment for archiving google sheet data
