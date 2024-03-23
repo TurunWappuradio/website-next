@@ -2,21 +2,19 @@ import { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-import {
-  EsittelytDocument,
-  EsittelytQuery,
-} from '@/contentful/graphql/esittelytPage.graphql';
+import Footer from '@/components/footer';
+import Hero from '@/components/hero';
 import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
 } from '@/contentful/client';
-
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-
-import Footer from '@/components/footer';
-import Hero from '@/components/hero';
+import {
+  EsittelytDocument,
+  EsittelytQuery,
+} from '@/contentful/graphql/esittelytPage.graphql';
 
 interface EsittelytProps {
   navigationItems?: NavigationItem[] | null;
