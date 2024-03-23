@@ -1,5 +1,5 @@
 query esittelyt {
-  hallitusJaTiimiesittelyt2024Collection {
+  presentationCollection {
     items {
       name
       description {
