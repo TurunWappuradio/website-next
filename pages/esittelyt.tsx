@@ -27,11 +27,10 @@ interface Esittely {
   picture?: {
     url?: string | null;
   };
-  forceOpen?: boolean;
   className?: string;
 }
 
-const ExhibitionListCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
+const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
   const { name, description, picture, className } = esittely;
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const handleClick = () => {
@@ -88,7 +87,7 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
         {
           <div>
             {esittelyt.map((esittely) => (
-              <ExhibitionListCard key={esittely.name} esittely={esittely} />
+              <PresentationCard key={esittely.name} esittely={esittely} />
             ))}
           </div>
         }
@@ -100,10 +99,9 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
 
 export const getStaticProps: GetStaticProps<EsittelytProps> = async () => {
   const data = await fetchContent<EsittelytQuery>(EsittelytDocument);
-
   const navigationItems = await fetchNavigationItems();
 
-  const esittelyt: Esittely[] = data.presentationCollection?.items || [];
+  const esittelyt: Esittely[] = data.presentationCollection.items;
 
   return {
     props: {
@@ -131,12 +129,12 @@ const TitleInfo = ({ esittely, isExpanded }: TitleInfoProps) => {
   );
 };
 
-interface DescriptionsProps {
+interface DescriptionProps {
   esittely: Esittely;
   isExpanded: boolean;
 }
 
-const Descriptions = ({ esittely, isExpanded }: DescriptionsProps) => {
+const Descriptions = ({ esittely, isExpanded }: DescriptionProps) => {
   return (
     <div
       className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
