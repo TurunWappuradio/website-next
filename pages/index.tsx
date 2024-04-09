@@ -5,7 +5,9 @@ import Image from 'next/image';
 import Calendar from '@/components/calendar';
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
+import Player from '@/components/player';
 import RichText from '@/components/richtext';
+import { Showlist } from '@/components/showlist';
 import Sponsors, { ISponsorData } from '@/components/sponsors';
 import {
   fetchContent,
@@ -14,8 +16,6 @@ import {
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
-import { Showlist } from '@/components/showlist';
-import Player from '@/components/player';
 import { fetchShowlist } from '@/scripts/google/client';
 import { Show } from '@/scripts/google/showlistHelpers';
 
