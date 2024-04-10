@@ -17,7 +17,7 @@ import {
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
 import { fetchShowlist } from '@/scripts/google/client';
-import { Show } from '@/scripts/google/showlistHelpers';
+import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -33,8 +33,7 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
+  showsByDate: ShowsByDate;
   firstDecorativeImage: {
     url?: string;
     width?: number;
@@ -64,12 +63,11 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonLink,
   navigationItems,
   showsByDate,
-  weekKeys,
-  firstDecorativeImage,
-  secondDecorativeImage,
-  firstContent,
-  secondContent,
-  thirdContent,
+  // firstDecorativeImage,
+  // secondDecorativeImage,
+  // firstContent,
+  // secondContent,
+  // thirdContent,
   sponsors,
   playing,
   onPlayPause,
@@ -106,7 +104,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         />
       )}
 
-      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
+      <Showlist showsByDate={showsByDate} />
 
       {/* First section */}
       {/* <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8"> */}
@@ -175,7 +173,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  const { showsByDate, weekKeys } = await fetchShowlist();
+  const showsByDate = await fetchShowlist();
 
   return {
     props: {
@@ -186,7 +184,6 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonLink,
       navigationItems,
       showsByDate,
-      weekKeys,
       firstDecorativeImage,
       secondDecorativeImage,
       firstContent,
