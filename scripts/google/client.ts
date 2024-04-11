@@ -1,4 +1,4 @@
-import { Color, Show, Showlist, showsToGroups } from './showlistHelpers';
+import { Color, Show, ShowsByDate, showsToGroups } from './showlistHelpers';
 import { sheets_v4 } from '@googleapis/sheets';
 import { addMilliseconds, formatISO, getHours } from 'date-fns';
 
@@ -116,17 +116,14 @@ export const parseSheetToShowList = async (
   return showList;
 };
 
-export const fetchShowlist = async (): Promise<Showlist> => {
+export const fetchShowlist = async (): Promise<ShowsByDate> => {
   const data = await getSheet({
     apiKey: process.env.GA_API_KEY,
     spreadsheetId: process.env.GA_SPREADSHEET_SHOWLIST,
     range: process.env.GA_SPREADSHEET_RANGE,
   });
   if (!data) {
-    return {
-      showsByDate: {},
-      weekKeys: {},
-    };
+    return {};
   }
   const shows = data
     ? await parseSheetToShowList(data, { apiKey: process.env.GA_API_KEY })

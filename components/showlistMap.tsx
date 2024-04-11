@@ -1,25 +1,39 @@
 import { useState } from 'react';
 import { differenceInMinutes, format, parse } from 'date-fns';
 import fi from 'date-fns/locale/fi';
-import { head, keys } from 'ramda';
+import { append, head, keys, last } from 'ramda';
 
-import { Show } from '@/scripts/google/showlistHelpers';
+import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
 import { ModeButton } from './button';
 import { ShowCard } from './showcard';
 import { WideScreencard } from './widescreen-card';
 
+const GROUP_SIZE = 5;
+
 interface ShowlistMapProps {
-  showsByDate: Record<string, Show[]>;
-  weekKeys: Record<string, string[]>;
+  showsByDate: ShowsByDate;
 }
 
-export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
-  const weeks = keys(weekKeys);
+export const ShowlistMap = ({ showsByDate }: ShowlistMapProps) => {
+  // Take every n consecutive days.
+  const groups: string[][] = keys(showsByDate).reduce((acc, date, idx) => {
+    const groupIdx = Math.floor(idx / GROUP_SIZE);
+    acc[groupIdx] = append(date, acc[groupIdx] ?? []);
+    return acc;
+  }, []);
 
   const [selectedShow, setSelectedShow] = useState<Show | null>(null);
-  const [openWeek, setOpenWeek] = useState<string | null>(head(weeks));
+  const [openGroup, setOpenGroup] = useState(0);
 
-  const openWeekDays = weekKeys[openWeek] ?? [];
+  const openWeekDays = groups[openGroup];
+
+  const formatGroupButtonText = (group: string[]): string => {
+    if (group.length === 1) return formatDayKey(head(group));
+
+    const startDay = formatDayKey(head(group), 'EEEEEE dd.');
+    const endDay = formatDayKey(last(group));
+    return `${startDay} – ${endDay}`;
+  };
 
   // prettier-ignore
   const timeStamps: string[] = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
@@ -35,16 +49,18 @@ export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
           forceOpen={true}
         />
       )}
-      <div className="flex space-x-2 p-6">
-        {weeks.map((n, i) => (
-          <ModeButton
-            key={n + i}
-            text={'Viikko ' + n}
-            onClick={() => setOpenWeek(n)}
-            isActive={openWeek === n}
-          />
-        ))}
-      </div>
+      {groups.length > 1 ? (
+        <div className="flex space-x-2 p-6">
+          {groups.map((group, idx) => (
+            <ModeButton
+              key={head(group)}
+              text={formatGroupButtonText(group)}
+              onClick={() => setOpenGroup(idx)}
+              isActive={openGroup === idx}
+            />
+          ))}
+        </div>
+      ) : null}
       <div className="flex">
         <div className="-mt-3 p-6">
           {timeStamps.map((timeStamp, i) => (
@@ -61,9 +77,7 @@ export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
                 className="flex w-full max-w-[1/7] flex-col text-center"
               >
                 <p className="mx-auto w-full font-bold text-white">
-                  {format(parse(day, 'y.M.dd', new Date()), 'EEEEEE dd.M.', {
-                    locale: fi,
-                  })}
+                  {formatDayKey(day)}
                 </p>
 
                 {/* If the first show of the day does not start at midnight, add buffer */}
@@ -93,6 +107,11 @@ export const ShowlistMap = ({ showsByDate, weekKeys }: ShowlistMapProps) => {
     </div>
   );
 };
+
+const formatDayKey = (day: string, format_: string = 'EEEEEE dd.M.'): string =>
+  format(parse(day, 'y.M.dd', new Date()), format_, {
+    locale: fi,
+  });
 
 // If the first show of the day does not start at midnight, add buffer
 const Buffer = ({ firstShow, day }: { firstShow: Show; day: string }) => {

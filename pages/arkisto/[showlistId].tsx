@@ -26,7 +26,6 @@ interface ShowListPageProps {
   showsByDate: {
     [key: string]: Show[];
   };
-  weekKeys: Record<string, string[]>;
   heroImage: {
     url?: string;
   };
@@ -37,7 +36,6 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   name,
   showsByDate,
   heroImage,
-  weekKeys,
   navigationItems,
   heroSubtext,
 }) => {
@@ -69,7 +67,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
           </a>
         </Link>
       </div>
-      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
+      <Showlist showsByDate={showsByDate} />
     </div>
   );
 };
@@ -103,9 +101,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { name, id, heroImage, heroSubtext } =
     data.programmeCollection.items[0];
 
-  const { showsByDate, weekKeys } = await fetchArchivedShowlist(
-    currentShowlistId
-  );
+  const showsByDate = await fetchArchivedShowlist(currentShowlistId);
 
   const navigationItems = await fetchNavigationItems();
 
@@ -114,7 +110,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       name,
       id,
       showsByDate,
-      weekKeys,
       navigationItems,
       heroImage,
       heroSubtext,
