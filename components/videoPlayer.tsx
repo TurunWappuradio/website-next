@@ -1,5 +1,6 @@
-import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
 import { GrFormClose } from 'react-icons/gr';
+
+import useShoutBoxAndVideo from '@/hooks/useShoutboxAndVideo';
 
 const VideoPlayer = () => {
   const { videoOpen, setVideoOpen } = useShoutBoxAndVideo();

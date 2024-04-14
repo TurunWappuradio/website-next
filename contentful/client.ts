@@ -4,6 +4,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
+
 import {
   NavigationItemsDocument,
   NavigationItemsQuery,

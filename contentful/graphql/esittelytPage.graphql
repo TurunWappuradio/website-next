@@ -1,0 +1,13 @@
+query esittelyt {
+  presentationCollection {
+    items {
+      name
+      description {
+        json
+      }
+      picture {
+        url
+      }
+    }
+  }
+}

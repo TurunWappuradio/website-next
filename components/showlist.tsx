@@ -1,19 +1,16 @@
 import { useState } from 'react';
 
-import { Show } from 'scripts/google/showlistHelpers';
+import { useViewport } from '@/hooks/useViewport';
+import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
+import { ModeButton } from './button';
 import ResponsiveShowlist from './responsiveShowlist';
 import ShowlistMap from './showlistMap';
-import { ModeButton } from './button';
-import { useViewport } from 'hooks/useViewport';
 
 interface ShowlistProps {
-  showsByDate: {
-    [key: string]: Show[];
-  };
-  weekKeys: Record<string, string[]>;
+  showsByDate: ShowsByDate;
 }
 
-export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
+export const Showlist = ({ showsByDate }: ShowlistProps) => {
   const [mode, setMode] = useState<'list' | 'map'>('list');
 
   const { isDesktop } = useViewport();
@@ -39,28 +36,17 @@ export const Showlist = ({ showsByDate, weekKeys }: ShowlistProps) => {
           </div>
         )}
       </div>
-      <ShowlistSelector
-        showsByDate={showsByDate}
-        weekKeys={weekKeys}
-        mode={mode}
-      />
+      <ShowlistSelector showsByDate={showsByDate} mode={mode} />
     </div>
   );
 };
 
 interface ShowlistSelectorProps {
-  showsByDate: {
-    [key: string]: Show[];
-  };
-  weekKeys: Record<string, string[]>;
+  showsByDate: ShowsByDate;
   mode: 'list' | 'map';
 }
 
-const ShowlistSelector = ({
-  showsByDate,
-  weekKeys,
-  mode,
-}: ShowlistSelectorProps) => {
+const ShowlistSelector = ({ showsByDate, mode }: ShowlistSelectorProps) => {
   const { isDesktop } = useViewport();
 
   if (!isDesktop) {
@@ -71,7 +57,7 @@ const ShowlistSelector = ({
     case 'list':
       return <ResponsiveShowlist showsByDate={showsByDate} />;
     case 'map':
-      return <ShowlistMap showsByDate={showsByDate} weekKeys={weekKeys} />;
+      return <ShowlistMap showsByDate={showsByDate} />;
   }
 };
 

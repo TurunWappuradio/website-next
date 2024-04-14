@@ -1,4 +1,5 @@
 import React from 'react';
+
 import NameFormatter from './nameformatter';
 
 interface MessageFormatterProps {

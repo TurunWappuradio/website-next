@@ -1,12 +1,12 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { FiMessageSquare, FiPause, FiPlay, FiVideo } from 'react-icons/fi';
+import Image from 'next/image';
 import { format } from 'date-fns';
 
-import testcard from '../public/testcard.webp';
+import useShoutBoxAndVideo from '@/hooks/useShoutboxAndVideo';
+import { Show } from '@/scripts/google/showlistHelpers';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
-import useShoutBoxAndVideo from 'hooks/useShoutboxAndVideo';
-import { FiPause, FiPlay, FiMessageSquare, FiVideo } from 'react-icons/fi';
-import { Show } from 'scripts/google/showlistHelpers';
+import testcard from '../public/testcard.webp';
 
 const SHOW_REFRESH_TIME = 10000; // 10 seconds
 

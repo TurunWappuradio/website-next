@@ -1,23 +1,23 @@
+import { BsArrowLeft } from 'react-icons/bs';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 
-import { ShowlistPathsDocument } from 'contentful/graphql/showlistPaths.graphql';
+import { fetchArchivedShowlist } from '@/archiver/archive';
+import Hero from '@/components/hero';
+import { Showlist } from '@/components/showlist';
 import {
   fetchContent,
   fetchNavigationItems,
   NavigationItem,
-} from 'contentful/client';
-import { ShowlistPathsQuery } from 'contentful/graphql/showlistPaths.graphql';
+} from '@/contentful/client';
 import {
   ShowlistPageDocument,
   ShowlistPageQuery,
-} from 'contentful/graphql/showlistPage.graphql';
-import Hero from 'components/hero';
-import { Showlist } from 'components/showlist';
-import { BsArrowLeft } from 'react-icons/bs';
-import Link from 'next/link';
-import { fetchArchivedShowlist } from 'archiver/archive';
-import { Show } from 'scripts/google/showlistHelpers';
+} from '@/contentful/graphql/showlistPage.graphql';
+import { ShowlistPathsDocument } from '@/contentful/graphql/showlistPaths.graphql';
+import { ShowlistPathsQuery } from '@/contentful/graphql/showlistPaths.graphql';
+import { Show } from '@/scripts/google/showlistHelpers';
 
 interface ShowListPageProps {
   name: string;
@@ -26,7 +26,6 @@ interface ShowListPageProps {
   showsByDate: {
     [key: string]: Show[];
   };
-  weekKeys: Record<string, string[]>;
   heroImage: {
     url?: string;
   };
@@ -37,7 +36,6 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
   name,
   showsByDate,
   heroImage,
-  weekKeys,
   navigationItems,
   heroSubtext,
 }) => {
@@ -69,7 +67,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
           </a>
         </Link>
       </div>
-      <Showlist showsByDate={showsByDate} weekKeys={weekKeys} />
+      <Showlist showsByDate={showsByDate} />
     </div>
   );
 };
@@ -103,9 +101,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { name, id, heroImage, heroSubtext } =
     data.programmeCollection.items[0];
 
-  const { showsByDate, weekKeys } = await fetchArchivedShowlist(
-    currentShowlistId
-  );
+  const showsByDate = await fetchArchivedShowlist(currentShowlistId);
 
   const navigationItems = await fetchNavigationItems();
 
@@ -114,7 +110,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       name,
       id,
       showsByDate,
-      weekKeys,
       navigationItems,
       heroImage,
       heroSubtext,

@@ -1,5 +1,6 @@
-import { archiveOldShowlists } from 'archiver/archiveCrawlers';
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+import { archiveOldShowlists } from '@/archiver/archiveCrawlers';
 
 type ResponseData = {
   message: string;

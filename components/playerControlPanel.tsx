@@ -1,4 +1,4 @@
-import useMetadata from 'hooks/useMetadata';
+import useMetadata from '@/hooks/useMetadata';
 import Controls from './controls';
 
 interface PlayerControlPanelProps {

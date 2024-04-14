@@ -1,11 +1,11 @@
+import 'tailwindcss/tailwind.css';
 import { createRef, useState } from 'react';
 import { AppProps } from 'next/app';
-import 'tailwindcss/tailwind.css';
 
-import PlayerControlPanel from 'components/playerControlPanel';
-import { ShoutBoxAndVideoProvider } from 'hooks/useShoutboxAndVideo';
-import { ChatWrapper } from 'components/ShoutBox/shoutbox';
-import VideoPlayer from 'components/videoPlayer';
+import PlayerControlPanel from '@/components/playerControlPanel';
+import { ChatWrapper } from '@/components/ShoutBox/shoutbox';
+import VideoPlayer from '@/components/videoPlayer';
+import { ShoutBoxAndVideoProvider } from '@/hooks/useShoutboxAndVideo';
 
 const AUDIO_STREAM_URL = 'https://player.turunwappuradio.com/wappuradio.mp3';
 

@@ -1,12 +1,23 @@
-import { Show, Showlist, showsToGroups } from 'scripts/google/showlistHelpers';
+import {
+  Show,
+  ShowsByDate,
+  showsToGroups,
+} from '@/scripts/google/showlistHelpers';
 
 const showlistBaseUrl = process.env.ARCHIVE_SOURCE_URL;
-const emptyResponse = { showsByDate: [], weekKeys: {} } as const;
+const emptyResponse = {} as const;
+
+interface LegacyShowList {
+  showsByDate: ShowsByDate;
+  weekKeys: Record<string, string[]>;
+}
 
 /**
  * Archive S3 bucket API
  */
-export const fetchArchivedShowlist = async (showlistId: string) => {
+export const fetchArchivedShowlist = async (
+  showlistId: string
+): Promise<ShowsByDate> => {
   if (!showlistBaseUrl) {
     console.error('Arkiston polkua ei ole määritetty');
     return emptyResponse;
@@ -15,13 +26,13 @@ export const fetchArchivedShowlist = async (showlistId: string) => {
 
   try {
     const response = await fetch(url);
-    const showlist: Show[] | Showlist = await response.json();
+    const showlist: Show[] | LegacyShowList = await response.json();
 
     if (Array.isArray(showlist)) {
       return showsToGroups(showlist);
     }
     if (showlist?.showsByDate) {
-      return showlist;
+      return showlist.showsByDate;
     }
     return emptyResponse;
   } catch (error) {

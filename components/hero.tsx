@@ -1,11 +1,11 @@
+import { FC, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, useState } from 'react';
 
-import { contentfulImageLoader } from 'contentful/contentfulImageLoader';
-import { LinkButton } from './button';
-import { NavigationItem } from 'contentful/client';
+import { NavigationItem } from '@/contentful/client';
+import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import heroImage from '../public/hero.webp';
+import { LinkButton } from './button';
 import Hamburger from './hamburger/hamburger';
 import Menu from './menu';
 
@@ -74,6 +74,7 @@ const Hero: FC<HeroProps> = ({
             ))}
 
             <NavLink href="/arkisto" name="Arkisto" />
+            <NavLink href="/esittelyt" name="Esittelyt" />
           </ul>
         </header>
 
