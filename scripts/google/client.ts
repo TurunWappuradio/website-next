@@ -73,6 +73,13 @@ export const parseSheetToShowList = async (
         return acc;
       }
       const shows = await acc;
+      if (index > 0 && !shows[index - 1]) {
+        throw new Error(
+          `Failed to parse showlist sheet. Invalid data before ${JSON.stringify(
+            sheetRow
+          )}`
+        );
+      }
 
       const previousEndTime = index ? shows[index - 1].end : showStartTime;
       const startDate = new Date(previousEndTime);
