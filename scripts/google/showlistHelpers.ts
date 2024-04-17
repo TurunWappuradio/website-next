@@ -4,6 +4,7 @@ import { groupBy } from 'ramda';
 export enum Color {
   Night = 'night',
   Promote = 'promote',
+  Editorial = 'editorial',
 }
 export interface Show {
   name?: string;

@@ -89,7 +89,7 @@ export const parseSheetToShowList = async (
       const isNight = color === Color.Night || getIsNightTime(startDate);
       const showColor = isNight
         ? Color.Night
-        : color === Color.Promote
+        : (color === Color.Promote || color === Color.Editorial)
         ? Color.Promote
         : null;
 
