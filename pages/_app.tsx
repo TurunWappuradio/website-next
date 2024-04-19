@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css';
-import { createRef, useEffect,useRef, useState } from 'react';
+import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import Hls from 'hls.js';
 
@@ -21,7 +21,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [volume, setVolume] = useState(0.8);
   const [playClicked, setPlayClicked] = useState(false);
 
-  const loadAudioStream = () => {
+  const loadAudioStream = useCallback(() => {
     if (Hls.isSupported() && isHlsLive) {
       hls.current = new Hls();
       hls.current.loadSource(HLS_STREAM_URL);
@@ -32,11 +32,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     ) {
       audioEl.current.src = AUDIO_STREAM_URL;
     }
-  };
+  }, [audioEl]);
 
-  useEffect(() => {
-    loadAudioStream();
-  }, [loadAudioStream]);
+  // Load the stream on initial page load.
+  useEffect(loadAudioStream, [loadAudioStream]);
 
   const handlePlayPause = () => {
     setPlayClicked(true);
