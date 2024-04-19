@@ -35,7 +35,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, [audioEl]);
 
   // Load the stream on initial page load.
-  useEffect(loadAudioStream, [loadAudioStream]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(loadAudioStream, []);
 
   const handlePlayPause = () => {
     setPlayClicked(true);
