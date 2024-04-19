@@ -8,6 +8,8 @@ import { ChatWrapper } from '@/components/ShoutBox/shoutbox';
 import VideoPlayer from '@/components/videoPlayer';
 import { ShoutBoxAndVideoProvider } from '@/hooks/useShoutboxAndVideo';
 
+const isHlsLive = process.env.NEXT_PUBLIC_HLS_MODE === 'live';
+
 const AUDIO_STREAM_URL = 'https://player.turunwappuradio.com/wappuradio.mp3';
 const HLS_STREAM_URL = 'https://stream.turunwappuradio.com/twr_chunklist.m3u8';
 
@@ -20,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [playClicked, setPlayClicked] = useState(false);
 
   const loadAudioStream = () => {
-    if (Hls.isSupported()) {
+    if (Hls.isSupported() && isHlsLive) {
       hls.current = new Hls();
       hls.current.loadSource(HLS_STREAM_URL);
       hls.current.attachMedia(audioEl.current);
