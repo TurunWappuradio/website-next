@@ -1,4 +1,3 @@
-import { Color, Show, ShowsByDate, showsToGroups } from './showlistHelpers';
 import { sheets_v4 } from '@googleapis/sheets';
 import { addMilliseconds, formatISO, getHours } from 'date-fns';
 
@@ -8,7 +7,9 @@ import {
   ensureDirectoryExists,
   getImagePath,
   saveArrayBufferToFile,
+  writeFile,
 } from '@/utils/fileHelpers';
+import { Color, Show, ShowsByDate, showsToGroups } from './showlistHelpers';
 
 const NEXT_URL = '/showlist' as const;
 const FILE_URL = `./public${NEXT_URL}` as const;
@@ -72,6 +73,13 @@ export const parseSheetToShowList = async (
         return acc;
       }
       const shows = await acc;
+      if (index > 0 && !shows[index - 1]) {
+        throw new Error(
+          `Failed to parse showlist sheet. Invalid data before ${JSON.stringify(
+            sheetRow
+          )}`
+        );
+      }
 
       const previousEndTime = index ? shows[index - 1].end : showStartTime;
       const startDate = new Date(previousEndTime);
@@ -81,7 +89,7 @@ export const parseSheetToShowList = async (
       const isNight = color === Color.Night || getIsNightTime(startDate);
       const showColor = isNight
         ? Color.Night
-        : color === Color.Promote
+        : color === Color.Promote || color === Color.Editorial
         ? Color.Promote
         : null;
 
@@ -116,6 +124,10 @@ export const parseSheetToShowList = async (
   return showList;
 };
 
+export const saveShowlistJson = async (data: Record<string, unknown>) => {
+  await writeFile(`${FILE_URL}/ohjelmakartta.json`, JSON.stringify(data));
+};
+
 export const fetchShowlist = async (): Promise<ShowsByDate> => {
   const data = await getSheet({
     apiKey: process.env.GA_API_KEY,
@@ -128,7 +140,10 @@ export const fetchShowlist = async (): Promise<ShowsByDate> => {
   const shows = data
     ? await parseSheetToShowList(data, { apiKey: process.env.GA_API_KEY })
     : [];
-  return showsToGroups(shows);
+
+  const showsByDate = showsToGroups(shows);
+  await saveShowlistJson(showsByDate);
+  return showsByDate;
 };
 
 const downloadShowFile = async (

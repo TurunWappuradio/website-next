@@ -18,7 +18,7 @@ const NavButton = ({ value, onClick, text, alternate = false }: NavButton) => {
   return (
     <>
       <a
-        className={`${'flex py-8 font-bold text-teal transition hover:text-coral'}
+        className={`${'flex cursor-pointer py-8 font-bold text-teal transition hover:text-coral'}
         ${disabled ? 'hidden' : ''}
         ${alternate ? '' : ''}
         `}

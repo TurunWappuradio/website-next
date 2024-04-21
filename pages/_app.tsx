@@ -1,29 +1,52 @@
 import 'tailwindcss/tailwind.css';
-import { createRef, useState } from 'react';
+import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { AppProps } from 'next/app';
+import Hls from 'hls.js';
 
 import PlayerControlPanel from '@/components/playerControlPanel';
 import { ChatWrapper } from '@/components/ShoutBox/shoutbox';
 import VideoPlayer from '@/components/videoPlayer';
 import { ShoutBoxAndVideoProvider } from '@/hooks/useShoutboxAndVideo';
 
+const isHlsLive =
+  Hls.isSupported() && process.env.NEXT_PUBLIC_HLS_MODE === 'live';
+
 const AUDIO_STREAM_URL = 'https://player.turunwappuradio.com/wappuradio.mp3';
+const HLS_STREAM_URL = 'https://stream.turunwappuradio.com/twr_chunklist.m3u8';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const audioEl = createRef<HTMLAudioElement>();
+  const hls = useRef<Hls | null>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [playClicked, setPlayClicked] = useState(false);
 
+  const loadAudioStream = useCallback(() => {
+    if (isHlsLive) {
+      hls.current = new Hls();
+      hls.current.attachMedia(audioEl.current);
+      hls.current.loadSource(HLS_STREAM_URL);
+    } else if (
+      audioEl.current &&
+      audioEl.current.canPlayType('application/vnd.apple.mpegurl')
+    ) {
+      audioEl.current.src = AUDIO_STREAM_URL;
+    }
+  }, [audioEl]);
+
+  // Load the stream on initial page load.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(loadAudioStream, []);
+
   const handlePlayPause = () => {
     setPlayClicked(true);
 
-    if (audioEl.current.paused) audioEl.current.play();
-    else {
-      // Pause, but then load the stream again ready to start
+    if (audioEl.current.paused) {
+      loadAudioStream();
+      audioEl.current.play();
+    } else {
       audioEl.current.pause();
-      audioEl.current.src = AUDIO_STREAM_URL;
     }
     setPlaying(!playing);
   };
@@ -42,7 +65,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ShoutBoxAndVideoProvider>
       <audio ref={audioEl}>
-        <source src={AUDIO_STREAM_URL} type="audio/mpeg" />
+        {isHlsLive ? null : <source src={AUDIO_STREAM_URL} type="audio/mpeg" />}
       </audio>
       <Component
         {...pageProps}
