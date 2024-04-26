@@ -55,8 +55,8 @@ const Time = ({ start, end }: TimeProps) => {
   const endTime = format(new Date(end), 'p', { locale: fi });
 
   return (
-    <p className="mt-1 h-[25px] w-[25px] rotate-90 font-bold text-white">
-      {startTime}&nbsp;-&nbsp;{endTime}
+    <p className="mt-1 h-[25px] w-[25px] rotate-90 whitespace-nowrap font-bold text-white">
+      {startTime} – {endTime}
     </p>
   );
 };
