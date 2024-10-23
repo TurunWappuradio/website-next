@@ -42,9 +42,9 @@ const NameFormatter = ({ name, timestamp, telegram }: NameFormatterProps) => {
 const findStyle = (name: string) => {
   switch (name) {
     case 'Toimitus':
-      return 'text-coral';
+      return 'text-radio-accent';
     case 'Palvelin':
-      return 'text-coral';
+      return 'text-radio-accent';
     default:
       return 'text-white';
   }

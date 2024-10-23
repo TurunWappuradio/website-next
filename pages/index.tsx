@@ -63,16 +63,17 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonLink,
   navigationItems,
   showsByDate,
-  // firstDecorativeImage,
-  // secondDecorativeImage,
-  // firstContent,
-  // secondContent,
-  // thirdContent,
   sponsors,
   playing,
   onPlayPause,
   muted,
   onMute,
+
+  // firstDecorativeImage,
+  // secondDecorativeImage,
+  // firstContent,
+  // secondContent,
+  // thirdContent,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -124,7 +125,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       </main> */}
 
       {/* Second section */}
-      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-blue-dark py-4 md:py-8">
+      {/* <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>

@@ -42,9 +42,9 @@ const Metadata: NextPage = () => {
     <div className="flex min-h-screen w-full flex-col items-center">
       <form
         onSubmit={handleSubmit}
-        className="mt-10 flex w-144 flex-col bg-blue-darkest px-6 py-12 text-white"
+        className="mt-10 flex w-144 flex-col bg-radio-common px-6 py-12 text-white"
       >
-        <h1 className="text-4xl font-bold text-coral">
+        <h1 className="text-4xl font-bold text-radio-accent">
           Musiikin metadatan syöttö
         </h1>
 
@@ -64,7 +64,9 @@ const Metadata: NextPage = () => {
         <Input type="password" id="password" />
 
         {loading ? (
-          <p className="ml-auto mt-4 px-8 py-3 text-coral">Lähetetään...</p>
+          <p className="ml-auto mt-4 px-8 py-3 text-radio-accent">
+            Lähetetään...
+          </p>
         ) : (
           <Button className="ml-auto mt-4">Tallenna</Button>
         )}
