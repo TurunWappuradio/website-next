@@ -75,7 +75,7 @@ const TitleInfo = ({ show, isExpanded, index }: TitleInfoProps) => {
     >
       <p
         className={`w-fit rounded-sm px-2 text-base font-bold md:text-lg ${
-          index % 2 === 0 ? 'bg-coral' : 'bg-teal'
+          index % 2 === 0 ? 'bg-radio-accent' : 'bg-radio-secondary'
         }`}
       >
         {show.name}
@@ -95,11 +95,13 @@ interface DescriptionsProps {
 const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg200 p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <h2 className="text-base font-bold text-teal sm:text-lg">{show.name}</h2>
+      <h2 className="text-base font-bold text-radio-accent200 sm:text-lg">
+        {show.name}
+      </h2>
       <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
         Juontaa: {show.hosts ?? 'Haamujuontaja'}
       </h3>
@@ -136,7 +138,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
         objectPosition={'65% 35%'}
         className={`-z-10  ${
           isExpanded
-            ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
+            ? 'rounded-t md:rounded-b md:rounded-l-none'
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}

@@ -12,7 +12,7 @@ const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
   <div
     className={`
       fixed left-0 top-0 z-30 h-screen w-full
-      transform-gpu bg-blue-darkest
+      transform-gpu bg-radio-common
       text-white transition-all md:hidden
       ${isOpen ? 'translate-x-0' : '-translate-x-full'}
     `}
