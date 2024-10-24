@@ -33,7 +33,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
         className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
-            : 'bg-gradient-to-b from-transparent via-transparent to-blue-darkest'
+            : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={handleClick}
       >

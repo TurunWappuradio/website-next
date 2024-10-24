@@ -1,12 +1,12 @@
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 
-import Calendar from '@/components/calendar';
+// import Image from 'next/image';
+// import Calendar from '@/components/calendar';
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
 import Player from '@/components/player';
-import RichText from '@/components/richtext';
+// import RichText from '@/components/richtext';
 import { Showlist } from '@/components/showlist';
 import Sponsors, { ISponsorData } from '@/components/sponsors';
 import {
@@ -14,10 +14,10 @@ import {
   fetchNavigationItems,
   NavigationItem,
 } from '@/contentful/client';
-import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
+// import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
 import { fetchShowlist } from '@/scripts/google/client';
-import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
+import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -112,7 +112,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
-            loader={contentfulImageLoader}
+            // loader={contentfulImageLoader}
             layout="fill"
             objectFit="cover"
             className="rounded"
@@ -140,7 +140,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={secondDecorativeImage.url}
-            loader={contentfulImageLoader}
+            // loader={contentfulImageLoader}
             layout="fill"
             objectFit="cover"
             className="rounded"

@@ -149,38 +149,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
           className="flex h-[81%] flex-col-reverse overflow-y-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%]"
           ref={messagesViewport}
         >
-          {[
-            {
-              message: 'hei',
-              name: 'sami',
-              timestamp: +new Date(),
-              source: null,
-            },
-            {
-              message: 'hei',
-              name: 'sami',
-              timestamp: +new Date(),
-              source: null,
-            },
-            {
-              message: 'hei',
-              name: 'sami',
-              timestamp: +new Date(),
-              source: 'telegram',
-            },
-            {
-              message: 'hei',
-              name: 'sami',
-              timestamp: +new Date(),
-              source: null,
-            },
-            {
-              message: 'hei',
-              name: 'sami',
-              timestamp: +new Date(),
-              source: null,
-            },
-          ].map((message, index) => (
+          {messages.map((message, index) => (
             <MessageFormatter
               key={index}
               message={message.message}

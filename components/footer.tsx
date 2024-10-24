@@ -16,7 +16,7 @@ interface FooterProps {
 
 const Footer = ({ navigationItems }: FooterProps) => {
   return (
-    <footer className="z-15 flex max-w-full flex-col flex-wrap items-center justify-center bg-radio-common py-14 pb-32 text-white lg:flex-row">
+    <footer className="z-15 flex max-w-full flex-col flex-wrap items-center justify-center bg-radio-bg py-14 pb-32 text-white lg:flex-row">
       <div className="flex w-64 max-w-full justify-center lg:justify-start xl:w-128">
         <div className="flex w-fit flex-col items-center">
           <div className="relative flex h-36 w-36 md:h-52 md:w-52">
