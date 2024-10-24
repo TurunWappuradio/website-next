@@ -12,11 +12,11 @@ const VideoPlayer = () => {
   return (
     videoOpen && (
       <div className="mx-auto block w-full max-w-6xl">
-        <div className="flex w-full items-end justify-end text-coral">
+        <div className="flex w-full items-end justify-end text-radio-accent">
           <button
             onClick={handleClose}
             title="chat"
-            className="mr-5 mt-5 h-10 w-10 rounded-full bg-coral"
+            className="mr-5 mt-5 h-10 w-10 rounded-full bg-radio-accent"
           >
             <GrFormClose size="1.7rem" className="mx-auto" />
           </button>

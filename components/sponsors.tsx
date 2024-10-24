@@ -8,8 +8,8 @@ const Sponsors = ({ sponsors = [] }: SponsorProps) => {
   }
 
   return (
-    <div className="flex max-w-full flex-col items-center bg-blue pb-14 pt-4">
-      <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-coral">
+    <div className="flex max-w-full flex-col items-center bg-radio-common pb-14 pt-4">
+      <h2 className="w-full max-w-5xl px-8 py-4 text-2xl font-bold text-radio-accent200">
         Turun Wappuradion tukena
       </h2>
       <div className="flex w-full max-w-5xl flex-wrap justify-center">

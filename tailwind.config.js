@@ -1,3 +1,5 @@
+const isSyssyColors = true;
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -16,20 +18,34 @@ module.exports = {
         light: '#00254a',
         lightest: '#60A3EE',
       },
-      orange: {
-        DEFAULT: '#db8841',
-      },
-      orange: {
-        DEFAULT: '#db8841',
-      },
-      purple: {
-        light: '#58265d',
-        dark: '#9b3970',
-        darkest: '#230127',
-      },
-      coral: '#F65F52',
-      teal: '#5bbfbf',
-      greyish: '#eef2b0',
+      radio: isSyssyColors
+        ? // Syssy
+          {
+            common: '#9b3970',
+            controller: '#58265d',
+            bg: '#230127',
+            bg200: '#58265d',
+            action: '#db8841',
+            accent: '#db8841',
+            accent200: '#eef2b0',
+            secondary: '#9b3970',
+            promote: '#9b3970',
+            night: '#58265d',
+          }
+        : // Wappu
+          {
+            common: '#001C36',
+            controller: '#000e1c',
+            bg: '#001C36',
+            bg200: '#001831',
+            action: '#5bbfbf',
+            accent: '#F65F52',
+            accent200: '#F65F52',
+            secondary: '#5bbfbf',
+            header: '#F65F52',
+            promote: '#5bbfbf',
+            night: '#60A3EE',
+          },
     },
     fontFamily: {
       sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],

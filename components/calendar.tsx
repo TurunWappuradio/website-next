@@ -55,7 +55,7 @@ const Calendar: FC = () => {
         <Event key={idx} event={event} />
       ))}
       <a
-        className="ml-auto font-bold text-teal underline transition hover:text-coral"
+        className="ml-auto font-bold text-radio-accent200 underline transition hover:text-radio-accent"
         href={process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_SHARE_URL || ''}
         target="_blank"
         rel="noreferrer"
@@ -85,13 +85,13 @@ const Event: FC<{ event: Event }> = ({ event }) => {
       : formatWithoutTime(start, end);
 
   return (
-    <div className="my-2 flex flex-row bg-blue-darkest p-2 text-white">
+    <div className="my-2 flex flex-row bg-radio-bg p-2 text-white">
       <div className="flex w-28 flex-col items-center justify-center p-2">
         <div className="text-3xl font-bold">{dateFormatted}</div>
         <div className="text-lg font-bold">{weekday}</div>
       </div>
       <div className="w-full p-2">
-        <h3 className="text-xl font-bold text-coral">{event.summary}</h3>
+        <h3 className="text-xl font-bold text-radio-accent">{event.summary}</h3>
         <div>{timeFormatted}</div>
         {event.location && <div>@ {event.location}</div>}
       </div>
