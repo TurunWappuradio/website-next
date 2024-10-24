@@ -66,7 +66,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" sizes="192x192" href="/logo@192.png" />
           <link rel="apple-touch-icon" sizes="512x512" href="/logo@512.png" />
         </Head>
-        <body className="bg-blue bg-gradient-to-b from-blue to-blue-light">
+        <body className="bg-radio-bg bg-gradient-to-b from-radio-bg to-radio-bg200">
           <Main />
           <NextScript />
         </body>

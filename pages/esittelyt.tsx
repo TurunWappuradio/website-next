@@ -83,7 +83,9 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
         isCompact={true}
       />
       <article className="mx-auto max-w-4xl px-4 pb-20 pt-12 text-white">
-        <h1 className="my-4 text-3xl font-bold text-coral">Ketä me ollaan?</h1>
+        <h1 className="my-4 text-3xl font-bold text-radio-accent200">
+          Ketä me ollaan?
+        </h1>
         {
           <div>
             {esittelyt.map((esittely) => (
@@ -137,11 +139,11 @@ interface DescriptionProps {
 const Descriptions = ({ esittely, isExpanded }: DescriptionProps) => {
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-blue-dark p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <h2 className="text-base font-bold text-teal sm:text-lg">
+      <h2 className="text-base font-bold text-radio-action sm:text-lg">
         {esittely.name}
       </h2>
       <div className="mt-2 text-sm text-white md:text-base">
@@ -178,7 +180,7 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
         objectPosition={'65% 35%'}
         className={`-z-10  ${
           isExpanded
-            ? 'rounded-t md:rounded-b md:rounded-l md:rounded-l-none '
+            ? 'rounded-t md:rounded-b md:rounded-l-none '
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}

@@ -27,7 +27,7 @@ const Controls = ({
         onClick={onPlayPause}
         title="Play/Pause"
         className={`flex h-12 w-12 items-center justify-center rounded-full ${
-          playing ? 'bg-teal' : 'bg-coral'
+          playing ? 'bg-radio-secondary' : 'bg-radio-accent'
         }`}
       >
         {playing ? (
@@ -40,7 +40,9 @@ const Controls = ({
       <button
         onClick={onMute}
         title="Mute"
-        className={`h-12 w-12 rounded-full ${muted ? 'bg-teal' : 'bg-coral'}`}
+        className={`h-12 w-12 rounded-full ${
+          muted ? 'bg-radio-secondary' : 'bg-radio-accent'
+        }`}
       >
         <MuteIcon size="1.7rem" className="mx-auto" />
       </button>
