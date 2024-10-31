@@ -27,7 +27,7 @@ const NameInput = ({ onSubmitName }: NameInputProps) => {
         onSubmitName(name);
         setName('');
       }}
-      className=" px[10px] flex h-full flex-row"
+      className=" px[10px] flex h-full flex-row bg-radio-bg"
     >
       <TextField
         label={''}
@@ -40,7 +40,7 @@ const NameInput = ({ onSubmitName }: NameInputProps) => {
         <button
           type="submit"
           value="Send"
-          className="sbSubmitButton inline-block cursor-pointer select-none rounded border-[3px] border-white bg-transparent px-3 py-1.5 text-center align-middle text-base font-bold text-white disabled:opacity-50"
+          className="sbSubmitButton inline-block cursor-pointer select-none rounded border-[3px] border-white bg-radio-bg px-3 py-1.5 text-center align-middle text-base font-bold text-white disabled:opacity-50"
           disabled={isButtonDisabled(name)}
         >
           OK
