@@ -143,10 +143,10 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem] ">
-      <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden shadow-md">
+    <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem]">
+      <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden bg-radio-bg shadow-md">
         <div
-          className="flex h-[81%] flex-col-reverse overflow-y-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%]"
+          className="flex h-[81%] flex-col-reverse overflow-y-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%] shadow-md"
           ref={messagesViewport}
         >
           {messages.map((message, index) => (
@@ -156,7 +156,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               name={message.name}
               timestamp={message.timestamp}
               color={
-                index % 2 === 0 ? 'bg-radio-common' : 'bg-radio-controller'
+                index % 2 === 0 ? 'bg-radio-bg' : 'bg-radio-bg200'
               }
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
@@ -169,7 +169,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
             </div>
           )}
         </div>
-        <div className="h-[4rem] w-full">
+        <div className="h-[4rem] w-full, bg-radio-bg">
           {name ? (
             <MessageInput
               name={isAdmin ? 'Toimitus' : name}
