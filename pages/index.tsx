@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-
 import Image from 'next/image';
+
 import Calendar from '@/components/calendar';
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
