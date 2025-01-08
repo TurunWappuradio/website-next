@@ -6,15 +6,16 @@ import { parseSheetToShowList } from '@/scripts/google/client';
 import { getSheet, GoogleConfigSheets } from '@/scripts/google/google';
 
 export const archiveOldShowlists = async () => {
-  // NOTE: Uncomment for archiving google sheet data
-  // const sheetConfigs = [
-  //   { name: '2024-wappu', showStartTime: '2024-04-21T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '17AnknBC5fzo8ZS3Wxc1HExm_qVV4kEXkgQOUv80lbGg', range: 'Ohjelmakartta!A3:J106' } }
-  //   // { name: '2023-wappu', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1eHDK-MYm6B3BH8rewQr04-pd2IK4iFwsPY5HKkrVNJg', range: 'Ohjelmakartta!A3:J5' } },
-  //   // { name: '2023-syssy', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '18UqWSStevUGa_rdIi9zF6NuCzbZc7H1ZnVMaIObV_Cg', range: 'Ohjelmakartta!A3:J32' } }
-  // ];
-  // for(const { config, name, showStartTime } of sheetConfigs) {
-  //   await archiveGogleSheet(config, name, showStartTime);
-  // }
+  
+   const sheetConfigs = [
+    { name: '2024-syssy', showStartTime: '2024-10-29T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1gPIjpY_JWlDYXmMboHds3bEWerU9nDd4o0pFeek9PKM', range: 'Ohjelmakartta!A3:J35' } }
+     //{ name: '2024-wappu', showStartTime: '2024-04-21T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '17AnknBC5fzo8ZS3Wxc1HExm_qVV4kEXkgQOUv80lbGg', range: 'Ohjelmakartta!A3:J106' } },
+     // { name: '2023-wappu', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '1eHDK-MYm6B3BH8rewQr04-pd2IK4iFwsPY5HKkrVNJg', range: 'Ohjelmakartta!A3:J5' } },
+     // { name: '2023-syssy', showStartTime: '2023-04-20T12:00:00', config: { apiKey: process.env.GA_API_KEY, spreadsheetId: '18UqWSStevUGa_rdIi9zF6NuCzbZc7H1ZnVMaIObV_Cg', range: 'Ohjelmakartta!A3:J32' } },
+   ];
+   for(const { config, name, showStartTime } of sheetConfigs) {
+     await archiveGogleSheet(config, name, showStartTime);
+   }
 };
 
 /** Helpers */
