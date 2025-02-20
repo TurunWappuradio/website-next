@@ -54,6 +54,7 @@ const SiteMap = ({ navigationItems }: FooterProps) => (
       <NavLink {...navItem} key={navItem.name} />
     ))}
     <NavLink slug="arkisto" name="Arkisto" />
+    <NavLink slug="esittelyt" name="Esittelyt" />
   </ul>
 );
 
