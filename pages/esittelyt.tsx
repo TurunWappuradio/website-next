@@ -1,8 +1,8 @@
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
