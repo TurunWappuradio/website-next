@@ -39,24 +39,24 @@ const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
 
   return (
     <div
-      className={`my-4 flex w-full rounded ${className} ${
-        isExpanded
-          ? 'h-auto rounded-l-none rounded-t lg:rounded-l lg:rounded-t-none'
-          : 'h-40'
+      className={`my-4 flex w-full flex-col rounded ${className} transition-all duration-300 ${
+        isExpanded ? 'h-auto' : 'h-96'
       }`}
     >
       <button
-        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
+        className={`group relative flex w-full flex-col overflow-hidden rounded md:flex-row ${
           isExpanded
-            ? 'flex rounded md:contents'
+            ? 'bg-transparent'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={handleClick}
       >
-        <TitleInfo esittely={esittely} isExpanded={isExpanded} />
-        <Descriptions esittely={esittely} isExpanded={isExpanded} />
         <PresImage esittely={esittely} isExpanded={isExpanded} />
+        <TitleInfo esittely={esittely} isExpanded={isExpanded} />
       </button>
+      {isExpanded && (
+        <Descriptions esittely={esittely} isExpanded={isExpanded} />
+      )}
     </div>
   );
 };
@@ -87,7 +87,7 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
           Ketä me ollaan?
         </h1>
         {
-          <div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {esittelyt.map((esittely) => (
               <PresentationCard key={esittely.name} esittely={esittely} />
             ))}
@@ -139,8 +139,8 @@ interface DescriptionProps {
 const Descriptions = ({ esittely, isExpanded }: DescriptionProps) => {
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
-        isExpanded ? 'opacity-100' : 'opacity-0'
+      className={`z-10 flex flex-col overflow-y-auto rounded bg-radio-bg p-4 text-left transition-opacity duration-300 ease-in-out ${
+        isExpanded ? 'h-auto max-h-full opacity-100' : 'max-h-0 opacity-0'
       }`}
     >
       <h2 className="text-base font-bold text-radio-action sm:text-lg">
@@ -166,22 +166,20 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
 
   return (
     <div
-      className={
-        isExpanded
-          ? 'relative aspect-[3/2] h-full w-full flex-none md:h-[20rem] md:w-[30rem] xl:h-[25rem] xl:w-[37.5rem]'
-          : ''
-      }
+      className={`relative aspect-[3/2] w-full flex-none transition-all duration-300 ${
+        isExpanded ? 'h-48' : 'h-96'
+      }`}
     >
       <Image
         src={url}
         unoptimized
         layout={'fill'}
         objectFit="cover"
-        objectPosition={'65% 35%'}
-        className={`-z-10  ${
+        objectPosition={'top'}
+        className={`-z-10 transition-opacity duration-300 ease-in-out ${
           isExpanded
-            ? 'rounded-t md:rounded-b md:rounded-l-none '
-            : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
+            ? 'opacity-100'
+            : 'opacity-70 md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}
       />

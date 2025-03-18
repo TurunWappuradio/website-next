@@ -38,6 +38,11 @@ const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
           <a className="p-2 text-2xl">Arkisto</a>
         </Link>
       </li>
+      <li className="my-5">
+        <Link href="/esittelyt">
+          <a className="p-2 text-2xl">Esittelyt</a>
+        </Link>
+      </li>
     </ul>
   </div>
 );
