@@ -44,7 +44,7 @@ const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
       }`}
     >
       <button
-        className={`group relative flex w-full flex-col overflow-hidden rounded ${
+        className={`group relative flex w-full flex-col overflow-hidden rounded md:flex-row ${
           isExpanded
             ? 'bg-transparent'
             : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
@@ -87,7 +87,7 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
           Ketä me ollaan?
         </h1>
         {
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {esittelyt.map((esittely) => (
               <PresentationCard key={esittely.name} esittely={esittely} />
             ))}
