@@ -63,13 +63,15 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonLink,
   navigationItems,
   sponsors,
+
+  // NOTE: Used during offseason
   // firstDecorativeImage,
   // secondDecorativeImage,
   // firstContent,
   // secondContent,
   // thirdContent,
 
-  // isLive
+  // NOTE: Used when going live
   showsByDate,
   playing,
   onPlayPause,
