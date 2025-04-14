@@ -22,8 +22,9 @@ export const ChatWrapper = () => {
 
   return (
     <div
-      className={`w-full flex-col items-center ${shoutboxOpen ? 'flex' : 'hidden'
-        }`}
+      className={`w-full flex-col items-center ${
+        shoutboxOpen ? 'flex' : 'hidden'
+      }`}
     >
       <div className="flex w-full max-w-6xl items-end justify-end">
         <button
@@ -65,7 +66,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
         })
       );
 
-      if(!!name) {
+      if (!!name) {
         handleSubmitName(name);
       }
 
@@ -74,23 +75,23 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
 
     // When receiving a message
     webSocket.current.onmessage = (e: any) => {
-      if(e.data === 'PING') {
+      if (e.data === 'PING') {
         return webSocket.current.send('PONG');
       }
 
       const { type, name, message, timestamp, source } = JSON.parse(e.data);
 
-      if(type === 'message' && name && message) {
+      if (type === 'message' && name && message) {
         addMessage({ name, message, timestamp, source });
-      } else if(type === 'admin') {
+      } else if (type === 'admin') {
         setAdmin(true);
       }
       // delete all messages from the banned person, unless this is them
-      else if(type === 'ban' && name === 'Toimitus' && message !== name) {
+      else if (type === 'ban' && name === 'Toimitus' && message !== name) {
         setMessages(messages.filter((m) => m.name !== message));
       }
       // load 20 newest messages on connect
-      else if(type === 'reload' && name === 'Palvelin' && message) {
+      else if (type === 'reload' && name === 'Palvelin' && message) {
         message.forEach((m: any) => {
           addMessage(m);
         });
@@ -137,7 +138,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     webSocket.current.send(JSON.stringify(message));
   }
 
-  if(!isOpen) {
+  if (!isOpen) {
     return null;
   }
 
@@ -166,7 +167,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
             </div>
           )}
         </div>
-        <div className="w-full h-[4rem] bg-radio-bg">
+        <div className="h-[4rem] w-full bg-radio-bg">
           {name ? (
             <MessageInput
               name={isAdmin ? 'Toimitus' : name}
