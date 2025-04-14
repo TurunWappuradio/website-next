@@ -22,9 +22,8 @@ export const ChatWrapper = () => {
 
   return (
     <div
-      className={`w-full flex-col items-center ${
-        shoutboxOpen ? 'flex' : 'hidden'
-      }`}
+      className={`w-full flex-col items-center ${shoutboxOpen ? 'flex' : 'hidden'
+        }`}
     >
       <div className="flex w-full max-w-6xl items-end justify-end">
         <button
@@ -66,7 +65,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
         })
       );
 
-      if (!!name) {
+      if(!!name) {
         handleSubmitName(name);
       }
 
@@ -75,23 +74,23 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
 
     // When receiving a message
     webSocket.current.onmessage = (e: any) => {
-      if (e.data === 'PING') {
+      if(e.data === 'PING') {
         return webSocket.current.send('PONG');
       }
 
       const { type, name, message, timestamp, source } = JSON.parse(e.data);
 
-      if (type === 'message' && name && message) {
+      if(type === 'message' && name && message) {
         addMessage({ name, message, timestamp, source });
-      } else if (type === 'admin') {
+      } else if(type === 'admin') {
         setAdmin(true);
       }
       // delete all messages from the banned person, unless this is them
-      else if (type === 'ban' && name === 'Toimitus' && message !== name) {
+      else if(type === 'ban' && name === 'Toimitus' && message !== name) {
         setMessages(messages.filter((m) => m.name !== message));
       }
       // load 20 newest messages on connect
-      else if (type === 'reload' && name === 'Palvelin' && message) {
+      else if(type === 'reload' && name === 'Palvelin' && message) {
         message.forEach((m: any) => {
           addMessage(m);
         });
@@ -138,7 +137,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     webSocket.current.send(JSON.stringify(message));
   }
 
-  if (!isOpen) {
+  if(!isOpen) {
     return null;
   }
 
@@ -146,7 +145,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
     <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem]">
       <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden bg-radio-bg shadow-md">
         <div
-          className="flex h-[81%] flex-col-reverse overflow-y-auto overflow-x-hidden px-0 py-2 text-white md:h-[85%] shadow-md"
+          className="flex h-[81%] flex-col-reverse overflow-y-auto overflow-x-hidden px-0 py-2 text-white shadow-md md:h-[85%]"
           ref={messagesViewport}
         >
           {messages.map((message, index) => (
@@ -155,9 +154,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
               message={message.message}
               name={message.name}
               timestamp={message.timestamp}
-              color={
-                index % 2 === 0 ? 'bg-radio-bg' : 'bg-radio-bg200'
-              }
+              color={index % 2 === 0 ? 'bg-radio-bg' : 'bg-radio-bg200'}
               isAdmin={isAdmin}
               onBanClick={handleBanClick}
               telegram={message.source === 'telegram'}
@@ -169,7 +166,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
             </div>
           )}
         </div>
-        <div className="h-[4rem] w-full, bg-radio-bg">
+        <div className="w-full h-[4rem] bg-radio-bg">
           {name ? (
             <MessageInput
               name={isAdmin ? 'Toimitus' : name}

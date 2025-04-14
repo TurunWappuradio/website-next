@@ -77,7 +77,6 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   onPlayPause,
   muted,
   onMute,
-
 }) => {
   return (
     <div className="min-h-screen w-full">
