@@ -5,9 +5,9 @@ import Image from 'next/image';
 import Calendar from '@/components/calendar';
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
-// import Player from '@/components/player';
- import RichText from '@/components/richtext';
-// import { Showlist } from '@/components/showlist';
+import Player from '@/components/player';
+import RichText from '@/components/richtext';
+import { Showlist } from '@/components/showlist';
 import Sponsors, { ISponsorData } from '@/components/sponsors';
 import {
   fetchContent,
@@ -16,8 +16,8 @@ import {
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
 import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
-// import { fetchShowlist } from '@/scripts/google/client';
-// import { ShowsByDate } from '@/scripts/google/showlistHelpers';
+import { fetchShowlist } from '@/scripts/google/client';
+import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
@@ -33,7 +33,7 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-  //showsByDate: ShowsByDate;
+  showsByDate: ShowsByDate;
   firstDecorativeImage: {
     url?: string;
     width?: number;
@@ -62,19 +62,21 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   heroButtonText,
   heroButtonLink,
   navigationItems,
-  //showsByDate,
   sponsors,
 
-  //playing,
-  //onPlayPause,
-  //muted,
-  //onMute,
+  // NOTE: Used during offseason
+  // firstDecorativeImage,
+  // secondDecorativeImage,
+  // firstContent,
+  // secondContent,
+  // thirdContent,
 
-  firstDecorativeImage,
-  secondDecorativeImage,
-  firstContent,
-  secondContent,
-  thirdContent,
+  // NOTE: Used when going live
+  showsByDate,
+  playing,
+  onPlayPause,
+  muted,
+  onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -96,7 +98,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      { /* isPlayerLive && (
+      {isPlayerLive && (
         <Player
           playing={playing}
           onPlayPause={onPlayPause}
@@ -104,12 +106,12 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           onMute={onMute}
           showsByDate={showsByDate}
         />
-      )*/ }
+      )}
 
-      {/* <Showlist showsByDate={showsByDate} /> */}
+      <Showlist showsByDate={showsByDate} />
 
       {/* First section */}
-      {<main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+      {/* {<main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
         <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
           <Image
             src={firstDecorativeImage.url}
@@ -123,18 +125,18 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
           <RichText content={firstContent} />
         </section>
-      </main> }
+      </main>} */}
 
       {/* Second section */}
-      { <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
+      {/* { <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={secondContent} />
         </section>
         <Calendar />
-      </div> }
+      </div> } */}
 
       {/* Third section */}
-      { <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+      {/* { <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
         <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
           <RichText content={thirdContent} />
         </section>
@@ -148,7 +150,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
             alt=""
           />
         </div>
-      </div> }
+      </div> } */}
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
@@ -175,7 +177,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  //const showsByDate = await fetchShowlist();
+  const showsByDate = await fetchShowlist();
 
   return {
     props: {
@@ -185,7 +187,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
       heroButtonText,
       heroButtonLink,
       navigationItems,
-      //showsByDate,
+      showsByDate,
       firstDecorativeImage,
       secondDecorativeImage,
       firstContent,
