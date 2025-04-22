@@ -59,7 +59,7 @@ const ModeButton = ({ text, isActive, onClick, ...props }: ModeButton) => {
     <button
       {...props}
       className={`rounded-sm p-2 text-white ${
-        isActive ? 'bg-radio-accent' : 'hover:text-radio-text bg-radio-common'
+        isActive ? 'bg-radio-accent' : 'bg-radio-common hover:text-radio-accent'
       }`}
       onClick={onClick}
     >

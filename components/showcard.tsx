@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import fi from 'date-fns/locale/fi';
@@ -93,6 +93,28 @@ interface DescriptionsProps {
 }
 
 const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
+  // Add hyperlinks to words that start with https://
+  const linkedDescription = useMemo(() => {
+    if (!show.description) return null;
+    const words = show.description.split(/(\s+)/);
+    return words.map((word, idx) => {
+      if (word.startsWith('https://')) {
+        return (
+          <a
+            key={idx}
+            href={word}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-radio-accent"
+          >
+            {word}
+          </a>
+        );
+      }
+      return <Fragment key={idx}>{word}</Fragment>;
+    });
+  }, [show.description]);
+
   return (
     <div
       className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg200 p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
@@ -108,7 +130,9 @@ const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
       <h3 className="mt-1 text-sm font-bold text-white sm:text-base">
         Tuottaa: {show.producer ?? 'Toimitus'}
       </h3>
-      <p className="mt-2 text-sm text-white md:text-base">{show.description}</p>
+      <p className="mt-2 text-sm text-white md:text-base">
+        {linkedDescription}
+      </p>
     </div>
   );
 };
