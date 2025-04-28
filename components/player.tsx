@@ -67,7 +67,11 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
                 playing ? 'bg-radio-secondary' : 'bg-radio-accent'
               }`}
             >
-              {playing ? <FiPause size="3rem" /> : <FiPlay size="3rem" />}
+              {playing ? (
+                <FiPause size="3rem" />
+              ) : (
+                <FiPlay size="3rem" className="ml-1" />
+              )}
             </button>
 
             <div className={`flex items-center gap-4`}>
