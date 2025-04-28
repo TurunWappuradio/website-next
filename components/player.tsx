@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { BsBoxArrowUpRight } from 'react-icons/bs';
+import { FaTelegramPlane } from 'react-icons/fa';
 import { FiMessageSquare, FiPause, FiPlay, FiVideo } from 'react-icons/fi';
 import Image from 'next/image';
 import { format } from 'date-fns';
@@ -34,6 +36,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
 
   const { pictureUrl, name, hosts } = show ?? {};
   const url = name ? pictureUrl ?? placeholderImage : testcard;
+
   return (
     <div className="flex justify-center p-6">
       <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-radio-bg200 md:w-full md:flex-nowrap md:justify-start">
@@ -59,7 +62,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
             </div>
           )}
 
-          <div className="flex w-full flex-wrap items-center gap-4">
+          <div className="mb-4 flex w-full flex-wrap items-center gap-4">
             <button
               onClick={onPlayPause}
               title="Play/Pause"
@@ -76,15 +79,6 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
 
             <div className={`flex items-center gap-4`}>
               <button
-                onClick={handleShoutboxToggle}
-                title="chat"
-                className={`h-12 w-12 rounded-full ${
-                  shoutboxOpen ? 'bg-radio-secondary' : 'bg-radio-accent'
-                }`}
-              >
-                <FiMessageSquare size="1.7rem" className="mx-auto" />
-              </button>
-              <button
                 onClick={handleVideoToggle}
                 title="Webcam"
                 className={`h-12 w-12 rounded-full ${
@@ -94,6 +88,25 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
                 <FiVideo size="1.7rem" className="mx-auto" />
               </button>
             </div>
+          </div>
+          <div className="flex w-full flex-col gap-2">
+            <span className="opacity-80">Osallistu keskusteluun</span>
+            <button
+              className="flex items-center font-bold transition hover:text-radio-accent200"
+              onClick={handleShoutboxToggle}
+            >
+              <FiMessageSquare className="mr-3 h-6 w-6" /> Shoutboxissa
+            </button>
+            <a
+              className="flex font-bold transition hover:text-radio-accent200"
+              href="https://t.me/turunwappuradio"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Telegram"
+            >
+              <FaTelegramPlane className="mr-3 h-6 w-6" /> Telegramissa{' '}
+              <BsBoxArrowUpRight className="ml-1 h-3 w-3" />
+            </a>
           </div>
         </div>
       </div>
