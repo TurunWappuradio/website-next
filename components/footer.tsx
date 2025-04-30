@@ -88,7 +88,7 @@ const Socials = () => (
     <SomeLink
       text="Discord-serveri"
       LogoComponent={FaDiscord}
-      href="https://discord.gg/CpnVGckP9Z"
+      href="https://discord.gg/a7jVuhu"
       ariaLabel="Discord"
     />
     <SomeLink
