@@ -72,11 +72,11 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   thirdContent,
 
   // NOTE: Used when going live
-  showsByDate,
-  playing,
-  onPlayPause,
-  muted,
-  onMute,
+  // showsByDate,
+  // playing,
+  // onPlayPause,
+  // muted,
+  // onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -98,7 +98,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {isPlayerLive && (
+      {/* isPlayerLive && (
         <Player
           playing={playing}
           onPlayPause={onPlayPause}
@@ -106,9 +106,9 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           onMute={onMute}
           showsByDate={showsByDate}
         />
-      )}
+      )} */}
 
-      <Showlist showsByDate={showsByDate} />
+      {/* <Showlist showsByDate={showsByDate} /> */}
 
       {/* First section */}
       {<main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
