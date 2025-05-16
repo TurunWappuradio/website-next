@@ -99,7 +99,7 @@ export const ResponsiveShowlist = ({
           {Object.keys(showsByDate).map((date, i) => {
             const dateParsed = parse(date, 'y.M.dd', new Date());
 
-            const str = format(dateParsed, 'cccc d.M', { locale: fi });
+            const str = format(dateParsed, 'cccc d.M.', { locale: fi });
             const text = str.charAt(0).toUpperCase() + str.slice(1);
             return (
               <option key={date + i} value={date}>
