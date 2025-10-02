@@ -2,29 +2,30 @@
   "name": "website-next",
   "private": true,
   "scripts": {
-    "dev": "npm run codegen && next dev",
-    "build": "npm run codegen && next build && next export",
+    "dev": "npm run codegen && next dev --turbopack",
+    "build": "npm run codegen && next build",
     "start": "npm run dev",
     "lint": "next lint --fix",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,graphql,css}\"",
     "codegen": "graphql-let --require dotenv/config"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.8",
-    "@contentful/rich-text-react-renderer": "^15.11.1",
+    "@apollo/client": "^4.0.7",
+    "@contentful/rich-text-react-renderer": "^16.1.5",
     "@googleapis/drive": "^4.0.1",
     "@googleapis/sheets": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "date-fns": "^2.28.0",
     "google-auth-library": "^8.7.0",
-    "graphql": "^16.3.0",
+    "graphql": "^16.11.0",
     "hls.js": "^1.5.8",
-    "next": "^12.0.10",
+    "next": "15.5.4",
     "ramda": "^0.28.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "react-icons": "^4.3.1",
+    "rxjs": "^7.8.2",
     "sharp": "^0.32.0"
   },
   "devDependencies": {
@@ -35,10 +36,10 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.6",
     "@graphql-codegen/typescript-resolvers": "^2.7.6",
     "@types/ramda": "^0.28.7",
-    "@types/react": "^17.0.39",
+    "@types/react": "19.2.0",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.2",
+    "eslint-config-next": "15.5.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "graphql-let": "^0.18.4",
@@ -47,5 +48,8 @@
     "prettier-plugin-tailwindcss": "^0.2.7",
     "tailwindcss": "^3.3.1",
     "typescript": "^5.4.5"
+  },
+  "overrides": {
+    "@types/react": "19.2.0"
   }
 }

@@ -60,11 +60,12 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
         isCompact={true}
       />
       <div className="mx-auto flex max-w-6xl flex-col py-6">
-        <Link href="/arkisto">
-          <a className="my-6 ml-28 mr-auto flex font-bold text-radio-accent transition hover:text-radio-accent">
-            <BsArrowLeft className="mr-2 h-6 w-6" />
-            Kaikki ohjelmakartat
-          </a>
+        <Link
+          href="/arkisto"
+          className="my-6 ml-28 mr-auto flex font-bold text-radio-accent transition hover:text-radio-accent"
+        >
+          <BsArrowLeft className="mr-2 h-6 w-6" />
+          Kaikki ohjelmakartat
         </Link>
       </div>
       <Showlist showsByDate={showsByDate} />

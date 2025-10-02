@@ -1,4 +1,4 @@
-import { useState, createContext, FunctionComponent, useContext } from 'react';
+import { useState, createContext, useContext, ReactNode } from 'react';
 
 interface ShoutboxAndVideoContent {
   shoutboxOpen: boolean;
@@ -14,7 +14,11 @@ const Context = createContext<ShoutboxAndVideoContent>({
   setVideoOpen: () => {},
 });
 
-export const ShoutBoxAndVideoProvider: FunctionComponent = ({ children }) => {
+export const ShoutBoxAndVideoProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [shoutboxOpen, setShoutboxOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
 

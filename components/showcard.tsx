@@ -158,7 +158,6 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
         src={url}
         unoptimized
         layout={'fill'}
-        objectFit="cover"
         objectPosition={'65% 35%'}
         className={`-z-10  ${
           isExpanded
@@ -166,6 +165,11 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}
+        style={{
+          maxWidth: '100%',
+          height: 'auto',
+          objectFit: 'cover',
+        }}
       />
     </div>
   );

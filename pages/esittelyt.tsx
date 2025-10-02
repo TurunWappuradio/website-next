@@ -174,7 +174,6 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
         src={url}
         unoptimized
         layout={'fill'}
-        objectFit="cover"
         objectPosition={'top'}
         className={`-z-10 transition-opacity duration-300 ease-in-out ${
           isExpanded
@@ -182,6 +181,11 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
             : 'opacity-70 md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}
+        style={{
+          maxWidth: '100%',
+          height: 'auto',
+          objectFit: 'cover',
+        }}
       />
     </div>
   );

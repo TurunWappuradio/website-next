@@ -2,7 +2,7 @@ import {
   ApolloClient,
   DocumentNode,
   InMemoryCache,
-  NormalizedCacheObject,
+  HttpLink,
 } from '@apollo/client';
 
 import {
@@ -13,7 +13,7 @@ import {
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 
-let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+let apolloClient: ApolloClient | undefined;
 
 export interface NavigationItem {
   name?: string;
@@ -35,7 +35,7 @@ const fetchContent = async <T>(
     const _apolloClient = apolloClient ?? createApolloClient();
     const { data } = await _apolloClient.query({ query, variables });
 
-    return data;
+    return data as T;
   } catch (error) {
     console.error(
       `There was a problem retrieving entries with the query ${query}`
@@ -46,12 +46,17 @@ const fetchContent = async <T>(
 
 const createApolloClient = () => {
   return new ApolloClient({
-    uri:
-      'https://graphql.contentful.com/content/v1/spaces/' + CONTENTFUL_SPACE_ID,
-    headers: {
-      Authorization: 'Bearer ' + CONTENTFUL_ACCESS_TOKEN,
-    },
     cache: new InMemoryCache(),
+
+    link: new HttpLink({
+      uri:
+        'https://graphql.contentful.com/content/v1/spaces/' +
+        CONTENTFUL_SPACE_ID,
+
+      headers: {
+        Authorization: 'Bearer ' + CONTENTFUL_ACCESS_TOKEN,
+      },
+    }),
   });
 };
 

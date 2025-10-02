@@ -23,20 +23,21 @@ const Footer = ({ navigationItems }: FooterProps) => {
             <Image
               src="/leima.svg"
               unoptimized={true}
-              layout="fill"
               alt="Logo of Turun Wappuradio ry"
+              fill
+              sizes="100vw"
             />
           </div>
-          <Link href="/tietosuojaseloste">
-            <a className="mt-6 text-sm text-white opacity-50">
-              © Turun Wappuradio ry
-              <br />
-              Tietosuojaseloste
-            </a>
+          <Link
+            href="/tietosuojaseloste"
+            className="mt-6 text-sm text-white opacity-50"
+          >
+            © Turun Wappuradio ry
+            <br />
+            Tietosuojaseloste
           </Link>
         </div>
       </div>
-
       <div className="flex w-128 max-w-full flex-row">
         <div className="my-4 hidden lg:block">
           <SiteMap navigationItems={navigationItems} />
@@ -65,8 +66,8 @@ interface NavLinkProps {
 
 const NavLink = ({ slug, name }: NavLinkProps) => (
   <li key={slug} className="my-3">
-    <Link href={'/' + slug}>
-      <a className="font-bold hover:underline">{name}</a>
+    <Link href={'/' + slug} className="font-bold hover:underline">
+      {name}
     </Link>
   </li>
 );

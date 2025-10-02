@@ -44,10 +44,14 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
           <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
             <Image
               src={url}
-              objectFit="cover"
-              unoptimized={true} // next.config.js has `loader:'custom'` therefore Image component expects loader-prop. Show images 2023 are optimized on built time.
-              layout="fill"
+              // next.config.js has `loader:'custom'` therefore Image component expects loader-prop. Show images 2023 are optimized on built time.
+              unoptimized={true}
               alt=""
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+              }}
             />
           </div>
         </div>

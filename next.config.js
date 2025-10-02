@@ -1,8 +1,13 @@
 module.exports = {
+  output: 'export',
   reactStrictMode: true,
   images: {
-    loader: 'custom',
-    domains: ['images.ctfassets.net'],
+    unoptimized: true,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.ctfassets.net' },
+      { protocol: 'https', hostname: 'downloads.ctfassets.net' },
+      { protocol: 'https', hostname: 'images.contentful.com' },
+    ],
   },
   webpack(config, options) {
     config.module.rules.push({

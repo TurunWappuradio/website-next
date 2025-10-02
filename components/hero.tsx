@@ -57,10 +57,13 @@ const Hero: FC<HeroProps> = ({
           unoptimized={!image?.url}
           priority={true}
           quality={50}
-          layout="fill"
-          objectFit="cover"
           className="z-0 opacity-[10%] grayscale"
           alt=""
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: 'cover',
+          }}
         />
 
         {/* Navigation */}
@@ -89,10 +92,11 @@ const Hero: FC<HeroProps> = ({
           >
             <Image
               src="/leima.svg"
-              layout="fill"
               priority={true}
               alt="Logo of Turun Wappuradio ry"
               unoptimized={true}
+              fill
+              sizes="100vw"
             />
           </div>
           <div className="flex flex-col">
@@ -131,10 +135,11 @@ const Hero: FC<HeroProps> = ({
 
 const NavLink = ({ href, name }: { href: string; name: string }) => (
   <li className="p-4">
-    <Link href={href}>
-      <a className="text-xl text-white transition hover:text-radio-accent">
-        {name}
-      </a>
+    <Link
+      href={href}
+      className="text-xl text-white transition hover:text-radio-accent"
+    >
+      {name}
     </Link>
   </li>
 );
