@@ -3,7 +3,6 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 const config: CodegenConfig = {
   schema: [
     {
-      // Contentful GraphQL endpoint (env segment is required)
       [`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`]:
         {
           headers: {

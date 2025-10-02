@@ -57,12 +57,13 @@ const Hero: FC<HeroProps> = ({
           unoptimized={!image?.url}
           priority={true}
           quality={50}
-          className="z-0 opacity-10 grayscale"
+          className="z-0"
           alt=""
           fill
           sizes="100vw"
           style={{
             objectFit: 'cover',
+            filter: 'grayscale(1) opacity(.1)', // Tailwind classes didn't work on Safari
           }}
         />
 
