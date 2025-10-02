@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -11,10 +11,7 @@ import {
   fetchNavigationItems,
   NavigationItem,
 } from '@/contentful/client';
-import {
-  EsittelytDocument,
-  EsittelytQuery,
-} from '@/contentful/graphql/esittelytPage.graphql';
+import { EsittelytDocument, EsittelytQuery } from '@/gql/graphql';
 
 interface EsittelytProps {
   navigationItems?: NavigationItem[] | null;
@@ -31,7 +28,7 @@ interface Esittely {
 }
 
 const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
-  const { name, description, picture, className } = esittely;
+  const { className } = esittely;
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const handleClick = () => {
     setIsExpanded((prev) => !prev);
@@ -65,8 +62,6 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
   navigationItems,
   esittelyt,
 }) => {
-  const data = fetchContent<EsittelytQuery>(EsittelytDocument);
-
   return (
     <div className="min-h-screen w-full">
       <Head>

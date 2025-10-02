@@ -15,7 +15,7 @@ import {
   NavigationItem,
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
-import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
+import { IndexDocument, IndexQuery } from '@/gql/graphql';
 import { fetchShowlist } from '@/scripts/google/client';
 import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 

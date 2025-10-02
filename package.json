@@ -7,7 +7,7 @@
     "start": "npm run dev",
     "lint": "next lint --fix",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,graphql,css}\"",
-    "codegen": "graphql-let --require dotenv/config"
+    "codegen": "graphql-codegen --require dotenv/config"
   },
   "dependencies": {
     "@apollo/client": "^4.0.7",
@@ -29,20 +29,21 @@
     "sharp": "^0.32.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.6.1",
-    "@graphql-codegen/import-types-preset": "^2.1.10",
-    "@graphql-codegen/typescript": "^2.4.3",
-    "@graphql-codegen/typescript-operations": "^2.3.0",
-    "@graphql-codegen/typescript-react-apollo": "^3.2.6",
-    "@graphql-codegen/typescript-resolvers": "^2.7.6",
+    "@graphql-codegen/cli": "^6.0.0",
+    "@graphql-codegen/client-preset": "^5.0.2",
+    "@graphql-codegen/import-types-preset": "^3.0.1",
+    "@graphql-codegen/typescript": "^5.0.1",
+    "@graphql-codegen/typescript-operations": "^5.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
+    "@graphql-codegen/typescript-resolvers": "^5.0.1",
     "@types/ramda": "^0.28.7",
     "@types/react": "19.2.0",
     "autoprefixer": "^10.4.2",
+    "dotenv": "^17.2.3",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.5.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
-    "graphql-let": "^0.18.4",
     "postcss": "^8.4.6",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.2.7",

@@ -12,10 +12,7 @@ import {
   NavigationItem,
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
-import {
-  ArchivePageDocument,
-  ArchivePageQuery,
-} from '@/contentful/graphql/archivePage.graphql';
+import { ArchivePageDocument, ArchivePageQuery } from '@/gql/graphql';
 
 interface ShowList {
   id?: string;

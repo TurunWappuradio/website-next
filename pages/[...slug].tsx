@@ -11,12 +11,10 @@ import {
 } from '@/contentful/client';
 import {
   ContentPageDocument,
-  ContentPageQuery,
-} from '@/contentful/graphql/contentPage.graphql';
-import {
   ContentPagePathsDocument,
   ContentPagePathsQuery,
-} from '@/contentful/graphql/contentPagePaths.graphql';
+  ContentPageQuery,
+} from '@/gql/graphql';
 
 interface ContentPageProps {
   name: string;

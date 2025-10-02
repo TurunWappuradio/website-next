@@ -14,9 +14,9 @@ import {
 import {
   ShowlistPageDocument,
   ShowlistPageQuery,
-} from '@/contentful/graphql/showlistPage.graphql';
-import { ShowlistPathsDocument } from '@/contentful/graphql/showlistPaths.graphql';
-import { ShowlistPathsQuery } from '@/contentful/graphql/showlistPaths.graphql';
+  ShowlistPathsDocument,
+  ShowlistPathsQuery,
+} from '@/gql/graphql';
 import { Show } from '@/scripts/google/showlistHelpers';
 
 interface ShowListPageProps {
