@@ -1,10 +1,11 @@
-import { NavigationItemsDocument, NavigationItemsQuery } from '@/gql/graphql';
 import {
   ApolloClient,
   DocumentNode,
-  InMemoryCache,
   HttpLink,
+  InMemoryCache,
 } from '@apollo/client';
+
+import { NavigationItemsDocument, NavigationItemsQuery } from '@/gql/graphql';
 
 const CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CONTENTFUL_ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;

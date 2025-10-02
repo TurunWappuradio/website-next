@@ -5,7 +5,7 @@
     "dev": "npm run codegen && next dev --turbopack",
     "build": "npm run codegen && next build",
     "start": "npm run dev",
-    "lint": "next lint --fix",
+    "lint": "eslint --fix .",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,graphql,css}\"",
     "codegen": "graphql-codegen --require dotenv/config"
   },
@@ -14,10 +14,12 @@
     "@contentful/rich-text-react-renderer": "^16.1.5",
     "@googleapis/drive": "^18.0.0",
     "@googleapis/sheets": "^12.0.0",
+    "@next/eslint-plugin-next": "^15.5.4",
     "@tailwindcss/postcss": "^4.1.14",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "date-fns": "^4.1.0",
+    "eslint-plugin-next": "^0.0.0",
     "google-auth-library": "^10.4.0",
     "graphql": "^16.11.0",
     "hls.js": "^1.6.13",
@@ -30,6 +32,7 @@
     "sharp": "^0.34.4"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@graphql-codegen/cli": "^6.0.0",
     "@graphql-codegen/client-preset": "^5.0.2",
     "@graphql-codegen/import-types-preset": "^3.0.1",
@@ -42,7 +45,7 @@
     "autoprefixer": "^10.4.21",
     "dotenv": "^17.2.3",
     "eslint": "^9.36.0",
-    "eslint-config-next": "15.5.4",
+    "eslint-config-next": "^15.5.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "postcss": "^8.5.6",
