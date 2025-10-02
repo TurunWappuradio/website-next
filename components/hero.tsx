@@ -57,7 +57,7 @@ const Hero: FC<HeroProps> = ({
           unoptimized={!image?.url}
           priority={true}
           quality={50}
-          className="z-0 opacity-[10%] grayscale"
+          className="z-0 opacity-10 grayscale"
           alt=""
           fill
           sizes="100vw"
@@ -82,7 +82,7 @@ const Hero: FC<HeroProps> = ({
         </header>
 
         {/* Hero content */}
-        <div className="z-10 mx-auto flex h-full w-[21rem] max-w-full flex-col items-center px-2 md:w-[59rem] md:flex-row">
+        <div className="z-10 mx-auto flex h-full w-84 max-w-full flex-col items-center px-2 md:w-236 md:flex-row">
           <div
             className={`relative ${
               isCompact

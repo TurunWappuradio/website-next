@@ -75,7 +75,7 @@ export const ShowListPage: NextPage<ShowListPageProps> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pathsResult = await fetchContent<ShowlistPathsQuery>(
-    ShowlistPathsDocument
+    ShowlistPathsDocument,
   );
   const paths = pathsResult.programmeCollection.items.map((item) => ({
     params: {

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { format, parse } from 'date-fns';
-import fi from 'date-fns/locale/fi';
+import { fi } from 'date-fns/locale/fi';
 
 import { ShowCard } from '@/components/showcard';
 import { Show } from '@/scripts/google/showlistHelpers';
@@ -67,7 +67,7 @@ export const ResponsiveShowlist = ({
   const [selectedDate, setSelectedDate] = useState<string>(
     Object.keys(showsByDate).includes(format(new Date(), 'y.M.dd'))
       ? format(new Date(), 'y.M.dd')
-      : Object.keys(showsByDate)[0]
+      : Object.keys(showsByDate)[0],
   );
 
   const setDateAndScroll = (date: string) => {
@@ -109,12 +109,12 @@ export const ResponsiveShowlist = ({
           })}
         </select>
 
-        <div className="mr-auto w-full space-y-4 lg:ml-[10rem]">
+        <div className="mr-auto w-full space-y-4 lg:ml-40">
           {showsByDate[selectedDate]?.map((show, i) => (
             <ShowCard show={show} key={show.start + i} index={i} />
           ))}
         </div>
-        <div className="ml-4 hidden w-[10rem] shrink-0 flex-col space-y-2 lg:flex">
+        <div className="ml-4 hidden w-40 shrink-0 flex-col space-y-2 lg:flex">
           {Object.keys(showsByDate).map((date) => (
             <DateButton
               key={date}

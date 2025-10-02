@@ -41,10 +41,10 @@ const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
       }`}
     >
       <button
-        className={`group relative flex w-full flex-col overflow-hidden rounded md:flex-row ${
+        className={`cursor-pointer group relative flex w-full flex-col overflow-hidden rounded md:flex-row ${
           isExpanded
             ? 'bg-transparent'
-            : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
+            : 'bg-linear-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={handleClick}
       >
@@ -161,16 +161,16 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
 
   return (
     <div
-      className={`relative aspect-[3/2] w-full flex-none transition-all duration-300 ${
+      className={`relative aspect-3/2 w-full flex-none transition-all duration-300 ${
         isExpanded ? 'h-48' : 'h-96'
       }`}
     >
       <Image
         src={url}
         unoptimized
-        layout={'fill'}
-        objectPosition={'top'}
-        className={`-z-10 transition-opacity duration-300 ease-in-out ${
+        layout="fill"
+        objectPosition="top"
+        className={`-z-10 transition duration-300 ease-in-out ${
           isExpanded
             ? 'opacity-100'
             : 'opacity-70 md:group-hover:scale-110 md:group-hover:opacity-100'
@@ -178,7 +178,6 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
         alt={name || ''}
         style={{
           maxWidth: '100%',
-          height: 'auto',
           objectFit: 'cover',
         }}
       />

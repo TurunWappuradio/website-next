@@ -1,4 +1,4 @@
-import 'tailwindcss/tailwind.css';
+import './globals.css';
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import Hls from 'hls.js';

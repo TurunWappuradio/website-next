@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { format, isSameDay, parseISO, startOfDay } from 'date-fns';
-import fi from 'date-fns/locale/fi';
+import { fi } from 'date-fns/locale/fi';
 
 // Fetch next events but not more than 6 months from now
 const MONTHS_COUNT = 6;
@@ -47,7 +47,7 @@ const Calendar: FC = () => {
   }, []);
 
   return (
-    <div className="m-4 flex w-128 max-w-full flex-col md:m-8">
+    <div className="m-4 flex w-lg max-w-full flex-col md:m-8">
       <h2 className="text-center text-xl font-bold text-white">
         Tulevat tapahtumat
       </h2>

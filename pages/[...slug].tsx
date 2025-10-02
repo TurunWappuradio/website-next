@@ -73,7 +73,7 @@ const ContentPage: NextPage<ContentPageProps> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pathsResult = await fetchContent<ContentPagePathsQuery>(
-    ContentPagePathsDocument
+    ContentPagePathsDocument,
   );
   const paths = pathsResult.contentPageCollection.items.map((item) => ({
     params: { slug: item.slug.split('/') },
@@ -86,7 +86,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<ContentPageProps> = async (
-  context
+  context,
 ) => {
   const { slug } = context.params;
 
