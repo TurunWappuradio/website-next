@@ -12,10 +12,7 @@ import {
   NavigationItem,
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
-import {
-  ArchivePageDocument,
-  ArchivePageQuery,
-} from '@/contentful/graphql/archivePage.graphql';
+import { ArchivePageDocument, ArchivePageQuery } from '@/gql/graphql';
 
 interface ShowList {
   id?: string;
@@ -69,28 +66,30 @@ const ShowListCard = ({ showList }: { showList: ShowList }) => {
   const { id, coverImage, name, shortDescription } = showList;
 
   return (
-    <Link href={`/arkisto/${id}`}>
-      <a className="group my-4 flex flex-col overflow-hidden rounded bg-radio-bg transition hover:scale-[1.03] md:flex-row">
-        <div className="relative inline h-40 w-full max-w-full shrink-0 grow-0 md:h-48 md:w-64">
-          <Image
-            src={coverImage.url}
-            alt=""
-            loader={contentfulImageLoader}
-            layout="fill"
-            objectFit="cover"
-          />
+    <Link
+      href={`/arkisto/${id}`}
+      className="group my-4 flex flex-col overflow-hidden rounded bg-radio-bg transition hover:scale-[1.03] md:flex-row"
+    >
+      <div className="relative inline h-40 w-full max-w-full shrink-0 grow-0 md:h-48 md:w-64">
+        <Image
+          src={coverImage.url}
+          alt=""
+          loader={contentfulImageLoader}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      </div>
+      <div className="flex flex-col p-4 md:p-6">
+        <h2 className="mb-2 text-xl font-bold text-radio-accent200">{name}</h2>
+        {shortDescription}
+        <div className="text-accent ml-auto mt-auto flex items-center pt-2 font-bold">
+          Ohjelmakartta
+          <BsArrowRight className="ml-2 h-6 w-6" />
         </div>
-        <div className="flex flex-col p-4 md:p-6">
-          <h2 className="mb-2 text-xl font-bold text-radio-accent200">
-            {name}
-          </h2>
-          {shortDescription}
-          <div className="text-accent ml-auto mt-auto flex items-center pt-2 font-bold">
-            Ohjelmakartta
-            <BsArrowRight className="ml-2 h-6 w-6" />
-          </div>
-        </div>
-      </a>
+      </div>
     </Link>
   );
 };

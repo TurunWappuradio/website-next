@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { differenceInMinutes, format, parse } from 'date-fns';
-import fi from 'date-fns/locale/fi';
+import { fi } from 'date-fns/locale/fi';
 import { append, head, keys, last } from 'ramda';
 
 import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
@@ -45,7 +45,7 @@ export const ShowlistMap = ({ showsByDate }: ShowlistMapProps) => {
         <ShowCard
           show={selectedShow}
           index={0}
-          className="mx-auto mt-4 max-w-[60rem]"
+          className="mx-auto mt-4 max-w-240"
           forceOpen={true}
         />
       )}
@@ -92,7 +92,7 @@ export const ShowlistMap = ({ showsByDate }: ShowlistMapProps) => {
                       key={i}
                       showLength={differenceInMinutes(
                         new Date(show.end),
-                        new Date(show.start)
+                        new Date(show.start),
                       )}
                       text={show?.name}
                       color={show?.color}

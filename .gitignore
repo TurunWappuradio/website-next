@@ -35,10 +35,14 @@ yarn-error.log*
 .vercel
 .env.local
 .env
-*.graphql.d.ts
-*.graphqls.d.ts
 /.cache
 .vscode
 
 # showlist files
 /public/showlist
+
+# auto-generated GraphQL
+*.graphql.d.ts
+*.graphqls.d.ts
+gql/
+

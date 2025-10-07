@@ -35,19 +35,23 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
   };
 
   const { pictureUrl, name, hosts } = show ?? {};
-  const url = name ? pictureUrl ?? placeholderImage : testcard;
+  const url = name ? (pictureUrl ?? placeholderImage) : testcard;
 
   return (
     <div className="flex justify-center p-6">
-      <div className="flex w-[21rem] max-w-[59rem] flex-wrap items-center rounded bg-radio-bg200 md:w-full md:flex-nowrap md:justify-start">
-        <div className="rounded bg-gradient-to-t from-radio-accent via-radio-accent200 to-radio-secondary p-1.5">
-          <div className="relative aspect-[3/2] w-80 rounded md:w-[28rem] lg:w-128">
+      <div className="flex w-84 max-w-236 flex-wrap items-center rounded bg-radio-bg200 md:w-full md:flex-nowrap md:justify-start">
+        <div className="rounded bg-linear-to-t from-radio-accent via-radio-accent200 to-radio-secondary p-1.5">
+          <div className="relative aspect-3/2 w-80 rounded md:w-md lg:w-lg">
             <Image
               src={url}
-              objectFit="cover"
-              unoptimized={true} // next.config.js has `loader:'custom'` therefore Image component expects loader-prop. Show images 2023 are optimized on built time.
-              layout="fill"
+              // next.config.js has `loader:'custom'` therefore Image component expects loader-prop. Show images 2023 are optimized on built time.
+              unoptimized={true}
               alt=""
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+              }}
             />
           </div>
         </div>

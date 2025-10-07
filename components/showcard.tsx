@@ -1,7 +1,7 @@
 import { Fragment, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import fi from 'date-fns/locale/fi';
+import { fi } from 'date-fns/locale/fi';
 
 import { Show } from '@/scripts/google/showlistHelpers';
 import placeholderImage from '../public/kuva_puuttuu_v2.jpeg';
@@ -33,7 +33,7 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
         className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
           isExpanded
             ? 'flex rounded md:contents'
-            : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
+            : 'bg-linear-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={handleClick}
       >
@@ -117,7 +117,7 @@ const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
 
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg200 p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-[20rem] xl:h-[25rem] ${
+      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg200 p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-80 xl:h-100 ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -150,7 +150,7 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
     <div
       className={
         isExpanded
-          ? 'relative aspect-[3/2] h-full w-full flex-none md:h-[20rem] md:w-[30rem] xl:h-[25rem] xl:w-[37.5rem]'
+          ? 'relative aspect-3/2 h-full w-full flex-none md:h-80 md:w-120 xl:h-100 xl:w-150'
           : ''
       }
     >
@@ -158,7 +158,6 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
         src={url}
         unoptimized
         layout={'fill'}
-        objectFit="cover"
         objectPosition={'65% 35%'}
         className={`-z-10  ${
           isExpanded
@@ -166,6 +165,11 @@ const ShowImage = ({ show, isExpanded }: ShowImageProps) => {
             : 'opacity-70 transition duration-300 ease-in-out md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}
+        style={{
+          maxWidth: '100%',
+          height: 'auto',
+          objectFit: 'cover',
+        }}
       />
     </div>
   );

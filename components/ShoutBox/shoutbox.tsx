@@ -63,7 +63,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
       webSocket.current.send(
         JSON.stringify({
           type: 'reload',
-        })
+        }),
       );
 
       if (!!name) {
@@ -143,7 +143,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
   }
 
   return (
-    <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-[38rem]">
+    <div className="mx-auto flex h-96 w-full max-w-6xl px-[25px] py-6 md:h-152">
       <div className="mx-auto my-0 h-auto w-full flex-wrap overflow-auto overflow-x-hidden bg-radio-bg shadow-md">
         <div
           className="flex h-[81%] flex-col-reverse overflow-y-auto overflow-x-hidden px-0 py-2 text-white shadow-md md:h-[85%]"
@@ -167,7 +167,7 @@ const Chat = ({ limit, isOpen }: ShoutBoxProps) => {
             </div>
           )}
         </div>
-        <div className="h-[4rem] w-full bg-radio-bg">
+        <div className="h-16 w-full bg-radio-bg">
           {name ? (
             <MessageInput
               name={isAdmin ? 'Toimitus' : name}

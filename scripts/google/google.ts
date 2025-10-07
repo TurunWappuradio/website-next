@@ -20,16 +20,15 @@ export type GoogleConfigFiles = {
 };
 
 const getJwt = (googleService: 'spreadsheets' | 'drive') => {
-  return new auth.JWT(
-    credentials.client_email,
-    undefined,
-    credentials.private_key,
-    [`https://www.googleapis.com/auth/${googleService}`]
-  );
+  return new auth.JWT({
+    email: credentials.client_email,
+    key: credentials.private_key,
+    scopes: [`https://www.googleapis.com/auth/${googleService}`],
+  });
 };
 
 export const getSheet = async (
-  config: GoogleConfigSheets
+  config: GoogleConfigSheets,
 ): Promise<gSheets.sheets_v4.Schema$ValueRange | null> => {
   if (!config.apiKey) {
     return null;
@@ -39,7 +38,7 @@ export const getSheet = async (
     jwt,
     config.apiKey,
     config.spreadsheetId,
-    config.range
+    config.range,
   );
 };
 
@@ -47,7 +46,7 @@ const getSheetRequest = async (
   jwt: auth.JWT,
   apiKey: string,
   spreadsheetId: string,
-  range: string
+  range: string,
 ) => {
   const sheets = gSheets.sheets({ version: 'v4' });
   try {
@@ -73,7 +72,7 @@ export const getFileRequest = async (
   jwt: auth.JWT,
   apiKey: string,
   fileId: string,
-  fields?: string[]
+  fields?: string[],
 ) => {
   const drive = gDrive.drive({
     version: 'v3',
@@ -91,7 +90,7 @@ export const getFileRequest = async (
       },
       {
         responseType: 'arraybuffer',
-      }
+      },
     );
 
     if (result.status === 404) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -11,10 +11,7 @@ import {
   fetchNavigationItems,
   NavigationItem,
 } from '@/contentful/client';
-import {
-  EsittelytDocument,
-  EsittelytQuery,
-} from '@/contentful/graphql/esittelytPage.graphql';
+import { EsittelytDocument, EsittelytQuery } from '@/gql/graphql';
 
 interface EsittelytProps {
   navigationItems?: NavigationItem[] | null;
@@ -31,7 +28,7 @@ interface Esittely {
 }
 
 const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
-  const { name, description, picture, className } = esittely;
+  const { className } = esittely;
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const handleClick = () => {
     setIsExpanded((prev) => !prev);
@@ -44,10 +41,10 @@ const PresentationCard: React.FC<{ esittely: Esittely }> = ({ esittely }) => {
       }`}
     >
       <button
-        className={`group relative flex w-full flex-col overflow-hidden rounded md:flex-row ${
+        className={`cursor-pointer group relative flex w-full flex-col overflow-hidden rounded md:flex-row ${
           isExpanded
             ? 'bg-transparent'
-            : 'bg-gradient-to-bl from-transparent via-transparent to-blue-darkest'
+            : 'bg-linear-to-bl from-transparent via-transparent to-blue-darkest'
         }`}
         onClick={handleClick}
       >
@@ -65,8 +62,6 @@ const EsittelytPage: NextPage<EsittelytProps> = ({
   navigationItems,
   esittelyt,
 }) => {
-  const data = fetchContent<EsittelytQuery>(EsittelytDocument);
-
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -166,22 +161,25 @@ const PresImage = ({ esittely, isExpanded }: PresImageProps) => {
 
   return (
     <div
-      className={`relative aspect-[3/2] w-full flex-none transition-all duration-300 ${
+      className={`relative aspect-3/2 w-full flex-none transition-all duration-300 ${
         isExpanded ? 'h-48' : 'h-96'
       }`}
     >
       <Image
         src={url}
         unoptimized
-        layout={'fill'}
-        objectFit="cover"
-        objectPosition={'top'}
-        className={`-z-10 transition-opacity duration-300 ease-in-out ${
+        layout="fill"
+        objectPosition="top"
+        className={`-z-10 transition duration-300 ease-in-out ${
           isExpanded
             ? 'opacity-100'
             : 'opacity-70 md:group-hover:scale-110 md:group-hover:opacity-100'
         }`}
         alt={name || ''}
+        style={{
+          maxWidth: '100%',
+          objectFit: 'cover',
+        }}
       />
     </div>
   );
