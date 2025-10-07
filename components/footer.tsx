@@ -56,6 +56,7 @@ const SiteMap = ({ navigationItems }: FooterProps) => (
     ))}
     <NavLink slug="arkisto" name="Arkisto" />
     <NavLink slug="esittelyt" name="Esittelyt" />
+    <NavLink slug="musiikki" name="Musiikki" />
   </ul>
 );
 

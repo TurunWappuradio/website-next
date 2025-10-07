@@ -79,6 +79,7 @@ const Hero: FC<HeroProps> = ({
 
             <NavLink href="/arkisto" name="Arkisto" />
             <NavLink href="/esittelyt" name="Esittelyt" />
+            <NavLink href="/musiikki" name="Musiikki" />
           </ul>
         </header>
 

@@ -41,6 +41,11 @@ const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
           Esittelyt
         </Link>
       </li>
+      <li className="my-5">
+        <Link href="/musiikki" className="p-2 text-2xl">
+          Musiikki
+        </Link>
+      </li>
     </ul>
   </div>
 );
