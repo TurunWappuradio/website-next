@@ -1,18 +1,18 @@
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 
-import Footer from '@/components/footer';
 import Hero from '@/components/hero';
+import { SongsTable } from '@/components/songsTable';
 import { fetchNavigationItems, NavigationItem } from '@/contentful/client';
+
+const title = 'Musiikkikirjasto | Turun Wappuradio';
+const subtext = 'Lista biiseistä jotka löytyy valmiina musakoneesta';
 
 interface MusicPageProps {
   navigationItems: NavigationItem[];
 }
 
 const MusicPage: NextPage<MusicPageProps> = ({ navigationItems }) => {
-  const title = 'Musiikkikirjasto | Turun Wappuradio';
-  const subtext = 'Lista biiseistä jotka löytyy valmiina musakoneesta';
-
   return (
     <div className="min-h-screen w-full">
       <Head>
@@ -29,8 +29,12 @@ const MusicPage: NextPage<MusicPageProps> = ({ navigationItems }) => {
         navigationItems={navigationItems}
         isCompact={true}
       />
-      <h1>Hello world!</h1>
-      <Footer navigationItems={navigationItems} />
+      <article className="mx-auto pt-12 text-white">
+        <h1 className="mx-auto px-3 max-w-6xl my-4 text-3xl font-bold text-radio-accent200">
+          Biisit
+        </h1>
+        <SongsTable />
+      </article>
     </div>
   );
 };
