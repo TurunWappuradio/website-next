@@ -15,7 +15,7 @@ import {
   NavigationItem,
 } from '@/contentful/client';
 import { contentfulImageLoader } from '@/contentful/contentfulImageLoader';
-import { IndexDocument, IndexQuery } from '@/contentful/graphql/index.graphql';
+import { IndexDocument, IndexQuery } from '@/gql/graphql';
 import { fetchShowlist } from '@/scripts/google/client';
 import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 
@@ -107,50 +107,58 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           showsByDate={showsByDate}
         />
       )} */}
-
       {/* <Showlist showsByDate={showsByDate} /> */}
-
       {/* First section */}
-      {<main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
-        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
-          <Image
-            src={firstDecorativeImage.url}
-            loader={contentfulImageLoader}
-            layout="fill"
-            objectFit="cover"
-            className="rounded"
-            alt=""
-          />
-        </div>
-        <section className="m-4 w-128 max-w-full text-lg text-white md:m-8">
-          <RichText content={firstContent} />
-        </section>
-      </main>}
-
+      {
+        <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+          <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
+            <Image
+              src={firstDecorativeImage.url}
+              loader={contentfulImageLoader}
+              className="rounded"
+              alt=""
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+          <section className="m-4 w-lg max-w-full text-lg text-white md:m-8">
+            <RichText content={firstContent} />
+          </section>
+        </main>
+      }
       {/* Second section */}
-      { <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
-        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
-          <RichText content={secondContent} />
-        </section>
-        <Calendar />
-      </div> }
-
-      {/* Third section */}
-      { <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
-        <section className="m-4 w-128 max-w-full text-base text-white md:m-8">
-          <RichText content={thirdContent} />
-        </section>
-        <div className="relative m-10 h-48 w-128 max-w-full md:m-8 md:h-96">
-          <Image
-            src={secondDecorativeImage.url}
-            loader={contentfulImageLoader}
-            layout="fill"
-            objectFit="cover"
-            className="rounded"
-            alt=""
-          />
+      {
+        <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
+          <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
+            <RichText content={secondContent} />
+          </section>
+          <Calendar />
         </div>
-      </div> }
+      }
+      {/* Third section */}
+      {
+        <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+          <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
+            <RichText content={thirdContent} />
+          </section>
+          <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
+            <Image
+              src={secondDecorativeImage.url}
+              loader={contentfulImageLoader}
+              className="rounded"
+              alt=""
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+        </div>
+      }
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>

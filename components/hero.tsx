@@ -57,10 +57,14 @@ const Hero: FC<HeroProps> = ({
           unoptimized={!image?.url}
           priority={true}
           quality={50}
-          layout="fill"
-          objectFit="cover"
-          className="z-0 opacity-[10%] grayscale"
+          className="z-0"
           alt=""
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: 'cover',
+            filter: 'grayscale(1) opacity(.1)', // Tailwind classes didn't work on Safari
+          }}
         />
 
         {/* Navigation */}
@@ -79,7 +83,7 @@ const Hero: FC<HeroProps> = ({
         </header>
 
         {/* Hero content */}
-        <div className="z-10 mx-auto flex h-full w-[21rem] max-w-full flex-col items-center px-2 md:w-[59rem] md:flex-row">
+        <div className="z-10 mx-auto flex h-full w-84 max-w-full flex-col items-center px-2 md:w-236 md:flex-row">
           <div
             className={`relative ${
               isCompact
@@ -89,10 +93,11 @@ const Hero: FC<HeroProps> = ({
           >
             <Image
               src="/leima.svg"
-              layout="fill"
               priority={true}
               alt="Logo of Turun Wappuradio ry"
               unoptimized={true}
+              fill
+              sizes="100vw"
             />
           </div>
           <div className="flex flex-col">
@@ -131,10 +136,11 @@ const Hero: FC<HeroProps> = ({
 
 const NavLink = ({ href, name }: { href: string; name: string }) => (
   <li className="p-4">
-    <Link href={href}>
-      <a className="text-xl text-white transition hover:text-radio-accent">
-        {name}
-      </a>
+    <Link
+      href={href}
+      className="text-xl text-white transition hover:text-radio-accent"
+    >
+      {name}
     </Link>
   </li>
 );

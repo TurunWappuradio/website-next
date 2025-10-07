@@ -42,7 +42,7 @@ const Metadata: NextPage = () => {
     <div className="flex min-h-screen w-full flex-col items-center">
       <form
         onSubmit={handleSubmit}
-        className="mt-10 flex w-144 flex-col bg-radio-common px-6 py-12 text-white"
+        className="mt-10 flex w-xl flex-col bg-radio-common px-6 py-12 text-white"
       >
         <h1 className="text-4xl font-bold text-radio-accent">
           Musiikin metadatan syöttö

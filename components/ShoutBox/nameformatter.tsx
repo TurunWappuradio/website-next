@@ -24,10 +24,11 @@ const NameFormatter = ({ name, timestamp, telegram }: NameFormatterProps) => {
             href="https://t.me/turunwappuradio"
           >
             <Image
-              layout="fill"
               unoptimized={true}
               alt="Telegram"
               src="/telegram.svg"
+              fill
+              sizes="100vw"
             ></Image>
           </a>
         </div>

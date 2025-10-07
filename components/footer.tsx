@@ -17,27 +17,28 @@ interface FooterProps {
 const Footer = ({ navigationItems }: FooterProps) => {
   return (
     <footer className="z-15 flex max-w-full flex-col flex-wrap items-center justify-center bg-radio-bg py-14 pb-32 text-white lg:flex-row">
-      <div className="flex w-64 max-w-full justify-center lg:justify-start xl:w-128">
+      <div className="flex w-64 max-w-full justify-center lg:justify-start xl:w-lg">
         <div className="flex w-fit flex-col items-center">
           <div className="relative flex h-36 w-36 md:h-52 md:w-52">
             <Image
               src="/leima.svg"
               unoptimized={true}
-              layout="fill"
               alt="Logo of Turun Wappuradio ry"
+              fill
+              sizes="100vw"
             />
           </div>
-          <Link href="/tietosuojaseloste">
-            <a className="mt-6 text-sm text-white opacity-50">
-              © Turun Wappuradio ry
-              <br />
-              Tietosuojaseloste
-            </a>
+          <Link
+            href="/tietosuojaseloste"
+            className="mt-6 text-sm text-white opacity-50"
+          >
+            © Turun Wappuradio ry
+            <br />
+            Tietosuojaseloste
           </Link>
         </div>
       </div>
-
-      <div className="flex w-128 max-w-full flex-row">
+      <div className="flex w-lg max-w-full flex-row">
         <div className="my-4 hidden lg:block">
           <SiteMap navigationItems={navigationItems} />
         </div>
@@ -65,8 +66,8 @@ interface NavLinkProps {
 
 const NavLink = ({ slug, name }: NavLinkProps) => (
   <li key={slug} className="my-3">
-    <Link href={'/' + slug}>
-      <a className="font-bold hover:underline">{name}</a>
+    <Link href={'/' + slug} className="font-bold hover:underline">
+      {name}
     </Link>
   </li>
 );

@@ -75,7 +75,7 @@ const renderOptions = (links?: any): Options => {
         if (
           React.Children.map(
             children,
-            (child: any) => child?.type === 'u'
+            (child: any) => child?.type === 'u',
           ).every(Boolean)
         ) {
           return (
@@ -84,7 +84,7 @@ const renderOptions = (links?: any): Options => {
                 {React.Children.map(children, (child: any) =>
                   React.cloneElement(child, {
                     className: 'no-underline',
-                  })
+                  }),
                 )}
               </LinkButton>
             </span>
@@ -105,12 +105,16 @@ const renderOptions = (links?: any): Options => {
             <Image
               src={asset.url}
               loader={contentfulImageLoader}
-              sizes="900px" // tailwind max-w-4xl
               width={asset.width}
               height={asset.height}
               alt={asset.description}
-              layout="responsive"
               className="md:rounded"
+              // tailwind max-w-4xl
+              sizes="900px"
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
             />
           </div>
         );
