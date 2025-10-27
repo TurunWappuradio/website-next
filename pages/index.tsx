@@ -65,18 +65,18 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   sponsors,
 
   // NOTE: Used during offseason
-  firstDecorativeImage,
-  secondDecorativeImage,
-  firstContent,
-  secondContent,
-  thirdContent,
+  // firstDecorativeImage,
+  // secondDecorativeImage,
+  // firstContent,
+  // secondContent,
+  // thirdContent,
 
   // NOTE: Used when going live
-  // showsByDate,
-  // playing,
-  // onPlayPause,
-  // muted,
-  // onMute,
+  showsByDate,
+  playing,
+  onPlayPause,
+  muted,
+  onMute,
 }) => {
   return (
     <div className="min-h-screen w-full">
@@ -98,7 +98,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {/* isPlayerLive && (
+      {isPlayerLive && (
         <Player
           playing={playing}
           onPlayPause={onPlayPause}
@@ -106,10 +106,11 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           onMute={onMute}
           showsByDate={showsByDate}
         />
-      )} */}
-      {/* <Showlist showsByDate={showsByDate} /> */}
+      )}
+      {<Showlist showsByDate={showsByDate} />}
       {/* First section */}
       {
+      /* NOTE: Used during offseason
         <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
           <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
             <Image
@@ -127,19 +128,19 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           <section className="m-4 w-lg max-w-full text-lg text-white md:m-8">
             <RichText content={firstContent} />
           </section>
-        </main>
+        </main> */
       }
       {/* Second section */}
-      {
+      {/* NOTE: Used during offseason
         <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
           <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
             <RichText content={secondContent} />
           </section>
           <Calendar />
-        </div>
+        </div> */
       }
       {/* Third section */}
-      {
+      {/* NOTE: Used during offseason
         <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
           <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
             <RichText content={thirdContent} />
@@ -157,7 +158,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
               }}
             />
           </div>
-        </div>
+        </div> */
       }
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
