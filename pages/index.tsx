@@ -109,8 +109,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       )}
       {<Showlist showsByDate={showsByDate} />}
       {/* First section */}
-      {
-      /* NOTE: Used during offseason
+      {/* NOTE: Used during offseason
         <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
           <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
             <Image
@@ -128,8 +127,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
           <section className="m-4 w-lg max-w-full text-lg text-white md:m-8">
             <RichText content={firstContent} />
           </section>
-        </main> */
-      }
+        </main> */}
       {/* Second section */}
       {/* NOTE: Used during offseason
         <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
@@ -137,8 +135,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
             <RichText content={secondContent} />
           </section>
           <Calendar />
-        </div> */
-      }
+        </div> */}
       {/* Third section */}
       {/* NOTE: Used during offseason
         <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
@@ -158,8 +155,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
               }}
             />
           </div>
-        </div> */
-      }
+        </div> */}
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
