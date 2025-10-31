@@ -70,7 +70,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
             <button
               onClick={onPlayPause}
               title="Play/Pause"
-              className={`flex h-20 w-20 items-center justify-center rounded-full ${
+              className={`flex h-20 w-20 items-center justify-center rounded-full cursor-pointer ${
                 playing ? 'bg-radio-secondary' : 'bg-radio-accent'
               }`}
             >
@@ -85,7 +85,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
               <button
                 onClick={handleVideoToggle}
                 title="Webcam"
-                className={`h-12 w-12 rounded-full ${
+                className={`h-12 w-12 rounded-full cursor-pointer ${
                   videoOpen ? 'bg-radio-secondary' : 'bg-radio-accent'
                 }`}
               >
@@ -96,7 +96,7 @@ const Player = ({ playing, onPlayPause, showsByDate }: PlayerProps) => {
           <div className="flex w-full flex-col gap-2">
             <span className="opacity-80">Osallistu keskusteluun</span>
             <button
-              className="flex items-center font-bold transition hover:text-radio-accent200"
+              className="flex items-center font-bold transition cursor-pointer hover:text-radio-accent200"
               onClick={handleShoutboxToggle}
             >
               <FiMessageSquare className="mr-3 h-6 w-6" /> Shoutboxissa

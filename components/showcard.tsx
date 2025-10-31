@@ -30,11 +30,11 @@ export const ShowCard = ({ show, index, className, forceOpen }: ShowCard) => {
     >
       <Time start={show.start} end={show.end} />
       <button
-        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row  ${
+        className={`group relative flex h-full w-full flex-col-reverse overflow-hidden rounded md:flex-row ${
           isExpanded
             ? 'flex rounded md:contents'
             : 'bg-linear-to-bl from-transparent via-transparent to-blue-darkest'
-        }`}
+        } ${forceOpen ? '' : 'cursor-pointer'}`}
         onClick={handleClick}
       >
         <TitleInfo show={show} isExpanded={isExpanded} index={index} />
