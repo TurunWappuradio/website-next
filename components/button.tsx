@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import Link from 'next/link';
 
 const buttonStyle =
-  'bg-radio-action px-6 md:px-8 py-2 md:py-3 text-blue font-bold hover:bg-radio-accent200 transition ease-in-out rounded';
+  'bg-radio-action px-6 md:px-8 py-2 md:py-3 text-blue font-bold hover:bg-radio-accent200 transition ease-in-out rounded cursor-pointer';
 
 interface ButtonProps {
   children: ReactNode;
@@ -57,7 +57,7 @@ const ModeButton = ({ text, isActive, onClick, ...props }: ModeButton) => {
   return (
     <button
       {...props}
-      className={`rounded-sm p-2 text-white ${
+      className={`rounded-sm p-2 text-white cursor-pointer ${
         isActive ? 'bg-radio-accent' : 'bg-radio-common hover:text-radio-accent'
       }`}
       onClick={onClick}

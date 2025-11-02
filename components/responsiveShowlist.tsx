@@ -43,7 +43,7 @@ const DateButton = ({ value, currentDate, onClick }: DateButton) => {
 
   return (
     <button
-      className={`w-full rounded-sm p-2 text-left capitalize text-white ${
+      className={`w-full rounded-sm p-2 text-left capitalize text-white cursor-pointer ${
         value === currentDate
           ? 'bg-radio-accent font-bold'
           : 'bg-radio-common hover:text-radio-accent'
