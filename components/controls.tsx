@@ -26,7 +26,7 @@ const Controls = ({
       <button
         onClick={onPlayPause}
         title="Play/Pause"
-        className={`flex h-12 w-12 items-center justify-center rounded-full ${
+        className={`flex h-12 w-12 items-center justify-center rounded-full cursor-pointer ${
           playing ? 'bg-radio-secondary' : 'bg-radio-accent'
         }`}
       >
@@ -40,7 +40,7 @@ const Controls = ({
       <button
         onClick={onMute}
         title="Mute"
-        className={`h-12 w-12 rounded-full ${
+        className={`h-12 w-12 rounded-full cursor-pointer ${
           muted ? 'bg-radio-secondary' : 'bg-radio-accent'
         }`}
       >
