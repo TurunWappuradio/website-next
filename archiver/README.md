@@ -35,4 +35,8 @@ aws_secret_access_key=abc
 
 1. Lataa arkistokansio purkkiin komennolla `aws s3 --profile wappuradio cp stuff/archives/<id> s3://archive.turunwappuradio.com/<id> --acl public-read`
 
-Esimerkiksi: `aws s3 --profile wappuradio cp stuff/archives/2024-wappu s3://archive.turunwappuradio.com/2024-wappu --acl public-read`
+   1. Esimerkiksi: `aws s3 --profile wappuradio cp stuff/archives/2024-wappu s3://archive.turunwappuradio.com/2024-wappu --acl public-read`
+
+   2. Käytä `sync` komentoa `cp` sijaan tai lisää `--recursive` flagi esimerkkiin
+
+   3. Arkisto vaatinee vielä sen aws cloudfront invalidoinnin, jolloin se tajuaa hakea arkiston kokonaan toisesta päästä uudestaan. Kirjaudu aws consoleen, valitse Cloudfront ja avaa `archive.turunw...` distribution ja sieltä `Invalidation` välilehdelle. Luo uusi invalidaatio ja määritä invalidoitavat polut (esim. `/2024-wappu`)
