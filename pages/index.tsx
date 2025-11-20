@@ -22,7 +22,7 @@ import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 
 // !!!
-// Hox! Tässä tiedostossa on paljon kommentoitua koodia, joka tarvitaan vain lähetyksen ajan.
+// Hox! Tässä tiedostossa on koodia, joka tarvitaan vain lähetyksen ajan.
 // !!!
 interface IndexProps {
   heroImage: {
@@ -33,7 +33,7 @@ interface IndexProps {
   heroButtonText: string;
   heroButtonLink: string;
   navigationItems: NavigationItem[];
-  showsByDate: ShowsByDate;
+  showsByDate?: ShowsByDate;
   firstDecorativeImage: {
     url?: string;
     width?: number;
@@ -64,14 +64,14 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
   navigationItems,
   sponsors,
 
-  // NOTE: Used during offseason
-  // firstDecorativeImage,
-  // secondDecorativeImage,
-  // firstContent,
-  // secondContent,
-  // thirdContent,
+  // Offseason content
+  firstDecorativeImage,
+  secondDecorativeImage,
+  firstContent,
+  secondContent,
+  thirdContent,
 
-  // NOTE: Used when going live
+  // Live content
   showsByDate,
   playing,
   onPlayPause,
@@ -98,64 +98,65 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {isPlayerLive && (
-        <Player
-          playing={playing}
-          onPlayPause={onPlayPause}
-          muted={muted}
-          onMute={onMute}
-          showsByDate={showsByDate}
-        />
+      {isPlayerLive ? (
+        <>
+          <Player
+            playing={playing}
+            onPlayPause={onPlayPause}
+            muted={muted}
+            onMute={onMute}
+            showsByDate={showsByDate}
+          />
+          {showsByDate && <Showlist showsByDate={showsByDate} />}
+        </>
+      ) : (
+        <>
+          <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
+            <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
+              <Image
+                src={firstDecorativeImage?.url}
+                loader={contentfulImageLoader}
+                className="rounded"
+                alt=""
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+            <section className="m-4 w-lg max-w-full text-lg text-white md:m-8">
+              <RichText content={firstContent} />
+            </section>
+          </main>
+
+          <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
+            <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
+              <RichText content={secondContent} />
+            </section>
+            <Calendar />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
+            <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
+              <RichText content={thirdContent} />
+            </section>
+            <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
+              <Image
+                src={secondDecorativeImage?.url}
+                loader={contentfulImageLoader}
+                className="rounded"
+                alt=""
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+          </div>
+        </>
       )}
-      {<Showlist showsByDate={showsByDate} />}
-      {/* First section */}
-      {/* NOTE: Used during offseason
-        <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
-          <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
-            <Image
-              src={firstDecorativeImage.url}
-              loader={contentfulImageLoader}
-              className="rounded"
-              alt=""
-              fill
-              sizes="100vw"
-              style={{
-                objectFit: 'cover',
-              }}
-            />
-          </div>
-          <section className="m-4 w-lg max-w-full text-lg text-white md:m-8">
-            <RichText content={firstContent} />
-          </section>
-        </main> */}
-      {/* Second section */}
-      {/* NOTE: Used during offseason
-        <div className="min-h-32 flex w-full flex-wrap items-center justify-center bg-radio-bg200 py-4 md:py-8">
-          <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
-            <RichText content={secondContent} />
-          </section>
-          <Calendar />
-        </div> */}
-      {/* Third section */}
-      {/* NOTE: Used during offseason
-        <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
-          <section className="m-4 w-lg max-w-full text-base text-white md:m-8">
-            <RichText content={thirdContent} />
-          </section>
-          <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
-            <Image
-              src={secondDecorativeImage.url}
-              loader={contentfulImageLoader}
-              className="rounded"
-              alt=""
-              fill
-              sizes="100vw"
-              style={{
-                objectFit: 'cover',
-              }}
-            />
-          </div>
-        </div> */}
       <Sponsors sponsors={sponsors} />
       <Footer navigationItems={navigationItems} />
     </div>
@@ -182,25 +183,28 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
 
   const navigationItems = await fetchNavigationItems();
 
-  const showsByDate = await fetchShowlist();
+  // Live content
+  const showsByDate: ShowsByDate | undefined = isPlayerLive
+    ? await fetchShowlist()
+    : undefined;
 
-  return {
-    props: {
-      heroImage,
-      heroTitle,
-      heroSubtext,
-      heroButtonText,
-      heroButtonLink,
-      navigationItems,
-      showsByDate,
-      firstDecorativeImage,
-      secondDecorativeImage,
-      firstContent,
-      secondContent,
-      thirdContent,
-      sponsors,
-    },
+  const props = {
+    heroImage,
+    heroTitle,
+    heroSubtext,
+    heroButtonText,
+    heroButtonLink,
+    navigationItems,
+    showsByDate: showsByDate || null,
+    firstDecorativeImage,
+    secondDecorativeImage,
+    firstContent,
+    secondContent,
+    thirdContent,
+    sponsors,
   };
+
+  return { props };
 };
 
 export default Index;
