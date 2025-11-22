@@ -1,4 +1,4 @@
-const isSyssyColors = true;
+const isSyssyColors = false;
 
 module.exports = {
   content: [
