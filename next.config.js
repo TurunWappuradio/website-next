@@ -8,6 +8,7 @@ module.exports = {
       { protocol: 'https', hostname: 'downloads.ctfassets.net' },
       { protocol: 'https', hostname: 'images.contentful.com' },
     ],
+    qualities: [25, 50, 75, 100],
   },
   webpack(config) {
     config.module.rules.push({
