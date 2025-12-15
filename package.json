@@ -14,7 +14,7 @@
     "@contentful/rich-text-react-renderer": "^16.1.5",
     "@googleapis/drive": "^18.0.0",
     "@googleapis/sheets": "^12.0.0",
-    "@next/eslint-plugin-next": "^15.5.4",
+    "@next/eslint-plugin-next": "^15.5.7",
     "@tailwindcss/postcss": "^4.1.14",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
@@ -23,11 +23,12 @@
     "google-auth-library": "^10.4.0",
     "graphql": "^16.11.0",
     "hls.js": "^1.6.13",
-    "next": "15.5.4",
+    "next": "^15.5.9",
     "ramda": "^0.31.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
+    "react-server-dom-webpack": "^19.2.3",
     "rxjs": "^7.8.2",
     "sharp": "^0.34.4"
   },
@@ -41,11 +42,12 @@
     "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "@graphql-codegen/typescript-resolvers": "^5.0.1",
     "@types/ramda": "^0.31.1",
-    "@types/react": "19.2.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.21",
     "dotenv": "^17.2.3",
     "eslint": "^9.36.0",
-    "eslint-config-next": "^15.5.4",
+    "eslint-config-next": "^16.0.7",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "postcss": "^8.5.6",
@@ -54,7 +56,5 @@
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3"
   },
-  "overrides": {
-    "@types/react": "19.2.0"
-  }
+  "overrides": {}
 }
