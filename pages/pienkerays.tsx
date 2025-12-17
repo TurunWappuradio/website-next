@@ -219,6 +219,7 @@ const Pienkerays: NextPage<PienkeraysProps> = ({ navigationItems }) => {
             kouluttautumistilaisuudet sekä 10v juhlavuoden tapahtumiin.
           </p>
           <p>Pienkeräysnumero - RA/2025/1686</p>
+          <p>Pienkeräyslupa on voimassa 10.2.2026 asti</p>
           <p>
             Pienkeräyksen järjestäjän yhteystiedot - Vesilinnantie 5, 20014
             Turun yliopisto, hallitus@turunwappuradio.com, 040 366 0129
