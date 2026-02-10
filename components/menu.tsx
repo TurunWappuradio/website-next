@@ -24,11 +24,6 @@ const Menu = ({ navigationItems, isOpen, closeMenu }: MenuProps) => (
         </Link>
       </li>
 
-      <li className="my-5">
-        <Link href="/pienkerays" className="p-2 text-2xl">
-          Pienkeräys
-        </Link>
-      </li>
 
       {navigationItems.map(({ name, slug }) => (
         <li key={slug} className="my-5">
