@@ -72,7 +72,7 @@ const Hero: FC<HeroProps> = ({
           {/* Desktop navigation bar */}
           <ul className="hidden w-full justify-end md:flex">
             <NavLink href="/" name="Radio" />
-            <NavLink href="/pienkerays" name="Pienkeräys" />
+            
 
             {navigationItems.map(({ name, slug }) => (
               <NavLink key={slug} href={`/${slug}`} name={name} />
