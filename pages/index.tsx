@@ -129,13 +129,8 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
                   Pienkeräys Turun Wappuradion tueksi
                 </h2>
                 <p className="mb-4 text-lg font-semibold">
-                  Turun Wappuradiota kohdannut vastoinkäymisten radioaallokko ei
-                  kaatanut venettä, mutta kaipaisimme tukea eteenpäin
-                  seilaamiseen.
+                  Keräys päättynyt. Kiitos osallistumisesta.
                 </p>
-                <div className="text-right font-bold text-lg underline">
-                  <Link href="/pienkerays">Lue lisää pienkeräyksestä →</Link>
-                </div>
               </div>
             </div>
           </section>
