@@ -112,29 +112,6 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         </>
       ) : (
         <>
-          {/* Pienkeräys */}
-          <section className="flex justify-center px-6 py-16 md:py-24">
-            <div className="bg-radio-promote max-w-3xl rounded-2xl relative overflow-visible flex flex-col md:flex-row">
-              <div className="md:w-1/4 m-2 shrink-0">
-                <Image
-                  src="/pienkerays_dino.svg"
-                  className="w-full max-w-[200px] block -mt-[50px] md:-mt-[70px]"
-                  alt=""
-                  width={400}
-                  height={400}
-                />
-              </div>
-              <div className="p-5 flex-grow">
-                <h2 className="text-2xl font-bold mb-4">
-                  Pienkeräys Turun Wappuradion tueksi
-                </h2>
-                <p className="mb-4 text-lg font-semibold">
-                  Keräys päättynyt. Kiitos osallistumisesta.
-                </p>
-              </div>
-            </div>
-          </section>
-          {/* End of Pienkeräys */}
 
           <main className="flex flex-wrap-reverse items-center justify-center py-4 md:py-8">
             <div className="relative m-10 h-48 w-lg max-w-full md:m-8 md:h-96">
