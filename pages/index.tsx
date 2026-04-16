@@ -102,13 +102,15 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
       />
       {isPlayerLive || isShowlistLive ? (
         <>
-          <Player
-            playing={playing}
-            onPlayPause={onPlayPause}
-            muted={muted}
-            onMute={onMute}
-            showsByDate={showsByDate}
-          />
+          {isPlayerLive && (
+            <Player
+              playing={playing}
+              onPlayPause={onPlayPause}
+              muted={muted}
+              onMute={onMute}
+              showsByDate={showsByDate}
+            />
+          ) }
           {isShowlistLive && showsByDate && <Showlist showsByDate={showsByDate} />}
         </>
       ) : (
