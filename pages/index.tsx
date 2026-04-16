@@ -21,6 +21,7 @@ import { fetchShowlist } from '@/scripts/google/client';
 import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
+const isShowlistLive = process.env.NETXT_PUBLIC_SHOWLIST_MODE === 'live';
 
 // !!!
 // Hox! Lähetyksen aikana käytettävä sisältö seuraa soittimen tilaa (live/offseason).
@@ -99,7 +100,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
         navigationItems={navigationItems}
         isCompact={isPlayerLive}
       />
-      {isPlayerLive ? (
+      {isPlayerLive || isShowlistLive ? (
         <>
           <Player
             playing={playing}
@@ -108,7 +109,7 @@ const Index: NextPage<IndexProps & PlayerControls> = ({
             onMute={onMute}
             showsByDate={showsByDate}
           />
-          {showsByDate && <Showlist showsByDate={showsByDate} />}
+          {isShowlistLive && showsByDate && <Showlist showsByDate={showsByDate} />}
         </>
       ) : (
         <>
@@ -186,7 +187,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const navigationItems = await fetchNavigationItems();
 
   // Live content
-  const showsByDate: ShowsByDate | undefined = isPlayerLive
+  const showsByDate: ShowsByDate | undefined = isShowlistLive
     ? await fetchShowlist()
     : undefined;
 
