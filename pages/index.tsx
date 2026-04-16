@@ -21,7 +21,7 @@ import { fetchShowlist } from '@/scripts/google/client';
 import { ShowsByDate } from '@/scripts/google/showlistHelpers';
 
 const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
-const isShowlistLive = process.env.NETXT_PUBLIC_SHOWLIST_MODE === 'live';
+const isShowlistLive = process.env.NEXT_PUBLIC_SHOWLIST_MODE === 'live';
 
 // !!!
 // Hox! Lähetyksen aikana käytettävä sisältö seuraa soittimen tilaa (live/offseason).
