@@ -24,7 +24,7 @@ const isPlayerLive = process.env.NEXT_PUBLIC_PLAYER_MODE === 'live';
 const isShowlistLive = process.env.NEXT_PUBLIC_SHOWLIST_MODE === 'live';
 
 // !!!
-// Hox! Lähetyksen aikana käytettävä sisältö seuraa soittimen tilaa (live/offseason).
+// Hox! Lähetyksen aikana käytettävä sisältö seuraa soittimen ja ohjelmakartan tilaa (live/offseason).
 // !!!
 interface IndexProps {
   heroImage: {
