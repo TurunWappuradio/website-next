@@ -1,26 +1,26 @@
 import { useState } from 'react';
-import { differenceInMinutes, format, parse } from 'date-fns';
+import { differenceInMinutes, format, getISOWeek, parse } from 'date-fns';
 import { fi } from 'date-fns/locale/fi';
-import { append, head, keys, last } from 'ramda';
+import { head, keys, last } from 'ramda';
 
 import { Show, ShowsByDate } from '@/scripts/google/showlistHelpers';
 import { ModeButton } from './button';
 import { ShowCard } from './showcard';
 import { WideScreencard } from './widescreen-card';
 
-const GROUP_SIZE = 3;
-
 interface ShowlistMapProps {
   showsByDate: ShowsByDate;
 }
 
 export const ShowlistMap = ({ showsByDate }: ShowlistMapProps) => {
-  // Take every n consecutive days.
-  const groups: string[][] = keys(showsByDate).reduce((acc, date, idx) => {
-    const groupIdx = Math.floor(idx / GROUP_SIZE);
-    acc[groupIdx] = append(date, acc[groupIdx] ?? []);
-    return acc;
-  }, []);
+  // Group dates by ISO week number.
+  const weekGroups: Record<number, string[]> = {};
+  for (const date of keys(showsByDate)) {
+    const parsed = parse(date, 'y.M.dd', new Date());
+    const week = getISOWeek(parsed);
+    weekGroups[week] = [...(weekGroups[week] ?? []), date];
+  }
+  const groups: string[][] = Object.values(weekGroups);
 
   const [selectedShow, setSelectedShow] = useState<Show | null>(null);
   const [openGroup, setOpenGroup] = useState(0);
