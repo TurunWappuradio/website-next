@@ -8,7 +8,7 @@ import { ModeButton } from './button';
 import { ShowCard } from './showcard';
 import { WideScreencard } from './widescreen-card';
 
-const GROUP_SIZE = 5;
+const GROUP_SIZE = 3;
 
 interface ShowlistMapProps {
   showsByDate: ShowsByDate;
