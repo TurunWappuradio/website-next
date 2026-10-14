@@ -117,7 +117,7 @@ const Descriptions = ({ show, isExpanded }: DescriptionsProps) => {
 
   return (
     <div
-      className={`z-10 mt-auto flex flex-col overflow-y-auto rounded bg-radio-bg200 p-4 text-left transition ease-in-out md:ml-auto md:mt-0 md:h-80 xl:h-100 ${
+      className={`z-10 mt-auto flex flex-col flex-1 overflow-y-auto rounded bg-radio-bg200 p-4 text-left transition ease-in-out md:mt-0 md:h-80 xl:h-100 ${
         isExpanded ? 'opacity-100' : 'opacity-0'
       }`}
     >
